@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/jqx.base.css" rel="stylesheet" />
+    <link href="~/Content/jqx.metro.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqx")
+    <script src="@Url.Content("~/Scripts/app/application.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/common.js")"></script>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

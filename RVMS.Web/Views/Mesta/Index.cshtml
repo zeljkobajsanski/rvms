@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Mesta";
+}
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/app/pages/mestaPage.js")"></script>
+    <script>
+        RVMS.Pages.Mesta = new RVMS.Pages.Mesta();
+    </script>
+}
+
+<div class="line">
+    <label class="label">Opština</label>
+    <div id="opstineCombo"></div>
+</div>
+<form action="javascript:;">
+        <div class="line">
+            <label class="label">Naziv mesta</label>
+            <input type="text" id="nazivMesta" />    
+        </div>
+        <div class="line">
+            <input type="submit" value="Sačuvaj" id="btnSave" class="pretraziBtn"/>    
+        </div>
+</form>    
+<div id="mesta"></div>

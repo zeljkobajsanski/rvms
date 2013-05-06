@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/jqx.base.css" rel="stylesheet" />
+    <link href="~/Content/jqx.metro.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqx")
+    <script src="@Url.Content("~/Scripts/toastr.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/application.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/common.js")"></script>
+    <script>
+            $(function() {
+                $("#topMenu").jqxMenu({theme: 'metro'});
+            });
+    </script>
+    @RenderSection("scripts", required: false)
+</head>
+    <body>
+        <header>
+            <div id="topMenu">
+                <ul>
+                    <li>@Html.ActionLink("Opštine", "Index", "Opstine")</li>
+                    <li>@Html.ActionLink("Mesta", "Index", "Mesta")</li>
+                    <li>@Html.ActionLink("Stajališta", "Index", "Stajalista")</li>
+                    <li>Daljinar
+                        <ul>
+                            <li>@Html.ActionLink("Nova relacija", "Nova", "Relacije")</li>
+                            <li>@Html.ActionLink("Pregled relacija", "Index", "Relacije")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Prevoznik
+                        <ul>
+                            <li>@Html.ActionLink("Pregled prevoznika", "Index", "Prevoznici")</li>
+                            <li>@Html.ActionLink("Prevoznik", "Prevoznik", "Prevoznici")</li>
+                            <li>Linije
+                                <ul>
+                                    <li>@Html.ActionLink("Nova linija", "Linija", "Linije")</li>
+                                    <li>@Html.ActionLink("Pregled linija", "Index", "Linije")</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        @RenderBody()
+        
+    </body>
+</html>

@@ -1,0 +1,22 @@
+﻿@model RVMS.Model.Entities.Prevoznik
+
+@{
+    ViewBag.Title = "Prevoznik";
+}
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/app/pages/prevoznikPage.js")"></script>
+    <script>
+        RVMS.Pages.PrevoznikPage = new RVMS.Pages.PrevoznikPage();
+    </script>
+}
+
+@Html.Hidden("Model", Html.Raw(Json.Encode(Model)))
+
+<form action="javascript:;">
+    <input id="nazivPrevoznika" />
+    <input id="adresaPrevoznika"/>
+    <input id="mestoPrevoznika"/>
+    <input type="submit" id="btnSave" value="Sačuvaj"/>    
+</form>

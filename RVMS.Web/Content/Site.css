@@ -1,0 +1,90 @@
+﻿html {
+    background: url('images/back1.png') repeat;
+}
+body {
+    font-size: .85em;
+    font-family: 'segoe ui', arial, sans-serif;
+    color: #232323;
+    background-color: #fff;
+    width: 1000px;
+    margin: 0px auto;
+    background: white;
+    min-height: 700px;
+    -webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    4px 4px 5px rgba(50, 50, 50, 0.75);
+    box-shadow:         4px 4px 5px rgba(50, 50, 50, 0.75);
+    padding: 4px;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+header {
+    margin-bottom: 4px;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.line {
+    clear: both;
+    margin: 2px 0;
+}
+
+.label {
+    float: left;
+    width: 180px;
+}
+
+.pretraziBtn {
+    margin-left: 180px;
+}

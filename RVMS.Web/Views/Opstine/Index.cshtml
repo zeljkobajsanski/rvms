@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Opštine";
+}
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/app/pages/opstinePage.js")"></script>
+    <script type="text/javascript">
+        RVMS.Pages.OpstinePage = new RVMS.Pages.OpstinePage();
+    </script>
+}
+<form id="unosForm" action="javascript:;">
+    <div class="line">
+        <label class="label">Naziv opštine</label>
+        <input type="text" id="noviUnos" />
+    </div>
+    <div class="line">
+        <input id="btnNew" type="submit" value="Dodaj" class="pretraziBtn"/>  
+    </div>
+</form>
+<div id="grid"></div>
+
+

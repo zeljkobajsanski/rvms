@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Stajališta";
+}
+
+@section styles
+{
+    <style>
+        #left {
+            float: left;
+        }
+        #mapa {
+            float: left;
+            margin: 104px 0 0 4px;
+            width: 400px;
+            min-height: 400px;
+        }    
+    </style>
+    
+    
+}
+@section scripts
+{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false">
+    </script>
+    <script src="@Url.Content("~/Scripts/app/pages/stajalistaPage.js")"></script>
+    <script>
+        RVMS.Pages.StajalistaPage = new RVMS.Pages.StajalistaPage();
+    </script>
+}
+
+<div id="left">
+    <div class="line">
+        <label class="label">Opština</label>
+        <div id="opstineCombo"></div>
+    </div>
+    <div class="line">
+        <label class="label">Mesto</label>
+        <div id="mestaCombo"></div>
+    </div>
+
+    <form action="javascript:;">
+        <div class="line">
+            <label class="label">Naziv stajališta</label>
+            <input type="text" id="nazivStajalista" />
+        </div>
+        <div class="line">
+            <label class="label">Stanica</label>
+            <div id="stanica"></div>  
+        </div>
+        <div class="line">
+            <input type="submit" id="btnSave" value="Sačuvaj" class="pretraziBtn"/>    
+        </div>
+    </form>
+    <div id="stajalista"></div>    
+</div>
+<div id="mapa"></div>

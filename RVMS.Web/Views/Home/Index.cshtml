@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "RVMS - Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@section styles
+{
+    <style>
+        #menuWrapper {
+            position: relative;
+        }
+
+        .tile {
+            display: block;
+            width: 150px;
+            height: 150px;
+            text-decoration: none;
+            background: green;
+            position: absolute;
+            color: white;
+            text-align: center;
+            padding-top1: 30px;
+            border: 4px solid transparent;
+        }
+
+        #opstine {
+            top: 100px;
+            left: 20px;
+        }
+        #mesta {
+            top: 100px;
+            left: 182px;
+        }
+        #stajalista {
+            top: 100px;
+            left: 344px;
+        }
+
+        #novaRelacija {
+            top: 262px;
+            left: 20px;
+        }
+
+        #pregledRelacija {
+            top: 262px;
+            left: 182px;
+            width: 312px;
+        }
+        #menuWrapper a:hover {
+            border: 4px solid rgb(183, 184, 216);
+        }
+    </style>
+}
+
+<div id="menuWrapper">
+    @Html.ActionLink("Opštine", "Index", "Opstine", null, new{@class = "tile", id="opstine"})    
+    @Html.ActionLink("Mesta", "Index", "Mesta", null, new{@class = "tile", id="mesta"})    
+    @Html.ActionLink("Stajališta", "Index", "Stajalista", null, new{@class = "tile", id="stajalista"})    
+    @Html.ActionLink("Nova relacija", "Nova", "Relacije", null, new{@class = "tile", id="novaRelacija"})    
+    @Html.ActionLink("Daljinar", "Index", "Relacije", null, new{@class = "tile", id="pregledRelacija"})    
+</div>
+
+
+

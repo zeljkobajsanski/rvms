@@ -1,0 +1,74 @@
+﻿@model RVMS.Model.Entities.Linija
+
+@{
+    ViewBag.Title = "Definisanje linije";
+}
+
+@section styles
+{
+    <style>
+        #mapa {
+            width: 810px;
+            min-height: 500px;
+            overflow: hidden;
+        }
+        #gridWrapper {
+            float: left;
+            margin: 4px 4px 0 0;
+        }
+        #grid {
+            margin-bottom: 12px;
+        }
+        #duzinaLinije {
+            font-weight: 600;
+        }
+        #stajalista {
+            float: left;
+            margin-right: 2px;
+        }
+        #linijaWrapper {
+            margin-top: 12px;
+        }
+        
+    </style>
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false"></script>
+    <script src="~/Scripts/app/pages/unosLinijePage.js"></script>
+    <script>RVMS.Pages.UnosLinijePage = new RVMS.Pages.UnosLinijePage()</script>
+}
+<div>
+    @Html.Hidden("Linija", @Html.Raw(Json.Encode(Model)))
+    <form action="javascript:;">
+        <div class="line">
+            <label class="label">Naziv linije</label>
+            <input id="nazviLinije" />
+        </div>
+        <div class="line">
+            <label class="label">Prevoznik</label>
+            <div id="prevoznici"></div>    
+        </div>
+        <div class="line">
+            <input type="submit" value="Sačuvaj" id="btnSave" class="pretraziBtn"/>    
+        </div>
+            
+    </form>
+</div>
+
+<div id="linijaWrapper">
+    <div class="line">
+        <div id="stajalista"></div>
+        <input type="submit" value="Izaberi" id="btnIzaberiStajaliste"/>    
+    </div>
+    
+
+    <div id="gridWrapper">
+        <div id="grid"></div>
+        <span>Dužina linije: </span><span id="duzinaLinije"></span>
+    </div>
+    <div id="mapa"></div>
+</div>
+
+

@@ -1,0 +1,90 @@
+﻿@model RVMS.Model.Entities.Relacija
+@{
+    ViewBag.Title = Model == null ? "Nova relacija" : "Izmena relacije";
+    var jsonModel = Json.Encode(Model);
+}
+
+@section styles
+{
+    <style>
+        #grid {
+            float: left;
+        }
+        #mapa {
+            width: 390px;
+            min-height: 400px;
+            float: left;
+            margin: 0 0 0 4px;
+        }
+        #ukupno {
+            clear: left;
+        }
+        #duzinaRelacije {
+            margin-left: 104px;
+        }
+        #vremeVoznje {
+            margin-left: 112px;
+        }
+        #brzina {
+            margin-left: 20px;
+        }
+        #ukupno label {
+            font-weight: 600;
+        }
+    </style>
+}
+
+@section scripts
+{
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false&region=RS"></script>
+    <script src="@Url.Content("~/Scripts/app/pages/relacijePage.js")"></script>
+    <script>
+        RVMS.Pages.RelacijePage = new RVMS.Pages.RelacijePage();
+    </script>
+}
+
+@Html.Hidden("Relacija", Html.Raw(jsonModel))
+
+<form action="javascript:;">
+    <div class="line">
+        <label class="label">Naziv relacije:</label>
+        <input type="text" id="nazivRelacije"/>
+        <input type="submit" id="btnSave" value="Sačuvaj"/>    
+    </div>
+    
+</form>
+
+<div id="daljinar">
+    <form action="javascript:;">
+        <div class="line">
+            <label class="label">Polazna stanica</label>
+            <div id="polaznaStanica"></div>    
+        </div>
+        <div class="line">
+            <label class="label">Dolazna stanica</label>
+            <div id="dolaznaStanica"></div>
+        </div>
+        <div class="line">
+            <label class="label">Međustanično rastojanje</label>
+            <div id="rastojanje"></div>
+        </div>
+        <div class="line">
+            <label class="label">Vreme vožnje</label>
+            <div id="vreme"></div>       
+        </div>
+        <div class="line">
+            <input class="pretraziBtn" type="submit" id="btnDodaj" value="Dodaj" />
+        </div>
+        
+    </form>
+    <div id="grid"></div>
+    <div id="mapa"></div>
+    <div id="ukupno">
+        <label>Dužina relacije: </label>
+        <span id="duzinaRelacije"></span><br/>
+        <label>Vreme vožnje: </label>
+        <span id="vremeVoznje"></span><br/>
+        <label>Srednja saobraćajna brzina: </label>
+        <span id="brzina"></span><br/>
+    </div>
+</div>
