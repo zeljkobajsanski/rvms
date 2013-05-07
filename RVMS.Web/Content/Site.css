@@ -1,6 +1,8 @@
 ﻿html {
     background: url('images/back1.png') repeat;
 }
+@font-face { font-family: 'segoe ui';src: url('fonts/SegoeUI.ttf'); }
+
 body {
     font-size: .85em;
     font-family: 'segoe ui', arial, sans-serif;
@@ -23,6 +25,7 @@ header, footer, nav, section {
 header {
     margin-bottom: 4px;
 }
+
 
 
 /* Styles for basic forms
