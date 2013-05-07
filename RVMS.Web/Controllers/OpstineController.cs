@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using RVMS.Model.Entities;
 using RVMS.Model.Repository;
 using RVMS.Web.Models;
+using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
     [Authorize]
+    [Aktivnost]
     public class OpstineController : Controller
     {
         private readonly Repository<Opstina> fRepository = new Repository<Opstina>(); 

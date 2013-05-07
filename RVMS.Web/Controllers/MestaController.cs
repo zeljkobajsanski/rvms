@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using RVMS.Model.Entities;
 using RVMS.Model.Repository;
+using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
     [Authorize]
+    [Aktivnost]
     public class MestaController : Controller
     {
         private readonly MestaRepository fRepository = new MestaRepository(); 

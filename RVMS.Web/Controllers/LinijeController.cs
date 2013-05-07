@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using RVMS.Model.Repository;
+using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
     [Authorize]
+    [Aktivnost]
     public class LinijeController : Controller
     {
         private readonly MedjustanicnaRastojanjaRepository m_MedjustanicnaRastojanjaRepository =
