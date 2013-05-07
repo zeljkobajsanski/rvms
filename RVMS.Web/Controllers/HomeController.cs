@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         //

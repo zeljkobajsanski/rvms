@@ -8,6 +8,7 @@ using RVMS.Model.Repository;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class MestaController : Controller
     {
         private readonly MestaRepository fRepository = new MestaRepository(); 

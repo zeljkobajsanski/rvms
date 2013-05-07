@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
@@ -11,6 +10,7 @@ using RVMS.Model.Repository;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class RelacijeController : Controller
     {
         private readonly RelacijeRepository fRelacijeRepository = new RelacijeRepository();

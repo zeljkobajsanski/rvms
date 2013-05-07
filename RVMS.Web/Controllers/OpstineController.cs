@@ -9,6 +9,7 @@ using RVMS.Web.Models;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class OpstineController : Controller
     {
         private readonly Repository<Opstina> fRepository = new Repository<Opstina>(); 

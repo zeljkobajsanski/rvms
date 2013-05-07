@@ -9,6 +9,7 @@ using RVMS.Model.Repository;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class LinijeController : Controller
     {
         private readonly MedjustanicnaRastojanjaRepository m_MedjustanicnaRastojanjaRepository =

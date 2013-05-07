@@ -9,6 +9,7 @@ using RVMS.Model.Repository;
 
 namespace RVMS.Web.Controllers
 {
+    [Authorize]
     public class PrevozniciController : Controller
     {
         private readonly PrevozniciRepository fPrevozniciRepository = new PrevozniciRepository();
