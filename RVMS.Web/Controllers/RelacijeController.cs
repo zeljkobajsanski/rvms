@@ -12,7 +12,7 @@ using rs.mvc.Korisnici.Filters;
 namespace RVMS.Web.Controllers
 {
     [Authorize]
-    [Aktivnost]
+    [LogujAktivnost]
     public class RelacijeController : Controller
     {
         private readonly RelacijeRepository fRelacijeRepository = new RelacijeRepository();

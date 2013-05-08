@@ -10,7 +10,7 @@ using rs.mvc.Korisnici.Filters;
 namespace RVMS.Web.Controllers
 {
     [Authorize]
-    [Aktivnost]
+    [LogujAktivnost]
     public class MestaController : Controller
     {
         private readonly MestaRepository fRepository = new MestaRepository(); 

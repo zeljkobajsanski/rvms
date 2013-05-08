@@ -11,7 +11,7 @@ using rs.mvc.Korisnici.Filters;
 namespace RVMS.Web.Controllers
 {
     [Authorize]
-    [Aktivnost]
+    [LogujAktivnost]
     public class StajalistaController : Controller
     {
         private readonly StajalistaRepository fRepository = new StajalistaRepository();

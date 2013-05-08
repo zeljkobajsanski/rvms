@@ -11,7 +11,7 @@ using rs.mvc.Korisnici.Filters;
 namespace RVMS.Web.Controllers
 {
     [Authorize]
-    [Aktivnost]
+    [LogujAktivnost]
     public class OpstineController : Controller
     {
         private readonly Repository<Opstina> fRepository = new Repository<Opstina>(); 
