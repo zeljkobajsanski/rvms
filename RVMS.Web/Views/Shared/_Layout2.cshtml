@@ -24,6 +24,9 @@
 </head>
     <body>
         <header>
+            <a href="@Url.Action("Index", "Home")">
+                <img src="@Url.Content("~/Content/oktopod.png")" alt="Logo" />
+            </a>
             <div id="topMenu">
                 <ul>
                     <li>@Html.ActionLink("Opštine", "Index", "Opstine")</li>
@@ -46,6 +49,14 @@
                                     <li>@Html.ActionLink("Pregled linija", "Index", "Linije")</li>
                                 </ul>
                             </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>@Html.Action("VratiKorisnika", "Home")</span>
+                        <ul>
+                            @*<li><a href="http://localhost:49926/account/mojprofil">Moj nalog</a></li>*@
+                            <li><a href="http://korisnici.azurewebsites.net/account/mojprofil">Moj nalog</a></li>
+                            <li>@Html.ActionLink("Odjavi me", "Logout", "Home")</li>
                         </ul>
                     </li>
                 </ul>

@@ -91,3 +91,7 @@ textarea {
 .pretraziBtn {
     margin-left: 180px;
 }
+
+#topMenu {
+    float: right;
+}
