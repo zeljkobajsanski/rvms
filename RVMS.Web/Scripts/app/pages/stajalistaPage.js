@@ -81,7 +81,8 @@
                 { text: 'Aktivno', datafield: 'Aktivan', editable: true, columntype: 'checkbox' },
                 { text: 'Stanica', datafield: 'Stanica', editable: true, columntype: 'checkbox' }
             ],
-            width: 594
+            width: 594,
+            sortable: true
         });
         stajalista.on('rowselect', _izabranoStajaliste);
 
@@ -136,6 +137,7 @@
             data: JSON.stringify({ OpstinaId: opstina, MestoId: mesto, Naziv: naziv, Stanica: stanica.jqxCheckBox('checked') }),
             success: function () {
                 nazivStajalista.val('');
+                stanica.jqxCheckBox('uncheck');
                 _osveziStajalista();
             },
             error: function(err) {

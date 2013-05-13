@@ -46,7 +46,7 @@
                     type: 'POST',
                     data: JSON.stringify(value),
                     success: function () {
-                        self.noviUnos('');
+                        noviUnos.val('');
                         RVMS.Common.showDataSaved();
                         $("#grid").jqxGrid('updatebounddata');
                     },
@@ -62,6 +62,7 @@
             theme: RVMS.getTheme(),
             source: data,
             editable: true,
+            sortable: true,
             columns: [{ text: 'ID', datafield: 'Id', editable: false },
                       {
                           text: 'Naziv opštine', datafield: 'NazivOpstine', validation: function (cell, value) {
