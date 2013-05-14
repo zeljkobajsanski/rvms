@@ -3,6 +3,7 @@
         mesta,
         nazivStajalista,
         btnSave,
+        btnCopy,
         stajalista,
         mapa,
         marker,
@@ -50,7 +51,17 @@
         mesta.on('change', function () {
             _osveziStajalista();
         });
-        
+
+        btnCopy = $("#btnCopy");
+        btnCopy.jqxButton({ theme: RVMS.getTheme() });
+        btnCopy.on('click', function() {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label);
+                nazivStajalista.focus();
+            }
+        });
+
         nazivStajalista.jqxInput({
             width: 180,
             height: RVMS.ControlHeight,
@@ -136,6 +147,7 @@
             contentType: 'application/json; charset=UTF-8',
             data: JSON.stringify({ OpstinaId: opstina, MestoId: mesto, Naziv: naziv, Stanica: stanica.jqxCheckBox('checked') }),
             success: function () {
+                RVMS.Common.showDataSaved();
                 nazivStajalista.val('');
                 stanica.jqxCheckBox('uncheck');
                 _osveziStajalista();
@@ -216,7 +228,10 @@
             dataType: 'json',
             data: JSON.stringify(stajaliste),
             success: function () {
-                if (commit) commit(true);
+                if (commit) {
+                    commit(true);
+                    RVMS.Common.showDataSaved();
+                }
             },
             error: function () {
                 if (commit) commit(false);

@@ -13,7 +13,15 @@
             margin: 104px 0 0 4px;
             width: 400px;
             min-height: 400px;
-        }    
+        } 
+        #mestaCombo {
+            display: inline-block;
+        }
+        #btnCopy {
+            padding-bottom: 4px;
+            border: 0;
+            cursor: pointer;
+        }   
     </style>
     
     
@@ -36,6 +44,7 @@
     <div class="line">
         <label class="label">Mesto</label>
         <div id="mestaCombo"></div>
+        <input type="image" src="@Url.Content("~/Content/images/copy.png")" id="btnCopy" title="Kopiraj naziv"/>
     </div>
 
     <form action="javascript:;">

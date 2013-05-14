@@ -39,6 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Glimpse.AspNet">
+      <HintPath>..\packages\Glimpse.AspNet.1.2.2\lib\net40\Glimpse.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Glimpse.1.3.1\lib\net40\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Mvc4">
+      <HintPath>..\packages\Glimpse.Mvc4.1.2.2\lib\net40\Glimpse.Mvc4.dll</HintPath>
+    </Reference>
     <Reference Include="Korisnici, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Korisnici.dll</HintPath>
@@ -147,6 +157,7 @@
     <Compile Include="Controllers\PrevozniciController.cs" />
     <Compile Include="Controllers\RelacijeController.cs" />
     <Compile Include="Controllers\StajalistaController.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +197,7 @@
     <Content Include="Content\images\check_white.png" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\images\close_white.png" />
+    <Content Include="Content\images\copy.png" />
     <Content Include="Content\images\crosshair-white.png" />
     <Content Include="Content\images\crosshair.png" />
     <Content Include="Content\images\darkness\ui-bg_flat_30_cccccc_40x100.png" />

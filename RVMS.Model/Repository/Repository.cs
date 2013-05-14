@@ -33,6 +33,7 @@ namespace RVMS.Model.Repository
 
         public IEnumerable<T> GetAll()
         {
+            var cs = fDataContext.Database.Connection;
             return fDataContext.Set<T>().ToArray();
         } 
 
