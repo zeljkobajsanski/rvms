@@ -217,6 +217,7 @@
     <Content Include="Content\images\darkness\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\images\darkness\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\images\darkred_gradient.png" />
+    <Content Include="Content\images\door_out.png" />
     <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\gnome_edit_delete.png" />
     <Content Include="Content\images\home %281%29.png" />
@@ -256,6 +257,7 @@
     <Content Include="Content\images\lightness\ui-icons_ef8c08_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\lightness\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\log_out.png" />
     <Content Include="Content\images\map-hue.png" />
     <Content Include="Content\images\map-saturation-overlay.png" />
     <Content Include="Content\images\map-saturation.png" />

@@ -12,6 +12,8 @@
         btnSchool,
         btnNumbers,
         btnGroblje,
+        btnIn,
+        btnOut,
         stajalista,
         mapa,
         marker,
@@ -129,7 +131,7 @@
         btnNumbers.on('click', function () {
             var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
             if (selektovanoMesto) {
-                nazivStajalista.val(selektovanoMesto.label + " - I");
+                nazivStajalista.val(selektovanoMesto.label + " I");
                 nazivStajalista.focus();
             }
         });
@@ -139,6 +141,30 @@
             var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
             if (selektovanoMesto) {
                 nazivStajalista.val(selektovanoMesto.label + " - groblje");
+                nazivStajalista.focus();
+            }
+        });
+
+        nazivStajalista.jqxInput({
+            width: 180,
+            height: RVMS.ControlHeight,
+            theme: RVMS.getTheme()
+        });
+        btnIn = $("#btnIn");
+        btnIn.jqxButton({ theme: RVMS.getTheme() });
+        btnIn.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - ulaz");
+                nazivStajalista.focus();
+            }
+        });
+        btnOut = $("#btnOut");
+        btnOut.jqxButton({ theme: RVMS.getTheme() });
+        btnOut.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - izlaz");
                 nazivStajalista.focus();
             }
         });
