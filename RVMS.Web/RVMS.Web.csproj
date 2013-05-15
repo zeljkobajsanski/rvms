@@ -195,6 +195,8 @@
     <Content Include="Content\images\check_indeterminate_disabled.png" />
     <Content Include="Content\images\check_indeterminate_white.png" />
     <Content Include="Content\images\check_white.png" />
+    <Content Include="Content\images\Christian-cross-icon.png" />
+    <Content Include="Content\images\city-icon.png" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\images\close_white.png" />
     <Content Include="Content\images\copy.png" />
@@ -270,6 +272,7 @@
     <Content Include="Content\images\nav-arrow-left.png" />
     <Content Include="Content\images\nav-arrow-right.png" />
     <Content Include="Content\images\nav-arrow-up.png" />
+    <Content Include="Content\images\Numbers-icon.png" />
     <Content Include="Content\images\office-icon-down.png" />
     <Content Include="Content\images\office-icon-left.png" />
     <Content Include="Content\images\office-icon-right.png" />
@@ -317,6 +320,8 @@
     <Content Include="Content\images\roundbg_classic_hover.png" />
     <Content Include="Content\images\roundbg_classic_normal.png" />
     <Content Include="Content\images\roundbg_disabled.png" />
+    <Content Include="Content\images\routing-intersection-right-icon.png" />
+    <Content Include="Content\images\school.png" />
     <Content Include="Content\images\smoothness\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\images\smoothness\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\images\smoothness\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -367,10 +372,13 @@
     <Content Include="Content\images\sunny\ui-icons_fadc7a_256x240.png" />
     <Content Include="Content\images\sunny\ui-icons_ffe180_256x240.png" />
     <Content Include="Content\images\tick.png" />
+    <Content Include="Content\images\tomato-icon.png" />
     <Content Include="Content\images\track_classic.png" />
     <Content Include="Content\images\track_darkblue.png" />
     <Content Include="Content\images\track_shinyblack.png" />
     <Content Include="Content\images\track_summer.png" />
+    <Content Include="Content\images\train.png" />
+    <Content Include="Content\images\van-bus-icon.png" />
     <Content Include="Content\jqx.base.css" />
     <Content Include="Content\jqx.bootstrap.css" />
     <Content Include="Content\jqx.metro.css" />

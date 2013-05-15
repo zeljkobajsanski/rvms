@@ -4,6 +4,14 @@
         nazivStajalista,
         btnSave,
         btnCopy,
+        btnIntersection,
+        btnCity,
+        btnBus,
+        btnMarket,
+        btnTrain,
+        btnSchool,
+        btnNumbers,
+        btnGroblje,
         stajalista,
         mapa,
         marker,
@@ -58,6 +66,79 @@
             var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
             if (selektovanoMesto) {
                 nazivStajalista.val(selektovanoMesto.label);
+                nazivStajalista.focus();
+            }
+        });
+        btnIntersection = $("#btnIntersection");
+        btnIntersection.jqxButton({ theme: RVMS.getTheme() });
+        btnIntersection.on('click', function() {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " R");
+                nazivStajalista.focus();
+            }
+        });
+        btnCity = $("#btnCity");
+        btnCity.jqxButton({ theme: RVMS.getTheme() });
+        btnCity.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - centar");
+                nazivStajalista.focus();
+            }
+        });
+        btnBus = $("#btnBus");
+        btnBus.jqxButton({ theme: RVMS.getTheme() });
+        btnBus.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " AS");
+                stanica.jqxCheckBox('check');
+                nazivStajalista.focus();
+            }
+        });
+        btnMarket = $("#btnMarket");
+        btnMarket.jqxButton({ theme: RVMS.getTheme() });
+        btnMarket.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - zelena pijaca");
+                nazivStajalista.focus();
+            }
+        });
+        btnTrain = $("#btnTrain");
+        btnTrain.jqxButton({ theme: RVMS.getTheme() });
+        btnTrain.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - ŽS");
+                nazivStajalista.focus();
+            }
+        });
+        btnSchool = $("#btnSchool");
+        btnSchool.jqxButton({ theme: RVMS.getTheme() });
+        btnSchool.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - škola");
+                nazivStajalista.focus();
+            }
+        });
+        btnNumbers = $("#btnNumbers");
+        btnNumbers.jqxButton({ theme: RVMS.getTheme() });
+        btnNumbers.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - I");
+                nazivStajalista.focus();
+            }
+        });
+        btnGroblje = $("#btnGroblje");
+        btnGroblje.jqxButton({ theme: RVMS.getTheme() });
+        btnGroblje.on('click', function () {
+            var selektovanoMesto = mesta.jqxDropDownList('getSelectedItem');
+            if (selektovanoMesto) {
+                nazivStajalista.val(selektovanoMesto.label + " - groblje");
                 nazivStajalista.focus();
             }
         });
