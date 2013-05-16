@@ -13,11 +13,14 @@
         mapa,
         duzinaRelacije,
         vremeVoznje,
-        brzina;
+        brzina,
+        btnPretrazi1,
+        btnPretrazi2,
+        pretragaStajalista;
 
     $(document).ready(function() {
         nazivRelacije = $("#nazivRelacije");
-        nazivRelacije.jqxInput({ theme: RVMS.getTheme(), placeHolder: 'Naziv relacije...', width: 240, height: RVMS.ControlHeight });
+        nazivRelacije.jqxInput({ theme: RVMS.getTheme(), placeHolder: 'Naziv relacije...', width: 340, height: RVMS.ControlHeight });
         btnSave = $("#btnSave");
         btnSave.jqxButton({ theme: RVMS.getTheme() });
         btnSave.on('click', _insertRelaciju);
@@ -168,6 +171,30 @@
         duzinaRelacije = $("#duzinaRelacije");
         vremeVoznje = $("#vremeVoznje");
         brzina = $("#brzina");
+
+        pretragaStajalista = $("#pretragaStajalista");
+        
+        btnPretrazi1 = $("#btnPretrazi1").jqxButton({ theme: RVMS.getTheme() });
+        btnPretrazi1.on('click', function() {
+            RVMS.Dialogs.PretragaStajalista.OpenDialog();
+            pretragaStajalista.off();
+            pretragaStajalista.on('close', function() {
+                if (RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste) {
+                    polaznaStanica.val(RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id);
+                }
+            });
+        });
+        btnPretrazi2 = $("#btnPretrazi2").jqxButton({ theme: RVMS.getTheme() });
+        btnPretrazi2.on('click', function () {
+            RVMS.Dialogs.PretragaStajalista.OpenDialog();
+            pretragaStajalista.off();
+            pretragaStajalista.on('close', function () {
+                if (RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste) {
+                    dolaznaStanica.val(RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id);
+                }
+            });
+            rastojanje.jqxNumberInput('focus');
+        });
     });
 
     function _insertRelaciju() {

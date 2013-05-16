@@ -44,9 +44,21 @@ namespace RVMS.Web.Controllers
             return Json(stajalista, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult PretraziStajalista(int? idOpstine, int? idMesta, string nazivStajalista)
+        {
+            var stajalista = fRepository.PretraziStajalista(idOpstine, idMesta, nazivStajalista).Select(x => new StajalisteDTO
+            {
+                Id = x.Id,
+                Opstina = x.Opstina.NazivOpstine,
+                Mesto = x.Mesto != null ? x.Mesto.Naziv : null,
+                Naziv = x.Naziv
+            }).ToArray();
+            return Json(stajalista, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult VratiAktivnaStajalista()
         {
-            var aktivnaStajalista = fRepository.VratiAktivnaStajalista().OrderBy(x => x.Naziv).Select(x => new StajalisteDTO
+            var aktivnaStajalista = fRepository.VratiAktivnaStajalista().OrderBy(x => x.Opstina.NazivOpstine).ThenBy(x => x.Naziv).Select(x => new StajalisteDTO
             {
                 Id = x.Id,
                 Naziv = x.Naziv,

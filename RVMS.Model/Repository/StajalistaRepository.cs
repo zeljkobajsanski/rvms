@@ -21,5 +21,23 @@ namespace RVMS.Model.Repository
         {
             return fDataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan).ToArray();
         }
+
+        public IEnumerable<Stajaliste> PretraziStajalista(int? idOpstine, int? idMesta, string nazivStajalista)
+        {
+            var stajalista = fDataContext.Stajalista.Include("Opstina").Include("Mesto").Where(x => x.Aktivan);
+            if (idOpstine.HasValue)
+            {
+                stajalista = stajalista.Where(x => x.OpstinaId == idOpstine);
+            }
+            if (idMesta.HasValue)
+            {
+                stajalista = stajalista.Where(x => x.MestoId == idMesta);
+            }
+            if (!string.IsNullOrEmpty(nazivStajalista))
+            {
+                stajalista = stajalista.Where(x => x.Naziv.Contains(nazivStajalista));
+            }
+            return stajalista.OrderBy(x => x.Naziv).ToArray();
+        }
     }
 }

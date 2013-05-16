@@ -59,9 +59,6 @@ namespace RVMS.Web.Controllers
         public void InsertMedjustanicnoRastojanje(MedjustanicnoRastojanje medjustanicnoRastojanje)
         {
             if (!ModelState.IsValid) throw new HttpRequestValidationException();
-            var rastojanje = fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(
-                medjustanicnoRastojanje.PolaznoStajalisteId, medjustanicnoRastojanje.DolaznoStajalisteId);
-            if (rastojanje.HasValue) throw new HttpException((int)HttpStatusCode.BadRequest, "Uneta razdaljia već postoji");
             fMedjustanicnaRastojanjaRepository.Add(medjustanicnoRastojanje);
             fMedjustanicnaRastojanjaRepository.Save();
         }

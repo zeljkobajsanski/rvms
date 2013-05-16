@@ -10,3 +10,4 @@
 
 RVMS.Pages = {};
 RVMS.ViewModels = {};
+RVMS.Dialogs = {};

@@ -31,6 +31,14 @@
         #ukupno label {
             font-weight: 600;
         }
+        #polaznaStanica, #dolaznaStanica {
+            display: inline-block;
+        }
+        
+        .btnFind {
+            border: 0;
+            margin-left: 4px;
+        }
     </style>
 }
 
@@ -41,6 +49,7 @@
     <script>
         RVMS.Pages.RelacijePage = new RVMS.Pages.RelacijePage();
     </script>
+    <script src="@Url.Content("~/Scripts/app/dialogs/pretragaStajalista.js")"></script>
 }
 
 @Html.Hidden("Relacija", Html.Raw(jsonModel))
@@ -55,28 +64,28 @@
 </form>
 
 <div id="daljinar">
+    <div class="line">
+        <label class="label">Polazna stanica</label>
+        <div id="polaznaStanica"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi1" class="btnFind" />    
+    </div>
+    <div class="line">
+        <label class="label">Dolazna stanica</label>
+        <div id="dolaznaStanica"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi2" class="btnFind"/>    
+    </div>
     <form action="javascript:;">
-        <div class="line">
-            <label class="label">Polazna stanica</label>
-            <div id="polaznaStanica"></div>    
-        </div>
-        <div class="line">
-            <label class="label">Dolazna stanica</label>
-            <div id="dolaznaStanica"></div>
-        </div>
         <div class="line">
             <label class="label">Međustanično rastojanje</label>
             <div id="rastojanje"></div>
         </div>
         <div class="line">
             <label class="label">Vreme vožnje</label>
-            <div id="vreme"></div>       
+            <div id="vreme"></div>
         </div>
         <div class="line">
             <input class="pretraziBtn" type="submit" id="btnDodaj" value="Dodaj" />
         </div>
-        
     </form>
+        
     <div id="grid"></div>
     <div id="mapa"></div>
     <div id="ukupno">
@@ -88,3 +97,4 @@
         <span id="brzina"></span><br/>
     </div>
 </div>
+@Html.Partial("~/Views/Stajalista/_PretragaStajalista.cshtml")

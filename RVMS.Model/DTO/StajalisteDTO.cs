@@ -8,6 +8,7 @@ namespace RVMS.Model.DTO
         public int? IdStajalistaLinije { get; set; }
         public string Naziv { get; set; }
         public string Opstina { get; set; }
+        public string Mesto { get; set; }
         public decimal? Latituda { get; set; }
         public decimal? Longituda { get; set; }
         public decimal? Udaljenost { get; set; }
