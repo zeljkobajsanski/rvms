@@ -60,9 +60,9 @@
             sortable: true,
             height: 244,
             columns: [
-                {text: 'Stajalište', datafield: 'Naziv'},
-                {text: 'Opština', datafield: 'Opstina'},
-                {text: 'Mesto', datafield: 'Mesto'}
+                { text: 'Stajalište', datafield: 'Naziv' },
+                { text: 'Mesto', datafield: 'Mesto' },
+                { text: 'Opština', datafield: 'Opstina' },
             ]
         });
 

@@ -1,4 +1,0 @@
-﻿[{"id": "1", "name": "Senta"}, 
-{"id":"2", "name": "Novi Sad"},
-{"id":"3", "name": "Vrbica"},
-{"id":"4", "name": "Beograd"}]
