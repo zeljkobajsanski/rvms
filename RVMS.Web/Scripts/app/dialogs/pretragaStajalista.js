@@ -40,13 +40,20 @@
             source: opstine,
             placeHolder: 'Filtriraj po opštini'
         });
+        
+        var mesta = new $.jqx.dataAdapter({
+            url: '/Mesta/VratiSvaAktivnaMesta',
+            datatype: 'json',
+        });
+
         psMesto = psMesto.jqxDropDownList({
             theme: RVMS.getTheme(),
             width: 240,
             height: RVMS.ControlHeight,
             valueMember: 'Id',
             displayMember: 'Naziv',
-            placeHolder: 'Filtriraj po mestu'
+            placeHolder: 'Filtriraj po mestu',
+            source: mesta
         });
 
         psStajaliste = psStajaliste.jqxInput({ theme: RVMS.getTheme(), width: 240, height: RVMS.ControlHeight });
@@ -67,7 +74,7 @@
         });
 
         // events
-        psOpstina.on('change', self.OsveziMesta);
+        //psOpstina.on('change', self.OsveziMesta);
 
         btnOcisti.on('click', self.Ocisti);
         

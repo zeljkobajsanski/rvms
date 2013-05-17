@@ -16,7 +16,8 @@
         brzina,
         btnPretrazi1,
         btnPretrazi2,
-        pretragaStajalista;
+        pretragaStajalista,
+        info = new google.maps.InfoWindow();
 
     $(document).ready(function() {
         nazivRelacije = $("#nazivRelacije");
@@ -256,24 +257,42 @@
         },
         {
             loadComplete: function(data) {
-                var len = data.length;
-                var bounds;
+                var len = data.length,
+                          bounds,
+                          directionsRequest = { travelMode: google.maps.TravelMode.DRIVING },
+                          waypoints = [];
                 for (var i = 0; i < len; i++) {
                     var stajaliste = data[i];
 
                     if (i == 0) {
-                        bounds = new google.maps.LatLngBounds(new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista),
-                            new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista));
+                        var polazak = new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista);
+                        directionsRequest.origin = polazak;
+                        bounds = new google.maps.LatLngBounds(polazak),
+                                 new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista);
                     }
                     if (stajaliste.LatitudaPolaznogStajalista && stajaliste.LongitudaPolaznogStajalista) {
-                        new google.maps.Marker({ map: mapa, position: new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista) });
+                        var marker = new google.maps.Marker({ map: mapa, position: new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista) });
+                        _dodeliInfo(marker, stajaliste);
                     }
                     if (stajaliste.LatitudaDolaznogStajalista && stajaliste.LongitudaDolaznogStajalista) {
-                        new google.maps.Marker({ map: mapa, position: new google.maps.LatLng(stajaliste.LatitudaDolaznogStajalista, stajaliste.LongitudaDolaznogStajalista) });
+                        var waypoint = new google.maps.LatLng(stajaliste.LatitudaDolaznogStajalista, stajaliste.LongitudaDolaznogStajalista);
+                        directionsRequest.destination = waypoint;
+                        if (i < len - 1) {
+                            waypoints.push({location: waypoint});
+                        } 
+                        var marker = new google.maps.Marker({ map: mapa, position: waypoint });
+                        _dodeliInfo(marker, stajaliste);
                         bounds.extend(new google.maps.LatLng(stajaliste.LatitudaDolaznogStajalista, stajaliste.LongitudaDolaznogStajalista));
                     }
-                    
                 }
+                var directionsService = new google.maps.DirectionsService();
+                directionsService.route(directionsRequest, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        var display = new google.maps.DirectionsRenderer();
+                        display.setMap(mapa);
+                        display.setDirections(response);
+                    }
+                });
                 mapa.fitBounds(bounds);
                 if (len > 0) {
                     var poslednji = data[len - 1];
@@ -313,5 +332,16 @@
         });
     }
     
-    
+    function _dodeliInfo(marker, stajaliste) {
+        google.maps.event.addListener(marker, 'click', function () {
+            var content = "<div class='infoWindow'>" +
+                "<h1>" + stajaliste.PolaznoStajaliste + "</h1>" +
+                "<p>" + stajaliste.PolaznoStajaliste + " - " + stajaliste.DolaznoStajaliste + "</p>" +
+                "<p>Rastojanje: " + stajaliste.Rastojanje + " km</p>" +
+                "<p>Vreme vožnje: " + stajaliste.VremeVoznje + " min</p>" +
+                "</div>";
+            info.setContent(content);
+            info.open(mapa, marker);
+        });
+    }
 };

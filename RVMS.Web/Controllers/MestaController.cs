@@ -32,6 +32,12 @@ namespace RVMS.Web.Controllers
             return Json(mesta, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult VratiSvaAktivnaMesta()
+        {
+            var mesta = fRepository.GetActive();
+            return Json(mesta, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public void Insert(Mesto mesto)
         {
