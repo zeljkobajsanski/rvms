@@ -72,7 +72,7 @@
 <form action="javascript:;">
     <div class="line">
         <label class="label">Naziv relacije:</label>
-        <input type="text" id="nazivRelacije"/>
+        <input type="text" id="nazivRelacije" tabindex="0" />
         <input type="submit" id="btnSave" value="Sačuvaj"/>    
     </div>
     
@@ -81,23 +81,23 @@
 <div id="daljinar">
     <div class="line">
         <label class="label">Polazna stanica</label>
-        <div id="polaznaStanica"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi1" class="btnFind" />    
+        <div id="polaznaStanica" tabindex="1"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi1" class="btnFind" />    
     </div>
     <div class="line">
         <label class="label">Dolazna stanica</label>
-        <div id="dolaznaStanica"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi2" class="btnFind"/>    
+        <div id="dolaznaStanica" tabindex="2"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi2" class="btnFind"/>    
     </div>
     <form action="javascript:;">
         <div class="line">
             <label class="label">Međustanično rastojanje</label>
-            <div id="rastojanje"></div>
+            <div id="rastojanje" tabindex="3"></div>
         </div>
         <div class="line">
             <label class="label">Vreme vožnje</label>
-            <div id="vreme"></div>
+            <div id="vreme" tabindex="4"></div>
         </div>
         <div class="line">
-            <input class="pretraziBtn" type="submit" id="btnDodaj" value="Dodaj" />
+            <input class="pretraziBtn" type="submit" id="btnDodaj" value="Dodaj" tabindex="5" />
         </div>
     </form>
         

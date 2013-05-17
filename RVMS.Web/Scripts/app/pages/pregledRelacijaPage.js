@@ -20,7 +20,9 @@
             height: 600,
             pageable: true,
             pagesize: 20,
-            pagesizeoptions: ['10', '20', '50']
+            pagesizeoptions: ['10', '20', '50'],
+            filterable: true,
+            sortable: true
         });
         grid.on('cellclick', function(event) {
             if (event.args.column.text == "Briši") {

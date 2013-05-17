@@ -4,8 +4,11 @@
             mestaGrid = $("#mesta"),
             nazivMesta = $("#nazivMesta"),
             btnSacuvaj = $("#btnSave"),
-            selektovanaOpstina;
-        
+            selektovanaOpstina,
+            loader = $("#loader");
+
+        loader.hide();
+
         // Opstine dropdown
         var opstineDataAdapter = new $.jqx.dataAdapter({
             url: '/Opstine/VratiAktivneOpstine',
@@ -69,6 +72,8 @@
                 RVMS.Common.showWarning("Unesite naziv mesta");
                 return false;
             }
+            loader.show();
+            btnSacuvaj.jqxButton({ disabled: true });
             $.ajax({
                 url: '/Mesta/Insert',
                 contentType: 'application/json; charset=UTF-8',
@@ -76,11 +81,15 @@
                 dataType: 'json',
                 data: JSON.stringify({ OpstinaId: selektovanaOpstina, Naziv: nazivMestaValue }),
                 success: function () {
+                    loader.hide();
+                    btnSacuvaj.jqxButton({ disabled: false });
                     nazivMesta.val('');
                     RVMS.Common.showDataSaved();
                     mestaGrid.jqxGrid('updatebounddata');
                 },
-                error: function(err) {
+                error: function (err) {
+                    loader.hide();
+                    btnSacuvaj.jqxButton({ disabled: false });
                     RVMS.Common.showGenericError();
                 }
             });

@@ -18,7 +18,8 @@
         mapa,
         marker,
         izabranoStajaliste,
-        stanica;
+        stanica,
+        loader;
 
 
     $(document).ready(function() {
@@ -26,6 +27,8 @@
         mesta = $("#mestaCombo");
         nazivStajalista = $("#nazivStajalista");
         stanica = $("#stanica");
+        loader = $("#loader");
+        loader.hide();
 
         var opstineDataAdapter = new $.jqx.dataAdapter({
             url: '/Opstine/VratiAktivneOpstine',
@@ -247,6 +250,8 @@
         var naziv = nazivStajalista.val();
         if (!naziv) return;
         var mesto = _izabranoMesto();
+        btnSave.jqxButton({ disabled: true });
+        loader.show();
         $.ajax({
             url: '/Stajalista/Insert',
             type: 'POST',
@@ -254,13 +259,17 @@
             contentType: 'application/json; charset=UTF-8',
             data: JSON.stringify({ OpstinaId: opstina, MestoId: mesto, Naziv: naziv, Stanica: stanica.jqxCheckBox('checked') }),
             success: function () {
+                btnSave.jqxButton({ disabled: false });
+                loader.hide();
                 RVMS.Common.showDataSaved();
                 nazivStajalista.val('');
                 stanica.jqxCheckBox('uncheck');
                 _osveziStajalista();
             },
-            error: function(err) {
-                alert(err);
+            error: function (err) {
+                loader.hide();
+                RVMS.Common.showGenericError();
+                btnSave.jqxButton({ disabled: true });
             }
         });
     }

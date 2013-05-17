@@ -194,7 +194,7 @@
                     dolaznaStanica.val(RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id);
                 }
             });
-            rastojanje.jqxNumberInput('focus');
+            rastojanje.find('input').focus();
         });
     });
 

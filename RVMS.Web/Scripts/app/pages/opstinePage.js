@@ -1,11 +1,16 @@
 ﻿RVMS.Pages.OpstinePage = function() {
     var noviUnos,
-        btnNew;
+        btnNew,
+        loader;
 
     $(document).ready(function () {
+        loader = $("#loader");
         noviUnos = $("#noviUnos");
         noviUnos.jqxInput({ theme: RVMS.getTheme(), width: 140, height: RVMS.ControlHeight });
         btnNew = $("#btnNew");
+
+        loader.hide();
+
         btnNew.jqxButton({ theme: RVMS.getTheme() });
         btnNew.on('click', function() {
             data = {
@@ -15,17 +20,24 @@
                 RVMS.Common.showWarning("Unesite naziv opštine");
                 return false;
             }
+            
+            loader.show();
+            btnNew.jqxButton({ disabled: true });
             $.ajax({
                 url: '/Opstine/Insert',
                 contentType: 'application/json',
                 type: 'POST',
                 data: JSON.stringify(data),
-                success: function() {
+                success: function () {
+                    loader.hide();
+                    btnNew.jqxButton({ disabled: false });
                     noviUnos.val('');
                     $("#grid").jqxGrid('updatebounddata');
                     RVMS.Common.showDataSaved();
                 },
-                error: function() {
+                error: function () {
+                    loader.hide();
+                    btnNew.jqxButton({ disabled: false });
                     RVMS.Common.showGenericError();
                 }
             });

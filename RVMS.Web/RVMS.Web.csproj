@@ -452,6 +452,7 @@
     <Content Include="resources\dragcancel.png" />
     <Content Include="resources\filter_dark.png" />
     <Content Include="resources\filter_large_.png" />
+    <Content Include="resources\kockice_loader.gif" />
     <Content Include="resources\loader.gif" />
     <Content Include="resources\loader2.gif" />
     <Content Include="resources\loader3.gif" />
@@ -510,6 +511,7 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Linije\Index.cshtml" />
     <Content Include="Views\Prevoznici\Prevoznik.cshtml" />
+    <Content Include="Views\Stajalista\_PretragaStajalista.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
