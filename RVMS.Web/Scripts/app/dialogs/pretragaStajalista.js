@@ -20,7 +20,7 @@
         dialogWindow.jqxWindow({
             theme: RVMS.getTheme(),
             width: 600,
-            height: 400,
+            height: 600,
             isModal: true,
             autoOpen: false,
             title: 'Pretraga stajališta'
@@ -65,7 +65,7 @@
             theme: RVMS.getTheme(),
             width: 588,
             sortable: true,
-            height: 244,
+            height: 450,
             columns: [
                 { text: 'Stajalište', datafield: 'Naziv' },
                 { text: 'Mesto', datafield: 'Mesto' },
