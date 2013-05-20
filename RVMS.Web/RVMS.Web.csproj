@@ -374,6 +374,7 @@
     <Content Include="Content\images\sunny\ui-icons_ffe180_256x240.png" />
     <Content Include="Content\images\tick.png" />
     <Content Include="Content\images\tomato-icon.png" />
+    <Content Include="Content\images\toolbar_find.png" />
     <Content Include="Content\images\track_classic.png" />
     <Content Include="Content\images\track_darkblue.png" />
     <Content Include="Content\images\track_shinyblack.png" />

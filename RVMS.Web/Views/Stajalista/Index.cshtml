@@ -25,14 +25,18 @@
         #stajalista {
             float: left;
         }   
+        #btnPretrazi {
+            border: 0;
+            margin-left: 4px;
+        }
     </style>
     
     
 }
 @section scripts
 {
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false">
-    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false"></script>
+    <script src="@Url.Content("~/Scripts/app/dialogs/pretragaStajalista.js")"></script>
     <script src="@Url.Content("~/Scripts/app/pages/stajalistaPage.js")"></script>
     <script>
         RVMS.Pages.StajalistaPage = new RVMS.Pages.StajalistaPage();
@@ -64,6 +68,7 @@
         <div class="line">
             <label class="label">Naziv stajališta</label>
             <input type="text" id="nazivStajalista" />
+            <input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi" />
         </div>
         <div class="line">
             <label class="label">Stanica</label>
@@ -79,3 +84,5 @@
     <div id="stajalista"></div>    
     <div id="mapa"></div>    
 </div>
+
+@Html.Partial("_PretragaStajalista")

@@ -68,5 +68,11 @@ namespace RVMS.Web.Controllers
             
             return Json(aktivnaStajalista, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult VratiStajaliste(int id)
+        {
+            var stajaliste = fRepository.Get(id);
+            return Json(stajaliste, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -19,7 +19,9 @@
         marker,
         izabranoStajaliste,
         stanica,
-        loader;
+        loader,
+        btnPretrazi,
+        pretrazenoStajaliste;
 
 
     $(document).ready(function() {
@@ -29,6 +31,7 @@
         stanica = $("#stanica");
         loader = $("#loader");
         loader.hide();
+        btnPretrazi = $("#btnPretrazi");
 
         var opstineDataAdapter = new $.jqx.dataAdapter({
             url: '/Opstine/VratiAktivneOpstine',
@@ -178,6 +181,25 @@
             theme: RVMS.getTheme()
         });
 
+        btnPretrazi.jqxButton({ theme: RVMS.getTheme() });
+        btnPretrazi.on('click', function() {
+            RVMS.Dialogs.PretragaStajalista.OpenDialog();
+        });
+        $("#pretragaStajalista").on('close', function() {
+            if (RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste && RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id) {
+                pretrazenoStajaliste = null;
+                $.ajax({
+                    url: '/Stajalista/VratiStajaliste',
+                    data: { id: RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id },
+                    success: function (response) {
+                        pretrazenoStajaliste = response;
+                        opstine.val(response.OpstinaId);
+                        mesta.val(response.MestoId);
+                    }
+                });
+            }
+        });
+
         stanica = $("#stanica");
         stanica.jqxCheckBox({ theme: RVMS.getTheme() });
 
@@ -212,6 +234,7 @@
     
     function _osveziMesta() {
         var opstina = _izabranaOpstina();
+        var ps = pretrazenoStajaliste;
         if (opstina) {
             var dataSource = new $.jqx.dataAdapter({
                 url: '/Mesta/VratiAktivnaMesta',
@@ -221,6 +244,13 @@
                     { name: 'Id', type: 'int' },
                     { name: 'Naziv' }
                 ]
+            },
+            {
+               loadComplete: function() {
+                   if (ps) {
+                       mesta.val(ps.MestoId);
+                   }
+               }     
             });
             mesta.jqxDropDownList({
                 source: dataSource
@@ -292,6 +322,18 @@
             ],
             updaterow: function(rid, value, commit) {
                 _update(value, commit);
+            }
+        }, {
+            loadComplete: function () {
+                if (pretrazenoStajaliste) {
+                    var rows = stajalista.jqxGrid('getrows');
+                    $.each(rows, function(ix, item) {
+                        if (pretrazenoStajaliste.Id === item.Id) {
+                            stajalista.jqxGrid('selectrow', ix);
+                            return;
+                        }
+                    });
+                }
             }
         });
 
