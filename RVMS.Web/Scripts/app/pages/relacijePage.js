@@ -140,8 +140,8 @@
         grid = $("#grid");
         grid.jqxGrid({
            columns: [
-               {text: 'Polazno stajalište', datafield: 'PolaznoStajaliste', editable: false},
-               { text: 'Dolazno stajalište', datafield: 'DolaznoStajaliste', editable: false },
+               {text: 'Polazno stajalište', datafield: 'PolaznoStajaliste', editable: false, cellsrenderer: _stajalisteCellRenderer },
+               { text: 'Dolazno stajalište', datafield: 'DolaznoStajaliste', editable: false, cellsrenderer: _stajalisteCellRenderer },
                { text: 'Rastojanje', datafield: 'Rastojanje', align: 'right', cellsalign: 'right', cellsformat: 'd2', editable: true, columntype: 'numberinput', width: 62 },
                { text: 'Dužina relacije', datafield: 'DuzinaRelacije', align: 'right', cellsalign: 'right', cellsformat: 'd2', editable: false, width: 84 },
                { text: 'Vreme vožnje', datafield: 'VremeVoznje', align: 'right', cellsalign: 'right', editable: true, columntype: 'numberinput', width: 80 },
@@ -223,19 +223,19 @@
             url: "/Relacije/MedjustanicnaRastojanja",
             data: { idRelacije: idRelacije },
             datatype: 'json',
-            datafields: [
-                { name: 'Id', type: 'int' },
-                { name: 'PolaznoStajaliste' },
-                { name: 'DolaznoStajaliste' },
-                { name: 'Rastojanje' },
-                { name: 'DuzinaRelacije' },
-                { name: 'VremeVoznje', type: 'int' },
-                { name: 'VremeVoznjePoRelaciji', type: 'int' },
-                { name: 'LatitudaPolaznogStajalista' },
-                { name: 'LongitudaPolaznogStajalista' },
-                { name: 'LatitudaDolaznogStajalista' },
-                { name: 'LongitudaDolaznogStajalista' }
-            ],
+            //datafields: [
+            //    { name: 'Id', type: 'int' },
+            //    { name: 'PolaznoStajaliste' },
+            //    { name: 'DolaznoStajaliste' },
+            //    { name: 'Rastojanje' },
+            //    { name: 'DuzinaRelacije' },
+            //    { name: 'VremeVoznje', type: 'number' },
+            //    { name: 'VremeVoznjePoRelaciji', type: 'number' },
+            //    { name: 'LatitudaPolaznogStajalista' },
+            //    { name: 'LongitudaPolaznogStajalista' },
+            //    { name: 'LatitudaDolaznogStajalista' },
+            //    { name: 'LongitudaDolaznogStajalista' }
+            //],
             updaterow: function(rid, value, commit) {
                 var data = {
                     Id: value.Id,
@@ -343,5 +343,27 @@
             info.setContent(content);
             info.open(mapa, marker);
         });
+    }
+    
+    function _stajalisteCellRenderer(row, columnfield, value) {
+        var lnk = $("<a class='stajalisteLink' target='_blank'></a>");
+        var data = grid.jqxGrid('getrowdata', row);
+        var id = null;
+        if (columnfield == 'PolaznoStajaliste') {
+            id = data.PolaznoStajalisteId;
+            if (data.LatitudaPolaznogStajalista && data.LongitudaPolaznogStajalista) {
+                lnk.addClass('globe');
+            }
+        } else if (columnfield == 'DolaznoStajaliste') {
+            id = data.DolaznoStajalisteId;
+            if (data.LatitudaDolaznogStajalista && data.LongitudaDolaznogStajalista) {
+                lnk.addClass('globe');
+            }
+        }
+        lnk.attr('href', '/Stajalista/Index/' + id);
+        lnk.text(value);
+        //return "<a href='/Stajalista/Index/" + id + "' class='stajalisteLink globe' target='_blank'>" + value + "</a>";
+        var link = $("<div>").append(lnk).html();
+        return link;
     }
 };

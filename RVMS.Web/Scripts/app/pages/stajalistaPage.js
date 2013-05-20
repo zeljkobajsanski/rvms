@@ -21,10 +21,15 @@
         stanica,
         loader,
         btnPretrazi,
-        pretrazenoStajaliste;
+        pretrazenoStajaliste,
+        model;
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+        var m = $("#model").val();
+        if (m) {
+            model = JSON.parse(m);
+        }
         opstine = $("#opstineCombo");
         mesta = $("#mestaCombo");
         nazivStajalista = $("#nazivStajalista");
@@ -40,6 +45,12 @@
                 { name: 'Id', type: 'int' },
                 { name: 'NazivOpstine' }
             ]
+        }, {
+            loadComplete: function () {
+                if (model) {
+                    opstine.val(model.OpstinaId);
+                }
+            }
         });
 
         opstine.jqxDropDownList({
@@ -176,8 +187,6 @@
         });
 
         nazivStajalista.jqxInput({
-            width: 180,
-            height: RVMS.ControlHeight,
             theme: RVMS.getTheme()
         });
 
@@ -192,6 +201,7 @@
                     url: '/Stajalista/VratiStajaliste',
                     data: { id: RVMS.Dialogs.PretragaStajalista.IzabranoStajaliste.Id },
                     success: function (response) {
+                        model = null;
                         pretrazenoStajaliste = response;
                         opstine.val(response.OpstinaId);
                         mesta.val(response.MestoId);
@@ -247,6 +257,9 @@
             },
             {
                loadComplete: function() {
+                   if (model) {
+                       mesta.val(model.MestoId);
+                   }
                    if (ps) {
                        mesta.val(ps.MestoId);
                    }
@@ -329,6 +342,15 @@
                     var rows = stajalista.jqxGrid('getrows');
                     $.each(rows, function(ix, item) {
                         if (pretrazenoStajaliste.Id === item.Id) {
+                            stajalista.jqxGrid('selectrow', ix);
+                            return;
+                        }
+                    });
+                }
+                if (model) {
+                    rows = stajalista.jqxGrid('getrows');
+                    $.each(rows, function (ix, item) {
+                        if (model.Id === item.Id) {
                             stajalista.jqxGrid('selectrow', ix);
                             return;
                         }

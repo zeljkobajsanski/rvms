@@ -16,8 +16,13 @@ namespace RVMS.Web.Controllers
     {
         private readonly StajalistaRepository fRepository = new StajalistaRepository();
 
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            if (id.HasValue)
+            {
+                var stajaliste = fRepository.Get(id.Value);
+                return View(stajaliste);
+            }
             return View();
         }
 

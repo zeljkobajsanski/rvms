@@ -69,7 +69,9 @@ namespace RVMS.Web.Controllers
                 fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO
                 {
                     Id = x.Id,
+                    PolaznoStajalisteId = x.PolaznoStajalisteId,
                     PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                    DolaznoStajalisteId = x.DolaznoStajalisteId,
                     DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
                     Rastojanje = x.Rastojanje,
                     VremeVoznje = x.VremeVoznje,

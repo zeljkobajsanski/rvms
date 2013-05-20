@@ -218,6 +218,7 @@
     <Content Include="Content\images\darkred_gradient.png" />
     <Content Include="Content\images\door_out.png" />
     <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\globe.png" />
     <Content Include="Content\images\gnome_edit_delete.png" />
     <Content Include="Content\images\home %281%29.png" />
     <Content Include="Content\images\home.png" />
