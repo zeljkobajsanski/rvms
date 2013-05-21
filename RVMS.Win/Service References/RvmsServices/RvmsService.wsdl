@@ -26,6 +26,24 @@
   <wsdl:message name="IRvmsService_VratiDaljinar_OutputMessage">
     <wsdl:part name="parameters" element="tns:VratiDaljinarResponse" />
   </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiRelacijuSaRastojanjima_InputMessage">
+    <wsdl:part name="parameters" element="tns:VratiRelacijuSaRastojanjima" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiRelacijuSaRastojanjima_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VratiRelacijuSaRastojanjimaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajRelaciju_InputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajRelaciju" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajRelaciju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajRelacijuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajRastojanje_InputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajRastojanje" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajRastojanje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajRastojanjeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRvmsService">
     <wsdl:operation name="VratiOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiOpstine" message="tns:IRvmsService_VratiOpstine_InputMessage" />
@@ -38,6 +56,18 @@
     <wsdl:operation name="VratiDaljinar">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiDaljinar" message="tns:IRvmsService_VratiDaljinar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiDaljinarResponse" message="tns:IRvmsService_VratiDaljinar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VratiRelacijuSaRastojanjima">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiRelacijuSaRastojanjima" message="tns:IRvmsService_VratiRelacijuSaRastojanjima_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiRelacijuSaRastojanjimaResponse" message="tns:IRvmsService_VratiRelacijuSaRastojanjima_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajRelaciju">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SacuvajRelaciju" message="tns:IRvmsService_SacuvajRelaciju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SacuvajRelacijuResponse" message="tns:IRvmsService_SacuvajRelaciju_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajRastojanje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SacuvajRastojanje" message="tns:IRvmsService_SacuvajRastojanje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SacuvajRastojanjeResponse" message="tns:IRvmsService_SacuvajRastojanje_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRvmsService" type="tns:IRvmsService">
@@ -62,6 +92,33 @@
     </wsdl:operation>
     <wsdl:operation name="VratiDaljinar">
       <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiDaljinar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VratiRelacijuSaRastojanjima">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiRelacijuSaRastojanjima" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajRelaciju">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/SacuvajRelaciju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajRastojanje">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/SacuvajRastojanje" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

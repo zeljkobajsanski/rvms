@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RVMS.Win.Annotations;
+using Message = RVMS.Win.Messages.Message;
 
 namespace RVMS.Win.Views
 {
@@ -37,6 +38,14 @@ namespace RVMS.Win.Views
 
         public event EventHandler<RequestViewEventArgs> RequestView;
 
+        public event EventHandler<NotificationEventArgs> Notify;
+
+        protected virtual void OnNotify(Message message)
+        {
+            var handler = Notify;
+            if (handler != null) handler(this, new NotificationEventArgs(){Message = message});
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -59,5 +68,11 @@ namespace RVMS.Win.Views
                 });
             }
         }
+
+        public virtual void Osvezi() {}
+        
+        public virtual void Sacuvaj() {}
+
+        public virtual void NoviUnos() {}
     }
 }

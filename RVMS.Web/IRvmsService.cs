@@ -21,5 +21,14 @@ namespace RVMS.Web
 
         [OperationContract]
         RelacijaDTO[] VratiDaljinar();
+
+        [OperationContract]
+        RelacijaSaMedjustanicnimRastojanjimaDTO VratiRelacijuSaRastojanjima(int idRelacije);
+
+        [OperationContract]
+        int SacuvajRelaciju(Relacija relacija);
+
+        [OperationContract]
+        MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje);
     }
 }

@@ -36,4 +36,36 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RelacijaDTO" nillable="true" type="tns:RelacijaDTO" />
+  <xs:complexType name="RelacijaSaMedjustanicnimRastojanjimaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdRelacije" type="xs:int" />
+      <xs:element minOccurs="0" name="NazivRelacije" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Stanice" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanjeDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RelacijaSaMedjustanicnimRastojanjimaDTO" nillable="true" type="tns:RelacijaSaMedjustanicnimRastojanjimaDTO" />
+  <xs:complexType name="ArrayOfMedjustanicnoRastojanjeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MedjustanicnoRastojanjeDTO" nillable="true" type="tns:MedjustanicnoRastojanjeDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMedjustanicnoRastojanjeDTO" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanjeDTO" />
+  <xs:complexType name="MedjustanicnoRastojanjeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DolaznoStajaliste" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DolaznoStajalisteId" type="xs:int" />
+      <xs:element minOccurs="0" name="DuzinaRelacije" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LatitudaDolaznogStajalista" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LatitudaPolaznogStajalista" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongitudaDolaznogStajalista" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongitudaPolaznogStajalista" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PolaznoStajaliste" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PolaznoStajalisteId" type="xs:int" />
+      <xs:element minOccurs="0" name="Rastojanje" type="xs:decimal" />
+      <xs:element minOccurs="0" name="VremeVoznje" type="xs:int" />
+      <xs:element minOccurs="0" name="VremeVoznjePoRelaciji" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MedjustanicnoRastojanjeDTO" nillable="true" type="tns:MedjustanicnoRastojanjeDTO" />
 </xs:schema>

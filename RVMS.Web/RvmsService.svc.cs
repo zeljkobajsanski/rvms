@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -40,6 +42,91 @@ namespace RVMS.Web
                 VremeVoznje = x.VremeVoznje,
                 SrednjaSaobracajnaBrzina = x.SrednjaSaobracajnaBrzina
             }).ToArray();
+        }
+
+        public RelacijaSaMedjustanicnimRastojanjimaDTO VratiRelacijuSaRastojanjima(int idRelacije)
+        {
+            var relacija = new RelacijeRepository().VratiRelacijuSaRastojanjima(idRelacije);
+            if (relacija == null) return null;
+            var retVal = new RelacijaSaMedjustanicnimRastojanjimaDTO
+            {
+                IdRelacije = relacija.Id,
+                NazivRelacije = relacija.Naziv,
+                Stanice = relacija.MedjustanicnaRastojanja.Select(x => new MedjustanicnoRastojanjeDTO()
+                {
+                    Id = x.Id,
+                    PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                    PolaznoStajalisteId = x.PolaznoStajalisteId,
+                    DolaznoStajalisteId = x.DolaznoStajalisteId,
+                    DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
+                    Rastojanje = x.Rastojanje,
+                    VremeVoznje = x.VremeVoznje
+                }).ToArray()
+            };
+            IzracunajRelaciju(retVal.Stanice);
+            return retVal;
+        }
+
+        
+
+        public int SacuvajRelaciju(Relacija relacija)
+        {
+            if (Validator.TryValidateObject(relacija, new ValidationContext(relacija, null, null),
+                                            new Collection<ValidationResult>()))
+            {
+                var repository = new RelacijeRepository();
+                if (relacija.Id == 0)
+                {
+                    repository.Add(relacija);
+                }
+                else
+                {
+                    repository.Update(relacija);
+                }
+                repository.Save();
+                return relacija.Id;
+            }
+            throw new InvalidOperationException("Podaci nisu validni");
+        }
+
+        public MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje)
+        {
+            var r = new MedjustanicnaRastojanjaRepository();
+            if (rastojanje.Id == 0)
+            {
+                r.Add(rastojanje);
+            }
+            else
+            {
+                r.Update(rastojanje);
+            }
+            r.Save();
+            var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
+            {
+                Id = x.Id,
+                PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                PolaznoStajalisteId = x.PolaznoStajalisteId,
+                DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
+                DolaznoStajalisteId = x.DolaznoStajalisteId,
+                Rastojanje = x.Rastojanje,
+                VremeVoznje = x.VremeVoznje
+            }).ToArray();
+            IzracunajRelaciju(retVal);
+            return retVal;
+        }
+
+        private static void IzracunajRelaciju(IEnumerable<MedjustanicnoRastojanjeDTO> rastojanja)
+        {
+            var duzinaRelacije = 0M;
+            var vremeVoznje = 0;
+
+            foreach (var medjustanicnoRastojanjeDto in rastojanja)
+            {
+                duzinaRelacije += medjustanicnoRastojanjeDto.Rastojanje;
+                vremeVoznje += medjustanicnoRastojanjeDto.VremeVoznje;
+                medjustanicnoRastojanjeDto.DuzinaRelacije = duzinaRelacije;
+                medjustanicnoRastojanjeDto.VremeVoznjePoRelaciji = vremeVoznje;
+            }
         }
     }
 }

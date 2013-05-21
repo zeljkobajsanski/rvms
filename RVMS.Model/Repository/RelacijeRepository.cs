@@ -10,5 +10,13 @@ namespace RVMS.Model.Repository
          {
              return fDataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan).ToArray();
          }
+
+        public Relacija VratiRelacijuSaRastojanjima(int idRelacije)
+        {
+            return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
+                .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
+                .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
+                .SingleOrDefault(x => x.Id == idRelacije);
+        }
     }
 }

@@ -476,6 +476,12 @@
     <Content Include="resources\sortdescbutton.png" />
     <Content Include="resources\sortremove.png" />
     <Content Include="RvmsService.svc" />
+    <None Include="SampleData\Daljinar.sql" />
+    <None Include="SampleData\ImportData.sql" />
+    <None Include="SampleData\Mesta.sql" />
+    <None Include="SampleData\Opstine.sql" />
+    <None Include="SampleData\Relacije.sql" />
+    <None Include="SampleData\Stajalista.sql" />
     <Content Include="Scripts\app\application.js" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\dialogs\pretragaStajalista.js" />

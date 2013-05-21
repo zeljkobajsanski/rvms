@@ -23,4 +23,68 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Entity" nillable="true" type="tns:Entity" />
+  <xs:complexType name="Relacija">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MedjustanicnaRastojanja" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanje" />
+          <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Relacija" nillable="true" type="tns:Relacija" />
+  <xs:complexType name="ArrayOfMedjustanicnoRastojanje">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MedjustanicnoRastojanje" nillable="true" type="tns:MedjustanicnoRastojanje" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMedjustanicnoRastojanje" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanje" />
+  <xs:complexType name="MedjustanicnoRastojanje">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DolaznoStajaliste" nillable="true" type="tns:Stajaliste" />
+          <xs:element minOccurs="0" name="DolaznoStajalisteId" type="xs:int" />
+          <xs:element minOccurs="0" name="PolaznoStajaliste" nillable="true" type="tns:Stajaliste" />
+          <xs:element minOccurs="0" name="PolaznoStajalisteId" type="xs:int" />
+          <xs:element minOccurs="0" name="Rastojanje" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Rbr" type="xs:int" />
+          <xs:element minOccurs="0" name="Relacija" nillable="true" type="tns:Relacija" />
+          <xs:element minOccurs="0" name="RelacijaId" type="xs:int" />
+          <xs:element minOccurs="0" name="VremeVoznje" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MedjustanicnoRastojanje" nillable="true" type="tns:MedjustanicnoRastojanje" />
+  <xs:complexType name="Stajaliste">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GpsLatituda" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="GpsLongituda" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Mesto" nillable="true" type="tns:Mesto" />
+          <xs:element minOccurs="0" name="MestoId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Opstina" nillable="true" type="tns:Opstina" />
+          <xs:element minOccurs="0" name="OpstinaId" type="xs:int" />
+          <xs:element minOccurs="0" name="Stanica" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Stajaliste" nillable="true" type="tns:Stajaliste" />
+  <xs:complexType name="Mesto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Opstina" nillable="true" type="tns:Opstina" />
+          <xs:element minOccurs="0" name="OpstinaId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Mesto" nillable="true" type="tns:Mesto" />
 </xs:schema>

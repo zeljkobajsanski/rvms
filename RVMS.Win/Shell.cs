@@ -13,6 +13,8 @@ using DevExpress.XtraBars.Helpers;
 using DevExpress.Skins;
 using DevExpress.LookAndFeel;
 using DevExpress.UserSkins;
+using DevExpress.XtraEditors;
+using RVMS.Win.Messages;
 using RVMS.Win.Views;
 
 
@@ -20,30 +22,66 @@ namespace RVMS.Win
 {
     public partial class Shell : RibbonForm
     {
-        private BaseDocument daljinar;
-        public BaseDocument relacija { get; set; }
         public Shell()
         {
             InitializeComponent();
             InitSkinGallery();
-            navBarItemRelacija.LinkClicked += (s, e) =>
-            {
-                if (relacija == null)
-                {
-                    relacija = documentManager1.View.AddDocument("Relacija", "ViewRelacija");
-                }
-                documentManager1.View.ActivateDocument(relacija.Control);
-                
-            };
-            navBarItemDaljinar.LinkClicked += (s, e) =>
-            {
-                if (daljinar == null)
-                {
-                    daljinar = documentManager1.View.AddDocument("Daljinar", "ViewDaljinar");
-                }
-                documentManager1.View.ActivateDocument(daljinar.Control);
-            };
+            InitCommands();
+            navBarItemRelacija.LinkClicked += (s, e) => AddDocumentRelacija(null);
+            navBarItemDaljinar.LinkClicked += (s, e) => AddDocumentDaljinar();
             repositoryItemMarqueeProgressBar1.Stopped = true;
+        }
+
+        private void AddDocumentDaljinar()
+        {
+            var view = new ViewDaljinar();
+            view.PropertyChanged += ViewPropertyChanged;
+            view.Notify += OnNotify;
+            view.RequestView += (s1, e1) => AddDocumentRelacija(e1.Parameters);
+            var doc = documentManager1.View.Controller.AddDocument(view);
+            doc.Caption = "Daljinar";
+        }
+
+        private void AddDocumentRelacija(object parameters)
+        {
+            var view = parameters != null ? new ViewRelacija(parameters) : new ViewRelacija();
+            view.PropertyChanged += ViewPropertyChanged;
+            view.Notify += OnNotify;
+            var doc = documentManager1.View.Controller.AddDocument(view);
+            doc.Caption = "Relacija";
+        }
+
+        private void InitCommands()
+        {
+
+            iRefresh.ItemClick += (s, e) =>
+            {
+                var active = documentManager1.View.ActiveDocument;
+                if (active == null) return;
+                var view = (ViewBase)active.Control;
+                view.Osvezi();
+            };
+            iSave.ItemClick += (s, e) =>
+            {
+                var active = documentManager1.View.ActiveDocument;
+                if (active == null) return;
+                var view = (ViewBase)active.Control;
+                view.Sacuvaj();
+            };
+            iNew.ItemClick += (s, e) =>
+            {
+                var active = documentManager1.View.ActiveDocument;
+                if (active == null) return;
+                var view = (ViewBase)active.Control;
+                view.NoviUnos();
+            };
+            iExit.ItemClick += (s, e) =>
+            {
+                if (Pitaj("Da li želite da napustite aplikaciju?"))
+                {
+                    Application.Exit();
+                }
+            };
         }
 
         void InitSkinGallery()
@@ -53,20 +91,24 @@ namespace RVMS.Win
 
         private void QueryControl(object sender, DevExpress.XtraBars.Docking2010.Views.QueryControlEventArgs e)
         {
-            switch (e.Document.ControlName)
+        }
+
+        private void OnNotify(object sender, NotificationEventArgs e)
+        {
+            switch (e.Message.MessageType)
             {
-                case "ViewRelacija":
-                    var view = new ViewRelacija();
-                    view.PropertyChanged += ViewPropertyChanged;
-                    view.RequestView += (s, e1) =>
-                    {
-                        
-                    };
-                    e.Control = view;
-                    break;
-                case "ViewDaljinar":
-                    e.Control = new ViewDaljinar();
-                    break;
+                    case MessageType.Ok:
+                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                                            MessageBoxIcon.Information);
+                        break;
+                    case MessageType.Warning:
+                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                        break;
+                    case MessageType.Error:
+                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error);
+                            break;
             }
         }
 
@@ -78,8 +120,16 @@ namespace RVMS.Win
                 Invoke(new Action(() =>
                 {
                     repositoryItemMarqueeProgressBar1.Stopped = !view.IsBusy;
+                    Cursor = view.IsBusy ? Cursors.WaitCursor : Cursors.Default;
                 }));
             }
+        }
+
+        private bool Pitaj(string pitanje)
+        {
+            return
+                XtraMessageBox.Show(this, pitanje, "Oktopod", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                    MessageBoxDefaultButton.Button2) == DialogResult.Yes;
         }
 
     }
