@@ -5,6 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVMS.Web", "RVMS.Web\RVMS.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVMS.Model", "RVMS.Model\RVMS.Model.csproj", "{3EA33751-90F9-40C4-A1CF-01F66113D940}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVMS.Win", "RVMS.Win\RVMS.Win.csproj", "{775C726F-CBD8-462E-BBE9-8A7AD97C91FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{460CCCAC-8D9D-44FF-A28A-F5B2CBBA2214} = {460CCCAC-8D9D-44FF-A28A-F5B2CBBA2214}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{3EA33751-90F9-40C4-A1CF-01F66113D940}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{3EA33751-90F9-40C4-A1CF-01F66113D940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EA33751-90F9-40C4-A1CF-01F66113D940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775C726F-CBD8-462E-BBE9-8A7AD97C91FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775C726F-CBD8-462E-BBE9-8A7AD97C91FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775C726F-CBD8-462E-BBE9-8A7AD97C91FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775C726F-CBD8-462E-BBE9-8A7AD97C91FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

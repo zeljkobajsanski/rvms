@@ -17,61 +17,43 @@
         btnPretrazi1,
         btnPretrazi2,
         pretragaStajalista,
-        info = new google.maps.InfoWindow();
+        info = new google.maps.InfoWindow(),
+        stajalisteZaPozicioniranje,
+        izabranoStajalisteId,
+        markers = [],
+        btnRefresh;
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+        
         nazivRelacije = $("#nazivRelacije");
         nazivRelacije.jqxInput({ theme: RVMS.getTheme(), placeHolder: 'Naziv relacije...', width: 340, height: RVMS.ControlHeight });
         btnSave = $("#btnSave");
         btnSave.jqxButton({ theme: RVMS.getTheme() });
         btnSave.on('click', _insertRelaciju);
-
+        
         daljinar = $("#daljinar");
 
         polaznaStanica = $("#polaznaStanica");
-        dolaznaStanica = $("#dolaznaStanica");
-
-
-        var staniceDataSource = new $.jqx.dataAdapter({
-            url: '/Stajalista/VratiAktivnaStajalista',
-            datatype: 'json',
-            async: false,
-            id: 'Id',
-        }, {});
-        staniceDataSource.dataBind();
-        var records = staniceDataSource.getGroupedRecords(['Opstina'], 'stajalista', 'grupa', [{name: 'Opstina', map: 'grupa'}]);
-        var source = [];
-        $.each(records, function (i, item) {
-            $.each(item.stajalista, function(i1, stajaliste) {
-                source.push({
-                    html: "<div style='padding: 0 0 0 2px'>" + stajaliste.Naziv + "</div>",
-                    group: item.grupa,
-                    label: stajaliste.Naziv,
-                    Naziv: stajaliste.Naziv,
-                    Id: stajaliste.Id
-                });
-            });
-        });
-
         polaznaStanica.jqxDropDownList({
             theme: RVMS.getTheme(),
             width: 240,
             height: RVMS.ControlHeight,
             placeHolder: 'Polazna stanica...',
-            //displayMember: 'Naziv',
             valueMember: 'Id',
-            source: source
+            displayMember: 'Naziv'
         });
         
+        dolaznaStanica = $("#dolaznaStanica");
         dolaznaStanica.jqxDropDownList({
             theme: RVMS.getTheme(),
             width: 240,
             height: RVMS.ControlHeight,
             placeHolder: 'Dolazna stanica...',
-            //displayMember: 'Naziv',
             valueMember: 'Id',
-            source: source
+            displayMember: 'Naziv'
         });
+        
+        _osveziStajalista();
 
         rastojanje = $("#rastojanje");
         rastojanje.jqxNumberInput({
@@ -158,6 +140,9 @@
                     _obrisi(event.args.value);
                 }
             }
+        }).on('rowselect', function(e) {
+            var data = grid.jqxGrid('getrowdata', e.args.rowindex);
+            polaznaStanica.val(data.DolaznoStajalisteId);
         });
         
         var relacijaJson = $("#Relacija").val();
@@ -196,7 +181,17 @@
             });
             rastojanje.find('input').focus();
         });
+        btnRefresh = $(".btnRefresh");
+        btnRefresh.jqxButton({ theme: RVMS.getTheme() });
+        btnRefresh.on('click', _osveziStajalista);
+        
+        stajalisteZaPozicioniranje = $("#stajalisteZaPozicioniranje");
     });
+    
+    self.izaberiStajaliste = function (id, naziv) {
+        stajalisteZaPozicioniranje.text(naziv);
+        izabranoStajalisteId = id;
+    };
 
     function _insertRelaciju() {
         var naziv = nazivRelacije.val();
@@ -218,24 +213,41 @@
         }
     }
     
+    function _osveziStajalista() {
+        var staniceDataSource = new $.jqx.dataAdapter({
+            url: '/Stajalista/VratiAktivnaStajalista',
+            datatype: 'json',
+            async: true,
+            id: 'Id',
+        }, {
+            //downloadComplete: function() {
+            //    staniceDataSource.dataBind();
+            //    var records = staniceDataSource.getGroupedRecords(['Opstina'], 'stajalista', 'grupa', [{ name: 'Opstina', map: 'grupa' }]);
+            //    var source = [];
+            //    $.each(records, function (i, item) {
+            //        $.each(item.stajalista, function (i1, stajaliste) {
+            //            source.push({
+            //                html: "<div style='padding: 0 0 0 2px'>" + stajaliste.Naziv + "</div>",
+            //                group: item.grupa,
+            //                label: stajaliste.Naziv,
+            //                Naziv: stajaliste.Naziv,
+            //                Id: stajaliste.Id
+            //            });
+            //        });
+            //    });
+            //    polaznaStanica.jqxDropDownList({ source: source });
+            //    dolaznaStanica.jqxDropDownList({ source: source });
+            }
+        );
+        polaznaStanica.jqxDropDownList({ source: staniceDataSource });
+        dolaznaStanica.jqxDropDownList({ source: staniceDataSource });
+    }
+    
     function _osveziGrid() {
         var dataSource = new $.jqx.dataAdapter({
             url: "/Relacije/MedjustanicnaRastojanja",
             data: { idRelacije: idRelacije },
             datatype: 'json',
-            //datafields: [
-            //    { name: 'Id', type: 'int' },
-            //    { name: 'PolaznoStajaliste' },
-            //    { name: 'DolaznoStajaliste' },
-            //    { name: 'Rastojanje' },
-            //    { name: 'DuzinaRelacije' },
-            //    { name: 'VremeVoznje', type: 'number' },
-            //    { name: 'VremeVoznjePoRelaciji', type: 'number' },
-            //    { name: 'LatitudaPolaznogStajalista' },
-            //    { name: 'LongitudaPolaznogStajalista' },
-            //    { name: 'LatitudaDolaznogStajalista' },
-            //    { name: 'LongitudaDolaznogStajalista' }
-            //],
             updaterow: function(rid, value, commit) {
                 var data = {
                     Id: value.Id,
@@ -261,6 +273,7 @@
                           bounds,
                           directionsRequest = { travelMode: google.maps.TravelMode.DRIVING },
                           waypoints = [];
+                markers = [];
                 for (var i = 0; i < len; i++) {
                     var stajaliste = data[i];
 
@@ -271,16 +284,28 @@
                                  new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista);
                     }
                     if (stajaliste.LatitudaPolaznogStajalista && stajaliste.LongitudaPolaznogStajalista) {
-                        var marker = new google.maps.Marker({ map: mapa, position: new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista) });
+                        var marker = new google.maps.Marker({ map: mapa, position: new google.maps.LatLng(stajaliste.LatitudaPolaznogStajalista, stajaliste.LongitudaPolaznogStajalista), draggable: true });
+                        marker.idStajalista = stajaliste.PolaznoStajalisteId;
+                        google.maps.event.addListener(marker, 'dragend', function () {
+                            _azurirajPoziciju(marker);
+                        });
+                        markers.push(marker);
                         _dodeliInfo(marker, stajaliste);
                     }
                     if (stajaliste.LatitudaDolaznogStajalista && stajaliste.LongitudaDolaznogStajalista) {
                         var waypoint = new google.maps.LatLng(stajaliste.LatitudaDolaznogStajalista, stajaliste.LongitudaDolaznogStajalista);
                         directionsRequest.destination = waypoint;
                         if (i < len - 1) {
-                            waypoints.push({location: waypoint});
-                        } 
-                        var marker = new google.maps.Marker({ map: mapa, position: waypoint });
+                            waypoints.push({ location: waypoint });
+                        } else {
+                            polaznaStanica.val(stajaliste.DolaznoStajalisteId);
+                        }
+                        marker = new google.maps.Marker({ map: mapa, position: waypoint, draggable: true });
+                        marker.idStajalista = stajaliste.DolaznoStajalisteId;
+                        google.maps.event.addListener(marker, 'dragend', function () {
+                            _azurirajPoziciju(marker);
+                        });
+                        markers.push(marker);
                         _dodeliInfo(marker, stajaliste);
                         bounds.extend(new google.maps.LatLng(stajaliste.LatitudaDolaznogStajalista, stajaliste.LongitudaDolaznogStajalista));
                     }
@@ -313,6 +338,45 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         mapa = new google.maps.Map(document.getElementById("mapa"), mapOptions);
+        google.maps.event.addListener(mapa, 'click', function(e) {
+            if (izabranoStajalisteId) {
+                if (!_postojiMarker(izabranoStajalisteId)) {
+                    var marker = new google.maps.Marker({ map: mapa, position: e.latLng, draggable: true });
+                    marker.idStajalista = izabranoStajalisteId;
+                    markers.push(marker);
+                    _azurirajPoziciju(marker);
+                    google.maps.event.addListener(marker, 'dragend', function() {
+                        _azurirajPoziciju(marker);
+                    });
+                }
+            }
+        });
+    }
+    
+    function _postojiMarker(idStajalista) {
+        var postoji = false;
+        markers.forEach(function (item) {
+            if (item.idStajalista === idStajalista) {
+                postoji = true;
+                return;
+            }
+        });
+        return postoji;
+    }
+    
+    function _azurirajPoziciju(marker) {
+        $.ajax({
+            url: '/Stajalista/AzurirajKoordinatu',
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify({ Id: marker.idStajalista, GpsLatituda: marker.getPosition().lat(), GpsLongituda: marker.getPosition().lng() }),
+            success: function() {
+                RVMS.Common.showSuccess("Pozicija stajališta je ažurirana");
+            },
+            error: function() {
+                RVMS.Common.showWarning("Neuspešno ažuriranje pozicije stajališta");
+            }
+        });
     }
 
     function _obrisiCellTemplate(row, column, value) {
@@ -345,24 +409,31 @@
         });
     }
     
+    
+    
     function _stajalisteCellRenderer(row, columnfield, value) {
-        var lnk = $("<a class='stajalisteLink' target='_blank'></a>");
+        var lnk = $("<a class='stajalisteLink' href='javascript:;'></a>");
         var data = grid.jqxGrid('getrowdata', row);
-        var id = null;
+        var id = null,
+            naziv = null;
+        
         if (columnfield == 'PolaznoStajaliste') {
             id = data.PolaznoStajalisteId;
+            naziv = data.PolaznoStajaliste;
             if (data.LatitudaPolaznogStajalista && data.LongitudaPolaznogStajalista) {
                 lnk.addClass('globe');
             }
         } else if (columnfield == 'DolaznoStajaliste') {
             id = data.DolaznoStajalisteId;
+            naziv = data.DolaznoStajaliste;
             if (data.LatitudaDolaznogStajalista && data.LongitudaDolaznogStajalista) {
                 lnk.addClass('globe');
             }
         }
-        lnk.attr('href', '/Stajalista/Index/' + id);
+
+        var callback = 'RVMS.Pages.RelacijePage.izaberiStajaliste(' + id + ',' +  '"' + naziv + '")';
+        lnk.attr('onclick', callback);
         lnk.text(value);
-        //return "<a href='/Stajalista/Index/" + id + "' class='stajalisteLink globe' target='_blank'>" + value + "</a>";
         var link = $("<div>").append(lnk).html();
         return link;
     }

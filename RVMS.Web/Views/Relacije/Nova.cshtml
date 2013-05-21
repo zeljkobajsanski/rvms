@@ -10,11 +10,19 @@
         #grid {
             float: left;
         }
-        #mapa {
-            width: 390px;
-            min-height: 400px;
+        #mapWrapper {
             float: left;
             margin: 0 0 0 4px;
+        }
+        #stajalisteZaPozicioniranje {
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+            text-align: right;
+        }
+        #mapa {
+            width: 390px;
+            min-height: 384px;
         }
         #ukupno {
             clear: left;
@@ -38,6 +46,7 @@
         .btnFind {
             border: 0;
             margin-left: 4px;
+            cursor: pointer;
         }
         .infoWindow p {
             font-size: 12px;
@@ -92,11 +101,15 @@
 <div id="daljinar">
     <div class="line">
         <label class="label">Polazna stanica</label>
-        <div id="polaznaStanica" tabindex="1"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi1" class="btnFind" />    
+        <div id="polaznaStanica" tabindex="1"></div>
+        <input type="image" src="@Url.Content("~/Content/images/16_refresh.png")" class="btnRefresh btnFind" />    
+        <input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi1" class="btnFind" />    
     </div>
     <div class="line">
         <label class="label">Dolazna stanica</label>
-        <div id="dolaznaStanica" tabindex="2"></div><input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi2" class="btnFind"/>    
+        <div id="dolaznaStanica" tabindex="2"></div>
+        <input type="image" src="@Url.Content("~/Content/images/16_refresh.png")" class="btnRefresh btnFind" />
+        <input type="image" src="@Url.Content("~/Content/images/toolbar_find.png")" id="btnPretrazi2" class="btnFind"/>    
     </div>
     <form action="javascript:;">
         <div class="line">
@@ -113,7 +126,10 @@
     </form>
         
     <div id="grid"></div>
-    <div id="mapa"></div>
+    <div id="mapWrapper">
+        <p id="stajalisteZaPozicioniranje"></p>
+        <div id="mapa"></div>
+    </div>
     <div id="ukupno">
         <label>Dužina relacije: </label>
         <span id="duzinaRelacije"></span><br/>

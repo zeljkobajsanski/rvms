@@ -43,6 +43,15 @@ namespace RVMS.Web.Controllers
             fRepository.Save();
         }
 
+        [HttpPost]
+        public void AzurirajKoordinatu(Stajaliste stajaliste)
+        {
+            var s = fRepository.Get(stajaliste.Id);
+            s.GpsLatituda = stajaliste.GpsLatituda;
+            s.GpsLongituda = stajaliste.GpsLongituda;
+            fRepository.Save();
+        }
+
         public JsonResult VratiStajalista(int idOpstine, int? idMesta)
         {
             var stajalista = fRepository.VratiStajalista(idOpstine, idMesta);
