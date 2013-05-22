@@ -19,12 +19,12 @@ namespace RVMS.Web
     {
         public Opstina[] VratiOpstine()
         {
-            return new Model.Repository.Repository<Opstina>().GetActive().ToArray();
+            return new Model.Repository.Repository<Opstina>().GetActive().OrderBy(x => x.NazivOpstine).ToArray();
         }
 
         public StajalisteDTO[] VratiStajalisteOpstine(int? idOpstine)
         {
-            return new StajalistaRepository().VratiStajalistaOpstine(idOpstine).Select(x => new StajalisteDTO()
+            return new StajalistaRepository().VratiStajalistaOpstine(idOpstine).OrderBy(x => x.Naziv).Select(x => new StajalisteDTO()
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
@@ -149,7 +149,7 @@ namespace RVMS.Web
 
         public Mesto[] VratiMesta(int? idOpstine)
         {
-            return new MestaRepository().VratiMestaOpstine(idOpstine).ToArray();
+            return new MestaRepository().VratiMestaOpstine(idOpstine).OrderBy(x => x.Naziv).ToArray();
         }
 
         public StajalisteDTO[] VratiStajalistaMestaIOpstine(int? idOpstine, int? idMesta)

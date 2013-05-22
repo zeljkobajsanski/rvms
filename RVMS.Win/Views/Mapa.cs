@@ -24,7 +24,18 @@ namespace RVMS.Win.Views
 
         public void InvokeScript(string script, params object[] parameters)
         {
-            webBrowser1.Document.InvokeScript(script, parameters);
+            if (webBrowser1.Document != null)
+            {
+                webBrowser1.Document.InvokeScript(script, parameters);
+            }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
         }
     }
 }

@@ -221,6 +221,9 @@ namespace RVMS.Win.ViewModels
             using (var svc = new RvmsServiceClient())
             {
                 Opstine = svc.VratiOpstine();
+                var svaStajalista = svc.VratiStajalisteOpstine(null);
+                PolaznaStajalista = svaStajalista;
+                DolaznaStajalista = svaStajalista;
             }
         }
 

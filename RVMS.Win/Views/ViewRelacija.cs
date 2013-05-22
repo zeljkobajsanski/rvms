@@ -27,8 +27,6 @@ namespace RVMS.Win.Views
 
         private string m_WebServiceHome;
 
-        private bool m_OtvorenaMapa;
-
         public ViewRelacija()
         {
             InitializeComponent();
@@ -38,6 +36,7 @@ namespace RVMS.Win.Views
             Enable(false);
             HandleEvents();
             m_WebServiceHome = ConfigurationManager.AppSettings["WebserviceHome"];
+            txtNazivRelacije.Focus();
         }
 
         public ViewRelacija(object param) : this()
@@ -91,6 +90,7 @@ namespace RVMS.Win.Views
         {
             m_ViewModel.NoviUnos();
             Enable(false);
+            txtNazivRelacije.Focus();
         }
 
         public override void Osvezi()
@@ -105,6 +105,8 @@ namespace RVMS.Win.Views
             {
                 opstinaBindingSource.DataSource = m_ViewModel.Opstine;
                 opstinaBindingSource1.DataSource = m_ViewModel.Opstine;
+                stajalisteDTOBindingSource.DataSource = m_ViewModel.PolaznaStajalista;
+                stajalisteDTOBindingSource1.DataSource = m_ViewModel.DolaznaStajalista;
                 IsBusy = false;
             });
             task.Start();
@@ -128,6 +130,7 @@ namespace RVMS.Win.Views
         {
             m_ViewModel.Dodaj();
             OnNotify(new SavedMessage());
+            dolaznoStajaliste.Focus();
         }
 
         private void ModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -266,16 +269,14 @@ namespace RVMS.Win.Views
                 if (m_Mapa == null)
                 {
                     m_Mapa = new Mapa(m_WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
-                    m_Mapa.Closed += (s1, e1) => m_OtvorenaMapa = false;
-                    m_Mapa.Activated += (s1, e1) => m_OtvorenaMapa = true;
+                    m_Mapa.Closed += (s1, e1) => m_Mapa = null;
                 }
-                
                 m_Mapa.Show(this);
             };
             gridView1.RowCellClick += (sender, args) =>
             {
                 var rastojanje = (MedjustanicnoRastojanjeDTO) gridView1.GetRow(args.RowHandle);
-                if (rastojanje != null && m_Mapa != null && m_OtvorenaMapa)
+                if (rastojanje != null && m_Mapa != null)
                 {
                     if (args.Column.FieldName == "PolaznoStajaliste")
                     {
