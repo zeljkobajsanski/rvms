@@ -27,6 +27,8 @@ namespace RVMS.Win.Views
 
         private string m_WebServiceHome;
 
+        private bool m_OtvorenaMapa;
+
         public ViewRelacija()
         {
             InitializeComponent();
@@ -160,8 +162,7 @@ namespace RVMS.Win.Views
             }
             if ("IdDolaznogStajalista" == e.PropertyName)
             {
-                txtRazdaljina.SelectAll();
-                txtRazdaljina.Focus();
+                
             }
             if ("MedjustanicnaRastojanja" == e.PropertyName)
             {
@@ -262,13 +263,19 @@ namespace RVMS.Win.Views
             };
             btnMapa.Click += (s, e) =>
             {
-                m_Mapa = new Mapa(m_WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
+                if (m_Mapa == null)
+                {
+                    m_Mapa = new Mapa(m_WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
+                    m_Mapa.Closed += (s1, e1) => m_OtvorenaMapa = false;
+                    m_Mapa.Activated += (s1, e1) => m_OtvorenaMapa = true;
+                }
+                
                 m_Mapa.Show(this);
             };
             gridView1.RowCellClick += (sender, args) =>
             {
                 var rastojanje = (MedjustanicnoRastojanjeDTO) gridView1.GetRow(args.RowHandle);
-                if (rastojanje != null && m_Mapa != null)
+                if (rastojanje != null && m_Mapa != null && m_OtvorenaMapa)
                 {
                     if (args.Column.FieldName == "PolaznoStajaliste")
                     {
