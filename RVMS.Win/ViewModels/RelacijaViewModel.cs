@@ -325,6 +325,8 @@ namespace RVMS.Win.ViewModels
                     IdPolazneOpstine = IdDolazneOpstine;
                     IdPolaznogStajalista = IdDolaznogStajalista;
                     IdDolaznogStajalista = null;
+                    Razdaljina = 0;
+                    VremeVoznje = 0;
                 }
             }
         }

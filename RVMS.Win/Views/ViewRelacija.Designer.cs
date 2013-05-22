@@ -349,6 +349,7 @@
             this.dolaznoStajaliste.EnterMoveNextControl = true;
             this.dolaznoStajaliste.Location = new System.Drawing.Point(93, 157);
             this.dolaznoStajaliste.Name = "dolaznoStajaliste";
+            this.dolaznoStajaliste.Properties.ActionButtonIndex = 1;
             this.dolaznoStajaliste.Properties.AutoSearchColumnIndex = 1;
             this.dolaznoStajaliste.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.dolaznoStajaliste.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
