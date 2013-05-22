@@ -10,6 +10,7 @@ namespace RVMS.Win.ViewModels
         private int? m_IdOpstine;
         private int? m_IdMesta;
         private string m_NazivStajalista;
+        private bool m_Stanica;
 
         public StajalistaViewModel()
         {
@@ -58,6 +59,20 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        public bool Stanica
+        {
+            get { return m_Stanica; }
+            set
+            {
+                if (value.Equals(m_Stanica))
+                {
+                    return;
+                }
+                m_Stanica = value;
+                OnPropertyChanged("Stanica");
+            }
+        }
+
         public BindingList<StajalisteDTO> Stajalista { get; set; }
 
         public Opstina[] Opstine { get; set; }
@@ -96,6 +111,29 @@ namespace RVMS.Win.ViewModels
             {
                Mesta = svc.VratiMesta(IdOpstine);
             }
+        }
+
+        public string Dodaj()
+        {
+            if (!IdOpstine.HasValue)
+            {
+                return "Opština je obavezna";
+            }
+            if (string.IsNullOrEmpty(NazivStajalista)) return "Unesite naziv stajališta";
+            using (var svc = new RvmsServiceClient())
+            {
+                var id = svc.SacuvajStajaliste(new Stajaliste()
+                {
+                    Naziv = NazivStajalista,
+                    OpstinaId = IdOpstine.Value,
+                    MestoId = IdMesta,
+                    Aktivan = true,
+                    Stanica = Stanica
+                });
+                NazivStajalista = null;
+                Stanica = false;
+            }
+            return null;
         }
     }
 }

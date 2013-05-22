@@ -62,6 +62,12 @@
   <wsdl:message name="IRvmsService_VratiStajalistaMestaIOpstine_OutputMessage">
     <wsdl:part name="parameters" element="tns:VratiStajalistaMestaIOpstineResponse" />
   </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajStajaliste_InputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajStajaliste" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SacuvajStajaliste_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajStajalisteResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRvmsService">
     <wsdl:operation name="VratiOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiOpstine" message="tns:IRvmsService_VratiOpstine_InputMessage" />
@@ -98,6 +104,10 @@
     <wsdl:operation name="VratiStajalistaMestaIOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstine" message="tns:IRvmsService_VratiStajalistaMestaIOpstine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstineResponse" message="tns:IRvmsService_VratiStajalistaMestaIOpstine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajStajaliste">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SacuvajStajaliste" message="tns:IRvmsService_SacuvajStajaliste_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SacuvajStajalisteResponse" message="tns:IRvmsService_SacuvajStajaliste_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRvmsService" type="tns:IRvmsService">
@@ -176,6 +186,15 @@
     </wsdl:operation>
     <wsdl:operation name="VratiStajalistaMestaIOpstine">
       <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SacuvajStajaliste">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/SacuvajStajaliste" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

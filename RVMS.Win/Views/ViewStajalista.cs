@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
+using Message = RVMS.Win.Messages.Message;
 
 namespace RVMS.Win.Views
 {
@@ -24,7 +26,15 @@ namespace RVMS.Win.Views
             HandleEvents();
         }
 
-        
+        public override void Sacuvaj()
+        {
+            Dodaj();
+        }
+
+        public override void Osvezi()
+        {
+            OsveziStajalista();
+        }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -65,6 +75,19 @@ namespace RVMS.Win.Views
                     m_ViewModel.IdMesta = null;
                 }
             };
+            btnDodaj.Click += (s, e) => Dodaj();
+        }
+
+        private void Dodaj()
+        {
+            var msg = m_ViewModel.Dodaj();
+            if (msg != null)
+            {
+                OnNotify(new Message(MessageType.Warning, msg));
+                return;
+            }
+            OnNotify(new SavedMessage());
+            txtNaziv.Focus();
         }
 
         private void OsveziOpstine()
@@ -124,5 +147,7 @@ namespace RVMS.Win.Views
             });
             task.Start();
         }
+
+        
     }
 }

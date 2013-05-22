@@ -39,5 +39,8 @@ namespace RVMS.Web
 
         [OperationContract]
         StajalisteDTO[] VratiStajalistaMestaIOpstine(int? idOpstine, int? idMesta);
+
+        [OperationContract]
+        int SacuvajStajaliste(Stajaliste stajaliste);
     }
 }

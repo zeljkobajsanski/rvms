@@ -41,6 +41,9 @@ namespace RVMS.Win.RvmsServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstine", ReplyAction="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstineResponse")]
         RVMS.Model.DTO.StajalisteDTO[] VratiStajalistaMestaIOpstine(System.Nullable<int> idOpstine, System.Nullable<int> idMesta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/SacuvajStajaliste", ReplyAction="http://tempuri.org/IRvmsService/SacuvajStajalisteResponse")]
+        int SacuvajStajaliste(RVMS.Model.Entities.Stajaliste stajaliste);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -104,6 +107,10 @@ namespace RVMS.Win.RvmsServices {
         
         public RVMS.Model.DTO.StajalisteDTO[] VratiStajalistaMestaIOpstine(System.Nullable<int> idOpstine, System.Nullable<int> idMesta) {
             return base.Channel.VratiStajalistaMestaIOpstine(idOpstine, idMesta);
+        }
+        
+        public int SacuvajStajaliste(RVMS.Model.Entities.Stajaliste stajaliste) {
+            return base.Channel.SacuvajStajaliste(stajaliste);
         }
     }
 }

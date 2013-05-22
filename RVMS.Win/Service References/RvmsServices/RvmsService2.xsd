@@ -125,4 +125,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SacuvajStajaliste">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RVMS.Model.Entities" minOccurs="0" name="stajaliste" nillable="true" type="q11:Stajaliste" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SacuvajStajalisteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SacuvajStajalisteResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

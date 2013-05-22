@@ -167,6 +167,21 @@ namespace RVMS.Web
                                              }).ToArray();
         }
 
+        public int SacuvajStajaliste(Stajaliste stajaliste)
+        {
+            var repo = new StajalistaRepository();
+            if (stajaliste.Id == 0)
+            {
+                repo.Add(stajaliste);
+            }
+            else
+            {
+                repo.Update(stajaliste);
+            }
+            repo.Save();
+            return stajaliste.Id;
+        }
+
         private static void IzracunajRelaciju(IEnumerable<MedjustanicnoRastojanjeDTO> rastojanja)
         {
             var duzinaRelacije = 0M;
