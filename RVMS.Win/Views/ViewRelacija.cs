@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using RVMS.Model.DTO;
 using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
+using Message = RVMS.Win.Messages.Message;
 
 namespace RVMS.Win.Views
 {
     public partial class ViewRelacija : ViewBase
     {
-        private readonly RelacijaViewModel m_ViewModel;
+        private RelacijaViewModel m_ViewModel;
+
+        private Mapa m_Mapa;
+
+        private string m_WebServiceHome;
 
         public ViewRelacija()
         {
@@ -24,12 +34,8 @@ namespace RVMS.Win.Views
             m_ViewModel.PropertyChanged += ModelPropertyChanged;
             relacijaViewModelBindingSource.DataSource = m_ViewModel;
             Enable(false);
-            simpleButton1.Click += (s, e) => Dodaj();
-        }
-
-        private void Dodaj()
-        {
-            m_ViewModel.Dodaj();
+            HandleEvents();
+            m_WebServiceHome = ConfigurationManager.AppSettings["WebserviceHome"];
         }
 
         public ViewRelacija(object param) : this()
@@ -59,12 +65,39 @@ namespace RVMS.Win.Views
             task.Start();
         }
 
-        protected override void OnLoad(EventArgs e)
+        public override void Sacuvaj()
+        {
+            if (!m_ViewModel.IsValid)
+            {
+                OnNotify(new InvalidForSaveMessage());
+                return;
+            }
+            var t = new Task(() =>
+            {
+                IsBusy = true;
+                m_ViewModel.Sacuvaj();
+            });
+            t.ContinueWith((task) =>
+            {
+                IsBusy = false;
+                Invoke(new Action(() => Enable(m_ViewModel.Relacija.IdRelacije != 0)));
+            });
+            t.Start();
+        }
+
+        public override void NoviUnos()
+        {
+            m_ViewModel.NoviUnos();
+            Enable(false);
+        }
+
+        public override void Osvezi()
         {
             var task = new Task(() =>
             {
                 IsBusy = true;
                 m_ViewModel.Init();
+                m_ViewModel.OsveziRelaciju();
             });
             task.ContinueWith(t =>
             {
@@ -73,6 +106,26 @@ namespace RVMS.Win.Views
                 IsBusy = false;
             });
             task.Start();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            Osvezi();
+        }
+
+        private void PonistiLookup(object sender, ButtonPressedEventArgs e)
+        {
+            var lkp = (LookUpEdit) sender;
+            if (e.Button.Index == 0)
+            {
+                lkp.EditValue = null;
+            }
+        }
+
+        private void Dodaj()
+        {
+            m_ViewModel.Dodaj();
+            OnNotify(new SavedMessage());
         }
 
         private void ModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -125,10 +178,10 @@ namespace RVMS.Win.Views
 
         private void Enable(bool enable)
         {
-            lookUpEdit1.Enabled = enable;
-            lookUpEdit2.Enabled = enable;
-            lookUpEdit3.Enabled = enable;
-            lookUpEdit4.Enabled = enable;
+            polazneOpstine.Enabled = enable;
+            polaznoStajaliste.Enabled = enable;
+            dolazneOpstine.Enabled = enable;
+            dolaznoStajaliste.Enabled = enable;
             txtRazdaljina.Enabled = enable;
             txtVremeVoznje.Enabled = enable;
             simpleButton1.Enabled = enable;
@@ -136,30 +189,107 @@ namespace RVMS.Win.Views
             
         }
 
-        public override void Sacuvaj()
+        private void HandleEvents()
         {
-            if (!m_ViewModel.IsValid)
+            simpleButton1.Click += (s, e) => Dodaj();
+            polazneOpstine.ButtonClick += PonistiLookup;
+            dolazneOpstine.ButtonClick += PonistiLookup;
+            gridView1.CellValueChanged += (s, e) =>
             {
-                OnNotify(new InvalidForSaveMessage());
-                return;
-            }
-            var t = new Task(() =>
+                var rastojanje = (MedjustanicnoRastojanjeDTO)gridView1.GetRow(e.RowHandle);
+                m_ViewModel.Sacuvaj(rastojanje);
+                OnNotify(new SavedMessage());
+            };
+            repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
-                IsBusy = true;
-                m_ViewModel.Sacuvaj();
-            });
-            t.ContinueWith((task) =>
+                if (e.Button.Index == 0)
+                {
+                    var question = new QuestionMessage("Da li želite da obrišete stavku?");
+                    OnNotify(question);
+                    if (question.Confirm)
+                    {
+                        var rastojanje = gridView1.GetFocusedRow() as MedjustanicnoRastojanjeDTO;
+                        if (rastojanje != null)
+                        {
+                            m_ViewModel.Obrisi(rastojanje);
+                        }
+                    }
+                }
+            };
+            gridView1.CustomSummaryCalculate += (s, e) =>
             {
-                IsBusy = false;
-                Invoke(new Action(() => Enable(m_ViewModel.Relacija.IdRelacije != 0)));
-            });
-            t.Start();
-        }
-
-        public override void NoviUnos()
-        {
-            m_ViewModel.NoviUnos();
-            Enable(false);
+                var gsi = (GridSummaryItem)e.Item;
+                switch (gsi.FieldName)
+                {
+                    case "PolaznoStajaliste":
+                        e.TotalValue = m_ViewModel.UkupnaDuzinaRelacije;
+                        break;
+                    case "DolaznoStajaliste":
+                        e.TotalValue = m_ViewModel.UkupnoVremeVoznje;
+                        break;
+                    case "Rastojanje":
+                        e.TotalValue = m_ViewModel.SrednjaSaobracajnaBrzina;
+                        break;
+                }
+            };
+            gridView1.CustomDrawCell += (s, e) =>
+            {
+                var rastojanje = (MedjustanicnoRastojanjeDTO) gridView1.GetRow(e.RowHandle);
+                if (e.Column.FieldName == "PolaznoStajaliste" && rastojanje.LatitudaPolaznogStajalista.HasValue &&
+                    rastojanje.LongitudaPolaznogStajalista.HasValue)
+                {
+                    e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.globe, new Rectangle(e.Bounds.Right - 16, e.Bounds.Y, 16, 16));
+                }
+                if (e.Column.FieldName == "DolaznoStajaliste" && rastojanje.LatitudaDolaznogStajalista.HasValue &&
+                    rastojanje.LongitudaDolaznogStajalista.HasValue)
+                {
+                    e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.globe, new Rectangle(e.Bounds.Right - 16, e.Bounds.Y, 16, 16));
+                }
+            };
+            polaznoStajaliste.ButtonClick += (s, e) =>
+            {
+                if (e.Button.Index == 0)
+                {
+                    m_ViewModel.OsveziPolaznaStajalista();
+                }
+            };
+            dolaznoStajaliste.ButtonClick += (s, e) =>
+            {
+                if (e.Button.Index == 0)
+                {
+                    m_ViewModel.OsveziDolaznaStajalista();
+                }
+            };
+            btnMapa.Click += (s, e) =>
+            {
+                m_Mapa = new Mapa(m_WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
+                m_Mapa.Show(this);
+            };
+            gridView1.RowCellClick += (sender, args) =>
+            {
+                var rastojanje = (MedjustanicnoRastojanjeDTO) gridView1.GetRow(args.RowHandle);
+                if (rastojanje != null && m_Mapa != null)
+                {
+                    if (args.Column.FieldName == "PolaznoStajaliste")
+                    {
+                        if (rastojanje.LatitudaPolaznogStajalista.HasValue && rastojanje.LongitudaPolaznogStajalista.HasValue)
+                        {
+                            OnNotify(new Message(MessageType.Ok, "Stajalište je već mapirano"));
+                            return;
+                        }
+                        m_Mapa.InvokeScript("dodajStajaliste", rastojanje.PolaznoStajalisteId, rastojanje.PolaznoStajaliste);
+                    }
+                    if (args.Column.FieldName == "DolaznoStajaliste")
+                    {
+                        if (rastojanje.LatitudaDolaznogStajalista.HasValue && rastojanje.LongitudaDolaznogStajalista.HasValue)
+                        {
+                            OnNotify(new Message(MessageType.Ok, "Stajalište je već mapirano"));
+                            return;
+                        }
+                        m_Mapa.InvokeScript("dodajStajaliste", rastojanje.DolaznoStajalisteId, rastojanje.DolaznoStajaliste);
+                    }
+                }
+            };
         }
     }
 }

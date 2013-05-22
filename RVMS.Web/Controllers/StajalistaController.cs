@@ -10,12 +10,13 @@ using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
-    [Authorize]
-    [LogujAktivnost]
+    
     public class StajalistaController : Controller
     {
         private readonly StajalistaRepository fRepository = new StajalistaRepository();
 
+        [Authorize]
+        [LogujAktivnost]
         public ActionResult Index(int? id)
         {
             if (id.HasValue)
@@ -26,6 +27,8 @@ namespace RVMS.Web.Controllers
             return View();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [HttpPost]
         public void Insert(Stajaliste stajaliste)
         {
@@ -35,6 +38,8 @@ namespace RVMS.Web.Controllers
             fRepository.Save();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [HttpPost]
         public void Update(Stajaliste stajaliste)
         {
@@ -52,12 +57,16 @@ namespace RVMS.Web.Controllers
             fRepository.Save();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult VratiStajalista(int idOpstine, int? idMesta)
         {
             var stajalista = fRepository.VratiStajalista(idOpstine, idMesta);
             return Json(stajalista, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult PretraziStajalista(int? idOpstine, int? idMesta, string nazivStajalista)
         {
             var stajalista = fRepository.PretraziStajalista(idOpstine, idMesta, nazivStajalista).Select(x => new StajalisteDTO
@@ -70,6 +79,8 @@ namespace RVMS.Web.Controllers
             return Json(stajalista, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult VratiAktivnaStajalista()
         {
             var aktivnaStajalista = fRepository.VratiAktivnaStajalista().OrderBy(x => x.Opstina.NazivOpstine).ThenBy(x => x.Naziv).Select(x => new StajalisteDTO
@@ -83,6 +94,8 @@ namespace RVMS.Web.Controllers
             return Json(aktivnaStajalista, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult VratiStajaliste(int id)
         {
             var stajaliste = fRepository.Get(id);

@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<RVMS.Model.DTO.MedjustanicnoRastojanjeDTO>
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Mapa relacije</title>
+    <style>
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'segoe ui', arial, sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .infoWindow p {
+            font-size: 12px;
+            margin: 2px;
+            padding: 0;
+        }
+        .infoWindow h1 {
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0;
+            padding: 0 0 4px 0;
+        }
+    </style>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+    <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false&region=RS"></script>
+</head>
+    <body>
+        @Html.Hidden("model", Json.Encode(Model))
+        <div id="map"></div>
+        <script>
+            var map, info = new google.maps.InfoWindow();
+            $(function() {
+                var model = $.parseJSON($("#model").val());
+
+                var mapOptions = {
+                    center: new google.maps.LatLng(44.22, 20.74),
+                    zoom: 7,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                var len = model.length,
+                    waypoints = [],
+                    bounds;
+                
+                for (var i = 0; i < len; i++) {
+                    var item = model[i];
+                    if (i == 0) {
+                        if (item.LatitudaPolaznogStajalista && item.LongitudaPolaznogStajalista) {
+                            var mPos = new google.maps.LatLng(item.LatitudaPolaznogStajalista, item.LongitudaPolaznogStajalista);
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: mPos
+                            });
+                            _dodeliInfo(marker, item.PolaznoStajaliste, item);
+                            bounds = new google.maps.LatLngBounds(mPos, mPos);
+                        }
+                    }
+                    if (item.LatitudaDolaznogStajalista && item.LongitudaPolaznogStajalista) {
+                        mPos = new google.maps.LatLng(item.LatitudaDolaznogStajalista, item.LongitudaDolaznogStajalista);
+                        marker = new google.maps.Marker({
+                            map: map,
+                            position: mPos
+                        });
+                        _dodeliInfo(marker, item.DolaznoStajaliste, item);
+                        if (bounds) {
+                            bounds.extend(mPos);
+                        }
+                    }
+                }
+                if (bounds) {
+                    map.fitBounds(bounds);
+                }
+            });
+            
+            function dodajStajaliste(idStajalista, naziv) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: map.getCenter(),
+                    title: naziv,
+                    draggable: true
+                });
+                new google.maps.InfoWindow({content: naziv}).open(map, marker);
+                
+                google.maps.event.addListener(marker, 'dragend', function(e) {
+                    $.ajax({
+                        url: '/Stajalista/AzurirajKoordinatu',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ Id: idStajalista, GpsLatituda: e.latLng.lat(), GpsLongituda: e.latLng.lng() }),
+                        success: function() {
+                            
+                        }
+                    });
+                });
+            }
+
+            function _dodeliInfo(marker, naziv, stajaliste) {
+                google.maps.event.addListener(marker, 'click', function () {
+                    var content = "<div class='infoWindow'>" +
+                        "<h1>" + naziv + "</h1>" +
+                        "<p>" + stajaliste.PolaznoStajaliste + " - " + stajaliste.DolaznoStajaliste + "</p>" +
+                        "<p>Rastojanje: " + stajaliste.Rastojanje + " km</p>" +
+                        "<p>Vreme vožnje: " + stajaliste.VremeVoznje + " min</p>" +
+                        "</div>";
+                    info.setContent(content);
+                    info.open(map, marker);
+                });
+            }
+        </script>
+    </body>
+</html>
+

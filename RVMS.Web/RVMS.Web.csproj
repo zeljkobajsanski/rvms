@@ -529,6 +529,7 @@
     <Content Include="Views\Linije\Index.cshtml" />
     <Content Include="Views\Prevoznici\Prevoznik.cshtml" />
     <Content Include="Views\Stajalista\_PretragaStajalista.cshtml" />
+    <Content Include="Views\Relacije\MapaRelacije.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -5,6 +5,7 @@
         Success,
         Ok,
         Warning,
-        Error
+        Error,
+        Question
     }
 }

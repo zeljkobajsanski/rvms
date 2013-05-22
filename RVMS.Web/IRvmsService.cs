@@ -30,5 +30,8 @@ namespace RVMS.Web
 
         [OperationContract]
         MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje);
+
+        [OperationContract]
+        MedjustanicnoRastojanjeDTO[] ObrisiRastojanje(int id);
     }
 }

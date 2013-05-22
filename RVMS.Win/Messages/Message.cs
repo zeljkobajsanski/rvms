@@ -4,6 +4,7 @@
     {
         public MessageType MessageType { get; set; }
         public string MessageText { get; set; }
+        public bool Confirm { get; set; }
 
         public Message(MessageType messageType)
         {

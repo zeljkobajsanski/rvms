@@ -11,25 +11,30 @@ using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
-    [Authorize]
-    [LogujAktivnost]
+    
     public class RelacijeController : Controller
     {
         private readonly RelacijeRepository fRelacijeRepository = new RelacijeRepository();
 
         private readonly MedjustanicnaRastojanjaRepository fMedjustanicnaRastojanjaRepository = new MedjustanicnaRastojanjaRepository();
 
+        [Authorize]
+        [LogujAktivnost]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpGet]
         public ActionResult Nova()
         {
             return View();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpGet]
         public ActionResult Izmeni(int id)
         {
@@ -38,6 +43,8 @@ namespace RVMS.Web.Controllers
             return View("Nova", relacija);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpPost]
         public JsonResult SacuvajRelaciju(Relacija relacija)
         {
@@ -55,6 +62,8 @@ namespace RVMS.Web.Controllers
             return Json(relacija.Id);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpPost]
         public void InsertMedjustanicnoRastojanje(MedjustanicnoRastojanje medjustanicnoRastojanje)
         {
@@ -63,6 +72,8 @@ namespace RVMS.Web.Controllers
             fMedjustanicnaRastojanjaRepository.Save();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult MedjustanicnaRastojanja(int idRelacije)
         {
             var medjustanicnaRastojanja =
@@ -93,6 +104,8 @@ namespace RVMS.Web.Controllers
             return Json(medjustanicnaRastojanja, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpPost]
         public void UpdateMedjustanicnoRastojanje(MedjustanicnoRastojanje medjustanicnoRastojanje)
         {
@@ -103,6 +116,8 @@ namespace RVMS.Web.Controllers
             fMedjustanicnaRastojanjaRepository.Save();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public JsonResult VratiRelacije()
         {
             var relacije = fRelacijeRepository.VratiRelacije().Select(x => new RelacijaDTO
@@ -116,6 +131,8 @@ namespace RVMS.Web.Controllers
             return Json(relacije, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [LogujAktivnost]
         public void Obrisi(int id)
         {
             var relacija = fRelacijeRepository.Get(id);
@@ -123,12 +140,38 @@ namespace RVMS.Web.Controllers
             fRelacijeRepository.Save();
         }
 
+        [Authorize]
+        [LogujAktivnost]
         [System.Web.Mvc.HttpPost]
         public void ObrisiMedjustanicnoRastojanje(int id)
         {
             var msr = fMedjustanicnaRastojanjaRepository.Get(id);
             fMedjustanicnaRastojanjaRepository.Delete(msr);
             fMedjustanicnaRastojanjaRepository.Save();
+        }
+
+        public ActionResult MapaRelacije(int? id)
+        {
+            if (id.HasValue)
+            {
+                var stajalista = fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(id.Value)
+                                                  .Select(x => new MedjustanicnoRastojanjeDTO()
+                                                  {
+                                                      Id = x.Id,
+                                                      PolaznoStajalisteId = x.PolaznoStajalisteId,
+                                                      PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                                                      DolaznoStajalisteId = x.DolaznoStajalisteId,
+                                                      DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
+                                                      Rastojanje = x.Rastojanje,
+                                                      VremeVoznje = x.VremeVoznje,
+                                                      LatitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLatituda,
+                                                      LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
+                                                      LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
+                                                      LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
+                                                  }).ToArray();
+                return View(stajalista);
+            }
+            return View(Enumerable.Empty<MedjustanicnoRastojanjeDTO>());
         }
 
     }

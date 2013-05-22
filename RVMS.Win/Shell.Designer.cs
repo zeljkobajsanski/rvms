@@ -45,7 +45,6 @@
             this.iHelp = new DevExpress.XtraBars.BarButtonItem();
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
             this.siStatus = new DevExpress.XtraBars.BarStaticItem();
-            this.siInfo = new DevExpress.XtraBars.BarStaticItem();
             this.alignButtonGroup = new DevExpress.XtraBars.BarButtonGroup();
             this.iBoldFontStyle = new DevExpress.XtraBars.BarButtonItem();
             this.iItalicFontStyle = new DevExpress.XtraBars.BarButtonItem();
@@ -76,6 +75,7 @@
             this.navBarItemDaljinar = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -106,6 +106,8 @@
             this.navbarImageList.Images.SetKeyName(3, "Trash_16x16.png");
             this.navbarImageList.Images.SetKeyName(4, "Calendar_16x16.png");
             this.navbarImageList.Images.SetKeyName(5, "Tasks_16x16.png");
+            this.navbarImageList.Images.SetKeyName(6, "ruler_pencil.png");
+            this.navbarImageList.Images.SetKeyName(7, "document_new.png");
             // 
             // ribbonControl
             // 
@@ -126,7 +128,6 @@
             this.iHelp,
             this.iAbout,
             this.siStatus,
-            this.siInfo,
             this.alignButtonGroup,
             this.iBoldFontStyle,
             this.iItalicFontStyle,
@@ -148,7 +149,7 @@
             this.ribbonControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMarqueeProgressBar1});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
-            this.ribbonControl.Size = new System.Drawing.Size(1010, 146);
+            this.ribbonControl.Size = new System.Drawing.Size(1008, 145);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iNew);
             this.ribbonControl.Toolbar.ItemLinks.Add(this.iOpen);
@@ -285,17 +286,10 @@
             // 
             // siStatus
             // 
-            this.siStatus.Caption = "Some Status Info";
+            this.siStatus.Caption = "Oktopod Alpha";
             this.siStatus.Id = 31;
             this.siStatus.Name = "siStatus";
             this.siStatus.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // siInfo
-            // 
-            this.siInfo.Caption = "Some Info";
-            this.siInfo.Id = 32;
-            this.siInfo.Name = "siInfo";
-            this.siInfo.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // alignButtonGroup
             // 
@@ -378,7 +372,6 @@
             // barEditItem1
             // 
             this.barEditItem1.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barEditItem1.Caption = "Status";
             this.barEditItem1.Edit = this.repositoryItemMarqueeProgressBar1;
             this.barEditItem1.Id = 63;
             this.barEditItem1.Name = "barEditItem1";
@@ -454,12 +447,11 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
-            this.ribbonStatusBar.ItemLinks.Add(this.siInfo);
             this.ribbonStatusBar.ItemLinks.Add(this.barEditItem1, true);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 740);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 735);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1010, 27);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1008, 32);
             // 
             // documentManager1
             // 
@@ -492,18 +484,18 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("0def2a04-cf98-457a-89cf-3c6d7d398a93");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 146);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 145);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 594);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 590);
             this.dockPanel1.Text = "Glavni meni";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.navBarControl1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 38);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 25);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 552);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 561);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // navBarControl1
@@ -519,7 +511,8 @@
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 192;
-            this.navBarControl1.Size = new System.Drawing.Size(192, 552);
+            this.navBarControl1.Size = new System.Drawing.Size(192, 561);
+            this.navBarControl1.SmallImages = this.navbarImageList;
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
@@ -542,22 +535,29 @@
             // 
             this.navBarItemDaljinar.Caption = "Daljinar";
             this.navBarItemDaljinar.Name = "navBarItemDaljinar";
+            this.navBarItemDaljinar.SmallImageIndex = 6;
             // 
             // navBarItemRelacija
             // 
             this.navBarItemRelacija.Caption = "Relacija";
             this.navBarItemRelacija.Name = "navBarItemRelacija";
+            this.navBarItemRelacija.SmallImageIndex = 7;
             // 
             // defaultLookAndFeel1
             // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2013";
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2010 Blue";
+            // 
+            // alertControl1
+            // 
+            this.alertControl1.AutoFormDelay = 3000;
+            this.alertControl1.FormLocation = DevExpress.XtraBars.Alerter.AlertFormLocation.TopRight;
             // 
             // Shell
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 767);
+            this.ClientSize = new System.Drawing.Size(1008, 767);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.ribbonControl);
             this.Controls.Add(this.ribbonStatusBar);
@@ -596,7 +596,6 @@
         private DevExpress.XtraBars.BarButtonItem iHelp;
         private DevExpress.XtraBars.BarButtonItem iAbout;
         private DevExpress.XtraBars.BarStaticItem siStatus;
-        private DevExpress.XtraBars.BarStaticItem siInfo;
         private DevExpress.XtraBars.BarButtonGroup alignButtonGroup;
         private DevExpress.XtraBars.BarButtonItem iBoldFontStyle;
         private DevExpress.XtraBars.BarButtonItem iItalicFontStyle;
@@ -631,6 +630,7 @@
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
+        private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
 
     }
 }

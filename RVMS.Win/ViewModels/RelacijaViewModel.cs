@@ -17,7 +17,7 @@ namespace RVMS.Win.ViewModels
         private RelacijaSaMedjustanicnimRastojanjimaDTO fRelacija;
         private string fNazivRelacije;
         private readonly RelacijeViewModelValidator m_ModelValidator;
-        private MedjustanicnoRastojanjeDTO[] fMedjustanicnaRastojanja;
+        private MedjustanicnoRastojanjeDTO[] fMedjustanicnaRastojanja = new MedjustanicnoRastojanjeDTO[0];
 
         public RelacijaViewModel()
         {
@@ -25,6 +25,9 @@ namespace RVMS.Win.ViewModels
             m_ModelValidator = new RelacijeViewModelValidator();
         }
 
+        /// <summary>
+        /// Naziv relacije
+        /// </summary>
         public string NazivRelacije
         {
             get { return fNazivRelacije; }
@@ -36,6 +39,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Šifarnik opština
+        /// </summary>
         public Opstina[] Opstine
         {
             get { return m_Opstine; }
@@ -50,6 +56,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Izabrana polazna opština
+        /// </summary>
         public int? IdPolazneOpstine
         {
             get { return m_IdPolazneOpstine; }
@@ -64,6 +73,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Izabrano polazno stajalište
+        /// </summary>
         public int? IdPolaznogStajalista
         {
             get { return m_IdPolaznogStajalista; }
@@ -75,6 +87,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Izabrana dolazna opština
+        /// </summary>
         public int? IdDolazneOpstine
         {
             get { return m_IdDolazneOpstine; }
@@ -89,6 +104,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Izabrano dolazno stajalište
+        /// </summary>
         public int? IdDolaznogStajalista
         {
             get { return m_IdDolaznogStajalista; }
@@ -103,14 +121,29 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Razdaljina
+        /// </summary>
         public decimal Razdaljina { get; set; }
 
+        /// <summary>
+        /// Vreme vožnje
+        /// </summary>
         public int VremeVoznje { get; set; }
 
+        /// <summary>
+        /// Polazna stajališta
+        /// </summary>
         public StajalisteDTO[] PolaznaStajalista { get; set; }
         
+        /// <summary>
+        /// Dolazna stajališta
+        /// </summary>
         public StajalisteDTO[] DolaznaStajalista { get; set; }
 
+        /// <summary>
+        /// Relacija
+        /// </summary>
         public RelacijaSaMedjustanicnimRastojanjimaDTO Relacija
         {
             get { return fRelacija; }
@@ -125,6 +158,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Međustanična rastojanja
+        /// </summary>
         public MedjustanicnoRastojanjeDTO[] MedjustanicnaRastojanja
         {
             get { return fMedjustanicnaRastojanja; }
@@ -136,6 +172,50 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Ukupna dužina relacije
+        /// </summary>
+        public decimal UkupnaDuzinaRelacije
+        {
+            get
+            {
+                if (!MedjustanicnaRastojanja.Any()) return 0;
+                return MedjustanicnaRastojanja.Last().DuzinaRelacije;
+            }
+        }
+
+        /// <summary>
+        /// Ukupno vreme vožnje
+        /// </summary>
+        public int UkupnoVremeVoznje
+        {
+            get
+            {
+                if (!MedjustanicnaRastojanja.Any()) return 0;
+                return MedjustanicnaRastojanja.Last().VremeVoznjePoRelaciji;
+            }
+        }
+
+        /// <summary>
+        /// Srednja saobraćajna brzina
+        /// </summary>
+        public decimal SrednjaSaobracajnaBrzina
+        {
+            get
+            {
+                if (UkupnoVremeVoznje == 0) return 0;
+                return UkupnaDuzinaRelacije/(((decimal)UkupnoVremeVoznje)/60);
+            }
+        }
+
+        public override bool IsValid
+        {
+            get
+            {
+                return m_ModelValidator.Validate(this).IsValid;
+            }
+        }
+
         public override void Init()
         {
             using (var svc = new RvmsServiceClient())
@@ -144,6 +224,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Učitava polazne stanice
+        /// </summary>
         public void UcitajPolazneStanice()
         {
             using (var svc = new RvmsServiceClient())
@@ -152,6 +235,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Učitava dolazne stanice
+        /// </summary>
         public void UcitajDolazneStanice()
         {
             using (var svc = new RvmsServiceClient())
@@ -160,6 +246,10 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Učitava relaciju
+        /// </summary>
+        /// <param name="idRelacije">Id relacije</param>
         public void UcitajRelaciju(int idRelacije)
         {
             using (var svc = new RvmsServiceClient())
@@ -173,6 +263,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        /// <summary>
+        /// Snima podatke
+        /// </summary>
         public void Sacuvaj()
         {
             using (var svc = new RvmsServiceClient())
@@ -197,14 +290,9 @@ namespace RVMS.Win.ViewModels
             }
         }
 
-        public override bool IsValid
-        {
-            get
-            {
-                return m_ModelValidator.Validate(this).IsValid;
-            }
-        }
-
+        /// <summary>
+        /// Kreira novi unos
+        /// </summary>
         public void NoviUnos()
         {
             Relacija = new RelacijaSaMedjustanicnimRastojanjimaDTO();
@@ -212,12 +300,17 @@ namespace RVMS.Win.ViewModels
             IdPolaznogStajalista = null;
             IdDolazneOpstine = null;
             IdDolaznogStajalista = null;
+            MedjustanicnaRastojanja = new MedjustanicnoRastojanjeDTO[0];
         }
 
+        /// <summary>
+        /// Unos novog međustaničnog rastojanja
+        /// </summary>
         public void Dodaj()
         {
             if (IdPolaznogStajalista.HasValue && IdDolaznogStajalista.HasValue)
             {
+                if (!m_ModelValidator.Validate(this).IsValid) return;
                 using (var svc = new RvmsServiceClient())
                 {
                     MedjustanicnaRastojanja = svc.SacuvajRastojanje(new MedjustanicnoRastojanje()
@@ -233,6 +326,57 @@ namespace RVMS.Win.ViewModels
                     IdPolaznogStajalista = IdDolaznogStajalista;
                     IdDolaznogStajalista = null;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Snima izmene međustaničnog rastojanja
+        /// </summary>
+        /// <param name="rastojanje"></param>
+        public void Sacuvaj(MedjustanicnoRastojanjeDTO rastojanje)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                MedjustanicnaRastojanja = svc.SacuvajRastojanje(new MedjustanicnoRastojanje()
+                {
+                    Id = rastojanje.Id,
+                    RelacijaId = Relacija.IdRelacije,
+                    PolaznoStajalisteId = rastojanje.PolaznoStajalisteId,
+                    DolaznoStajalisteId = rastojanje.DolaznoStajalisteId,
+                    Rastojanje = rastojanje.Rastojanje,
+                    VremeVoznje = rastojanje.VremeVoznje,
+                    Aktivan = true
+                });
+            }
+        }
+
+        /// <summary>
+        /// Briše međustanično rastojanje
+        /// </summary>
+        /// <param name="rastojanje"></param>
+        public void Obrisi(MedjustanicnoRastojanjeDTO rastojanje)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                MedjustanicnaRastojanja = svc.ObrisiRastojanje(rastojanje.Id);
+            }
+        }
+
+        public void OsveziPolaznaStajalista()
+        {
+            OnPropertyChanged("IdPolazneOpstine");
+        }
+
+        public void OsveziDolaznaStajalista()
+        {
+            OnPropertyChanged("IdDolazneOpstine");
+        }
+
+        public void OsveziRelaciju()
+        {
+            if (Relacija.IdRelacije != 0)
+            {
+                UcitajRelaciju(Relacija.IdRelacije);
             }
         }
     }

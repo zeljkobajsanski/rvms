@@ -98,17 +98,23 @@ namespace RVMS.Win
             switch (e.Message.MessageType)
             {
                     case MessageType.Ok:
-                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
-                                            MessageBoxIcon.Information);
+                        //XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                        //                    MessageBoxIcon.Information);
+                        alertControl1.Show(this, "Info", e.Message.MessageText, Properties.Resources.info_32x32);
                         break;
                     case MessageType.Warning:
-                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
-                                            MessageBoxIcon.Warning);
+                        //XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                        //                    MessageBoxIcon.Warning);
+                        alertControl1.Show(this, "Upozorenje", e.Message.MessageText, Properties.Resources.warning_32x32);
                         break;
                     case MessageType.Error:
-                        XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error);
-                            break;
+                        //XtraMessageBox.Show(this, e.Message.MessageText, "Oktopod", MessageBoxButtons.OK,
+                        //                        MessageBoxIcon.Error);
+                        alertControl1.Show(this, "Greška", e.Message.MessageText, Properties.Resources.error_32x32);
+                        break;
+                    case MessageType.Question:
+                        e.Message.Confirm = Pitaj(e.Message.MessageText);
+                        break;
             }
         }
 
