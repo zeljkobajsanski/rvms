@@ -35,6 +35,12 @@ namespace RVMS.Win.RvmsServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/ObrisiRastojanje", ReplyAction="http://tempuri.org/IRvmsService/ObrisiRastojanjeResponse")]
         RVMS.Model.DTO.MedjustanicnoRastojanjeDTO[] ObrisiRastojanje(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiMesta", ReplyAction="http://tempuri.org/IRvmsService/VratiMestaResponse")]
+        RVMS.Model.Entities.Mesto[] VratiMesta(System.Nullable<int> idOpstine);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstine", ReplyAction="http://tempuri.org/IRvmsService/VratiStajalistaMestaIOpstineResponse")]
+        RVMS.Model.DTO.StajalisteDTO[] VratiStajalistaMestaIOpstine(System.Nullable<int> idOpstine, System.Nullable<int> idMesta);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -90,6 +96,14 @@ namespace RVMS.Win.RvmsServices {
         
         public RVMS.Model.DTO.MedjustanicnoRastojanjeDTO[] ObrisiRastojanje(int id) {
             return base.Channel.ObrisiRastojanje(id);
+        }
+        
+        public RVMS.Model.Entities.Mesto[] VratiMesta(System.Nullable<int> idOpstine) {
+            return base.Channel.VratiMesta(idOpstine);
+        }
+        
+        public RVMS.Model.DTO.StajalisteDTO[] VratiStajalistaMestaIOpstine(System.Nullable<int> idOpstine, System.Nullable<int> idMesta) {
+            return base.Channel.VratiStajalistaMestaIOpstine(idOpstine, idMesta);
         }
     }
 }

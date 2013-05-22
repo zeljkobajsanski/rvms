@@ -29,7 +29,18 @@ namespace RVMS.Win
             InitCommands();
             navBarItemRelacija.LinkClicked += (s, e) => AddDocumentRelacija(null);
             navBarItemDaljinar.LinkClicked += (s, e) => AddDocumentDaljinar();
+            iStajalista.LinkClicked += (s, e) => AddDocumentStajalista();
             repositoryItemMarqueeProgressBar1.Stopped = true;
+        }
+
+        private void AddDocumentStajalista()
+        {
+            var view = new ViewStajalista();
+            view.PropertyChanged += ViewPropertyChanged;
+            view.Notify += OnNotify;
+            view.RequestView += (s1, e1) => AddDocumentRelacija(e1.Parameters);
+            var doc = documentManager1.View.Controller.AddDocument(view);
+            doc.Caption = "Stajališta";
         }
 
         private void AddDocumentDaljinar()

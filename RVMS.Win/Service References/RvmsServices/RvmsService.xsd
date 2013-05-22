@@ -87,4 +87,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Mesto" nillable="true" type="tns:Mesto" />
+  <xs:complexType name="ArrayOfMesto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Mesto" nillable="true" type="tns:Mesto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMesto" nillable="true" type="tns:ArrayOfMesto" />
 </xs:schema>

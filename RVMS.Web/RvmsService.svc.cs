@@ -147,6 +147,26 @@ namespace RVMS.Web
             return retVal;
         }
 
+        public Mesto[] VratiMesta(int? idOpstine)
+        {
+            return new MestaRepository().VratiMestaOpstine(idOpstine).ToArray();
+        }
+
+        public StajalisteDTO[] VratiStajalistaMestaIOpstine(int? idOpstine, int? idMesta)
+        {
+            return new StajalistaRepository().VratiStajalista(idOpstine, idMesta, true)
+                                             .Select(x => new StajalisteDTO()
+                                             {
+                                                 Id = x.Id,
+                                                 Naziv = x.Naziv,
+                                                 Opstina = x.Opstina.NazivOpstine,
+                                                 Mesto = x.Mesto.Naziv,
+                                                 Stanica = x.Stanica,
+                                                 Latituda = x.GpsLatituda,
+                                                 Longituda = x.GpsLongituda
+                                             }).ToArray();
+        }
+
         private static void IzracunajRelaciju(IEnumerable<MedjustanicnoRastojanjeDTO> rastojanja)
         {
             var duzinaRelacije = 0M;

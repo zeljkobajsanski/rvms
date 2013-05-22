@@ -8,14 +8,24 @@ namespace RVMS.Model.Repository
 {
     public class StajalistaRepository : Repository<Stajaliste>
     {
-        public IEnumerable<Stajaliste> VratiStajalista(int idOpstine, int? idMesta)
+        public IQueryable<Stajaliste> VratiStajalista(int? idOpstine, int? idMesta, bool includeParents = false)
         {
-            var stajalista = fDataContext.Stajalista.Where(x => x.OpstinaId == idOpstine);
+            var set = fDataContext.Stajalista;
+            if (includeParents)
+            {
+                set.Include("Opstina");
+                set.Include("Mesto");
+            }
+            var stajalista = set.Where(x => x.Aktivan);
+            if (idOpstine.HasValue)
+            {
+                stajalista = stajalista.Where(x => x.OpstinaId == idOpstine);
+            }
             if (idMesta.HasValue)
             {
                 stajalista = stajalista.Where(x => x.MestoId == idMesta);
             }
-            return stajalista.ToArray();
+            return stajalista;
         }
 
         public IEnumerable<Stajaliste> VratiAktivnaStajalista()

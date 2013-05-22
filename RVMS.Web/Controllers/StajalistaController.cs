@@ -61,7 +61,7 @@ namespace RVMS.Web.Controllers
         [LogujAktivnost]
         public JsonResult VratiStajalista(int idOpstine, int? idMesta)
         {
-            var stajalista = fRepository.VratiStajalista(idOpstine, idMesta);
+            var stajalista = fRepository.VratiStajalista(idOpstine, idMesta).ToArray();
             return Json(stajalista, JsonRequestBehavior.AllowGet);
         }
 

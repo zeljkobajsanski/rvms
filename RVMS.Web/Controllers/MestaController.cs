@@ -22,7 +22,7 @@ namespace RVMS.Web.Controllers
 
         public JsonResult VratiMesta(int idOpstine)
         {
-            var mesta = fRepository.VratiMestaOpstine(idOpstine);
+            var mesta = fRepository.VratiMestaOpstine(idOpstine).ToArray();
             return Json(mesta, JsonRequestBehavior.AllowGet);
         }
 

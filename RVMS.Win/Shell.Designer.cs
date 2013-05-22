@@ -76,6 +76,8 @@
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
+            this.iStajalista = new DevExpress.XtraNavBar.NavBarItem();
+            this.iMesta = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -108,6 +110,7 @@
             this.navbarImageList.Images.SetKeyName(5, "Tasks_16x16.png");
             this.navbarImageList.Images.SetKeyName(6, "ruler_pencil.png");
             this.navbarImageList.Images.SetKeyName(7, "document_new.png");
+            this.navbarImageList.Images.SetKeyName(8, "bus.png");
             // 
             // ribbonControl
             // 
@@ -507,7 +510,9 @@
             this.navBarGroup2});
             this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItemDaljinar,
-            this.navBarItemRelacija});
+            this.navBarItemRelacija,
+            this.iMesta,
+            this.iStajalista});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 192;
@@ -520,6 +525,10 @@
             // 
             this.navBarGroup1.Caption = "Šifarnici";
             this.navBarGroup1.Expanded = true;
+            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iMesta),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iStajalista)
+            });
             this.navBarGroup1.Name = "navBarGroup1";
             // 
             // navBarGroup2
@@ -551,6 +560,17 @@
             // 
             this.alertControl1.AutoFormDelay = 3000;
             this.alertControl1.FormLocation = DevExpress.XtraBars.Alerter.AlertFormLocation.TopRight;
+            // 
+            // iStajalista
+            // 
+            this.iStajalista.Caption = "Stajališta";
+            this.iStajalista.Name = "iStajalista";
+            this.iStajalista.SmallImageIndex = 8;
+            // 
+            // iMesta
+            // 
+            this.iMesta.Caption = "Mesta";
+            this.iMesta.Name = "iMesta";
             // 
             // Shell
             // 
@@ -631,6 +651,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar repositoryItemMarqueeProgressBar1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
+        private DevExpress.XtraNavBar.NavBarItem iStajalista;
+        private DevExpress.XtraNavBar.NavBarItem iMesta;
 
     }
 }

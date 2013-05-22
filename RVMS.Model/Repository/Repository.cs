@@ -31,10 +31,9 @@ namespace RVMS.Model.Repository
             return fDataContext.Set<T>().SingleOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            var cs = fDataContext.Database.Connection;
-            return fDataContext.Set<T>().ToArray();
+            return fDataContext.Set<T>();
         } 
 
         public void Dispose()
@@ -52,9 +51,9 @@ namespace RVMS.Model.Repository
             fDataContext.Entry(entity).State = EntityState.Unchanged;
         }
 
-        public IEnumerable<T> GetActive()
+        public IQueryable<T> GetActive()
         {
-            return fDataContext.Set<T>().Where(x => x.Aktivan).ToArray();
+            return fDataContext.Set<T>().Where(x => x.Aktivan);
         } 
     }
 }

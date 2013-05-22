@@ -6,9 +6,14 @@ namespace RVMS.Model.Repository
 {
     public class MestaRepository : Repository<Mesto>
     {
-         public IEnumerable<Mesto> VratiMestaOpstine(int idOpstine)
+         public IQueryable<Mesto> VratiMestaOpstine(int? idOpstine)
          {
-             return fDataContext.Mesta.Where(x => x.OpstinaId == idOpstine).ToArray();
+             var mesta = GetActive();
+             if (idOpstine.HasValue)
+             {
+                 mesta = mesta.Where(x => x.OpstinaId == idOpstine);
+             }
+             return mesta;
          } 
     }
 }

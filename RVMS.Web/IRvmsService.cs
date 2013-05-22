@@ -33,5 +33,11 @@ namespace RVMS.Web
 
         [OperationContract]
         MedjustanicnoRastojanjeDTO[] ObrisiRastojanje(int id);
+
+        [OperationContract]
+        Mesto[] VratiMesta(int? idOpstine);
+
+        [OperationContract]
+        StajalisteDTO[] VratiStajalistaMestaIOpstine(int? idOpstine, int? idMesta);
     }
 }

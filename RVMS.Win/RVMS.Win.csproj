@@ -142,6 +142,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DaljinarViewModel.cs" />
     <Compile Include="ViewModels\RelacijaViewModel.cs" />
+    <Compile Include="ViewModels\StajalistaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\Mapa.cs">
       <SubType>Form</SubType>
@@ -168,6 +169,12 @@
       <DependentUpon>ViewRelacija.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Views.cs" />
+    <Compile Include="Views\ViewStajalista.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ViewStajalista.Designer.cs">
+      <DependentUpon>ViewStajalista.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Shell.resx">
       <DependentUpon>Shell.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +198,9 @@
     <EmbeddedResource Include="Views\ViewRelacija.resx">
       <DependentUpon>ViewRelacija.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewStajalista.resx">
+      <DependentUpon>ViewStajalista.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.LinijaDTO.datasource" />
@@ -210,6 +220,7 @@
     <None Include="Properties\DataSources\RVMS.Model.Entities.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.Relacija.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.RelacijaViewModel.datasource" />
+    <None Include="Properties\DataSources\RVMS.Win.ViewModels.StajalistaViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
