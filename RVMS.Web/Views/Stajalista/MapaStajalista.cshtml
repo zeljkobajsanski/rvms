@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+@model RVMS.Model.Entities.Stajaliste
+
+@section styles
+{
+    <style>
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+}
+
+@Html.Hidden("model", Json.Encode(Model))
+<div id="map"></div>
+
+<script>
+    var map,
+        stajaliste,
+        marker;
+
+    $(function() {
+        var mapOptions = {
+            center: new google.maps.LatLng(44.22, 20.74),
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        google.maps.event.addListener(map, 'click', function(e) {
+            if (!marker) {
+                _kreirajMarker(e.latLng.lat(), e.latLng.lng());
+                _azuirajKoordinatu(e.latLng.lat(), e.latLng.lng());
+            }
+        });
+
+        stajaliste = $.parseJSON($("#model").val());
+        
+        if (stajaliste.GpsLatituda && stajaliste.GpsLongituda) {
+            _kreirajMarker(stajaliste.GpsLatituda, stajaliste.GpsLongituda);
+        }
+    });
+    
+    function _kreirajMarker(lat, lng) {
+        marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(lat, lng),
+            title: stajaliste.Naziv,
+            draggable: true
+        });
+        google.maps.event.addListener(marker, 'dragend', function(e) {
+            _azuirajKoordinatu(e.latLng.lat(), e.latLng.lng());
+        });
+    }
+
+    function _azuirajKoordinatu(lat, lng) {
+        $.ajax({
+            url: '/Stajalista/AzurirajKoordinatu',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ Id: stajaliste.Id, GpsLatituda: lat, GpsLongituda: lng }),
+            success: function() {
+                toastr.success('Podaci su uspešno sačuvani');
+            },
+            error: function() {
+                toastr.error('Greška pri čuvanju podataka. Pokušajte ponovo');
+            }
+        });
+    }
+</script>

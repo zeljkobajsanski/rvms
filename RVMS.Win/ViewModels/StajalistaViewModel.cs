@@ -135,5 +135,42 @@ namespace RVMS.Win.ViewModels
             }
             return null;
         }
+
+        public void Update(StajalisteDTO stajaliste)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                svc.SacuvajStajaliste(new Stajaliste()
+                {
+                    Id = stajaliste.Id,
+                    Naziv = stajaliste.Naziv,
+                    OpstinaId = stajaliste.OpstinaId,
+                    MestoId = stajaliste.MestoId,
+                    GpsLatituda = stajaliste.Latituda,
+                    GpsLongituda = stajaliste.Longituda,
+                    Stanica = stajaliste.Stanica,
+                    Aktivan = true
+                });
+            }
+        }
+
+        public void Obrisi(StajalisteDTO stajaliste)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                svc.SacuvajStajaliste(new Stajaliste()
+                {
+                    Id = stajaliste.Id,
+                    Naziv = stajaliste.Naziv,
+                    OpstinaId = stajaliste.OpstinaId,
+                    MestoId = stajaliste.MestoId,
+                    GpsLatituda = stajaliste.Latituda,
+                    GpsLongituda = stajaliste.Longituda,
+                    Stanica = stajaliste.Stanica,
+                    Aktivan = false
+                });
+                Stajalista.Remove(stajaliste);
+            }
+        }
     }
 }

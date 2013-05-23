@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RVMS.Model.DTO;
 using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
 using Message = RVMS.Win.Messages.Message;
@@ -76,6 +77,88 @@ namespace RVMS.Win.Views
                 }
             };
             btnDodaj.Click += (s, e) => Dodaj();
+            gridView1.CellValueChanged += (s, e) =>
+            {
+                var stajaliste = (StajalisteDTO) gridView1.GetRow(e.RowHandle);
+                if (stajaliste != null)
+                {
+                    try
+                    {
+                        m_ViewModel.Update(stajaliste);
+                        OnNotify(new SavedMessage());
+                    }
+                    catch (Exception exc)
+                    {
+                        OnNotify(new ErrorMessage(exc));
+                    }
+                }
+            };
+            repositoryItemButtonEdit1.ButtonClick += (s, e) =>
+            {
+                switch (e.Button.Index)
+                {
+                    case 0:
+                        MapirajStajaliste();
+                        break;
+                    case 1:
+                        ObrisiKoordinate();
+                        break;
+                    case 2:
+                        ObrisiStajaliste();
+                        break;
+                }
+                
+            };
+            repositoryItemCheckEdit1.EditValueChanged += (s, e) => gridView1.CloseEditor();
+        }
+
+        private void ObrisiStajaliste()
+        {
+            var q = new QuestionMessage("Da li želite da obrišete stajalište?");
+            OnNotify(q);
+            if (q.Confirm)
+            {
+                var stajaliste = (StajalisteDTO)gridView1.GetFocusedRow();
+                try
+                {
+                    m_ViewModel.Obrisi(stajaliste);
+                    OnNotify(new SavedMessage());
+                }
+                catch (Exception exc)
+                {
+                    OnNotify(new ErrorMessage(exc));
+                }
+            }
+        }
+
+        private void ObrisiKoordinate()
+        {
+            var q = new QuestionMessage("Da li želite da obrišete koordinate stajališta?");
+            OnNotify(q);
+            if (q.Confirm)
+            {
+                var stajaliste = (StajalisteDTO)gridView1.GetFocusedRow();
+                stajaliste.Latituda = null;
+                stajaliste.Longituda = null;
+                try
+                {
+                    m_ViewModel.Update(stajaliste);
+                    OnNotify(new SavedMessage());
+                }
+                catch (Exception exc)
+                {
+                    OnNotify(new ErrorMessage(exc));
+                }  
+            }
+        }
+
+        private void MapirajStajaliste()
+        {
+            var stajaliste = (StajalisteDTO)gridView1.GetFocusedRow();
+            using (var m = new Mapa(ApplicationContext.Current.WebServiceHome + "/Stajalista/MapaStajalista/" + stajaliste.Id))
+            {
+                m.ShowDialog(this);
+            }
         }
 
         private void Dodaj()

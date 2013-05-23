@@ -101,5 +101,11 @@ namespace RVMS.Web.Controllers
             var stajaliste = fRepository.Get(id);
             return Json(stajaliste, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MapaStajalista(int id)
+        {
+            var stajaliste = fRepository.Get(id);
+            return View(stajaliste);
+        }
     }
 }

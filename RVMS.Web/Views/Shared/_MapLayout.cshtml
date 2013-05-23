@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/favicon.png")">
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/maps.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")"></script>
+    <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcdf5bk8_wFGfPjt4w-aVHJX_EYTm-9TI&sensor=false&region=RS"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

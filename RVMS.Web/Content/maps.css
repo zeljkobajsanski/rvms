@@ -1,0 +1,12 @@
+﻿@font-face { font-family: 'segoe ui';src: url('fonts/SegoeUI.ttf'); }
+
+html {
+    font-family: 'segoe ui', arial, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}

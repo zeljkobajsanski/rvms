@@ -393,6 +393,7 @@
     <Content Include="Content\jqx.base.css" />
     <Content Include="Content\jqx.bootstrap.css" />
     <Content Include="Content\jqx.metro.css" />
+    <Content Include="Content\maps.css" />
     <Content Include="Content\oktopod.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -530,6 +531,8 @@
     <Content Include="Views\Prevoznici\Prevoznik.cshtml" />
     <Content Include="Views\Stajalista\_PretragaStajalista.cshtml" />
     <Content Include="Views\Relacije\MapaRelacije.cshtml" />
+    <Content Include="Views\Stajalista\MapaStajalista.cshtml" />
+    <Content Include="Views\Shared\_MapLayout.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

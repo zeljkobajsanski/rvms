@@ -7,7 +7,9 @@ namespace RVMS.Model.DTO
         public int Id { get; set; }
         public int? IdStajalistaLinije { get; set; }
         public string Naziv { get; set; }
+        public int OpstinaId { get; set; }
         public string Opstina { get; set; }
+        public int? MestoId { get; set; }
         public string Mesto { get; set; }
         public decimal? Latituda { get; set; }
         public decimal? Longituda { get; set; }

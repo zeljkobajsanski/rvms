@@ -113,6 +113,16 @@ namespace RVMS.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap globe_cancel {
+            get {
+                object obj = ResourceManager.GetObject("globe_cancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gnome_edit_delete {
             get {
                 object obj = ResourceManager.GetObject("gnome_edit_delete", resourceCulture);

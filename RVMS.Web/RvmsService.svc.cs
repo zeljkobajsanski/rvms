@@ -163,7 +163,9 @@ namespace RVMS.Web
                                                  Mesto = x.Mesto.Naziv,
                                                  Stanica = x.Stanica,
                                                  Latituda = x.GpsLatituda,
-                                                 Longituda = x.GpsLongituda
+                                                 Longituda = x.GpsLongituda,
+                                                 OpstinaId = x.OpstinaId,
+                                                 MestoId = x.MestoId
                                              }).ToArray();
         }
 

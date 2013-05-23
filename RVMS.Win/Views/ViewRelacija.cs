@@ -25,8 +25,6 @@ namespace RVMS.Win.Views
 
         private Mapa m_Mapa;
 
-        private string m_WebServiceHome;
-
         public ViewRelacija()
         {
             InitializeComponent();
@@ -35,7 +33,6 @@ namespace RVMS.Win.Views
             relacijaViewModelBindingSource.DataSource = m_ViewModel;
             Enable(false);
             HandleEvents();
-            m_WebServiceHome = ConfigurationManager.AppSettings["WebserviceHome"];
             txtNazivRelacije.Focus();
         }
 
@@ -268,7 +265,7 @@ namespace RVMS.Win.Views
             {
                 if (m_Mapa == null)
                 {
-                    m_Mapa = new Mapa(m_WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
+                    m_Mapa = new Mapa(ApplicationContext.Current.WebServiceHome + "/Relacije/MapaRelacije/" + m_ViewModel.Relacija.IdRelacije);
                     m_Mapa.Closed += (s1, e1) => m_Mapa = null;
                 }
                 m_Mapa.Show(this);
