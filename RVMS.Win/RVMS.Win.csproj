@@ -35,7 +35,7 @@
     <SuiteName>Oktopod</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>oktopod.html</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -300,39 +300,39 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
-    <Content Include="Images\Calendar_16x16.png" />
-    <Content Include="Images\Drafts_16x16.png" />
-    <Content Include="Images\gnome_edit_delete.png" />
-    <Content Include="Images\Inbox_16x16.png" />
-    <Content Include="Images\Mail_16x16.png" />
-    <Content Include="Images\Organizer_16x16.png" />
-    <Content Include="Images\Outbox_16x16.png" />
-    <Content Include="Images\Ribbon_AlignCenter_16x16.png" />
-    <Content Include="Images\Ribbon_AlignLeft_16x16.png" />
-    <Content Include="Images\Ribbon_AlignRight_16x16.png" />
-    <Content Include="Images\Ribbon_Bold_16x16.png" />
-    <Content Include="Images\Ribbon_Close_16x16.png" />
-    <Content Include="Images\Ribbon_Close_32x32.png" />
-    <Content Include="Images\Ribbon_Content_16x16.png" />
-    <Content Include="Images\Ribbon_Content_32x32.png" />
-    <Content Include="Images\Ribbon_Exit_16x16.png" />
-    <Content Include="Images\Ribbon_Exit_32x32.png" />
-    <Content Include="Images\Ribbon_Find_16x16.png" />
-    <Content Include="Images\Ribbon_Find_32x32.png" />
-    <Content Include="Images\Ribbon_Info_16x16.png" />
-    <Content Include="Images\Ribbon_Info_32x32.png" />
-    <Content Include="Images\Ribbon_Italic_16x16.png" />
-    <Content Include="Images\Ribbon_New_16x16.png" />
-    <Content Include="Images\Ribbon_New_32x32.png" />
-    <Content Include="Images\Ribbon_Open_16x16.png" />
-    <Content Include="Images\Ribbon_Open_32x32.png" />
-    <Content Include="Images\Ribbon_SaveAs_16x16.png" />
-    <Content Include="Images\Ribbon_SaveAs_32x32.png" />
-    <Content Include="Images\Ribbon_Save_16x16.png" />
-    <Content Include="Images\Ribbon_Save_32x32.png" />
-    <Content Include="Images\Ribbon_Underline_16x16.png" />
-    <Content Include="Images\Tasks_16x16.png" />
-    <Content Include="Images\Trash_16x16.png" />
+    <None Include="Images\Calendar_16x16.png" />
+    <None Include="Images\Drafts_16x16.png" />
+    <None Include="Images\gnome_edit_delete.png" />
+    <None Include="Images\Inbox_16x16.png" />
+    <None Include="Images\Mail_16x16.png" />
+    <None Include="Images\Organizer_16x16.png" />
+    <None Include="Images\Outbox_16x16.png" />
+    <None Include="Images\Ribbon_AlignCenter_16x16.png" />
+    <None Include="Images\Ribbon_AlignLeft_16x16.png" />
+    <None Include="Images\Ribbon_AlignRight_16x16.png" />
+    <None Include="Images\Ribbon_Bold_16x16.png" />
+    <None Include="Images\Ribbon_Close_16x16.png" />
+    <None Include="Images\Ribbon_Close_32x32.png" />
+    <None Include="Images\Ribbon_Content_16x16.png" />
+    <None Include="Images\Ribbon_Content_32x32.png" />
+    <None Include="Images\Ribbon_Exit_16x16.png" />
+    <None Include="Images\Ribbon_Exit_32x32.png" />
+    <None Include="Images\Ribbon_Find_16x16.png" />
+    <None Include="Images\Ribbon_Find_32x32.png" />
+    <None Include="Images\Ribbon_Info_16x16.png" />
+    <None Include="Images\Ribbon_Info_32x32.png" />
+    <None Include="Images\Ribbon_Italic_16x16.png" />
+    <None Include="Images\Ribbon_New_16x16.png" />
+    <None Include="Images\Ribbon_New_32x32.png" />
+    <None Include="Images\Ribbon_Open_16x16.png" />
+    <None Include="Images\Ribbon_Open_32x32.png" />
+    <None Include="Images\Ribbon_SaveAs_16x16.png" />
+    <None Include="Images\Ribbon_SaveAs_32x32.png" />
+    <None Include="Images\Ribbon_Save_16x16.png" />
+    <None Include="Images\Ribbon_Save_32x32.png" />
+    <None Include="Images\Ribbon_Underline_16x16.png" />
+    <None Include="Images\Tasks_16x16.png" />
+    <None Include="Images\Trash_16x16.png" />
     <None Include="Resources\globe_cancel.png" />
     <None Include="Resources\warning_32x32.png" />
     <None Include="Resources\info_32x32.png" />
