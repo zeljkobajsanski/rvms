@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using RVMS.Win.RvmsServices;
@@ -11,10 +12,15 @@ namespace RVMS.Win.ViewModels
         private int? m_IdMesta;
         private string m_NazivStajalista;
         private bool m_Stanica;
+        private BindingList<StajalisteDTO> m_Stajalista;
+        private Opstina[] m_Opstine;
+        private Mesto[] m_Mesta;
 
         public StajalistaViewModel()
         {
             Stajalista = new BindingList<StajalisteDTO>();
+            Opstine = new Opstina[0];
+            Mesta = new Mesto[0];
         }
 
         public int? IdOpstine
@@ -73,11 +79,47 @@ namespace RVMS.Win.ViewModels
             }
         }
 
-        public BindingList<StajalisteDTO> Stajalista { get; set; }
+        public BindingList<StajalisteDTO> Stajalista
+        {
+            get { return m_Stajalista; }
+            set
+            {
+                if (Equals(value, m_Stajalista))
+                {
+                    return;
+                }
+                m_Stajalista = value;
+                OnPropertyChanged("Stajalista");
+            }
+        }
 
-        public Opstina[] Opstine { get; set; }
+        public Opstina[] Opstine
+        {
+            get { return m_Opstine; }
+            set
+            {
+                if (Equals(value, m_Opstine))
+                {
+                    return;
+                }
+                m_Opstine = value;
+                OnPropertyChanged("Opstine");
+            }
+        }
 
-        public Mesto[] Mesta { get; set; }
+        public Mesto[] Mesta
+        {
+            get { return m_Mesta; }
+            set
+            {
+                if (Equals(value, m_Mesta))
+                {
+                    return;
+                }
+                m_Mesta = value;
+                OnPropertyChanged("Mesta");
+            }
+        }
 
         public override void Init()
         {
@@ -88,20 +130,36 @@ namespace RVMS.Win.ViewModels
         {
             using (var svc = new RvmsServiceClient())
             {
-                Opstine = svc.VratiOpstine();
+                IsBusy = true;
+                svc.VratiOpstineCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    Opstine = e.Result;
+                };
+                svc.VratiOpstineAsync();
             }
         }
 
         internal void UcitajStajalista()
         {
+            IsBusy = true;
             using (var svc = new RvmsServiceClient())
             {
-                Stajalista.Clear();
-                var stajalista = svc.VratiStajalistaMestaIOpstine(IdOpstine, IdMesta);
-                foreach (var stajalisteDto in stajalista)
+                svc.VratiStajalistaMestaIOpstineAsync(IdOpstine, IdMesta);
+                svc.VratiStajalistaMestaIOpstineCompleted += (s, e) =>
                 {
-                    Stajalista.Add(stajalisteDto);
-                }
+                    IsBusy = false;
+                    HandleError(e);
+                    Stajalista.RaiseListChangedEvents = false;
+                    Stajalista.Clear();
+                    foreach (var stajaliste in e.Result)
+                    {
+                        Stajalista.Add(stajaliste);
+                    }
+                    Stajalista.RaiseListChangedEvents = true;
+                    OnPropertyChanged("Stajalista");
+                };
             }
         }
 
@@ -109,7 +167,14 @@ namespace RVMS.Win.ViewModels
         {
             using (var svc = new RvmsServiceClient())
             {
-               Mesta = svc.VratiMesta(IdOpstine);
+                IsBusy = true;
+                svc.VratiMestaCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    Mesta = e.Result;
+                };
+               svc.VratiMestaAsync(IdOpstine);
             }
         }
 

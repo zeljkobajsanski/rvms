@@ -16,11 +16,13 @@ namespace RVMS.Win.Views
 {
     public partial class ViewStajalista : ViewBase
     {
-        private StajalistaViewModel m_ViewModel = new StajalistaViewModel();
+        private readonly StajalistaViewModel m_ViewModel = new StajalistaViewModel();
 
         public ViewStajalista()
         {
             InitializeComponent();
+            opstinaBindingSource.DataSource = m_ViewModel.Opstine;
+            mestoBindingSource.DataSource = m_ViewModel.Mesta;
             m_ViewModel.PropertyChanged += ViewModelPropertyChanged;
             stajalistaViewModelBindingSource.DataSource = m_ViewModel;
             stajalisteDTOBindingSource.DataSource = m_ViewModel.Stajalista;
@@ -39,17 +41,14 @@ namespace RVMS.Win.Views
 
         protected override void OnLoad(EventArgs e)
         {
-            var task = new Task(() =>
+            try
             {
-                IsBusy = true;
                 m_ViewModel.Init();
-            });
-            task.ContinueWith(t =>
+            }
+            catch (Exception exc)
             {
-                opstinaBindingSource.DataSource = m_ViewModel.Opstine;
-                IsBusy = false;
-            });
-            task.Start();
+                OnNotify(new ErrorMessage(exc));
+            }
         }
 
         private void HandleEvents()
@@ -175,17 +174,39 @@ namespace RVMS.Win.Views
 
         private void OsveziOpstine()
         {
-            var task = new Task(() =>
+            try
             {
-                IsBusy = true;
                 m_ViewModel.UcitajOpstine();
-            });
-            task.ContinueWith(t =>
+            }
+            catch (Exception exc)
             {
-                opstinaBindingSource.DataSource = m_ViewModel.Opstine;
-                IsBusy = false;
-            });
-            task.Start();
+                OnNotify(new ErrorMessage(exc));
+            }
+        }
+
+        private void OsveziStajalista()
+        {
+            try
+            {
+                m_ViewModel.UcitajStajalista();
+            }
+            catch (Exception exc)
+            {
+                OnNotify(new ErrorMessage(exc));
+            }
+        }
+
+        private void OsveziMestaIStajalista()
+        {
+            try
+            {
+                m_ViewModel.UcitajMesta();
+                m_ViewModel.UcitajStajalista();
+            }
+            catch (Exception exc)
+            {
+                OnNotify(new ErrorMessage(exc));
+            }
         }
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -198,39 +219,19 @@ namespace RVMS.Win.Views
                 case "IdMesta":
                     OsveziStajalista();
                     break;
+                case "IsBusy":
+                    IsBusy = m_ViewModel.IsBusy;
+                    break;
+                case "Stajalista":
+                    stajalisteDTOBindingSource.ResetBindings(true);
+                    break;
+                case "Opstine":
+                    opstinaBindingSource.DataSource = m_ViewModel.Opstine;
+                    break;
+                case "Mesta":
+                    mestoBindingSource.DataSource = m_ViewModel.Mesta;
+                    break;
             }
         }
-
-        private void OsveziStajalista()
-        {
-            var task = new Task(() =>
-            {
-                IsBusy = true;
-                Invoke(new Action(() => m_ViewModel.UcitajStajalista()));
-            });
-            task.ContinueWith(t =>
-            {
-                IsBusy = false;
-            });
-            task.Start();
-        }
-
-        private void OsveziMestaIStajalista()
-        {
-            var task = new Task(() =>
-            {
-                IsBusy = true;
-                m_ViewModel.UcitajMesta();
-                Invoke(new Action(() => m_ViewModel.UcitajStajalista()));
-            });
-            task.ContinueWith(t =>
-            {
-                mestoBindingSource.DataSource = m_ViewModel.Mesta;
-                IsBusy = false;
-            });
-            task.Start();
-        }
-
-        
     }
 }

@@ -19,7 +19,7 @@ using Message = RVMS.Win.Messages.Message;
 
 namespace RVMS.Win.Views
 {
-    public partial class ViewRelacija : ViewBase
+    public sealed partial class ViewRelacija : ViewBase
     {
         private RelacijaViewModel m_ViewModel;
 
@@ -29,6 +29,10 @@ namespace RVMS.Win.Views
         {
             InitializeComponent();
             m_ViewModel = new RelacijaViewModel();
+            opstinaBindingSource.DataSource = m_ViewModel.Opstine;
+            opstinaBindingSource1.DataSource = m_ViewModel.Opstine;
+            stajalisteDTOBindingSource.DataSource = m_ViewModel.PolaznaStajalista;
+            stajalisteDTOBindingSource1.DataSource = m_ViewModel.DolaznaStajalista;
             m_ViewModel.PropertyChanged += ModelPropertyChanged;
             relacijaViewModelBindingSource.DataSource = m_ViewModel;
             Enable(false);
@@ -39,28 +43,17 @@ namespace RVMS.Win.Views
         public ViewRelacija(object param) : this()
         {
             var idRelacije = Convert.ToInt32(param);
-            var task = new Task(() =>
+            try
             {
-                IsBusy = true;
                 m_ViewModel.UcitajRelaciju(idRelacije);
-            });
-            task.ContinueWith(task1 =>
-            {
-                if (task1.Exception != null)
-                {
-                    OnNotify(new ErrorMessage(task1.Exception));
-                    return;
-                }
-                Invoke(new Action(() =>
-                {
-                    txtNazivRelacije.Refresh();
-                    medjustanicnoRastojanjeDTOBindingSource.DataSource = m_ViewModel.MedjustanicnaRastojanja;
-                    Enable(m_ViewModel.Relacija.IdRelacije != 0);
-                }));
+                txtNazivRelacije.Refresh();
+                medjustanicnoRastojanjeDTOBindingSource.DataSource = m_ViewModel.MedjustanicnaRastojanja;
                 
-                IsBusy = false;
-            });
-            task.Start();
+            }
+            catch (Exception exc)
+            {
+                OnNotify(new ErrorMessage(exc));
+            }
         }
 
         public override void Sacuvaj()
@@ -70,17 +63,8 @@ namespace RVMS.Win.Views
                 OnNotify(new InvalidForSaveMessage());
                 return;
             }
-            var t = new Task(() =>
-            {
-                IsBusy = true;
-                m_ViewModel.Sacuvaj();
-            });
-            t.ContinueWith((task) =>
-            {
-                IsBusy = false;
-                Invoke(new Action(() => Enable(m_ViewModel.Relacija.IdRelacije != 0)));
-            });
-            t.Start();
+            m_ViewModel.Sacuvaj();
+            Enable(m_ViewModel.Relacija.IdRelacije != 0);
         }
 
         public override void NoviUnos()
@@ -92,21 +76,15 @@ namespace RVMS.Win.Views
 
         public override void Osvezi()
         {
-            var task = new Task(() =>
+            try
             {
-                IsBusy = true;
-                m_ViewModel.Init();
                 m_ViewModel.OsveziRelaciju();
-            });
-            task.ContinueWith(t =>
+                m_ViewModel.Init();
+            }
+            catch (Exception exc)
             {
-                opstinaBindingSource.DataSource = m_ViewModel.Opstine;
-                opstinaBindingSource1.DataSource = m_ViewModel.Opstine;
-                stajalisteDTOBindingSource.DataSource = m_ViewModel.PolaznaStajalista;
-                stajalisteDTOBindingSource1.DataSource = m_ViewModel.DolaznaStajalista;
-                IsBusy = false;
-            });
-            task.Start();
+                OnNotify(new ErrorMessage(exc));
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -132,49 +110,50 @@ namespace RVMS.Win.Views
 
         private void ModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if ("IdPolazneOpstine" == e.PropertyName)
+            switch (e.PropertyName)
             {
-                var task = new Task(() =>
-                {
-                    IsBusy = true;
-                    m_ViewModel.UcitajPolazneStanice();
-                });
-                task.ContinueWith(t =>
-                {
+                case "IdPolazneOpstine":
+                    try
+                    {
+                        m_ViewModel.UcitajPolazneStanice();
+                    }
+                    catch (Exception exc)
+                    {
+                        OnNotify(new ErrorMessage(exc));
+                    }
+                    break;
+                case "IdDolazneOpstine":
+                    try
+                    {
+                        m_ViewModel.UcitajDolazneStanice();
+                    }
+                    catch (Exception exc)
+                    {
+                        OnNotify(new ErrorMessage(exc));
+                    }
+                    break;
+                case "IdDolaznogStajalista":
+                    break;
+                case "MedjustanicnaRastojanja":
+                    medjustanicnoRastojanjeDTOBindingSource.DataSource = m_ViewModel.MedjustanicnaRastojanja;
+                    break;
+                case "IsBusy":
+                    IsBusy = m_ViewModel.IsBusy;
+                    break;
+                case "Relacija":
+                    Enable(m_ViewModel.Relacija.IdRelacije != 0);
+                    break;
+                case "Opstine":
+                    opstinaBindingSource.DataSource = m_ViewModel.Opstine;
+                    opstinaBindingSource1.DataSource = m_ViewModel.Opstine;
+                    break;
+                case "PolaznaStajalista":
                     stajalisteDTOBindingSource.DataSource = m_ViewModel.PolaznaStajalista;
-                    IsBusy = false;
-                });
-                task.Start();
-            }
-            if ("IdDolazneOpstine" == e.PropertyName)
-            {
-                var task = new Task(() =>
-                {
-                    IsBusy = true;
-                    m_ViewModel.UcitajDolazneStanice();
-                });
-                task.ContinueWith(t =>
-                {
+                    break;
+                case "DolaznaStajalista":
                     stajalisteDTOBindingSource1.DataSource = m_ViewModel.DolaznaStajalista;
-                    IsBusy = false;
-                });
-                task.Start();
+                    break;
             }
-            if ("IdDolaznogStajalista" == e.PropertyName)
-            {
-                
-            }
-            if ("MedjustanicnaRastojanja" == e.PropertyName)
-            {
-                Invoke(
-                    new Action(
-                        () =>
-                        {
-                            medjustanicnoRastojanjeDTOBindingSource.DataSource = m_ViewModel.MedjustanicnaRastojanja;
-                        }));
-
-            }
-            
         }
 
         private void Enable(bool enable)

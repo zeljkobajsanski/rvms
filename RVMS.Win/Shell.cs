@@ -137,7 +137,7 @@ namespace RVMS.Win
                 Invoke(new Action(() =>
                 {
                     repositoryItemMarqueeProgressBar1.Stopped = !view.IsBusy;
-                    Cursor = view.IsBusy ? Cursors.WaitCursor : Cursors.Default;
+                    //Cursor = view.IsBusy ? Cursors.WaitCursor : Cursors.Default;
                 }));
             }
         }

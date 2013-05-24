@@ -1,4 +1,5 @@
-﻿using RVMS.Model.DTO;
+﻿using System.ComponentModel;
+using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using RVMS.Win.Models.Validators;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace RVMS.Win.ViewModels
 {
     public class RelacijaViewModel : ViewModel
     {
-        private Opstina[] m_Opstine;
         private int? m_IdPolaznogStajalista;
         private int? m_IdPolazneOpstine;
         private int? m_IdDolazneOpstine;
@@ -18,11 +18,17 @@ namespace RVMS.Win.ViewModels
         private string fNazivRelacije;
         private readonly RelacijeViewModelValidator m_ModelValidator;
         private MedjustanicnoRastojanjeDTO[] fMedjustanicnaRastojanja = new MedjustanicnoRastojanjeDTO[0];
+        private StajalisteDTO[] m_DolaznaStajalista;
+        private StajalisteDTO[] m_PolaznaStajalista;
+        private Opstina[] m_Opstine;
 
         public RelacijaViewModel()
         {
             Relacija = new RelacijaSaMedjustanicnimRastojanjimaDTO();
             m_ModelValidator = new RelacijeViewModelValidator();
+            Opstine = new Opstina[0];
+            PolaznaStajalista = new StajalisteDTO[0];
+            DolaznaStajalista = new StajalisteDTO[0];
         }
 
         /// <summary>
@@ -134,12 +140,36 @@ namespace RVMS.Win.ViewModels
         /// <summary>
         /// Polazna stajališta
         /// </summary>
-        public StajalisteDTO[] PolaznaStajalista { get; set; }
-        
+        public StajalisteDTO[] PolaznaStajalista
+        {
+            get { return m_PolaznaStajalista; }
+            set
+            {
+                if (Equals(value, m_PolaznaStajalista))
+                {
+                    return;
+                }
+                m_PolaznaStajalista = value;
+                OnPropertyChanged("PolaznaStajalista");
+            }
+        }
+
         /// <summary>
         /// Dolazna stajališta
         /// </summary>
-        public StajalisteDTO[] DolaznaStajalista { get; set; }
+        public StajalisteDTO[] DolaznaStajalista
+        {
+            get { return m_DolaznaStajalista; }
+            set
+            {
+                if (Equals(value, m_DolaznaStajalista))
+                {
+                    return;
+                }
+                m_DolaznaStajalista = value;
+                OnPropertyChanged("DolaznaStajalista");
+            }
+        }
 
         /// <summary>
         /// Relacija
@@ -220,10 +250,23 @@ namespace RVMS.Win.ViewModels
         {
             using (var svc = new RvmsServiceClient())
             {
-                Opstine = svc.VratiOpstine();
-                var svaStajalista = svc.VratiStajalisteOpstine(null);
-                PolaznaStajalista = svaStajalista;
-                DolaznaStajalista = svaStajalista;
+                IsBusy = true;
+                svc.VratiOpstineCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    Opstine = e.Result;
+                };
+                svc.VratiOpstineAsync();
+                IsBusy = true;
+                svc.VratiStajalisteOpstineCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    PolaznaStajalista = e.Result;
+                    DolaznaStajalista = e.Result;
+                };
+                svc.VratiStajalisteOpstineAsync(null);
             }
         }
 
@@ -232,9 +275,16 @@ namespace RVMS.Win.ViewModels
         /// </summary>
         public void UcitajPolazneStanice()
         {
+            IsBusy = true;
             using (var svc = new RvmsServiceClient())
             {
-                PolaznaStajalista = svc.VratiStajalisteOpstine(IdPolazneOpstine);
+                svc.VratiStajalisteOpstineCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    PolaznaStajalista = e.Result;
+                };
+                svc.VratiStajalisteOpstineAsync(IdPolazneOpstine);
             }
         }
 
@@ -243,9 +293,16 @@ namespace RVMS.Win.ViewModels
         /// </summary>
         public void UcitajDolazneStanice()
         {
+            IsBusy = true;
             using (var svc = new RvmsServiceClient())
             {
-                DolaznaStajalista = svc.VratiStajalisteOpstine(IdDolazneOpstine);
+                svc.VratiStajalisteOpstineCompleted += (s, e) =>
+                {
+                    IsBusy = false;
+                    HandleError(e);
+                    DolaznaStajalista = e.Result;
+                };
+                svc.VratiStajalisteOpstineAsync(IdDolazneOpstine);
             }
         }
 
@@ -255,14 +312,20 @@ namespace RVMS.Win.ViewModels
         /// <param name="idRelacije">Id relacije</param>
         public void UcitajRelaciju(int idRelacije)
         {
+            IsBusy = true;
             using (var svc = new RvmsServiceClient())
             {
-                var result = svc.VratiRelacijuSaRastojanjima(idRelacije);
-                if (result != null)
+                svc.VratiRelacijuSaRastojanjimaCompleted += (s, e) =>
                 {
-                    Relacija = result;
-                    MedjustanicnaRastojanja = result.Stanice;
-                }
+                    IsBusy = false;
+                    HandleError(e);
+                    Relacija = e.Result;
+                    if (e.Result != null)
+                    {
+                        MedjustanicnaRastojanja = e.Result.Stanice;
+                    }
+                };
+                svc.VratiRelacijuSaRastojanjimaAsync(idRelacije);
             }
         }
 

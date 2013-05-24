@@ -20,10 +20,24 @@ namespace RVMS.Win.Views
         public ViewDaljinar()
         {
             InitializeComponent();
+            relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
                 if (e.Button.Index == 0) Izmeni();
             };
+            m_ViewModel.PropertyChanged += ViewModelPropertyChanged;
+        }
+
+        private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsBusy")
+            {
+                IsBusy = m_ViewModel.IsBusy;
+            }
+            else if ("Daljinar" == e.PropertyName)
+            {
+                relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
+            }
         }
 
         private void Izmeni()
@@ -47,24 +61,14 @@ namespace RVMS.Win.Views
 
         public override void Osvezi()
         {
-            var task = new Task(() =>
+            try
             {
-                IsBusy = true;
                 m_ViewModel.UcitajDaljinar();
-            });
-            task.ContinueWith((t) =>
+            }
+            catch (Exception exc)
             {
-                Invoke(new Action(() =>
-                {
-                    if (t.Exception != null)
-                    {
-                        OnNotify(new ErrorMessage(t.Exception));
-                    }
-                    relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
-                }));
-                IsBusy = false;
-            });
-            task.Start();
+                OnNotify(new ErrorMessage(exc));
+            }
         }
     }
 }

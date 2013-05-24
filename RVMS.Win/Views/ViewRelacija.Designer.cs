@@ -1,6 +1,6 @@
 ﻿namespace RVMS.Win.Views
 {
-    partial class ViewRelacija
+    sealed partial class ViewRelacija
     {
         /// <summary>
         /// Required designer variable.
@@ -187,7 +187,7 @@
             this.colPolaznoStajaliste.Name = "colPolaznoStajaliste";
             this.colPolaznoStajaliste.OptionsColumn.AllowEdit = false;
             this.colPolaznoStajaliste.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "PolaznoStajaliste", "Dužina relacije: {0:n2}km")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "PolaznoStajaliste", "Dužina relacije: {0:n2} km")});
             this.colPolaznoStajaliste.Visible = true;
             this.colPolaznoStajaliste.VisibleIndex = 0;
             this.colPolaznoStajaliste.Width = 275;
@@ -199,7 +199,7 @@
             this.colDolaznoStajaliste.Name = "colDolaznoStajaliste";
             this.colDolaznoStajaliste.OptionsColumn.AllowEdit = false;
             this.colDolaznoStajaliste.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "DolaznoStajaliste", "Vreme vožnje: {0:n0}min")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "DolaznoStajaliste", "Vreme vožnje: {0:n0} min")});
             this.colDolaznoStajaliste.Visible = true;
             this.colDolaznoStajaliste.VisibleIndex = 1;
             this.colDolaznoStajaliste.Width = 240;
@@ -356,7 +356,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::RVMS.Win.Properties.Resources.isync, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dolaznoStajaliste.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Naziv", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Naziv", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Opstina", "Opstina", 47, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
             this.dolaznoStajaliste.Properties.DataSource = this.stajalisteDTOBindingSource1;
             this.dolaznoStajaliste.Properties.DisplayMember = "Naziv";
@@ -382,7 +382,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dolazneOpstine.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NazivOpstine", "Naziv Opstine", 89, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NazivOpstine", "Naziv Opstine", 89, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.dolazneOpstine.Properties.DataSource = this.opstinaBindingSource1;
             this.dolazneOpstine.Properties.DisplayMember = "NazivOpstine";
             this.dolazneOpstine.Properties.NullText = "";
@@ -407,7 +407,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::RVMS.Win.Properties.Resources.isync, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.polaznoStajaliste.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Naziv", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Naziv", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Opstina", "Opstina", 47, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
             this.polaznoStajaliste.Properties.DataSource = this.stajalisteDTOBindingSource;
             this.polaznoStajaliste.Properties.DisplayMember = "Naziv";
@@ -433,7 +433,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.polazneOpstine.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NazivOpstine", "Naziv Opstine", 89, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NazivOpstine", "Naziv Opstine", 89, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.polazneOpstine.Properties.DataSource = this.opstinaBindingSource;
             this.polazneOpstine.Properties.DisplayMember = "NazivOpstine";
             this.polazneOpstine.Properties.NullText = "";
