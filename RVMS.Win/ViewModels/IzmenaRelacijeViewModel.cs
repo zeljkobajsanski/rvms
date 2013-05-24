@@ -53,6 +53,7 @@ namespace RVMS.Win.ViewModels
                     HandleError(e);
                     MedjustanicnoRastojanje = e.Result;
                 };
+                svc.VratiMedjustanicnoRastojanjeAsync(id);
             }
         }
 
