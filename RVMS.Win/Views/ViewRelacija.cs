@@ -13,6 +13,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using RVMS.Model.DTO;
+using RVMS.Win.Dialogs;
 using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
 using Message = RVMS.Win.Messages.Message;
@@ -182,18 +183,25 @@ namespace RVMS.Win.Views
             };
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
-                if (e.Button.Index == 0)
+                switch (e.Button.Index)
                 {
-                    var question = new QuestionMessage("Da li želite da obrišete stavku?");
-                    OnNotify(question);
-                    if (question.Confirm)
+                    case 1:
                     {
-                        var rastojanje = gridView1.GetFocusedRow() as MedjustanicnoRastojanjeDTO;
-                        if (rastojanje != null)
+                        var question = new QuestionMessage("Da li želite da obrišete stavku?");
+                        OnNotify(question);
+                        if (question.Confirm)
                         {
-                            m_ViewModel.Obrisi(rastojanje);
+                            var rastojanje = gridView1.GetFocusedRow() as MedjustanicnoRastojanjeDTO;
+                            if (rastojanje != null)
+                            {
+                                m_ViewModel.Obrisi(rastojanje);
+                            }
                         }
                     }
+                        break;
+                    case 0:
+                        IzmeniSelektovanoRastojanje();
+                        break;
                 }
             };
             gridView1.CustomSummaryCalculate += (s, e) =>
@@ -274,6 +282,18 @@ namespace RVMS.Win.Views
                     }
                 }
             };
+        }
+
+        private void IzmeniSelektovanoRastojanje()
+        {
+            var rastojanje = (MedjustanicnoRastojanjeDTO) gridView1.GetFocusedRow();
+            if (rastojanje != null)
+            {
+                using (var d = new IzmenaRelacije(rastojanje.Id))
+                {
+                    d.ShowDialog(this);
+                }
+            }
         }
     }
 }

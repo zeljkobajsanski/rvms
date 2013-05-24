@@ -184,6 +184,11 @@ namespace RVMS.Web
             return stajaliste.Id;
         }
 
+        public MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id)
+        {
+            return new MedjustanicnaRastojanjaRepository().Get(id);
+        }
+
         private static void IzracunajRelaciju(IEnumerable<MedjustanicnoRastojanjeDTO> rastojanja)
         {
             var duzinaRelacije = 0M;

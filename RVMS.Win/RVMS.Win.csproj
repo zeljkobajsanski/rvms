@@ -117,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Dialogs\IzmenaRelacije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IzmenaRelacije.Designer.cs">
+      <DependentUpon>IzmenaRelacije.cs</DependentUpon>
+    </Compile>
     <Compile Include="Messages\ErrorMessage.cs" />
     <Compile Include="Messages\InvalidForSaveMessage.cs" />
     <Compile Include="Messages\Message.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DaljinarViewModel.cs" />
+    <Compile Include="ViewModels\IzmenaRelacijeViewModel.cs" />
     <Compile Include="ViewModels\RelacijaViewModel.cs" />
     <Compile Include="ViewModels\StajalistaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
@@ -176,6 +183,9 @@
     <Compile Include="Views\ViewStajalista.Designer.cs">
       <DependentUpon>ViewStajalista.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Dialogs\IzmenaRelacije.resx">
+      <DependentUpon>IzmenaRelacije.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Shell.resx">
       <DependentUpon>Shell.cs</DependentUpon>
     </EmbeddedResource>

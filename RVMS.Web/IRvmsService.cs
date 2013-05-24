@@ -42,5 +42,8 @@ namespace RVMS.Web
 
         [OperationContract]
         int SacuvajStajaliste(Stajaliste stajaliste);
+
+        [OperationContract]
+        MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id);
     }
 }

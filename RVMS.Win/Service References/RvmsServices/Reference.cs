@@ -94,6 +94,14 @@ namespace RVMS.Win.RvmsServices {
         System.IAsyncResult BeginSacuvajStajaliste(RVMS.Model.Entities.Stajaliste stajaliste, System.AsyncCallback callback, object asyncState);
         
         int EndSacuvajStajaliste(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanje", ReplyAction="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanjeResponse")]
+        RVMS.Model.Entities.MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanje", ReplyAction="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanjeResponse")]
+        System.IAsyncResult BeginVratiMedjustanicnoRastojanje(int id, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.Entities.MedjustanicnoRastojanje EndVratiMedjustanicnoRastojanje(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -292,6 +300,25 @@ namespace RVMS.Win.RvmsServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class VratiMedjustanicnoRastojanjeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VratiMedjustanicnoRastojanjeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.Entities.MedjustanicnoRastojanje Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.Entities.MedjustanicnoRastojanje)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class RvmsServiceClient : System.ServiceModel.ClientBase<RVMS.Win.RvmsServices.IRvmsService>, RVMS.Win.RvmsServices.IRvmsService {
         
         private BeginOperationDelegate onBeginVratiOpstineDelegate;
@@ -354,6 +381,12 @@ namespace RVMS.Win.RvmsServices {
         
         private System.Threading.SendOrPostCallback onSacuvajStajalisteCompletedDelegate;
         
+        private BeginOperationDelegate onBeginVratiMedjustanicnoRastojanjeDelegate;
+        
+        private EndOperationDelegate onEndVratiMedjustanicnoRastojanjeDelegate;
+        
+        private System.Threading.SendOrPostCallback onVratiMedjustanicnoRastojanjeCompletedDelegate;
+        
         public RvmsServiceClient() {
         }
         
@@ -392,6 +425,8 @@ namespace RVMS.Win.RvmsServices {
         public event System.EventHandler<VratiStajalistaMestaIOpstineCompletedEventArgs> VratiStajalistaMestaIOpstineCompleted;
         
         public event System.EventHandler<SacuvajStajalisteCompletedEventArgs> SacuvajStajalisteCompleted;
+        
+        public event System.EventHandler<VratiMedjustanicnoRastojanjeCompletedEventArgs> VratiMedjustanicnoRastojanjeCompleted;
         
         public RVMS.Model.Entities.Opstina[] VratiOpstine() {
             return base.Channel.VratiOpstine();
@@ -889,6 +924,56 @@ namespace RVMS.Win.RvmsServices {
             }
             base.InvokeAsync(this.onBeginSacuvajStajalisteDelegate, new object[] {
                         stajaliste}, this.onEndSacuvajStajalisteDelegate, this.onSacuvajStajalisteCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.Entities.MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id) {
+            return base.Channel.VratiMedjustanicnoRastojanje(id);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginVratiMedjustanicnoRastojanje(int id, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiMedjustanicnoRastojanje(id, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.Entities.MedjustanicnoRastojanje EndVratiMedjustanicnoRastojanje(System.IAsyncResult result) {
+            return base.Channel.EndVratiMedjustanicnoRastojanje(result);
+        }
+        
+        private System.IAsyncResult OnBeginVratiMedjustanicnoRastojanje(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int id = ((int)(inValues[0]));
+            return this.BeginVratiMedjustanicnoRastojanje(id, callback, asyncState);
+        }
+        
+        private object[] OnEndVratiMedjustanicnoRastojanje(System.IAsyncResult result) {
+            RVMS.Model.Entities.MedjustanicnoRastojanje retVal = this.EndVratiMedjustanicnoRastojanje(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVratiMedjustanicnoRastojanjeCompleted(object state) {
+            if ((this.VratiMedjustanicnoRastojanjeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VratiMedjustanicnoRastojanjeCompleted(this, new VratiMedjustanicnoRastojanjeCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VratiMedjustanicnoRastojanjeAsync(int id) {
+            this.VratiMedjustanicnoRastojanjeAsync(id, null);
+        }
+        
+        public void VratiMedjustanicnoRastojanjeAsync(int id, object userState) {
+            if ((this.onBeginVratiMedjustanicnoRastojanjeDelegate == null)) {
+                this.onBeginVratiMedjustanicnoRastojanjeDelegate = new BeginOperationDelegate(this.OnBeginVratiMedjustanicnoRastojanje);
+            }
+            if ((this.onEndVratiMedjustanicnoRastojanjeDelegate == null)) {
+                this.onEndVratiMedjustanicnoRastojanjeDelegate = new EndOperationDelegate(this.OnEndVratiMedjustanicnoRastojanje);
+            }
+            if ((this.onVratiMedjustanicnoRastojanjeCompletedDelegate == null)) {
+                this.onVratiMedjustanicnoRastojanjeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiMedjustanicnoRastojanjeCompleted);
+            }
+            base.InvokeAsync(this.onBeginVratiMedjustanicnoRastojanjeDelegate, new object[] {
+                        id}, this.onEndVratiMedjustanicnoRastojanjeDelegate, this.onVratiMedjustanicnoRastojanjeCompletedDelegate, userState);
         }
     }
 }
