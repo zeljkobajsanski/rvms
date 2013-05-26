@@ -10,7 +10,7 @@ namespace RVMS.Model.Repository
         {
             return fDataContext.Relacije.Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                                         .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
-                                        .Single(x => x.Id == idRelacije).MedjustanicnaRastojanja.ToArray();
+                                        .Single(x => x.Id == idRelacije).MedjustanicnaRastojanja;
         }
 
         public IEnumerable<MedjustanicnoRastojanje> VratiMedjustanicnaRastojanja(int? polaznoStajaliste)

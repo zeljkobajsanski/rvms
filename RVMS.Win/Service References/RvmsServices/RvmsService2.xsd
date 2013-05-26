@@ -153,4 +153,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PomeriMedjustanicnoRastojanjeDole">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idRelacije" type="xs:int" />
+        <xs:element minOccurs="0" name="idMedjustanicnogRastojanja" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PomeriMedjustanicnoRastojanjeDoleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="PomeriMedjustanicnoRastojanjeDoleResult" nillable="true" type="q13:ArrayOfMedjustanicnoRastojanjeDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PomeriMedjustanicnoRastojanjeGore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idRelacije" type="xs:int" />
+        <xs:element minOccurs="0" name="idMedjustanicnogRastojanja" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PomeriMedjustanicnoRastojanjeGoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="PomeriMedjustanicnoRastojanjeGoreResult" nillable="true" type="q14:ArrayOfMedjustanicnoRastojanjeDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

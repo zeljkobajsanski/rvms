@@ -65,6 +65,7 @@
       <xs:element minOccurs="0" name="PolaznoStajaliste" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PolaznoStajalisteId" type="xs:int" />
       <xs:element minOccurs="0" name="Rastojanje" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rbr" type="xs:int" />
       <xs:element minOccurs="0" name="VremeVoznje" type="xs:int" />
       <xs:element minOccurs="0" name="VremeVoznjePoRelaciji" type="xs:int" />
     </xs:sequence>

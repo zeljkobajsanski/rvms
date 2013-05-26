@@ -282,6 +282,22 @@ namespace RVMS.Win.Views
                     }
                 }
             };
+            repositoryItemButtonEdit2.ButtonClick += (s, e) =>
+            {
+                var rastojanje =
+                    (MedjustanicnoRastojanjeDTO)gridView1.GetFocusedRow();
+                switch (e.Button.Kind)
+                {
+                    case ButtonPredefines.Up:
+                        m_ViewModel.PomeriMedjustanicnoRastojanjeGore(
+                            rastojanje);
+                        break;
+                    case ButtonPredefines.Down:
+                        m_ViewModel.PomeriMedjustanicnoRastojanjeDole(
+                            rastojanje);
+                        break;
+                }
+            };
         }
 
         private void IzmeniSelektovanoRastojanje()
@@ -291,7 +307,18 @@ namespace RVMS.Win.Views
             {
                 using (var d = new IzmenaRelacije(rastojanje.Id))
                 {
-                    d.ShowDialog(this);
+                    var r = d.ShowDialog(this);
+                    if (DialogResult.OK == r)
+                    {
+                        try
+                        {
+                            m_ViewModel.OsveziRelaciju();
+                        }
+                        catch (Exception exc)
+                        {
+                            OnNotify(new ErrorMessage(exc));
+                        }
+                    }
                 }
             }
         }

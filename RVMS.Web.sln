@@ -10,6 +10,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVMS.Win", "RVMS.Win\RVMS.W
 		{460CCCAC-8D9D-44FF-A28A-F5B2CBBA2214} = {460CCCAC-8D9D-44FF-A28A-F5B2CBBA2214}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{08CEE6A0-B501-4F85-B0AC-E49E7254DFAB}"
+	ProjectSection(SolutionItems) = preProject
+		Library\DevExpress\DevExpress.Data.v12.2.dll = Library\DevExpress\DevExpress.Data.v12.2.dll
+		Library\DevExpress\DevExpress.Printing.v12.2.Core.dll = Library\DevExpress\DevExpress.Printing.v12.2.Core.dll
+		Library\DevExpress\DevExpress.Utils.v12.2.dll = Library\DevExpress\DevExpress.Utils.v12.2.dll
+		Library\DevExpress\DevExpress.XtraBars.v12.2.dll = Library\DevExpress\DevExpress.XtraBars.v12.2.dll
+		Library\DevExpress\DevExpress.XtraEditors.v12.2.dll = Library\DevExpress\DevExpress.XtraEditors.v12.2.dll
+		Library\DevExpress\DevExpress.XtraGrid.v12.2.dll = Library\DevExpress\DevExpress.XtraGrid.v12.2.dll
+		Library\DevExpress\DevExpress.XtraLayout.v12.2.dll = Library\DevExpress\DevExpress.XtraLayout.v12.2.dll
+		Library\DevExpress\DevExpress.XtraNavBar.v12.2.dll = Library\DevExpress\DevExpress.XtraNavBar.v12.2.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

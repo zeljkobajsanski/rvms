@@ -48,8 +48,11 @@
                             var mPos = new google.maps.LatLng(item.LatitudaPolaznogStajalista, item.LongitudaPolaznogStajalista);
                             var marker = new google.maps.Marker({
                                 map: map,
-                                position: mPos
+                                position: mPos,
+                                draggable: true,
+                                idStajalista: item.PolaznoStajalisteId
                             });
+                            _dodeliDragListener(marker);
                             _dodeliInfo(marker, item.PolaznoStajaliste, item);
                             bounds = new google.maps.LatLngBounds(mPos, mPos);
                         }
@@ -58,8 +61,11 @@
                         mPos = new google.maps.LatLng(item.LatitudaDolaznogStajalista, item.LongitudaDolaznogStajalista);
                         marker = new google.maps.Marker({
                             map: map,
-                            position: mPos
+                            position: mPos,
+                            draggable: true,
+                            idStajalista: item.DolaznoStajalisteId
                         });
+                        _dodeliDragListener(marker);
                         _dodeliInfo(marker, item.DolaznoStajaliste, item);
                         if (bounds) {
                             bounds.extend(mPos);
@@ -76,24 +82,12 @@
                     map: map,
                     position: map.getCenter(),
                     title: naziv,
-                    draggable: true
+                    draggable: true,
+                    idStajalista: idStajalista
                 });
                 new google.maps.InfoWindow({content: naziv}).open(map, marker);
-                
-                google.maps.event.addListener(marker, 'dragend', function(e) {
-                    $.ajax({
-                        url: '/Stajalista/AzurirajKoordinatu',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({ Id: idStajalista, GpsLatituda: e.latLng.lat(), GpsLongituda: e.latLng.lng() }),
-                        success: function() {
-                            toastr.success('Podaci su uspešno sačuvani');
-                        },
-                        error: function () {
-                            toastr.error('Greška pri čuvanju podataka. Pokušajte ponovo');
-                        }
-                    });
-                });
+                _dodeliDragListener(marker);
+
             }
 
             function _dodeliInfo(marker, naziv, stajaliste) {
@@ -106,6 +100,23 @@
                         "</div>";
                     info.setContent(content);
                     info.open(map, marker);
+                });
+            }
+            
+            function _dodeliDragListener(marker) {
+                google.maps.event.addListener(marker, 'dragend', function (e) {
+                    $.ajax({
+                        url: '/Stajalista/AzurirajKoordinatu',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ Id: marker.idStajalista, GpsLatituda: e.latLng.lat(), GpsLongituda: e.latLng.lng() }),
+                        success: function () {
+                            toastr.success('Podaci su uspešno sačuvani');
+                        },
+                        error: function () {
+                            toastr.error('Greška pri čuvanju podataka. Pokušajte ponovo');
+                        }
+                    });
                 });
             }
         </script>

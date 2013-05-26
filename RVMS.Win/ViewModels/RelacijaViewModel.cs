@@ -447,5 +447,24 @@ namespace RVMS.Win.ViewModels
                 UcitajRelaciju(Relacija.IdRelacije);
             }
         }
+
+        public void PomeriMedjustanicnoRastojanjeGore(MedjustanicnoRastojanjeDTO rastojanje)
+        {
+            if (rastojanje.Rbr != 0)
+            {
+                using (var svc = new RvmsServiceClient())
+                {
+                    MedjustanicnaRastojanja = svc.PomeriMedjustanicnoRastojanjeGore(Relacija.IdRelacije, rastojanje.Id);
+                }
+            }
+        }
+
+        public void PomeriMedjustanicnoRastojanjeDole(MedjustanicnoRastojanjeDTO rastojanje)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                MedjustanicnaRastojanja = svc.PomeriMedjustanicnoRastojanjeDole(Relacija.IdRelacije, rastojanje.Id);
+            }
+        }
     }
 }

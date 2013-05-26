@@ -55,6 +55,7 @@ namespace RVMS.Web
                 Stanice = relacija.MedjustanicnaRastojanja.Select(x => new MedjustanicnoRastojanjeDTO()
                 {
                     Id = x.Id,
+                    Rbr = x.Rbr,
                     PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
                     PolaznoStajalisteId = x.PolaznoStajalisteId,
                     DolaznoStajalisteId = x.DolaznoStajalisteId,
@@ -65,7 +66,7 @@ namespace RVMS.Web
                     LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
                     LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
                     LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
-                }).OrderBy(x => x.Id).ToArray()
+                }).OrderBy(x => x.Rbr).ToArray()
             };
             IzracunajRelaciju(retVal.Stanice);
             return retVal;
@@ -96,6 +97,8 @@ namespace RVMS.Web
         public MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje)
         {
             var r = new MedjustanicnaRastojanjaRepository();
+            var broj = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Count();
+            rastojanje.Rbr = broj + 1;
             if (rastojanje.Id == 0)
             {
                 r.Add(rastojanje);
@@ -108,6 +111,7 @@ namespace RVMS.Web
             var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
+                Rbr = x.Rbr,
                 PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
                 PolaznoStajalisteId = x.PolaznoStajalisteId,
                 DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
@@ -118,7 +122,7 @@ namespace RVMS.Web
                 LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
                 LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
                 LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
-            }).OrderBy(x => x.Id).ToArray();
+            }).OrderBy(x => x.Rbr).ToArray();
             IzracunajRelaciju(retVal);
             return retVal;
         }
@@ -132,6 +136,7 @@ namespace RVMS.Web
             var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
+                Rbr = x.Rbr,
                 PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
                 PolaznoStajalisteId = x.PolaznoStajalisteId,
                 DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
@@ -142,7 +147,7 @@ namespace RVMS.Web
                 LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
                 LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
                 LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
-            }).OrderBy(x => x.Id).ToArray();
+            }).OrderBy(x => x.Rbr).ToArray();
             IzracunajRelaciju(retVal);
             return retVal;
         }
@@ -187,6 +192,76 @@ namespace RVMS.Web
         public MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id)
         {
             return new MedjustanicnaRastojanjaRepository().Get(id);
+        }
+
+        public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeGore(int idRelacije, int idMedjustanicnogRastojanja)
+        {
+            var r = new MedjustanicnaRastojanjaRepository();
+            var rastojanja = r.VratiMedjustanicnaRastojanja(idRelacije);
+            var msr = rastojanja.Single(x => x.Id == idMedjustanicnogRastojanja);
+            if (msr.Rbr > 0)
+            {
+                var rbr = msr.Rbr - 1;
+                var zameni = rastojanja.Where(x => x.Rbr == rbr);
+                foreach (var medjustanicnoRastojanje in zameni)
+                {
+                    medjustanicnoRastojanje.Rbr = msr.Rbr;
+                }
+                msr.Rbr = rbr;
+                r.Save();
+            }
+            var retVal = r.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
+            {
+                Id = x.Id,
+                Rbr = x.Rbr,
+                PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                PolaznoStajalisteId = x.PolaznoStajalisteId,
+                DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
+                DolaznoStajalisteId = x.DolaznoStajalisteId,
+                Rastojanje = x.Rastojanje,
+                VremeVoznje = x.VremeVoznje,
+                LatitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLatituda,
+                LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
+                LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
+                LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
+            }).OrderBy(x => x.Rbr).ToArray();
+            IzracunajRelaciju(retVal);
+            return retVal;
+        }
+
+        public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeDole(int idRelacije, int idMedjustanicnogRastojanja)
+        {
+            var r = new MedjustanicnaRastojanjaRepository();
+            var rastojanja = r.VratiMedjustanicnaRastojanja(idRelacije);
+            var msr = rastojanja.Single(x => x.Id == idMedjustanicnogRastojanja);
+            if (msr.Rbr < rastojanja.Count())
+            {
+                var rbr = msr.Rbr + 1;
+                var zameni = rastojanja.Where(x => x.Rbr == rbr);
+                foreach (var medjustanicnoRastojanje in zameni)
+                {
+                    medjustanicnoRastojanje.Rbr = msr.Rbr;
+                }
+                msr.Rbr = rbr;
+                r.Save();
+            }
+            var retVal = r.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
+            {
+                Id = x.Id,
+                Rbr = x.Rbr,
+                PolaznoStajaliste = x.PolaznoStajaliste.Naziv,
+                PolaznoStajalisteId = x.PolaznoStajalisteId,
+                DolaznoStajaliste = x.DolaznoStajaliste.Naziv,
+                DolaznoStajalisteId = x.DolaznoStajalisteId,
+                Rastojanje = x.Rastojanje,
+                VremeVoznje = x.VremeVoznje,
+                LatitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLatituda,
+                LongitudaPolaznogStajalista = x.PolaznoStajaliste.GpsLongituda,
+                LatitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLatituda,
+                LongitudaDolaznogStajalista = x.DolaznoStajaliste.GpsLongituda
+            }).OrderBy(x => x.Rbr).ToArray();
+            IzracunajRelaciju(retVal);
+            return retVal;
         }
 
         private static void IzracunajRelaciju(IEnumerable<MedjustanicnoRastojanjeDTO> rastojanja)

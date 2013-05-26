@@ -7,11 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using RVMS.Model.Entities;
+using RVMS.Win.RvmsServices;
 using RVMS.Win.ViewModels;
 
 namespace RVMS.Win.Dialogs
 {
-    public partial class IzmenaRelacije : DevExpress.XtraEditors.XtraForm
+    public partial class IzmenaRelacije : Dialog
     {
         private readonly IzmenaRelacijeViewModel m_ViewModel;
 
@@ -20,6 +21,25 @@ namespace RVMS.Win.Dialogs
             InitializeComponent();
             m_ViewModel = new IzmenaRelacijeViewModel();
             m_ViewModel.PropertyChanged += ViewModelOnPropertyChanged;
+            btnOk.Click += (s, e) => Ok();
+            btnCancel.Click += (s, e) => Close();
+        }
+
+        private void Ok()
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                try
+                {
+                    svc.SacuvajRastojanje(m_ViewModel.MedjustanicnoRastojanje);
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                catch (Exception exc)
+                {
+                    ShowError(exc);
+                }
+            }
         }
 
         public IzmenaRelacije(int idRelacije) : this()

@@ -45,5 +45,11 @@ namespace RVMS.Web
 
         [OperationContract]
         MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id);
+
+        [OperationContract]
+        MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeDole(int idRelacije, int idMedjustanicnogRastojanja);
+
+        [OperationContract]
+        MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeGore(int idRelacije, int idMedjustanicnogRastojanja);
     }
 }

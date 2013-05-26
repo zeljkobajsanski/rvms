@@ -3,6 +3,7 @@
     public class MedjustanicnoRastojanjeDTO
     {
         public int Id { get; set; }
+        public int Rbr { get; set; }
         public int PolaznoStajalisteId { get; set; }
         public string PolaznoStajaliste { get; set; }
         public int DolaznoStajalisteId { get; set; }

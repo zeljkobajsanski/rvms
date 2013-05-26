@@ -74,6 +74,18 @@
   <wsdl:message name="IRvmsService_VratiMedjustanicnoRastojanje_OutputMessage">
     <wsdl:part name="parameters" element="tns:VratiMedjustanicnoRastojanjeResponse" />
   </wsdl:message>
+  <wsdl:message name="IRvmsService_PomeriMedjustanicnoRastojanjeDole_InputMessage">
+    <wsdl:part name="parameters" element="tns:PomeriMedjustanicnoRastojanjeDole" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_PomeriMedjustanicnoRastojanjeDole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PomeriMedjustanicnoRastojanjeDoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_PomeriMedjustanicnoRastojanjeGore_InputMessage">
+    <wsdl:part name="parameters" element="tns:PomeriMedjustanicnoRastojanjeGore" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_PomeriMedjustanicnoRastojanjeGore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PomeriMedjustanicnoRastojanjeGoreResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRvmsService">
     <wsdl:operation name="VratiOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiOpstine" message="tns:IRvmsService_VratiOpstine_InputMessage" />
@@ -118,6 +130,14 @@
     <wsdl:operation name="VratiMedjustanicnoRastojanje">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanje" message="tns:IRvmsService_VratiMedjustanicnoRastojanje_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanjeResponse" message="tns:IRvmsService_VratiMedjustanicnoRastojanje_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PomeriMedjustanicnoRastojanjeDole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeDole" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeDole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeDoleResponse" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeDole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PomeriMedjustanicnoRastojanjeGore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGore" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeGore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGoreResponse" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeGore_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRvmsService" type="tns:IRvmsService">
@@ -214,6 +234,24 @@
     </wsdl:operation>
     <wsdl:operation name="VratiMedjustanicnoRastojanje">
       <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiMedjustanicnoRastojanje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PomeriMedjustanicnoRastojanjeDole">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeDole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PomeriMedjustanicnoRastojanjeGore">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

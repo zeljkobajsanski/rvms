@@ -48,6 +48,8 @@
             this.colVremeVoznjePoRelaciji = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.txtNazivRelacije = new DevExpress.XtraEditors.TextEdit();
             this.relacijaViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -85,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNazivRelacije.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVremeVoznje.Properties)).BeginInit();
@@ -154,7 +157,8 @@
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemSpinEdit1,
             this.repositoryItemSpinEdit2,
-            this.repositoryItemButtonEdit1});
+            this.repositoryItemButtonEdit1,
+            this.repositoryItemButtonEdit2});
             this.gridControl1.Size = new System.Drawing.Size(1000, 496);
             this.gridControl1.TabIndex = 12;
             this.gridControl1.TabStop = false;
@@ -175,7 +179,8 @@
             this.colDuzinaRelacije,
             this.colVremeVoznje,
             this.colVremeVoznjePoRelaciji,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowFooter = true;
@@ -190,8 +195,8 @@
             this.colPolaznoStajaliste.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "PolaznoStajaliste", "Dužina relacije: {0:n2} km")});
             this.colPolaznoStajaliste.Visible = true;
-            this.colPolaznoStajaliste.VisibleIndex = 0;
-            this.colPolaznoStajaliste.Width = 270;
+            this.colPolaznoStajaliste.VisibleIndex = 1;
+            this.colPolaznoStajaliste.Width = 248;
             // 
             // colDolaznoStajaliste
             // 
@@ -202,8 +207,8 @@
             this.colDolaznoStajaliste.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "DolaznoStajaliste", "Vreme vožnje: {0:n0} min")});
             this.colDolaznoStajaliste.Visible = true;
-            this.colDolaznoStajaliste.VisibleIndex = 1;
-            this.colDolaznoStajaliste.Width = 236;
+            this.colDolaznoStajaliste.VisibleIndex = 2;
+            this.colDolaznoStajaliste.Width = 222;
             // 
             // colRastojanje
             // 
@@ -215,7 +220,7 @@
             this.colRastojanje.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Rastojanje", "Vs: {0:n1} km/h")});
             this.colRastojanje.Visible = true;
-            this.colRastojanje.VisibleIndex = 2;
+            this.colRastojanje.VisibleIndex = 3;
             this.colRastojanje.Width = 84;
             // 
             // repositoryItemSpinEdit1
@@ -226,6 +231,7 @@
             this.repositoryItemSpinEdit1.Mask.EditMask = "n2";
             this.repositoryItemSpinEdit1.Mask.UseMaskAsDisplayFormat = true;
             this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
+            this.repositoryItemSpinEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
             // colDuzinaRelacije
             // 
@@ -236,7 +242,7 @@
             this.colDuzinaRelacije.OptionsColumn.AllowEdit = false;
             this.colDuzinaRelacije.OptionsColumn.FixedWidth = true;
             this.colDuzinaRelacije.Visible = true;
-            this.colDuzinaRelacije.VisibleIndex = 3;
+            this.colDuzinaRelacije.VisibleIndex = 4;
             this.colDuzinaRelacije.Width = 112;
             // 
             // colVremeVoznje
@@ -247,7 +253,7 @@
             this.colVremeVoznje.Name = "colVremeVoznje";
             this.colVremeVoznje.OptionsColumn.FixedWidth = true;
             this.colVremeVoznje.Visible = true;
-            this.colVremeVoznje.VisibleIndex = 4;
+            this.colVremeVoznje.VisibleIndex = 5;
             this.colVremeVoznje.Width = 118;
             // 
             // repositoryItemSpinEdit2
@@ -268,7 +274,7 @@
             this.colVremeVoznjePoRelaciji.OptionsColumn.AllowEdit = false;
             this.colVremeVoznjePoRelaciji.OptionsColumn.FixedWidth = true;
             this.colVremeVoznjePoRelaciji.Visible = true;
-            this.colVremeVoznjePoRelaciji.VisibleIndex = 5;
+            this.colVremeVoznjePoRelaciji.VisibleIndex = 6;
             this.colVremeVoznjePoRelaciji.Width = 110;
             // 
             // gridColumn1
@@ -280,7 +286,7 @@
             this.gridColumn1.OptionsColumn.ShowCaption = false;
             this.gridColumn1.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 6;
+            this.gridColumn1.VisibleIndex = 7;
             this.gridColumn1.Width = 52;
             // 
             // repositoryItemButtonEdit1
@@ -291,6 +297,26 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::RVMS.Win.Properties.Resources.gnome_edit_delete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.ColumnEdit = this.repositoryItemButtonEdit2;
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.FixedWidth = true;
+            this.gridColumn2.OptionsColumn.ShowCaption = false;
+            this.gridColumn2.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 0;
+            this.gridColumn2.Width = 36;
+            // 
+            // repositoryItemButtonEdit2
+            // 
+            this.repositoryItemButtonEdit2.AutoHeight = false;
+            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Up),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Down)});
+            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
             // 
             // txtNazivRelacije
             // 
@@ -657,6 +683,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNazivRelacije.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVremeVoznje.Properties)).EndInit();
@@ -735,5 +762,7 @@
         private DevExpress.XtraEditors.SimpleButton btnMapa;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
     }
 }

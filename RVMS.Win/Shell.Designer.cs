@@ -71,13 +71,13 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.iMesta = new DevExpress.XtraNavBar.NavBarItem();
+            this.iStajalista = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemDaljinar = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
-            this.iStajalista = new DevExpress.XtraNavBar.NavBarItem();
-            this.iMesta = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -527,9 +527,19 @@
             this.navBarGroup1.Expanded = true;
             this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.iMesta),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.iStajalista)
-            });
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iStajalista)});
             this.navBarGroup1.Name = "navBarGroup1";
+            // 
+            // iMesta
+            // 
+            this.iMesta.Caption = "Mesta";
+            this.iMesta.Name = "iMesta";
+            // 
+            // iStajalista
+            // 
+            this.iStajalista.Caption = "Stajališta";
+            this.iStajalista.Name = "iStajalista";
+            this.iStajalista.SmallImageIndex = 8;
             // 
             // navBarGroup2
             // 
@@ -561,17 +571,6 @@
             this.alertControl1.AutoFormDelay = 3000;
             this.alertControl1.FormLocation = DevExpress.XtraBars.Alerter.AlertFormLocation.TopRight;
             // 
-            // iStajalista
-            // 
-            this.iStajalista.Caption = "Stajališta";
-            this.iStajalista.Name = "iStajalista";
-            this.iStajalista.SmallImageIndex = 8;
-            // 
-            // iMesta
-            // 
-            this.iMesta.Caption = "Mesta";
-            this.iMesta.Name = "iMesta";
-            // 
             // Shell
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -588,6 +587,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Oktopod";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
