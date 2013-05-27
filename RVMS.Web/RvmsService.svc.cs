@@ -105,7 +105,11 @@ namespace RVMS.Web
             }
             else
             {
-                r.Update(rastojanje);
+                var msr = r.Get(rastojanje.Id);
+                msr.PolaznoStajalisteId = rastojanje.PolaznoStajalisteId;
+                msr.DolaznoStajalisteId = rastojanje.DolaznoStajalisteId;
+                msr.Rastojanje = rastojanje.Rastojanje;
+                msr.VremeVoznje = rastojanje.VremeVoznje;
             }
             r.Save();
             var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
