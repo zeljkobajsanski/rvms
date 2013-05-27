@@ -45,14 +45,6 @@
             this.iHelp = new DevExpress.XtraBars.BarButtonItem();
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
             this.siStatus = new DevExpress.XtraBars.BarStaticItem();
-            this.alignButtonGroup = new DevExpress.XtraBars.BarButtonGroup();
-            this.iBoldFontStyle = new DevExpress.XtraBars.BarButtonItem();
-            this.iItalicFontStyle = new DevExpress.XtraBars.BarButtonItem();
-            this.iUnderlinedFontStyle = new DevExpress.XtraBars.BarButtonItem();
-            this.fontStyleButtonGroup = new DevExpress.XtraBars.BarButtonGroup();
-            this.iLeftTextAlign = new DevExpress.XtraBars.BarButtonItem();
-            this.iCenterTextAlign = new DevExpress.XtraBars.BarButtonItem();
-            this.iRightTextAlign = new DevExpress.XtraBars.BarButtonItem();
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
@@ -60,9 +52,11 @@
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.skinsRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.exitRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
@@ -78,11 +72,15 @@
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
+            this.iUser = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -131,26 +129,22 @@
             this.iHelp,
             this.iAbout,
             this.siStatus,
-            this.alignButtonGroup,
-            this.iBoldFontStyle,
-            this.iItalicFontStyle,
-            this.iUnderlinedFontStyle,
-            this.fontStyleButtonGroup,
-            this.iLeftTextAlign,
-            this.iCenterTextAlign,
-            this.iRightTextAlign,
             this.rgbiSkins,
-            this.barEditItem1});
+            this.barEditItem1,
+            this.iUser,
+            this.barButtonItem1,
+            this.barButtonItem2});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 64;
+            this.ribbonControl.MaxItemId = 71;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage,
             this.helpRibbonPage});
             this.ribbonControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemMarqueeProgressBar1});
+            this.repositoryItemMarqueeProgressBar1,
+            this.repositoryItemHyperLinkEdit1});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl.Size = new System.Drawing.Size(1008, 145);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
@@ -244,6 +238,9 @@
             this.ribbonImageCollection.Images.SetKeyName(13, "Ribbon_AlignCenter_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(14, "Ribbon_AlignRight_16x16.png");
             this.ribbonImageCollection.Images.SetKeyName(15, "database_refresh (1).png");
+            this.ribbonImageCollection.Images.SetKeyName(16, "user.png");
+            this.ribbonImageCollection.Images.SetKeyName(17, "key2 (1).png");
+            this.ribbonImageCollection.Images.SetKeyName(18, "user (1).png");
             // 
             // iClose
             // 
@@ -294,66 +291,6 @@
             this.siStatus.Name = "siStatus";
             this.siStatus.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
-            // alignButtonGroup
-            // 
-            this.alignButtonGroup.Caption = "Align Commands";
-            this.alignButtonGroup.Id = 52;
-            this.alignButtonGroup.ItemLinks.Add(this.iBoldFontStyle);
-            this.alignButtonGroup.ItemLinks.Add(this.iItalicFontStyle);
-            this.alignButtonGroup.ItemLinks.Add(this.iUnderlinedFontStyle);
-            this.alignButtonGroup.Name = "alignButtonGroup";
-            // 
-            // iBoldFontStyle
-            // 
-            this.iBoldFontStyle.Caption = "Bold";
-            this.iBoldFontStyle.Id = 53;
-            this.iBoldFontStyle.ImageIndex = 9;
-            this.iBoldFontStyle.Name = "iBoldFontStyle";
-            // 
-            // iItalicFontStyle
-            // 
-            this.iItalicFontStyle.Caption = "Italic";
-            this.iItalicFontStyle.Id = 54;
-            this.iItalicFontStyle.ImageIndex = 10;
-            this.iItalicFontStyle.Name = "iItalicFontStyle";
-            // 
-            // iUnderlinedFontStyle
-            // 
-            this.iUnderlinedFontStyle.Caption = "Underlined";
-            this.iUnderlinedFontStyle.Id = 55;
-            this.iUnderlinedFontStyle.ImageIndex = 11;
-            this.iUnderlinedFontStyle.Name = "iUnderlinedFontStyle";
-            // 
-            // fontStyleButtonGroup
-            // 
-            this.fontStyleButtonGroup.Caption = "Font Style";
-            this.fontStyleButtonGroup.Id = 56;
-            this.fontStyleButtonGroup.ItemLinks.Add(this.iLeftTextAlign);
-            this.fontStyleButtonGroup.ItemLinks.Add(this.iCenterTextAlign);
-            this.fontStyleButtonGroup.ItemLinks.Add(this.iRightTextAlign);
-            this.fontStyleButtonGroup.Name = "fontStyleButtonGroup";
-            // 
-            // iLeftTextAlign
-            // 
-            this.iLeftTextAlign.Caption = "Left";
-            this.iLeftTextAlign.Id = 57;
-            this.iLeftTextAlign.ImageIndex = 12;
-            this.iLeftTextAlign.Name = "iLeftTextAlign";
-            // 
-            // iCenterTextAlign
-            // 
-            this.iCenterTextAlign.Caption = "Center";
-            this.iCenterTextAlign.Id = 58;
-            this.iCenterTextAlign.ImageIndex = 13;
-            this.iCenterTextAlign.Name = "iCenterTextAlign";
-            // 
-            // iRightTextAlign
-            // 
-            this.iRightTextAlign.Caption = "Right";
-            this.iRightTextAlign.Id = 59;
-            this.iRightTextAlign.ImageIndex = 14;
-            this.iRightTextAlign.Name = "iRightTextAlign";
-            // 
             // rgbiSkins
             // 
             this.rgbiSkins.Caption = "Skins";
@@ -399,12 +336,14 @@
             this.ribbonImageCollectionLarge.Images.SetKeyName(7, "Ribbon_Content_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(8, "Ribbon_Info_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(9, "database_refresh.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(10, "user (1).png");
             // 
             // homeRibbonPage
             // 
             this.homeRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.fileRibbonPageGroup,
             this.skinsRibbonPageGroup,
+            this.ribbonPageGroup1,
             this.exitRibbonPageGroup});
             this.homeRibbonPage.Name = "homeRibbonPage";
             this.homeRibbonPage.Text = "Home";
@@ -427,6 +366,11 @@
             this.skinsRibbonPageGroup.ShowCaptionButton = false;
             this.skinsRibbonPageGroup.Text = "Skins";
             // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.iUser);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            // 
             // exitRibbonPageGroup
             // 
             this.exitRibbonPageGroup.ItemLinks.Add(this.iExit);
@@ -446,6 +390,11 @@
             this.helpRibbonPageGroup.ItemLinks.Add(this.iAbout);
             this.helpRibbonPageGroup.Name = "helpRibbonPageGroup";
             this.helpRibbonPageGroup.Text = "Help";
+            // 
+            // repositoryItemHyperLinkEdit1
+            // 
+            this.repositoryItemHyperLinkEdit1.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             // 
             // ribbonStatusBar
             // 
@@ -571,6 +520,31 @@
             this.alertControl1.AutoFormDelay = 3000;
             this.alertControl1.FormLocation = DevExpress.XtraBars.Alerter.AlertFormLocation.TopRight;
             // 
+            // iUser
+            // 
+            this.iUser.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Left;
+            this.iUser.Caption = "barSubItem1";
+            this.iUser.Id = 68;
+            this.iUser.LargeImageIndex = 10;
+            this.iUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
+            this.iUser.Name = "iUser";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Moj nalog";
+            this.barButtonItem1.Id = 69;
+            this.barButtonItem1.ImageIndex = 18;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Promena lozinke";
+            this.barButtonItem2.Id = 70;
+            this.barButtonItem2.ImageIndex = 17;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
             // Shell
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -593,6 +567,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMarqueeProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
@@ -616,14 +591,6 @@
         private DevExpress.XtraBars.BarButtonItem iHelp;
         private DevExpress.XtraBars.BarButtonItem iAbout;
         private DevExpress.XtraBars.BarStaticItem siStatus;
-        private DevExpress.XtraBars.BarButtonGroup alignButtonGroup;
-        private DevExpress.XtraBars.BarButtonItem iBoldFontStyle;
-        private DevExpress.XtraBars.BarButtonItem iItalicFontStyle;
-        private DevExpress.XtraBars.BarButtonItem iUnderlinedFontStyle;
-        private DevExpress.XtraBars.BarButtonGroup fontStyleButtonGroup;
-        private DevExpress.XtraBars.BarButtonItem iLeftTextAlign;
-        private DevExpress.XtraBars.BarButtonItem iCenterTextAlign;
-        private DevExpress.XtraBars.BarButtonItem iRightTextAlign;
         private DevExpress.XtraBars.RibbonGalleryBarItem rgbiSkins;
         private DevExpress.XtraBars.Ribbon.RibbonPage homeRibbonPage;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup fileRibbonPageGroup;
@@ -653,6 +620,11 @@
         private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
         private DevExpress.XtraNavBar.NavBarItem iStajalista;
         private DevExpress.XtraNavBar.NavBarItem iMesta;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.BarSubItem iUser;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
 
     }
 }

@@ -47,6 +47,7 @@ namespace RVMS.Win
                 var result = login.ShowDialog(this);
                 if (DialogResult.OK != result) Application.Exit();
                 WindowState = FormWindowState.Maximized;
+                iUser.Caption = ApplicationContext.Current.ImeIPrezime;
             }
         }
 
