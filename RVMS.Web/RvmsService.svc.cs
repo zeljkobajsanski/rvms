@@ -94,6 +94,17 @@ namespace RVMS.Web
             throw new InvalidOperationException("Podaci nisu validni");
         }
 
+        public void ObrisiRelaciju(int idRelacije)
+        {
+            var repo = new RelacijeRepository();
+            var relacija = repo.Get(idRelacije);
+            if (relacija != null)
+            {
+                relacija.Aktivan = false;
+                repo.Save();
+            }
+        }
+
         public MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje)
         {
             var r = new MedjustanicnaRastojanjaRepository();

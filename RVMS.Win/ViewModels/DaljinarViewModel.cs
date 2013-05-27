@@ -1,19 +1,21 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using RVMS.Model.DTO;
 using RVMS.Win.RvmsServices;
+using System.Linq;
 
 namespace RVMS.Win.ViewModels
 {
     public class DaljinarViewModel : ViewModel
     {
-        private RelacijaDTO[] m_Daljinar;
+        private List<RelacijaDTO> m_Daljinar;
 
         public DaljinarViewModel()
         {
-            Daljinar = new RelacijaDTO[0];
+            Daljinar = new List<RelacijaDTO>();
         }
         
-        public RelacijaDTO[] Daljinar
+        public List<RelacijaDTO> Daljinar
         {
             get { return m_Daljinar; }
             set
@@ -36,9 +38,17 @@ namespace RVMS.Win.ViewModels
                 {
                     IsBusy = false;
                     HandleError(e);
-                    Daljinar = e.Result;
+                    Daljinar = e.Result.ToList();
                 };
                 svc.VratiDaljinarAsync();
+            }
+        }
+
+        public void ObrisiRelaciju(int id)
+        {
+            using (var svc = new RvmsServiceClient())
+            {
+                svc.ObrisiRelaciju(id);
             }
         }
     }

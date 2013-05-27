@@ -68,6 +68,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObrisiRelaciju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idRelacije" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObrisiRelacijuResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SacuvajRastojanje">
     <xs:complexType>
       <xs:sequence>

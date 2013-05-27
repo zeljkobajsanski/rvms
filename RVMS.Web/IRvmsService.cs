@@ -29,6 +29,9 @@ namespace RVMS.Web
         int SacuvajRelaciju(Relacija relacija);
 
         [OperationContract]
+        void ObrisiRelaciju(int idRelacije);
+
+        [OperationContract]
         MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje);
 
         [OperationContract]

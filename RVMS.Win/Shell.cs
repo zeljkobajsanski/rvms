@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -14,6 +15,8 @@ using DevExpress.Skins;
 using DevExpress.LookAndFeel;
 using DevExpress.UserSkins;
 using DevExpress.XtraEditors;
+using Korisnici.ClientLibrary;
+using RVMS.Win.Dialogs;
 using RVMS.Win.Messages;
 using RVMS.Win.Views;
 
@@ -31,6 +34,25 @@ namespace RVMS.Win
             navBarItemDaljinar.LinkClicked += (s, e) => AddDocumentDaljinar();
             iStajalista.LinkClicked += (s, e) => AddDocumentStajalista();
             repositoryItemMarqueeProgressBar1.Stopped = true;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                siStatus.Caption = "Build: " + ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            }
+            using (var login = new Login())
+            {
+                var result = login.ShowDialog(this);
+                if (DialogResult.OK != result) Application.Exit();
+                WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            new Account(ApplicationContext.Current.LoginService).Logout(ApplicationContext.Current.LogId);
         }
 
         private void AddDocumentStajalista()
@@ -90,7 +112,7 @@ namespace RVMS.Win
             {
                 if (Pitaj("Da li želite da napustite aplikaciju?"))
                 {
-                    Application.Exit();
+                    Close();
                 }
             };
         }

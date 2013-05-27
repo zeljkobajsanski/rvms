@@ -55,6 +55,14 @@ namespace RVMS.Win.RvmsServices {
         
         int EndSacuvajRelaciju(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/ObrisiRelaciju", ReplyAction="http://tempuri.org/IRvmsService/ObrisiRelacijuResponse")]
+        void ObrisiRelaciju(int idRelacije);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/ObrisiRelaciju", ReplyAction="http://tempuri.org/IRvmsService/ObrisiRelacijuResponse")]
+        System.IAsyncResult BeginObrisiRelaciju(int idRelacije, System.AsyncCallback callback, object asyncState);
+        
+        void EndObrisiRelaciju(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/SacuvajRastojanje", ReplyAction="http://tempuri.org/IRvmsService/SacuvajRastojanjeResponse")]
         RVMS.Model.DTO.MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(RVMS.Model.Entities.MedjustanicnoRastojanje rastojanje);
         
@@ -405,6 +413,12 @@ namespace RVMS.Win.RvmsServices {
         
         private System.Threading.SendOrPostCallback onSacuvajRelacijuCompletedDelegate;
         
+        private BeginOperationDelegate onBeginObrisiRelacijuDelegate;
+        
+        private EndOperationDelegate onEndObrisiRelacijuDelegate;
+        
+        private System.Threading.SendOrPostCallback onObrisiRelacijuCompletedDelegate;
+        
         private BeginOperationDelegate onBeginSacuvajRastojanjeDelegate;
         
         private EndOperationDelegate onEndSacuvajRastojanjeDelegate;
@@ -481,6 +495,8 @@ namespace RVMS.Win.RvmsServices {
         public event System.EventHandler<VratiRelacijuSaRastojanjimaCompletedEventArgs> VratiRelacijuSaRastojanjimaCompleted;
         
         public event System.EventHandler<SacuvajRelacijuCompletedEventArgs> SacuvajRelacijuCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ObrisiRelacijuCompleted;
         
         public event System.EventHandler<SacuvajRastojanjeCompletedEventArgs> SacuvajRastojanjeCompleted;
         
@@ -742,6 +758,55 @@ namespace RVMS.Win.RvmsServices {
             }
             base.InvokeAsync(this.onBeginSacuvajRelacijuDelegate, new object[] {
                         relacija}, this.onEndSacuvajRelacijuDelegate, this.onSacuvajRelacijuCompletedDelegate, userState);
+        }
+        
+        public void ObrisiRelaciju(int idRelacije) {
+            base.Channel.ObrisiRelaciju(idRelacije);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginObrisiRelaciju(int idRelacije, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginObrisiRelaciju(idRelacije, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndObrisiRelaciju(System.IAsyncResult result) {
+            base.Channel.EndObrisiRelaciju(result);
+        }
+        
+        private System.IAsyncResult OnBeginObrisiRelaciju(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idRelacije = ((int)(inValues[0]));
+            return this.BeginObrisiRelaciju(idRelacije, callback, asyncState);
+        }
+        
+        private object[] OnEndObrisiRelaciju(System.IAsyncResult result) {
+            this.EndObrisiRelaciju(result);
+            return null;
+        }
+        
+        private void OnObrisiRelacijuCompleted(object state) {
+            if ((this.ObrisiRelacijuCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ObrisiRelacijuCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ObrisiRelacijuAsync(int idRelacije) {
+            this.ObrisiRelacijuAsync(idRelacije, null);
+        }
+        
+        public void ObrisiRelacijuAsync(int idRelacije, object userState) {
+            if ((this.onBeginObrisiRelacijuDelegate == null)) {
+                this.onBeginObrisiRelacijuDelegate = new BeginOperationDelegate(this.OnBeginObrisiRelaciju);
+            }
+            if ((this.onEndObrisiRelacijuDelegate == null)) {
+                this.onEndObrisiRelacijuDelegate = new EndOperationDelegate(this.OnEndObrisiRelaciju);
+            }
+            if ((this.onObrisiRelacijuCompletedDelegate == null)) {
+                this.onObrisiRelacijuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnObrisiRelacijuCompleted);
+            }
+            base.InvokeAsync(this.onBeginObrisiRelacijuDelegate, new object[] {
+                        idRelacije}, this.onEndObrisiRelacijuDelegate, this.onObrisiRelacijuCompletedDelegate, userState);
         }
         
         public RVMS.Model.DTO.MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(RVMS.Model.Entities.MedjustanicnoRastojanje rastojanje) {

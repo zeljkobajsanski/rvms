@@ -24,9 +24,12 @@ namespace RVMS.Win.Views
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
                 if (e.Button.Index == 0) Izmeni();
+                else if (e.Button.Index == 1) Obrisi();
             };
             m_ViewModel.PropertyChanged += ViewModelPropertyChanged;
         }
+
+        
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -46,6 +49,28 @@ namespace RVMS.Win.Views
             if (relacija != null)
             {
                 OnRequestView(Views.ViewRelacije, relacija.Id);
+            }
+        }
+
+        private void Obrisi()
+        {
+            var relacija = IzabranaRelacija();
+            if (relacija != null)
+            {
+                var q = new QuestionMessage("Da li želite da obrišete relaciju?");
+                OnNotify(q);
+                if (q.Confirm)
+                {
+                    try
+                    {
+                        m_ViewModel.ObrisiRelaciju(relacija.Id);
+                        relacijaDTOBindingSource.ResetBindings(true);
+                    }
+                    catch (Exception exc)
+                    {
+                        OnNotify(new ErrorMessage(exc));
+                    }
+                }
             }
         }
 
@@ -69,6 +94,11 @@ namespace RVMS.Win.Views
             {
                 OnNotify(new ErrorMessage(exc));
             }
+        }
+
+        public override void NoviUnos()
+        {
+            OnRequestView("Relacija", null);
         }
     }
 }
