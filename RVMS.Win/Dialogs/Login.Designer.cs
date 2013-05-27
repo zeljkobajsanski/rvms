@@ -43,6 +43,8 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.hyperLinkEdit1 = new DevExpress.XtraEditors.HyperLinkEdit();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.loginViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -55,11 +57,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.hyperLinkEdit1);
             this.layoutControl1.Controls.Add(this.labelControl1);
             this.layoutControl1.Controls.Add(this.simpleButton2);
             this.layoutControl1.Controls.Add(this.simpleButton1);
@@ -69,7 +74,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(284, 118);
+            this.layoutControl1.Size = new System.Drawing.Size(284, 136);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -78,7 +83,7 @@
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Red;
             this.labelControl1.AutoEllipsis = true;
             this.labelControl1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.loginViewModelBindingSource, "Message", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.labelControl1.Location = new System.Drawing.Point(12, 86);
+            this.labelControl1.Location = new System.Drawing.Point(12, 108);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(260, 13);
             this.labelControl1.StyleController = this.layoutControl1;
@@ -133,10 +138,11 @@
             this.layoutControlItem2,
             this.layoutControlItem3,
             this.layoutControlItem4,
-            this.layoutControlItem5});
+            this.layoutControlItem5,
+            this.layoutControlItem6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(284, 118);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(284, 136);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -188,9 +194,9 @@
             // 
             this.layoutControlItem5.Control = this.labelControl1;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 74);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(264, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(264, 20);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -201,6 +207,30 @@
             this.dxErrorProvider1.ContainerControl = this;
             this.dxErrorProvider1.DataSource = this.loginViewModelBindingSource;
             // 
+            // hyperLinkEdit1
+            // 
+            this.hyperLinkEdit1.EditValue = "Zaboravljena lozinka?";
+            this.hyperLinkEdit1.Location = new System.Drawing.Point(12, 86);
+            this.hyperLinkEdit1.Name = "hyperLinkEdit1";
+            this.hyperLinkEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.hyperLinkEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.hyperLinkEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.hyperLinkEdit1.Size = new System.Drawing.Size(260, 18);
+            this.hyperLinkEdit1.StyleController = this.layoutControl1;
+            this.hyperLinkEdit1.TabIndex = 9;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.hyperLinkEdit1;
+            this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 74);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(264, 22);
+            this.layoutControlItem6.Text = "layoutControlItem6";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextToControlDistance = 0;
+            this.layoutControlItem6.TextVisible = false;
+            // 
             // loginViewModelBindingSource
             // 
             this.loginViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.LoginViewModel);
@@ -210,7 +240,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.simpleButton2;
-            this.ClientSize = new System.Drawing.Size(284, 118);
+            this.ClientSize = new System.Drawing.Size(284, 136);
             this.Controls.Add(this.layoutControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -230,6 +260,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -251,5 +283,7 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
     }
 }
