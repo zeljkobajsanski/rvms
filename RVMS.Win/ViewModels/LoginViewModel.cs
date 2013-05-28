@@ -87,5 +87,24 @@ namespace RVMS.Win.ViewModels
                 return false;
             }
         }
+
+        public void ResetujLozinku()
+        {
+            if (string.IsNullOrEmpty(KorisnickoIme))
+            {
+                Message = "Unesite Vaše korisničko ime";
+                return;
+            }
+            try
+            {
+                var account = new Account(ApplicationContext.Current.LoginService);
+                var ok = account.ResetPassword(KorisnickoIme, "rvms");
+                Message = ok ? "Nova lozinka je poslata na Vaš e-mail." : "Neuspešan reset lozinke";
+            }
+            catch (Exception exc)
+            {
+                Message = "Greška prilikom reseta lozinke";
+            }
+        }
     }
 }

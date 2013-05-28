@@ -38,6 +38,7 @@ namespace RVMS.Win.Dialogs
                                              Prijavi();
                                          }
                                      };
+            hyperLinkEdit1.Click += (s, e) => fViewModel.ResetujLozinku();
         }
 
         private void Prijavi()
