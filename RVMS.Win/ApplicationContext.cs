@@ -12,6 +12,8 @@ namespace RVMS.Win
 
         public int LogId { get; set; }
 
+        public int IdKorisnika { get; set; }
+
         public string KorisnickoIme { get; set; }
 
         public string ImeIPrezime { get; set; }

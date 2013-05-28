@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Shell));
-            this.navbarImageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.navbarImageList = new System.Windows.Forms.ImageList(this.components);
+            this.navbarImageListLarge = new System.Windows.Forms.ImageList();
+            this.navbarImageList = new System.Windows.Forms.ImageList();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
+            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu();
             this.iNew = new DevExpress.XtraBars.BarButtonItem();
             this.iOpen = new DevExpress.XtraBars.BarButtonItem();
             this.iSave = new DevExpress.XtraBars.BarButtonItem();
             this.iRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonImageCollection = new DevExpress.Utils.ImageCollection(this.components);
+            this.ribbonImageCollection = new DevExpress.Utils.ImageCollection();
             this.iClose = new DevExpress.XtraBars.BarButtonItem();
             this.iFind = new DevExpress.XtraBars.BarButtonItem();
             this.iHelp = new DevExpress.XtraBars.BarButtonItem();
@@ -48,19 +47,21 @@
             this.rgbiSkins = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemMarqueeProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemMarqueeProgressBar();
-            this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
+            this.iUser = new DevExpress.XtraBars.BarSubItem();
+            this.iMojNalog = new DevExpress.XtraBars.BarButtonItem();
+            this.iPassword = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection();
             this.homeRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.fileRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.skinsRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.exitRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.helpRibbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.helpRibbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
-            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
@@ -70,11 +71,8 @@
             this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemDaljinar = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
-            this.iUser = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -132,11 +130,11 @@
             this.rgbiSkins,
             this.barEditItem1,
             this.iUser,
-            this.barButtonItem1,
-            this.barButtonItem2});
+            this.iMojNalog,
+            this.iPassword});
             this.ribbonControl.LargeImages = this.ribbonImageCollectionLarge;
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 71;
+            this.ribbonControl.MaxItemId = 74;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.iAbout);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -286,6 +284,7 @@
             // 
             // siStatus
             // 
+            this.siStatus.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
             this.siStatus.Caption = "Oktopod Alpha";
             this.siStatus.Id = 31;
             this.siStatus.Name = "siStatus";
@@ -322,6 +321,31 @@
             this.repositoryItemMarqueeProgressBar1.Name = "repositoryItemMarqueeProgressBar1";
             this.repositoryItemMarqueeProgressBar1.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid;
             // 
+            // iUser
+            // 
+            this.iUser.Caption = "Anonymus";
+            this.iUser.Id = 71;
+            this.iUser.ImageIndex = 16;
+            this.iUser.LargeImageIndex = 10;
+            this.iUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.iMojNalog),
+            new DevExpress.XtraBars.LinkPersistInfo(this.iPassword)});
+            this.iUser.Name = "iUser";
+            // 
+            // iMojNalog
+            // 
+            this.iMojNalog.Caption = "Moj nalog";
+            this.iMojNalog.Id = 72;
+            this.iMojNalog.ImageIndex = 16;
+            this.iMojNalog.Name = "iMojNalog";
+            // 
+            // iPassword
+            // 
+            this.iPassword.Caption = "Promena lozinke";
+            this.iPassword.Id = 73;
+            this.iPassword.ImageIndex = 17;
+            this.iPassword.Name = "iPassword";
+            // 
             // ribbonImageCollectionLarge
             // 
             this.ribbonImageCollectionLarge.ImageSize = new System.Drawing.Size(32, 32);
@@ -343,7 +367,6 @@
             this.homeRibbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.fileRibbonPageGroup,
             this.skinsRibbonPageGroup,
-            this.ribbonPageGroup1,
             this.exitRibbonPageGroup});
             this.homeRibbonPage.Name = "homeRibbonPage";
             this.homeRibbonPage.Text = "Home";
@@ -365,11 +388,6 @@
             this.skinsRibbonPageGroup.Name = "skinsRibbonPageGroup";
             this.skinsRibbonPageGroup.ShowCaptionButton = false;
             this.skinsRibbonPageGroup.Text = "Skins";
-            // 
-            // ribbonPageGroup1
-            // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.iUser);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // exitRibbonPageGroup
             // 
@@ -398,8 +416,9 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
+            this.ribbonStatusBar.ItemLinks.Add(this.iUser);
             this.ribbonStatusBar.ItemLinks.Add(this.barEditItem1, true);
+            this.ribbonStatusBar.ItemLinks.Add(this.siStatus);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 735);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
@@ -520,31 +539,6 @@
             this.alertControl1.AutoFormDelay = 3000;
             this.alertControl1.FormLocation = DevExpress.XtraBars.Alerter.AlertFormLocation.TopRight;
             // 
-            // iUser
-            // 
-            this.iUser.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Left;
-            this.iUser.Caption = "barSubItem1";
-            this.iUser.Id = 68;
-            this.iUser.LargeImageIndex = 10;
-            this.iUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
-            this.iUser.Name = "iUser";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "Moj nalog";
-            this.barButtonItem1.Id = 69;
-            this.barButtonItem1.ImageIndex = 18;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Promena lozinke";
-            this.barButtonItem2.Id = 70;
-            this.barButtonItem2.ImageIndex = 17;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
             // Shell
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -621,10 +615,9 @@
         private DevExpress.XtraNavBar.NavBarItem iStajalista;
         private DevExpress.XtraNavBar.NavBarItem iMesta;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarSubItem iUser;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem iMojNalog;
+        private DevExpress.XtraBars.BarButtonItem iPassword;
 
     }
 }

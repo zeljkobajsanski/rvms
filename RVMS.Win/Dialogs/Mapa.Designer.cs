@@ -1,4 +1,4 @@
-﻿namespace RVMS.Win.Views
+namespace RVMS.Win.Dialogs
 {
     partial class Mapa
     {

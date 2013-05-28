@@ -116,6 +116,22 @@ namespace RVMS.Win
                     Close();
                 }
             };
+            iMojNalog.ItemClick += (s, e) =>
+            {
+                var view = new ViewKorisnickiNalog();
+                view.PropertyChanged += ViewPropertyChanged;
+                view.Notify += OnNotify;
+                var doc = documentManager1.View.Controller.AddDocument(view);
+                doc.Caption = "Korisnički nalog";
+            };
+            iPassword.ItemClick += (s, e) =>
+            {
+                var view = new ViewPromenaLozinke();
+                view.PropertyChanged += ViewPropertyChanged;
+                view.Notify += OnNotify;
+                var doc = documentManager1.View.Controller.AddDocument(view);
+                doc.Caption = "Promena lozinke";
+            };
         }
 
         void InitSkinGallery()

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RVMS.Model.DTO;
+using RVMS.Win.Dialogs;
 using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
 using Message = RVMS.Win.Messages.Message;

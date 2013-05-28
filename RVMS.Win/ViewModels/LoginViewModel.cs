@@ -72,8 +72,9 @@ namespace RVMS.Win.ViewModels
                 if (loginInfo.Status == "Ok")
                 {
                     ApplicationContext.Current.LogId = loginInfo.LogId;
+                    ApplicationContext.Current.IdKorisnika = loginInfo.UserId;
                     ApplicationContext.Current.KorisnickoIme = loginInfo.Username;
-                    ApplicationContext.Current.ImeIPrezime = loginInfo.FirstName + " " + loginInfo.LastName;
+                    ApplicationContext.Current.ImeIPrezime = loginInfo.Name;
                     return true;
                 }
 
