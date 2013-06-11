@@ -132,6 +132,13 @@ namespace RVMS.Win
                 var doc = documentManager1.View.Controller.AddDocument(view);
                 doc.Caption = "Promena lozinke";
             };
+            iOpen.ItemClick += (s, e) =>
+                                   {
+                                       var active = documentManager1.View.ActiveDocument;
+                                       if (active == null) return;
+                                       var view = (ViewBase) active.Control;
+                                       view.Otvori();
+                                   };
         }
 
         void InitSkinGallery()

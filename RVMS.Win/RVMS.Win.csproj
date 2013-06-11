@@ -35,7 +35,7 @@
     <SuiteName>Oktopod</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>oktopod.html</WebPage>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>26</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -49,6 +49,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,6 +58,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>eye.ico</ApplicationIcon>
@@ -275,6 +277,7 @@
     <None Include="Properties\DataSources\RVMS.Model.Entities.Stajaliste.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.Relacija.datasource" />
+    <None Include="Properties\DataSources\RVMS.Win.ViewModels.DaljinarViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.LoginViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.PromenaLozinkeViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.RelacijaViewModel.datasource" />
@@ -402,6 +405,25 @@
     <None Include="Resources\earth.png" />
     <None Include="Resources\isync.png" />
     <None Include="Resources\16_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

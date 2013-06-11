@@ -21,6 +21,8 @@ namespace RVMS.Win.ViewModels
         private StajalisteDTO[] m_DolaznaStajalista;
         private StajalisteDTO[] m_PolaznaStajalista;
         private Opstina[] m_Opstine;
+        private string fNapomena;
+        private string fPoslednjaOpstina;
 
         public RelacijaViewModel()
         {
@@ -42,6 +44,17 @@ namespace RVMS.Win.ViewModels
                 if (NazivRelacije == value) return;
                 fNazivRelacije = value;
                 OnPropertyChanged("NazivRelacije");
+            }
+        }
+
+        public string Napomena
+        {
+            get { return fNapomena; }
+            set
+            {
+                if (value == fNapomena) return;
+                fNapomena = value;
+                OnPropertyChanged("Napomena");
             }
         }
 
@@ -90,6 +103,7 @@ namespace RVMS.Win.ViewModels
                 if (IdPolaznogStajalista == value) return;
                 m_IdPolaznogStajalista = value;
                 OnPropertyChanged("IdPolaznogStajalista");
+                IzaberiPoslednjuOpstinu();
             }
         }
 
@@ -124,6 +138,19 @@ namespace RVMS.Win.ViewModels
                 }
                 m_IdDolaznogStajalista = value;
                 OnPropertyChanged("IdDolaznogStajalista");
+            }
+        }
+
+        private void IzaberiPoslednjuOpstinu()
+        {
+            if (IdPolaznogStajalista != null)
+            {
+                var stajaliste = PolaznaStajalista.SingleOrDefault(x => x.Id == IdPolaznogStajalista);
+                PoslednjaOpstina = stajaliste != null ? stajaliste.Opstina : null;
+            }
+            else
+            {
+                PoslednjaOpstina = null;
             }
         }
 
@@ -183,6 +210,7 @@ namespace RVMS.Win.ViewModels
                 if (Relacija != null)
                 {
                     NazivRelacije = Relacija.NazivRelacije;
+                    Napomena = Relacija.Napomena;
                 }
                 OnPropertyChanged("Relacija");
             }
@@ -235,6 +263,17 @@ namespace RVMS.Win.ViewModels
             {
                 if (UkupnoVremeVoznje == 0) return 0;
                 return UkupnaDuzinaRelacije/(((decimal)UkupnoVremeVoznje)/60);
+            }
+        }
+
+        public string PoslednjaOpstina
+        {
+            get { return fPoslednjaOpstina; }
+            set
+            {
+                if (value == fPoslednjaOpstina) return;
+                fPoslednjaOpstina = value;
+                OnPropertyChanged("PoslednjaOpstina");
             }
         }
 
@@ -340,7 +379,8 @@ namespace RVMS.Win.ViewModels
                 {
                     Id = Relacija.IdRelacije,
                     Naziv = NazivRelacije,
-                    Aktivan = true
+                    Aktivan = true,
+                    Napomena = Napomena
                 });
                 Relacija.IdRelacije = id;
             }

@@ -2179,4 +2179,5 @@ INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2274
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2275, N'Lapušnik', 58, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2276, N'Orlate', 58, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2277, N'Vraćevšnica', 62, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2278, N'Besni Fok', 27, 1)
 SET IDENTITY_INSERT [dbo].[Mestoes] OFF

@@ -74,5 +74,7 @@ namespace RVMS.Win.Views
         public virtual void Sacuvaj() {}
 
         public virtual void NoviUnos() {}
+
+        public virtual void Otvori() {}
     }
 }

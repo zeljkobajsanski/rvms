@@ -33,7 +33,11 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewRelacija));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.relacijaViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
             this.btnMapa = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.medjustanicnoRastojanjeDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -51,7 +55,6 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.txtNazivRelacije = new DevExpress.XtraEditors.TextEdit();
-            this.relacijaViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.txtVremeVoznje = new DevExpress.XtraEditors.TextEdit();
             this.txtRazdaljina = new DevExpress.XtraEditors.TextEdit();
@@ -72,15 +75,26 @@
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.medjustanicnoRastojanjeDTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -89,7 +103,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNazivRelacije.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVremeVoznje.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRazdaljina.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dolaznoStajaliste.Properties)).BeginInit();
@@ -109,17 +122,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
+            this.dockPanel1.SuspendLayout();
+            this.dockPanel1_Container.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.textEdit1);
+            this.layoutControl1.Controls.Add(this.memoEdit1);
             this.layoutControl1.Controls.Add(this.btnMapa);
             this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Controls.Add(this.txtNazivRelacije);
@@ -134,16 +156,45 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1024, 768);
+            this.layoutControl1.Size = new System.Drawing.Size(523, 768);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "PoslednjaOpstina", true));
+            this.textEdit1.Location = new System.Drawing.Point(102, 58);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Properties.AllowFocused = false;
+            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.textEdit1.Properties.Appearance.Options.UseFont = true;
+            this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.textEdit1.Properties.ReadOnly = true;
+            this.textEdit1.Size = new System.Drawing.Size(268, 18);
+            this.textEdit1.StyleController = this.layoutControl1;
+            this.textEdit1.TabIndex = 15;
+            this.textEdit1.TabStop = false;
+            // 
+            // relacijaViewModelBindingSource
+            // 
+            this.relacijaViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.RelacijaViewModel);
+            // 
+            // memoEdit1
+            // 
+            this.memoEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "Napomena", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.memoEdit1.Location = new System.Drawing.Point(377, 70);
+            this.memoEdit1.Name = "memoEdit1";
+            this.memoEdit1.Size = new System.Drawing.Size(155, 208);
+            this.memoEdit1.StyleController = this.layoutControl1;
+            this.memoEdit1.TabIndex = 14;
+            this.memoEdit1.TabStop = false;
             // 
             // btnMapa
             // 
             this.btnMapa.Image = global::RVMS.Win.Properties.Resources.earth;
             this.btnMapa.Location = new System.Drawing.Point(377, 12);
             this.btnMapa.Name = "btnMapa";
-            this.btnMapa.Size = new System.Drawing.Size(105, 38);
+            this.btnMapa.Size = new System.Drawing.Size(145, 38);
             this.btnMapa.StyleController = this.layoutControl1;
             this.btnMapa.TabIndex = 13;
             this.btnMapa.Text = "Prikaži mapu";
@@ -151,7 +202,7 @@
             // gridControl1
             // 
             this.gridControl1.DataSource = this.medjustanicnoRastojanjeDTOBindingSource;
-            this.gridControl1.Location = new System.Drawing.Point(12, 260);
+            this.gridControl1.Location = new System.Drawing.Point(12, 282);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -159,7 +210,7 @@
             this.repositoryItemSpinEdit2,
             this.repositoryItemButtonEdit1,
             this.repositoryItemButtonEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(1000, 496);
+            this.gridControl1.Size = new System.Drawing.Size(530, 457);
             this.gridControl1.TabIndex = 12;
             this.gridControl1.TabStop = false;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -183,6 +234,9 @@
             this.gridColumn2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedRow = false;
+            this.gridView1.OptionsSelection.EnableAppearanceHideSelection = false;
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
@@ -241,8 +295,6 @@
             this.colDuzinaRelacije.Name = "colDuzinaRelacije";
             this.colDuzinaRelacije.OptionsColumn.AllowEdit = false;
             this.colDuzinaRelacije.OptionsColumn.FixedWidth = true;
-            this.colDuzinaRelacije.Visible = true;
-            this.colDuzinaRelacije.VisibleIndex = 4;
             this.colDuzinaRelacije.Width = 112;
             // 
             // colVremeVoznje
@@ -253,7 +305,7 @@
             this.colVremeVoznje.Name = "colVremeVoznje";
             this.colVremeVoznje.OptionsColumn.FixedWidth = true;
             this.colVremeVoznje.Visible = true;
-            this.colVremeVoznje.VisibleIndex = 5;
+            this.colVremeVoznje.VisibleIndex = 4;
             this.colVremeVoznje.Width = 118;
             // 
             // repositoryItemSpinEdit2
@@ -273,8 +325,6 @@
             this.colVremeVoznjePoRelaciji.Name = "colVremeVoznjePoRelaciji";
             this.colVremeVoznjePoRelaciji.OptionsColumn.AllowEdit = false;
             this.colVremeVoznjePoRelaciji.OptionsColumn.FixedWidth = true;
-            this.colVremeVoznjePoRelaciji.Visible = true;
-            this.colVremeVoznjePoRelaciji.VisibleIndex = 6;
             this.colVremeVoznjePoRelaciji.Width = 110;
             // 
             // gridColumn1
@@ -286,7 +336,7 @@
             this.gridColumn1.OptionsColumn.ShowCaption = false;
             this.gridColumn1.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 7;
+            this.gridColumn1.VisibleIndex = 5;
             this.gridColumn1.Width = 52;
             // 
             // repositoryItemButtonEdit1
@@ -322,19 +372,15 @@
             // 
             this.txtNazivRelacije.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "NazivRelacije", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtNazivRelacije.EnterMoveNextControl = true;
-            this.txtNazivRelacije.Location = new System.Drawing.Point(90, 12);
+            this.txtNazivRelacije.Location = new System.Drawing.Point(99, 12);
             this.txtNazivRelacije.Name = "txtNazivRelacije";
-            this.txtNazivRelacije.Size = new System.Drawing.Size(283, 20);
+            this.txtNazivRelacije.Size = new System.Drawing.Size(274, 20);
             this.txtNazivRelacije.StyleController = this.layoutControl1;
             this.txtNazivRelacije.TabIndex = 11;
             // 
-            // relacijaViewModelBindingSource
-            // 
-            this.relacijaViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.RelacijaViewModel);
-            // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(284, 234);
+            this.simpleButton1.Location = new System.Drawing.Point(284, 256);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(89, 22);
             this.simpleButton1.StyleController = this.layoutControl1;
@@ -345,7 +391,7 @@
             // 
             this.txtVremeVoznje.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "VremeVoznje", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtVremeVoznje.EnterMoveNextControl = true;
-            this.txtVremeVoznje.Location = new System.Drawing.Point(284, 210);
+            this.txtVremeVoznje.Location = new System.Drawing.Point(284, 232);
             this.txtVremeVoznje.Name = "txtVremeVoznje";
             this.txtVremeVoznje.Properties.Appearance.Options.UseTextOptions = true;
             this.txtVremeVoznje.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -360,7 +406,7 @@
             // 
             this.txtRazdaljina.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "Razdaljina", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtRazdaljina.EnterMoveNextControl = true;
-            this.txtRazdaljina.Location = new System.Drawing.Point(284, 186);
+            this.txtRazdaljina.Location = new System.Drawing.Point(284, 208);
             this.txtRazdaljina.Name = "txtRazdaljina";
             this.txtRazdaljina.Properties.Appearance.Options.UseTextOptions = true;
             this.txtRazdaljina.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -375,7 +421,7 @@
             // 
             this.dolaznoStajaliste.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "IdDolaznogStajalista", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.dolaznoStajaliste.EnterMoveNextControl = true;
-            this.dolaznoStajaliste.Location = new System.Drawing.Point(93, 157);
+            this.dolaznoStajaliste.Location = new System.Drawing.Point(102, 179);
             this.dolaznoStajaliste.Name = "dolaznoStajaliste";
             this.dolaznoStajaliste.Properties.ActionButtonIndex = 1;
             this.dolaznoStajaliste.Properties.AutoSearchColumnIndex = 1;
@@ -390,7 +436,7 @@
             this.dolaznoStajaliste.Properties.DisplayMember = "Naziv";
             this.dolaznoStajaliste.Properties.NullText = "";
             this.dolaznoStajaliste.Properties.ValueMember = "Id";
-            this.dolaznoStajaliste.Size = new System.Drawing.Size(277, 22);
+            this.dolaznoStajaliste.Size = new System.Drawing.Size(268, 22);
             this.dolaznoStajaliste.StyleController = this.layoutControl1;
             this.dolaznoStajaliste.TabIndex = 7;
             // 
@@ -402,7 +448,7 @@
             // 
             this.dolazneOpstine.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "IdDolazneOpstine", true));
             this.dolazneOpstine.EnterMoveNextControl = true;
-            this.dolazneOpstine.Location = new System.Drawing.Point(93, 133);
+            this.dolazneOpstine.Location = new System.Drawing.Point(102, 155);
             this.dolazneOpstine.Name = "dolazneOpstine";
             this.dolazneOpstine.Properties.ActionButtonIndex = 1;
             this.dolazneOpstine.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -415,7 +461,7 @@
             this.dolazneOpstine.Properties.DisplayMember = "NazivOpstine";
             this.dolazneOpstine.Properties.NullText = "";
             this.dolazneOpstine.Properties.ValueMember = "Id";
-            this.dolazneOpstine.Size = new System.Drawing.Size(277, 20);
+            this.dolazneOpstine.Size = new System.Drawing.Size(268, 20);
             this.dolazneOpstine.StyleController = this.layoutControl1;
             this.dolazneOpstine.TabIndex = 6;
             // 
@@ -427,7 +473,7 @@
             // 
             this.polaznoStajaliste.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "IdPolaznogStajalista", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.polaznoStajaliste.EnterMoveNextControl = true;
-            this.polaznoStajaliste.Location = new System.Drawing.Point(93, 82);
+            this.polaznoStajaliste.Location = new System.Drawing.Point(102, 104);
             this.polaznoStajaliste.Name = "polaznoStajaliste";
             this.polaznoStajaliste.Properties.ActionButtonIndex = 1;
             this.polaznoStajaliste.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -441,7 +487,7 @@
             this.polaznoStajaliste.Properties.DisplayMember = "Naziv";
             this.polaznoStajaliste.Properties.NullText = "";
             this.polaznoStajaliste.Properties.ValueMember = "Id";
-            this.polaznoStajaliste.Size = new System.Drawing.Size(277, 22);
+            this.polaznoStajaliste.Size = new System.Drawing.Size(268, 22);
             this.polaznoStajaliste.StyleController = this.layoutControl1;
             this.polaznoStajaliste.TabIndex = 5;
             // 
@@ -453,7 +499,7 @@
             // 
             this.polazneOpstine.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.relacijaViewModelBindingSource, "IdPolazneOpstine", true));
             this.polazneOpstine.EnterMoveNextControl = true;
-            this.polazneOpstine.Location = new System.Drawing.Point(93, 58);
+            this.polazneOpstine.Location = new System.Drawing.Point(102, 80);
             this.polazneOpstine.Name = "polazneOpstine";
             this.polazneOpstine.Properties.ActionButtonIndex = 1;
             this.polazneOpstine.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -466,7 +512,7 @@
             this.polazneOpstine.Properties.DisplayMember = "NazivOpstine";
             this.polazneOpstine.Properties.NullText = "";
             this.polazneOpstine.Properties.ValueMember = "Id";
-            this.polazneOpstine.Size = new System.Drawing.Size(277, 20);
+            this.polazneOpstine.Size = new System.Drawing.Size(268, 20);
             this.polazneOpstine.StyleController = this.layoutControl1;
             this.polazneOpstine.TabIndex = 4;
             // 
@@ -489,10 +535,12 @@
             this.layoutControlGroup3,
             this.emptySpaceItem2,
             this.emptySpaceItem1,
-            this.layoutControlItem10});
+            this.layoutControlItem10,
+            this.layoutControlItem11,
+            this.emptySpaceItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1024, 768);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(554, 751);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -500,7 +548,7 @@
             // 
             this.layoutControlItem5.Control = this.txtRazdaljina;
             this.layoutControlItem5.CustomizationFormText = "Razdaljina [km]";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 174);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 196);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(365, 24);
             this.layoutControlItem5.Text = "Razdaljina [km]";
@@ -512,7 +560,7 @@
             // 
             this.layoutControlItem6.Control = this.txtVremeVoznje;
             this.layoutControlItem6.CustomizationFormText = "Vreme vožnje [min]";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 198);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 220);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(365, 24);
             this.layoutControlItem6.Text = "Vreme vožnje [min]";
@@ -524,7 +572,7 @@
             // 
             this.layoutControlItem7.Control = this.simpleButton1;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(272, 222);
+            this.layoutControlItem7.Location = new System.Drawing.Point(272, 244);
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(93, 26);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(93, 26);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -546,15 +594,15 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(365, 24);
             this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem8.Text = "Relacija";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(75, 13);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(84, 13);
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.gridControl1;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 248);
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 270);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(1004, 500);
+            this.layoutControlItem9.Size = new System.Drawing.Size(534, 461);
             this.layoutControlItem9.Text = "layoutControlItem9";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
@@ -567,32 +615,43 @@
             this.layoutControlGroup2.CustomizationFormText = "Polazna stanica/stajalište";
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem12});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(365, 75);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(365, 97);
             this.layoutControlGroup2.Text = "Polazna stanica/stajalište";
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.polazneOpstine;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 22);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(359, 24);
             this.layoutControlItem1.Text = "Opština";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(75, 13);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(84, 13);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.polaznoStajaliste;
             this.layoutControlItem2.CustomizationFormText = "Polazna stanica";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 46);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(359, 26);
             this.layoutControlItem2.Text = "Polazna stanica";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(75, 13);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(84, 13);
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.textEdit1;
+            this.layoutControlItem12.CustomizationFormText = "Poslednja opština";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(359, 22);
+            this.layoutControlItem12.Text = "Poslednja opština";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(84, 13);
             // 
             // layoutControlGroup3
             // 
@@ -602,7 +661,7 @@
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem3,
             this.layoutControlItem4});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 99);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 121);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup3.Size = new System.Drawing.Size(365, 75);
@@ -616,7 +675,7 @@
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(359, 24);
             this.layoutControlItem3.Text = "Opština";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(75, 13);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(84, 13);
             // 
             // layoutControlItem4
             // 
@@ -626,13 +685,13 @@
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(359, 26);
             this.layoutControlItem4.Text = "Dolazna stanica";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(75, 13);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(84, 13);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 222);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 244);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
             this.emptySpaceItem2.Size = new System.Drawing.Size(272, 26);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
@@ -642,9 +701,9 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(474, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(524, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(530, 248);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(10, 270);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -653,30 +712,106 @@
             this.layoutControlItem10.Control = this.btnMapa;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
             this.layoutControlItem10.Location = new System.Drawing.Point(365, 0);
-            this.layoutControlItem10.MaxSize = new System.Drawing.Size(109, 42);
-            this.layoutControlItem10.MinSize = new System.Drawing.Size(109, 42);
+            this.layoutControlItem10.MaxSize = new System.Drawing.Size(149, 42);
+            this.layoutControlItem10.MinSize = new System.Drawing.Size(149, 42);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(109, 248);
+            this.layoutControlItem10.Size = new System.Drawing.Size(149, 42);
             this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem10.Text = "layoutControlItem10";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
             this.layoutControlItem10.TextVisible = false;
             // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.memoEdit1;
+            this.layoutControlItem11.CustomizationFormText = "Napomena";
+            this.layoutControlItem11.Location = new System.Drawing.Point(365, 42);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(159, 228);
+            this.layoutControlItem11.Text = "Napomena";
+            this.layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(84, 13);
+            // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
+            this.emptySpaceItem3.Location = new System.Drawing.Point(514, 0);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(10, 42);
+            this.emptySpaceItem3.Text = "emptySpaceItem3";
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
             this.dxErrorProvider1.DataSource = this.relacijaViewModelBindingSource;
+            // 
+            // dockManager1
+            // 
+            this.dockManager1.Form = this;
+            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.dockPanel1});
+            this.dockManager1.TopZIndexControls.AddRange(new string[] {
+            "DevExpress.XtraBars.BarDockControl",
+            "DevExpress.XtraBars.StandaloneBarDockControl",
+            "System.Windows.Forms.StatusBar",
+            "System.Windows.Forms.MenuStrip",
+            "System.Windows.Forms.StatusStrip",
+            "DevExpress.XtraBars.Ribbon.RibbonStatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonControl"});
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Controls.Add(this.dockPanel1_Container);
+            this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanel1.ID = new System.Guid("3313556f-f1f7-43a6-9255-b1401f7f101e");
+            this.dockPanel1.Location = new System.Drawing.Point(523, 0);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(501, 200);
+            this.dockPanel1.Size = new System.Drawing.Size(501, 768);
+            this.dockPanel1.Text = "PDF Pregledač";
+            // 
+            // dockPanel1_Container
+            // 
+            this.dockPanel1_Container.Controls.Add(this.axAcroPDF1);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 25);
+            this.dockPanel1_Container.Name = "dockPanel1_Container";
+            this.dockPanel1_Container.Size = new System.Drawing.Size(493, 739);
+            this.dockPanel1_Container.TabIndex = 0;
+            // 
+            // axAcroPDF1
+            // 
+            this.axAcroPDF1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axAcroPDF1.Enabled = true;
+            this.axAcroPDF1.Location = new System.Drawing.Point(0, 0);
+            this.axAcroPDF1.Name = "axAcroPDF1";
+            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
+            this.axAcroPDF1.Size = new System.Drawing.Size(493, 739);
+            this.axAcroPDF1.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "pdf";
+            this.openFileDialog1.Filter = "pdf|*.pdf";
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.ShowReadOnly = true;
+            this.openFileDialog1.Title = "Izberite PDF datoteku";
             // 
             // ViewRelacija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
+            this.Controls.Add(this.dockPanel1);
             this.Name = "ViewRelacija";
             this.Size = new System.Drawing.Size(1024, 768);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.medjustanicnoRastojanjeDTOBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -685,7 +820,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNazivRelacije.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.relacijaViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVremeVoznje.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRazdaljina.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dolaznoStajaliste.Properties)).EndInit();
@@ -705,13 +839,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
+            this.dockPanel1.ResumeLayout(false);
+            this.dockPanel1_Container.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -764,5 +905,15 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
+        private DevExpress.XtraEditors.MemoEdit memoEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
+        private AxAcroPDFLib.AxAcroPDF axAcroPDF1;
+        private DevExpress.XtraBars.Docking.DockManager dockManager1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
     }
 }

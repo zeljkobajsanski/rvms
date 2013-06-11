@@ -193,7 +193,8 @@ namespace RVMS.Win.ViewModels
                     OpstinaId = IdOpstine.Value,
                     MestoId = IdMesta,
                     Aktivan = true,
-                    Stanica = Stanica
+                    Stanica = Stanica,
+                    Novo = true
                 });
                 NazivStajalista = null;
                 Stanica = false;

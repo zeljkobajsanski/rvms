@@ -15,6 +15,7 @@ namespace RVMS.Model.DTO
         public decimal? Longituda { get; set; }
         public decimal? Udaljenost { get; set; }
         public bool Stanica { get; set; }
+        public bool Novo { get; set; }
 
         private sealed class IdEqualityComparer : IEqualityComparer<StajalisteDTO>
         {

@@ -93,6 +93,14 @@ namespace RVMS.Win.Views
                     }
                 }
             };
+            gridView1.CustomDrawCell += (s, e) =>
+            {
+                var stajaliste = gridView1.GetRow(e.RowHandle) as StajalisteDTO;
+                if (stajaliste != null && stajaliste.Novo)
+                {
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                }
+            };
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
                 switch (e.Button.Index)

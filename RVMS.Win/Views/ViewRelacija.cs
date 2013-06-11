@@ -75,6 +75,17 @@ namespace RVMS.Win.Views
             txtNazivRelacije.Focus();
         }
 
+        public override void Otvori()
+        {
+            openFileDialog1.ShowDialog(this);
+            var file = openFileDialog1.FileName;
+            if (file != null)
+            {
+                dockPanel1.Show();
+                axAcroPDF1.LoadFile(file);    
+            }
+        }
+
         public override void Osvezi()
         {
             try

@@ -10,6 +10,7 @@ namespace RVMS.Win.Models.Validators
             RuleFor(x => x.NazivRelacije).NotEmpty().WithMessage("Unesite naziv relacije");
             RuleFor(x => x.Razdaljina).GreaterThanOrEqualTo(0).WithMessage("Unesite razdaljinu");
             RuleFor(x => x.VremeVoznje).GreaterThanOrEqualTo(0).WithMessage("Unesite vreme vožnje");
+            RuleFor(x => x.Napomena).Length(0, 2048).WithMessage("Napomena je predugačka");
             //RuleSet("Naziv", () => RuleFor(x => x.NazivRelacije).NotEmpty().WithMessage("Unesite naziv relacije"));
             //RuleSet("RazdaljinaIVreme", () =>
             //{

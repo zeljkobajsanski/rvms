@@ -74,6 +74,7 @@
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
+            this.hideContainerLeft = new DevExpress.XtraBars.Docking.AutoHideContainer();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -86,6 +87,7 @@
             this.dockPanel1.SuspendLayout();
             this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            this.hideContainerLeft.SuspendLayout();
             this.SuspendLayout();
             // 
             // navbarImageListLarge
@@ -177,9 +179,9 @@
             // 
             // iOpen
             // 
-            this.iOpen.Caption = "&Open";
-            this.iOpen.Description = "Opens a file.";
-            this.iOpen.Hint = "Opens a file";
+            this.iOpen.Caption = "&Otvori";
+            this.iOpen.Description = "Otvori datoteku";
+            this.iOpen.Hint = "Otvara datoteku";
             this.iOpen.Id = 2;
             this.iOpen.ImageIndex = 1;
             this.iOpen.LargeImageIndex = 1;
@@ -439,9 +441,9 @@
             // 
             // dockManager1
             // 
+            this.dockManager1.AutoHideContainers.AddRange(new DevExpress.XtraBars.Docking.AutoHideContainer[] {
+            this.hideContainerLeft});
             this.dockManager1.Form = this;
-            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
-            this.dockPanel1});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -456,11 +458,14 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("0def2a04-cf98-457a-89cf-3c6d7d398a93");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 145);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
+            this.dockPanel1.SavedIndex = 0;
             this.dockPanel1.Size = new System.Drawing.Size(200, 590);
             this.dockPanel1.Text = "Glavni meni";
+            this.dockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             // 
             // dockPanel1_Container
             // 
@@ -539,13 +544,22 @@
             // 
             this.alertControl1.AutoFormDelay = 3000;
             // 
+            // hideContainerLeft
+            // 
+            this.hideContainerLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(221)))), ((int)(((byte)(238)))));
+            this.hideContainerLeft.Controls.Add(this.dockPanel1);
+            this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hideContainerLeft.Location = new System.Drawing.Point(0, 145);
+            this.hideContainerLeft.Name = "hideContainerLeft";
+            this.hideContainerLeft.Size = new System.Drawing.Size(23, 590);
+            // 
             // Shell
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 767);
-            this.Controls.Add(this.dockPanel1);
+            this.Controls.Add(this.hideContainerLeft);
             this.Controls.Add(this.ribbonControl);
             this.Controls.Add(this.ribbonStatusBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -568,6 +582,7 @@
             this.dockPanel1.ResumeLayout(false);
             this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            this.hideContainerLeft.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -618,6 +633,7 @@
         private DevExpress.XtraBars.BarSubItem iUser;
         private DevExpress.XtraBars.BarButtonItem iMojNalog;
         private DevExpress.XtraBars.BarButtonItem iPassword;
+        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
 
     }
 }

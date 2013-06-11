@@ -32,6 +32,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="DuzinaRelacije" type="xs:decimal" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Napomena" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SrednjaSaobracajnaBrzina" type="xs:decimal" />
       <xs:element minOccurs="0" name="VremeVoznje" type="xs:int" />
@@ -41,6 +42,7 @@
   <xs:complexType name="RelacijaSaMedjustanicnimRastojanjimaDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="IdRelacije" type="xs:int" />
+      <xs:element minOccurs="0" name="Napomena" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NazivRelacije" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Stanice" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanjeDTO" />
     </xs:sequence>

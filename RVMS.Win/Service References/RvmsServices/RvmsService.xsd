@@ -28,6 +28,7 @@
       <xs:extension base="tns:Entity">
         <xs:sequence>
           <xs:element minOccurs="0" name="MedjustanicnaRastojanja" nillable="true" type="tns:ArrayOfMedjustanicnoRastojanje" />
+          <xs:element minOccurs="0" name="Napomena" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>

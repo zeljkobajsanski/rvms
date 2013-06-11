@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using RVMS.Model.DTO;
 using RVMS.Win.Messages;
 using RVMS.Win.ViewModels;
@@ -27,6 +28,14 @@ namespace RVMS.Win.Views
                 else if (e.Button.Index == 1) Obrisi();
             };
             m_ViewModel.PropertyChanged += ViewModelPropertyChanged;
+            daljinarViewModelBindingSource.DataSource = m_ViewModel;
+            searchLookUpEdit1.ButtonClick += (s, e) =>
+            {
+                if (e.Button.Kind == ButtonPredefines.Delete)
+                {
+                    searchLookUpEdit1.EditValue = null;
+                }
+            };
         }
 
         
@@ -40,6 +49,12 @@ namespace RVMS.Win.Views
             else if ("Daljinar" == e.PropertyName)
             {
                 relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
+            } else if ("Stajalista" == e.PropertyName)
+            {
+                stajalisteDTOBindingSource.DataSource = m_ViewModel.Stajalista;
+            } else if ("IzabranoStajaliste" == e.PropertyName)
+            {
+                m_ViewModel.UcitajDaljinar();
             }
         }
 
@@ -88,6 +103,7 @@ namespace RVMS.Win.Views
         {
             try
             {
+                m_ViewModel.UcitajStajalista();
                 m_ViewModel.UcitajDaljinar();
             }
             catch (Exception exc)

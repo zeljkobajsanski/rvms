@@ -16,6 +16,9 @@ namespace RVMS.Model.Entities
         [Required(ErrorMessage = "Naziv relacije nije unet")]
         public string Naziv { get; set; }
 
+        [StringLength(2048, ErrorMessage = "Napomena je predugačka")]
+        public string Napomena { get; set; }
+
         public IList<MedjustanicnoRastojanje> MedjustanicnaRastojanja { get; set; }
 
         public decimal DuzinaRelacije { get { return MedjustanicnaRastojanja.Sum(x => x.Rastojanje); } }

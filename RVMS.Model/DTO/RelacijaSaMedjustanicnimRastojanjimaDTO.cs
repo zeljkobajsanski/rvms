@@ -4,6 +4,7 @@
     {
         public int IdRelacije { get; set; }
         public string NazivRelacije { get; set; }
+        public string Napomena { get; set; }
         public MedjustanicnoRastojanjeDTO[] Stanice { get; set; }
     }
 }

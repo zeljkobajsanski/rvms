@@ -14,5 +14,7 @@
         public decimal? GpsLongituda { get; set; }
 
         public bool Stanica { get; set; }
+
+        public bool Novo { get; set; }
     }
 }

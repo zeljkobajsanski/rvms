@@ -32,15 +32,16 @@ namespace RVMS.Web
             }).ToArray();
         }
 
-        public RelacijaDTO[] VratiDaljinar()
+        public RelacijaDTO[] VratiDaljinar(int? idStajalista)
         {
-            return new RelacijeRepository().VratiRelacije().Select(x => new RelacijaDTO()
+            return new RelacijeRepository().VratiRelacije(idStajalista).Select(x => new RelacijaDTO()
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
                 DuzinaRelacije = x.DuzinaRelacije,
                 VremeVoznje = x.VremeVoznje,
-                SrednjaSaobracajnaBrzina = x.SrednjaSaobracajnaBrzina
+                SrednjaSaobracajnaBrzina = x.SrednjaSaobracajnaBrzina,
+                Napomena = x.Napomena
             }).ToArray();
         }
 
@@ -52,6 +53,7 @@ namespace RVMS.Web
             {
                 IdRelacije = relacija.Id,
                 NazivRelacije = relacija.Naziv,
+                Napomena = relacija.Napomena,
                 Stanice = relacija.MedjustanicnaRastojanja.Select(x => new MedjustanicnoRastojanjeDTO()
                 {
                     Id = x.Id,
@@ -185,7 +187,8 @@ namespace RVMS.Web
                                                  Latituda = x.GpsLatituda,
                                                  Longituda = x.GpsLongituda,
                                                  OpstinaId = x.OpstinaId,
-                                                 MestoId = x.MestoId
+                                                 MestoId = x.MestoId,
+                                                 Novo = x.Novo
                                              }).ToArray();
         }
 

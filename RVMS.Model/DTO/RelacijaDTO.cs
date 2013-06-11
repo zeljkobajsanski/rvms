@@ -7,5 +7,6 @@
         public decimal DuzinaRelacije { get; set; }
         public int VremeVoznje { get; set; }
         public decimal SrednjaSaobracajnaBrzina { get; set; }
+        public string Napomena { get; set; }
     }
 }

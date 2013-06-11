@@ -6,9 +6,18 @@ namespace RVMS.Model.Repository
 {
     public class RelacijeRepository : Repository<Relacija>
     {
-         public IEnumerable<Relacija> VratiRelacije()
-         {
-             return fDataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan).ToArray();
+        public IEnumerable<Relacija> VratiRelacije(int? idStajalista)
+        {
+            var relacije = fDataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan);
+            if (idStajalista.HasValue)
+            {
+                relacije =
+                    relacije.Where(
+                        x =>
+                        x.MedjustanicnaRastojanja.Any(
+                            s => s.PolaznoStajalisteId == idStajalista || s.DolaznoStajalisteId == idStajalista));
+            }
+             return relacije.ToArray();
          }
 
         public Relacija VratiRelacijuSaRastojanjima(int idRelacije)

@@ -120,13 +120,14 @@ namespace RVMS.Web.Controllers
         [LogujAktivnost]
         public JsonResult VratiRelacije()
         {
-            var relacije = fRelacijeRepository.VratiRelacije().Select(x => new RelacijaDTO
+            var relacije = fRelacijeRepository.VratiRelacije(null).Select(x => new RelacijaDTO
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
                 DuzinaRelacije = x.DuzinaRelacije,
                 VremeVoznje = x.VremeVoznje,
-                SrednjaSaobracajnaBrzina = x.SrednjaSaobracajnaBrzina
+                SrednjaSaobracajnaBrzina = x.SrednjaSaobracajnaBrzina,
+                Napomena = x.Napomena
             });
             return Json(relacije, JsonRequestBehavior.AllowGet);
         }
