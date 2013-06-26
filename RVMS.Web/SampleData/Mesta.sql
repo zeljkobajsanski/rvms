@@ -1769,7 +1769,7 @@ INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1864
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1865, N'Tijovac', 159, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1866, N'Crnoljevica', 159, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1867, N'Bogaraš', 3, 1)
-INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1868, N'Gronji Breg', 3, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1868, N'Gornji Breg', 3, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1869, N'Kevi', 3, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1870, N'Tornjoš', 3, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (1871, N'Banatska Dubica', 160, 1)
@@ -2180,4 +2180,9 @@ INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2275
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2276, N'Orlate', 58, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2277, N'Vraćevšnica', 62, 1)
 INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2278, N'Besni Fok', 27, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2279, N'Ravni Topolovac', 71, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2280, N'Sopot', 142, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2281, N'Novi Itebej', 71, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2282, N'Aradac', 75, 1)
+INSERT INTO [dbo].[Mestoes] ([Id], [Naziv], [OpstinaId], [Aktivan]) VALUES (2283, N'Stari Bračin', 153, 1)
 SET IDENTITY_INSERT [dbo].[Mestoes] OFF

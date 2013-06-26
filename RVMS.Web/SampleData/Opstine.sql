@@ -189,4 +189,5 @@ INSERT INTO [dbo].[Opstinas] ([Id], [NazivOpstine], [Aktivan]) VALUES (187, N'Š
 INSERT INTO [dbo].[Opstinas] ([Id], [NazivOpstine], [Aktivan]) VALUES (188, N'Šid', 1)
 INSERT INTO [dbo].[Opstinas] ([Id], [NazivOpstine], [Aktivan]) VALUES (189, N'Štimlje', 1)
 INSERT INTO [dbo].[Opstinas] ([Id], [NazivOpstine], [Aktivan]) VALUES (190, N'Štrpce', 1)
+INSERT INTO [dbo].[Opstinas] ([Id], [NazivOpstine], [Aktivan]) VALUES (191, N'Beograd - Zvezdara', 1)
 SET IDENTITY_INSERT [dbo].[Opstinas] OFF
