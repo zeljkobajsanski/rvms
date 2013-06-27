@@ -32,6 +32,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.daljinarViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stajalisteDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -55,9 +56,11 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daljinarViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).BeginInit();
@@ -71,11 +74,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.radioGroup1);
             this.layoutControl1.Controls.Add(this.searchLookUpEdit1);
             this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -86,10 +91,19 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // radioGroup1
+            // 
+            this.radioGroup1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.daljinarViewModelBindingSource, "TipStajalista", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.radioGroup1.Location = new System.Drawing.Point(119, 43);
+            this.radioGroup1.Name = "radioGroup1";
+            this.radioGroup1.Size = new System.Drawing.Size(276, 53);
+            this.radioGroup1.StyleController = this.layoutControl1;
+            this.radioGroup1.TabIndex = 6;
+            // 
             // searchLookUpEdit1
             // 
             this.searchLookUpEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.daljinarViewModelBindingSource, "IzabranoStajaliste", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.searchLookUpEdit1.Location = new System.Drawing.Point(107, 12);
+            this.searchLookUpEdit1.Location = new System.Drawing.Point(119, 100);
             this.searchLookUpEdit1.Name = "searchLookUpEdit1";
             this.searchLookUpEdit1.Properties.ActionButtonIndex = 1;
             this.searchLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -154,13 +168,13 @@
             // gridControl1
             // 
             this.gridControl1.DataSource = this.relacijaDTOBindingSource;
-            this.gridControl1.Location = new System.Drawing.Point(12, 40);
+            this.gridControl1.Location = new System.Drawing.Point(12, 136);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1,
             this.repositoryItemMemoExEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(1000, 716);
+            this.gridControl1.Size = new System.Drawing.Size(1000, 620);
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -297,9 +311,9 @@
             // 
             this.layoutControlItem1.Control = this.gridControl1;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 124);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1004, 720);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1004, 624);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -309,19 +323,19 @@
             // 
             this.layoutControlGroup2.CustomizationFormText = "Filter";
             this.layoutControlGroup2.ExpandButtonVisible = true;
-            this.layoutControlGroup2.Expanded = false;
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem3});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(399, 28);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(399, 124);
             this.layoutControlGroup2.Text = "Filter";
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.searchLookUpEdit1;
             this.layoutControlItem2.CustomizationFormText = "Stajalište na relaciji";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 57);
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(375, 24);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(375, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
@@ -330,13 +344,23 @@
             this.layoutControlItem2.Text = "Stajalište na relaciji";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(92, 13);
             // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.radioGroup1;
+            this.layoutControlItem3.CustomizationFormText = "Tip stajališta";
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(375, 57);
+            this.layoutControlItem3.Text = "Tip stajališta";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(92, 13);
+            // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
             this.emptySpaceItem1.Location = new System.Drawing.Point(399, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(605, 28);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(605, 124);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -349,6 +373,7 @@
             this.Size = new System.Drawing.Size(1024, 768);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daljinarViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).EndInit();
@@ -362,6 +387,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);
 
@@ -394,5 +420,7 @@
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private System.Windows.Forms.BindingSource daljinarViewModelBindingSource;
+        private DevExpress.XtraEditors.RadioGroup radioGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

@@ -32,6 +32,7 @@
   <xs:element name="VratiDaljinar">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="tipStajalista" type="xs:int" />
         <xs:element minOccurs="0" name="idStajalista" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

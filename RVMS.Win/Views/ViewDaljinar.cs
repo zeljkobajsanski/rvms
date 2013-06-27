@@ -21,6 +21,8 @@ namespace RVMS.Win.Views
         public ViewDaljinar()
         {
             InitializeComponent();
+            radioGroup1.Properties.Items.Add(new RadioGroupItem(1, "Polazno stajalište"));
+            radioGroup1.Properties.Items.Add(new RadioGroupItem(2, "Dolazno stajalište"));
             relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
@@ -53,6 +55,9 @@ namespace RVMS.Win.Views
             {
                 stajalisteDTOBindingSource.DataSource = m_ViewModel.Stajalista;
             } else if ("IzabranoStajaliste" == e.PropertyName)
+            {
+                m_ViewModel.UcitajDaljinar();
+            } else if ("TipStajalista" == e.PropertyName)
             {
                 m_ViewModel.UcitajDaljinar();
             }

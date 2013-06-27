@@ -20,7 +20,7 @@ namespace RVMS.Web
         StajalisteDTO[] VratiStajalisteOpstine(int? idOpstine);
 
         [OperationContract]
-        RelacijaDTO[] VratiDaljinar(int? idStajalista);
+        RelacijaDTO[] VratiDaljinar(int tipStajalista, int? idStajalista);
 
         [OperationContract]
         RelacijaSaMedjustanicnimRastojanjimaDTO VratiRelacijuSaRastojanjima(int idRelacije);

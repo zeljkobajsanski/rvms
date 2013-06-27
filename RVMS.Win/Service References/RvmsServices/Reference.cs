@@ -32,10 +32,10 @@ namespace RVMS.Win.RvmsServices {
         RVMS.Model.DTO.StajalisteDTO[] EndVratiStajalisteOpstine(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiDaljinar", ReplyAction="http://tempuri.org/IRvmsService/VratiDaljinarResponse")]
-        RVMS.Model.DTO.RelacijaDTO[] VratiDaljinar(System.Nullable<int> idStajalista);
+        RVMS.Model.DTO.RelacijaDTO[] VratiDaljinar(int tipStajalista, System.Nullable<int> idStajalista);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/VratiDaljinar", ReplyAction="http://tempuri.org/IRvmsService/VratiDaljinarResponse")]
-        System.IAsyncResult BeginVratiDaljinar(System.Nullable<int> idStajalista, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginVratiDaljinar(int tipStajalista, System.Nullable<int> idStajalista, System.AsyncCallback callback, object asyncState);
         
         RVMS.Model.DTO.RelacijaDTO[] EndVratiDaljinar(System.IAsyncResult result);
         
@@ -698,13 +698,13 @@ namespace RVMS.Win.RvmsServices {
                         idOpstine}, this.onEndVratiStajalisteOpstineDelegate, this.onVratiStajalisteOpstineCompletedDelegate, userState);
         }
         
-        public RVMS.Model.DTO.RelacijaDTO[] VratiDaljinar(System.Nullable<int> idStajalista) {
-            return base.Channel.VratiDaljinar(idStajalista);
+        public RVMS.Model.DTO.RelacijaDTO[] VratiDaljinar(int tipStajalista, System.Nullable<int> idStajalista) {
+            return base.Channel.VratiDaljinar(tipStajalista, idStajalista);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginVratiDaljinar(System.Nullable<int> idStajalista, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginVratiDaljinar(idStajalista, callback, asyncState);
+        public System.IAsyncResult BeginVratiDaljinar(int tipStajalista, System.Nullable<int> idStajalista, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiDaljinar(tipStajalista, idStajalista, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -713,8 +713,9 @@ namespace RVMS.Win.RvmsServices {
         }
         
         private System.IAsyncResult OnBeginVratiDaljinar(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            System.Nullable<int> idStajalista = ((System.Nullable<int>)(inValues[0]));
-            return this.BeginVratiDaljinar(idStajalista, callback, asyncState);
+            int tipStajalista = ((int)(inValues[0]));
+            System.Nullable<int> idStajalista = ((System.Nullable<int>)(inValues[1]));
+            return this.BeginVratiDaljinar(tipStajalista, idStajalista, callback, asyncState);
         }
         
         private object[] OnEndVratiDaljinar(System.IAsyncResult result) {
@@ -730,11 +731,11 @@ namespace RVMS.Win.RvmsServices {
             }
         }
         
-        public void VratiDaljinarAsync(System.Nullable<int> idStajalista) {
-            this.VratiDaljinarAsync(idStajalista, null);
+        public void VratiDaljinarAsync(int tipStajalista, System.Nullable<int> idStajalista) {
+            this.VratiDaljinarAsync(tipStajalista, idStajalista, null);
         }
         
-        public void VratiDaljinarAsync(System.Nullable<int> idStajalista, object userState) {
+        public void VratiDaljinarAsync(int tipStajalista, System.Nullable<int> idStajalista, object userState) {
             if ((this.onBeginVratiDaljinarDelegate == null)) {
                 this.onBeginVratiDaljinarDelegate = new BeginOperationDelegate(this.OnBeginVratiDaljinar);
             }
@@ -745,6 +746,7 @@ namespace RVMS.Win.RvmsServices {
                 this.onVratiDaljinarCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiDaljinarCompleted);
             }
             base.InvokeAsync(this.onBeginVratiDaljinarDelegate, new object[] {
+                        tipStajalista,
                         idStajalista}, this.onEndVratiDaljinarDelegate, this.onVratiDaljinarCompletedDelegate, userState);
         }
         

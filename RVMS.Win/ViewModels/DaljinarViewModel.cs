@@ -11,12 +11,14 @@ namespace RVMS.Win.ViewModels
         private List<RelacijaDTO> m_Daljinar;
         private StajalisteDTO[] fStajalista;
         private int? fIzabranoStajaliste;
+        private int fTipStajalista;
 
 
         public DaljinarViewModel()
         {
             Daljinar = new List<RelacijaDTO>();
             Stajalista = new StajalisteDTO[0];
+            TipStajalista = 1;
         }
         
         public List<RelacijaDTO> Daljinar
@@ -55,6 +57,17 @@ namespace RVMS.Win.ViewModels
             }
         }
 
+        public int TipStajalista
+        {
+            get { return fTipStajalista; }
+            set
+            {
+                if (value == fTipStajalista) return;
+                fTipStajalista = value;
+                OnPropertyChanged("TipStajalista");
+            }
+        }
+
         public void UcitajDaljinar()
         {
             IsBusy = true;
@@ -66,7 +79,7 @@ namespace RVMS.Win.ViewModels
                     HandleError(e);
                     Daljinar = e.Result.ToList();
                 };
-                svc.VratiDaljinarAsync(IzabranoStajaliste);
+                svc.VratiDaljinarAsync(TipStajalista, IzabranoStajaliste);
             }
         }
 

@@ -32,9 +32,9 @@ namespace RVMS.Web
             }).ToArray();
         }
 
-        public RelacijaDTO[] VratiDaljinar(int? idStajalista)
+        public RelacijaDTO[] VratiDaljinar(int tipStajalista, int? idStajalista)
         {
-            return new RelacijeRepository().VratiRelacije(idStajalista).Select(x => new RelacijaDTO()
+            return new RelacijeRepository().VratiRelacije(tipStajalista, idStajalista).Select(x => new RelacijaDTO()
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
@@ -252,7 +252,7 @@ namespace RVMS.Web
             var rRepo = new RelacijeRepository();
             var sRepo = new StajalistaRepository();
             var stajaliste = sRepo.VratiStajalisteIOpstinu(idStajalista);
-            var relacije = rRepo.VratiRelacije(idStajalista);
+            var relacije = rRepo.VratiRelacije(1, idStajalista);
             return new StajalisteSaRelacijamaDTO
             {
                 Id = stajaliste.Id,
