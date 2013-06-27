@@ -54,5 +54,14 @@ namespace RVMS.Web
 
         [OperationContract]
         MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeGore(int idRelacije, int idMedjustanicnogRastojanja);
+
+        [OperationContract]
+        StajalisteSaRelacijamaDTO VratiStajalisteSaRelacijama(int idStajalista);
+
+        [OperationContract]
+        string ObrisiStajaliste(int idStajalista);
+
+        [OperationContract]
+        void SvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode);
     }
 }

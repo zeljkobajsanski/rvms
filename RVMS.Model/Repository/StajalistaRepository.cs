@@ -33,6 +33,11 @@ namespace RVMS.Model.Repository
             return fDataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan).ToArray();
         }
 
+        public Stajaliste VratiStajalisteIOpstinu(int idStajalista)
+        {
+            return fDataContext.Stajalista.Include("Opstina").SingleOrDefault(x => x.Id == idStajalista);
+        }
+
         public IEnumerable<Stajaliste> PretraziStajalista(int? idOpstine, int? idMesta, string nazivStajalista)
         {
             var stajalista = fDataContext.Stajalista.Include("Opstina").Include("Mesto").Where(x => x.Aktivan);

@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.Entities" />
       <xsd:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" />
+      <xsd:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRvmsService_VratiOpstine_InputMessage">
@@ -92,6 +93,24 @@
   <wsdl:message name="IRvmsService_PomeriMedjustanicnoRastojanjeGore_OutputMessage">
     <wsdl:part name="parameters" element="tns:PomeriMedjustanicnoRastojanjeGoreResponse" />
   </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiStajalisteSaRelacijama_InputMessage">
+    <wsdl:part name="parameters" element="tns:VratiStajalisteSaRelacijama" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiStajalisteSaRelacijama_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VratiStajalisteSaRelacijamaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_ObrisiStajaliste_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObrisiStajaliste" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_ObrisiStajaliste_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObrisiStajalisteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SvediStajalistaNaPodrazumevano_InputMessage">
+    <wsdl:part name="parameters" element="tns:SvediStajalistaNaPodrazumevano" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SvediStajalistaNaPodrazumevano_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SvediStajalistaNaPodrazumevanoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRvmsService">
     <wsdl:operation name="VratiOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiOpstine" message="tns:IRvmsService_VratiOpstine_InputMessage" />
@@ -148,6 +167,18 @@
     <wsdl:operation name="PomeriMedjustanicnoRastojanjeGore">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGore" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeGore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGoreResponse" message="tns:IRvmsService_PomeriMedjustanicnoRastojanjeGore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VratiStajalisteSaRelacijama">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiStajalisteSaRelacijama" message="tns:IRvmsService_VratiStajalisteSaRelacijama_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiStajalisteSaRelacijamaResponse" message="tns:IRvmsService_VratiStajalisteSaRelacijama_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObrisiStajaliste">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/ObrisiStajaliste" message="tns:IRvmsService_ObrisiStajaliste_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/ObrisiStajalisteResponse" message="tns:IRvmsService_ObrisiStajaliste_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SvediStajalistaNaPodrazumevano">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevano" message="tns:IRvmsService_SvediStajalistaNaPodrazumevano_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevanoResponse" message="tns:IRvmsService_SvediStajalistaNaPodrazumevano_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRvmsService" type="tns:IRvmsService">
@@ -271,6 +302,33 @@
     </wsdl:operation>
     <wsdl:operation name="PomeriMedjustanicnoRastojanjeGore">
       <soap:operation soapAction="http://tempuri.org/IRvmsService/PomeriMedjustanicnoRastojanjeGore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VratiStajalisteSaRelacijama">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiStajalisteSaRelacijama" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObrisiStajaliste">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/ObrisiStajaliste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SvediStajalistaNaPodrazumevano">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevano" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

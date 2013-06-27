@@ -107,5 +107,10 @@ namespace RVMS.Web.Controllers
             var stajaliste = fRepository.Get(id);
             return View(stajaliste);
         }
+
+        public ActionResult PoredjenjeStajalista()
+        {
+            return View();
+        }
     }
 }

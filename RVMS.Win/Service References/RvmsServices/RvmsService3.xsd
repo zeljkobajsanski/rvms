@@ -15,6 +15,7 @@
       <xs:element minOccurs="0" name="Mesto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MestoId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Novo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Opstina" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OpstinaId" type="xs:int" />
       <xs:element minOccurs="0" name="Stanica" type="xs:boolean" />
@@ -73,4 +74,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MedjustanicnoRastojanjeDTO" nillable="true" type="tns:MedjustanicnoRastojanjeDTO" />
+  <xs:complexType name="StajalisteSaRelacijamaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Opstina" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Relacije" nillable="true" type="tns:ArrayOfRelacijaDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StajalisteSaRelacijamaDTO" nillable="true" type="tns:StajalisteSaRelacijamaDTO" />
 </xs:schema>

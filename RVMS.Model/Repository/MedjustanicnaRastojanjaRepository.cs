@@ -30,5 +30,12 @@ namespace RVMS.Model.Repository
                     (x.PolaznoStajalisteId == doStajalista && x.DolaznoStajalisteId == odStajalista));
             return msr != null ? msr.Rastojanje : (decimal?)null;
         }
+
+        public IQueryable<MedjustanicnoRastojanje> VratiSvaMedjustanicnaRastojanjaSaStajalistem(int idStajalista)
+        {
+            return
+                fDataContext.Daljinar.Where(
+                    x => x.PolaznoStajalisteId == idStajalista || x.DolaznoStajalisteId == idStajalista);
+        }
     }
 }

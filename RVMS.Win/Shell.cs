@@ -33,8 +33,11 @@ namespace RVMS.Win
             navBarItemRelacija.LinkClicked += (s, e) => AddDocumentRelacija(null);
             navBarItemDaljinar.LinkClicked += (s, e) => AddDocumentDaljinar();
             iStajalista.LinkClicked += (s, e) => AddDocumentStajalista();
+            iPoredjenjeStajalista.LinkClicked += (s, e) => AddDocumentPoredjenjeStajalista();
             repositoryItemMarqueeProgressBar1.Stopped = true;
         }
+
+        
 
         protected override void OnLoad(EventArgs e)
         {
@@ -85,9 +88,18 @@ namespace RVMS.Win
             doc.Caption = "Relacija";
         }
 
+        private void AddDocumentPoredjenjeStajalista()
+        {
+            var view = new ViewPoredjenjeStajalista();
+            view.PropertyChanged += ViewPropertyChanged;
+            view.Notify += OnNotify;
+            view.RequestView += (s, e) => AddDocumentRelacija(e.Parameters);
+            var doc = documentManager1.View.Controller.AddDocument(view);
+            doc.Caption = "Poređenje stajališta";
+        }
+
         private void InitCommands()
         {
-
             iRefresh.ItemClick += (s, e) =>
             {
                 var active = documentManager1.View.ActiveDocument;

@@ -226,6 +226,7 @@
     <Content Include="Content\images\darkred_gradient.png" />
     <Content Include="Content\images\door_out.png" />
     <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\eye %282%29.png" />
     <Content Include="Content\images\globe.png" />
     <Content Include="Content\images\gnome_edit_delete.png" />
     <Content Include="Content\images\home %281%29.png" />
@@ -269,6 +270,7 @@
     <Content Include="Content\images\map-hue.png" />
     <Content Include="Content\images\map-saturation-overlay.png" />
     <Content Include="Content\images\map-saturation.png" />
+    <Content Include="Content\images\marker.png" />
     <Content Include="Content\images\metro-icon-down-white.png" />
     <Content Include="Content\images\metro-icon-down.png" />
     <Content Include="Content\images\metro-icon-left-white.png" />
@@ -533,6 +535,7 @@
     <Content Include="Views\Relacije\MapaRelacije.cshtml" />
     <Content Include="Views\Stajalista\MapaStajalista.cshtml" />
     <Content Include="Views\Shared\_MapLayout.cshtml" />
+    <Content Include="Views\Stajalista\PoredjenjeStajalista.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

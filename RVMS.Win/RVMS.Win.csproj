@@ -35,7 +35,7 @@
     <SuiteName>Oktopod</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>oktopod.html</WebPage>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -156,6 +156,8 @@
     <Compile Include="Messages\QuestionMessage.cs" />
     <Compile Include="Messages\SavedMessage.cs" />
     <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\Relacija.cs" />
+    <Compile Include="Models\StajalisteSaRelacijama.cs" />
     <Compile Include="Models\Validators\LoginViewModelValidator.cs" />
     <Compile Include="Models\Validators\PromenaLozinkeViewModelValidator.cs" />
     <Compile Include="Models\Validators\RelacijeViewModelValidator.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="ViewModels\IzmenaRelacijeViewModel.cs" />
     <Compile Include="ViewModels\KorisnickiNalogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PoredjenjeStajalistaViewModel.cs" />
     <Compile Include="ViewModels\PromenaLozinkeViewModel.cs" />
     <Compile Include="ViewModels\RelacijaViewModel.cs" />
     <Compile Include="ViewModels\StajalistaViewModel.cs" />
@@ -200,6 +203,12 @@
     </Compile>
     <Compile Include="Views\ViewKorisnickiNalog.Designer.cs">
       <DependentUpon>ViewKorisnickiNalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewPoredjenjeStajalista.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ViewPoredjenjeStajalista.Designer.cs">
+      <DependentUpon>ViewPoredjenjeStajalista.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewPromenaLozinke.cs">
       <SubType>UserControl</SubType>
@@ -249,6 +258,9 @@
     <EmbeddedResource Include="Views\ViewKorisnickiNalog.resx">
       <DependentUpon>ViewKorisnickiNalog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewPoredjenjeStajalista.resx">
+      <DependentUpon>ViewPoredjenjeStajalista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ViewPromenaLozinke.resx">
       <DependentUpon>ViewPromenaLozinke.cs</DependentUpon>
     </EmbeddedResource>
@@ -267,6 +279,7 @@
     <None Include="Properties\DataSources\RVMS.Model.DTO.RelacijaDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.RelacijaSaMedjustanicnimRastojanjimaDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.StajalisteDTO.datasource" />
+    <None Include="Properties\DataSources\RVMS.Model.DTO.StajalisteSaRelacijamaDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.Entity.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.Linija.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.MedjustanicnoRastojanje.datasource" />
@@ -277,7 +290,7 @@
     <None Include="Properties\DataSources\RVMS.Model.Entities.Stajaliste.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.Relacija.datasource" />
-    <None Include="Properties\DataSources\RVMS.Win.ViewModels.DaljinarViewModel.datasource" />
+    <None Include="Properties\DataSources\RVMS.Win.Models.StajalisteSaRelacijama.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.LoginViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.PromenaLozinkeViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.RelacijaViewModel.datasource" />
@@ -303,6 +316,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\RvmsServices\RvmsService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RvmsServices\RvmsService4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -364,6 +380,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
+    <None Include="Resources\fav2.png" />
+    <None Include="Resources\marker_pink.png" />
+    <None Include="Resources\marker %281%29.png" />
+    <None Include="Resources\eye %282%29.png" />
     <None Include="Images\Calendar_16x16.png" />
     <None Include="Images\Drafts_16x16.png" />
     <None Include="Images\gnome_edit_delete.png" />

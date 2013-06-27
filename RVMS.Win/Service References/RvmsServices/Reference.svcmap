@@ -24,6 +24,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="RvmsService.disco" MetadataType="Disco" ID="f9166cf0-2885-4280-8a44-2a76c18fb64f" SourceId="1" SourceUrl="http://localhost:49998/RvmsService.svc?disco" />
+    <MetadataFile FileName="RvmsService4.xsd" MetadataType="Schema" ID="a20b00c6-b18f-43d9-9c19-50a24708010f" SourceId="1" SourceUrl="http://localhost:49998/RvmsService.svc?xsd=xsd4" />
     <MetadataFile FileName="RvmsService1.xsd" MetadataType="Schema" ID="7037d31a-0607-4baa-86c1-487d3d062804" SourceId="1" SourceUrl="http://localhost:49998/RvmsService.svc?xsd=xsd1" />
     <MetadataFile FileName="RvmsService.xsd" MetadataType="Schema" ID="0731f086-b26c-4f7f-a401-d7f23cefc99e" SourceId="1" SourceUrl="http://localhost:49998/RvmsService.svc?xsd=xsd2" />
     <MetadataFile FileName="RvmsService2.xsd" MetadataType="Schema" ID="81b762e0-323d-4b80-89e7-1f8e36274057" SourceId="1" SourceUrl="http://localhost:49998/RvmsService.svc?xsd=xsd0" />

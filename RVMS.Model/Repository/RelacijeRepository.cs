@@ -27,5 +27,12 @@ namespace RVMS.Model.Repository
                 .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
                 .SingleOrDefault(x => x.Id == idRelacije);
         }
+
+        public bool PostojiRelacijaSaStajalistem(int idStajalista)
+        {
+            return
+                fDataContext.Daljinar.Any(
+                    x => x.PolaznoStajalisteId == idStajalista || x.DolaznoStajalisteId == idStajalista);
+        }
     }
 }

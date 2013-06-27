@@ -50,6 +50,7 @@
     <Compile Include="DTO\RelacijaDTO.cs" />
     <Compile Include="DTO\RelacijaSaMedjustanicnimRastojanjimaDTO.cs" />
     <Compile Include="DTO\StajalisteDTO.cs" />
+    <Compile Include="DTO\StajalisteSaRelacijamaDTO.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Linija.cs" />
     <Compile Include="Entities\MedjustanicnoRastojanje.cs" />

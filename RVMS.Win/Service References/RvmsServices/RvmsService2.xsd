@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.Entities" />
   <xs:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" />
+  <xs:import schemaLocation="http://localhost:49998/RvmsService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="VratiOpstine">
     <xs:complexType>
       <xs:sequence />
@@ -195,6 +196,47 @@
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="PomeriMedjustanicnoRastojanjeGoreResult" nillable="true" type="q14:ArrayOfMedjustanicnoRastojanjeDTO" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiStajalisteSaRelacijama">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idStajalista" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiStajalisteSaRelacijamaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="VratiStajalisteSaRelacijamaResult" nillable="true" type="q15:StajalisteSaRelacijamaDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObrisiStajaliste">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idStajalista" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObrisiStajalisteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObrisiStajalisteResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SvediStajalistaNaPodrazumevano">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPodrazumevanogStajalista" type="xs:int" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="stajalistaKojaSeSvode" nillable="true" type="q16:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SvediStajalistaNaPodrazumevanoResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

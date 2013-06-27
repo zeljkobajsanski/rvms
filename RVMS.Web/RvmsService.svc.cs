@@ -247,6 +247,64 @@ namespace RVMS.Web
             return retVal;
         }
 
+        public StajalisteSaRelacijamaDTO VratiStajalisteSaRelacijama(int idStajalista)
+        {
+            var rRepo = new RelacijeRepository();
+            var sRepo = new StajalistaRepository();
+            var stajaliste = sRepo.VratiStajalisteIOpstinu(idStajalista);
+            var relacije = rRepo.VratiRelacije(idStajalista);
+            return new StajalisteSaRelacijamaDTO
+            {
+                Id = stajaliste.Id,
+                Naziv = stajaliste.Naziv,
+                Opstina = stajaliste.Opstina.NazivOpstine,
+                Latitude = stajaliste.GpsLatituda,
+                Longitude = stajaliste.GpsLongituda,
+                Relacije = relacije.Select(x => new RelacijaDTO()
+                {
+                    Id = x.Id,
+                    Naziv = x.Naziv
+                }).ToArray()
+            };
+        }
+
+        public string ObrisiStajaliste(int idStajalista)
+        {
+            var sRepo = new StajalistaRepository();
+            var rRepo = new RelacijeRepository();
+            var postoji = rRepo.PostojiRelacijaSaStajalistem(idStajalista);
+            if (postoji) return "Brisanje nije dozvoljeno: Postoje relacije sa izabranim stajalištem";
+            var stajaliste = sRepo.Get(idStajalista);
+            if (stajaliste != null)
+            {
+                stajaliste.Aktivan = false;
+                sRepo.Save();
+            }
+            return null;
+        }
+
+        public void SvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode)
+        {
+            var dRepos = new MedjustanicnaRastojanjaRepository();
+            foreach (var idStajalista in stajalistaKojaSeSvode)
+            {
+                var daljinar = dRepos.VratiSvaMedjustanicnaRastojanjaSaStajalistem(idStajalista).ToArray();
+                foreach (var medjustanicnoRastojanje in daljinar)
+                {
+                    if (medjustanicnoRastojanje.PolaznoStajalisteId == idStajalista)
+                    {
+                        medjustanicnoRastojanje.PolaznoStajalisteId = idPodrazumevanogStajalista;
+                    }
+                    if (medjustanicnoRastojanje.DolaznoStajalisteId == idStajalista)
+                    {
+                        medjustanicnoRastojanje.DolaznoStajalisteId = idPodrazumevanogStajalista;
+                    }
+                }
+                ObrisiStajaliste(idStajalista);
+            }
+            dRepos.Save();
+        }
+
         public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeDole(int idRelacije, int idMedjustanicnogRastojanja)
         {
             var r = new MedjustanicnaRastojanjaRepository();
