@@ -515,6 +515,9 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Services\Linije.svc" />
+    <Content Include="Services\Stajalista.svc" />
+    <Content Include="Services\Test.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -553,6 +556,10 @@
     <ProjectReference Include="..\RVMS.Model\RVMS.Model.csproj">
       <Project>{3ea33751-90f9-40c4-a1cf-01f66113d940}</Project>
       <Name>RVMS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RVMS.Services\RVMS.Services.csproj">
+      <Project>{152a4e2b-1982-4620-9863-c19446c1f364}</Project>
+      <Name>RVMS.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

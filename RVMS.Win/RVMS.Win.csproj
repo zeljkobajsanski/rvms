@@ -170,6 +170,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\Services.Linije\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Services.Stajalista\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Shell.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +344,26 @@
     <None Include="Service References\RvmsServices\RvmsService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Services.Linije\Linije.wsdl" />
+    <None Include="Service References\Services.Linije\Linije.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Linije\Linije1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Linije\Linije2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Stajalista\Stajalista.wsdl" />
+    <None Include="Service References\Services.Stajalista\Stajalista.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Stajalista\Stajalista1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.Stajalista\Stajalista2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client,KB2468871">
@@ -375,6 +405,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\RvmsServices\" />
+    <WCFMetadataStorage Include="Service References\Services.Linije\" />
+    <WCFMetadataStorage Include="Service References\Services.Stajalista\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\RvmsServices\RvmsService.disco" />
@@ -393,6 +425,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
+    <None Include="Service References\Services.Linije\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Services.Linije\configuration.svcinfo" />
+    <None Include="Service References\Services.Linije\configuration91.svcinfo" />
+    <None Include="Service References\Services.Linije\Linije.disco" />
+    <None Include="Service References\Services.Stajalista\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Services.Stajalista\configuration.svcinfo" />
+    <None Include="Service References\Services.Stajalista\configuration91.svcinfo" />
+    <None Include="Service References\Services.Stajalista\Stajalista.disco" />
     <None Include="Resources\fav2.png" />
     <None Include="Resources\marker_pink.png" />
     <None Include="Resources\marker %281%29.png" />

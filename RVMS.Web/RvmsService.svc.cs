@@ -308,7 +308,7 @@ namespace RVMS.Web
         {
             var dto = new LinijaSaKandidatimaDTO();
             dto.Stajalista = VratiSusednaStajalista(idStajalista);
-            var relacije = m_RelacijeRepository.VratiRelacijeKojePolazeSaStanice(idStajalista).ToArray();
+            var relacije = m_RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(idStajalista).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var relacija in relacije)
             {
@@ -340,6 +340,7 @@ namespace RVMS.Web
         {
             var sb = new StringBuilder();
             var len = relacija.MedjustanicnaRastojanja.Count;
+            
             for (int i = 0; i < len; i++)
             {
                 var medjustanicnoRastojanje = relacija.MedjustanicnaRastojanja[i];
@@ -347,14 +348,14 @@ namespace RVMS.Web
                 {
                     sb.AppendLine(medjustanicnoRastojanje.PolaznoStajaliste.Naziv);
                 }
-                else if (i == len - 1)
-                {
-                    sb.AppendLine(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
-                }
                 else
                 {
                     sb.AppendLine(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
                 }
+            }
+            if (len == 1)
+            {
+                sb.AppendLine(relacija.MedjustanicnaRastojanja[0].DolaznoStajaliste.Naziv);
             }
             return sb.ToString();
         }
@@ -401,7 +402,7 @@ namespace RVMS.Web
             };
             var poslednje = relacija.MedjustanicnaRastojanja.Last();
             dto.Stajalista = VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
-            var relacije = m_RelacijeRepository.VratiRelacijeKojePolazeSaStanice(poslednje.DolaznoStajalisteId).ToArray();
+            var relacije = m_RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var r in relacije)
             {
@@ -425,7 +426,7 @@ namespace RVMS.Web
                     Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
                 });
             }
-
+            var found = false;
             for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
             {
                 var medjustanicnoRastojanje = medjustanicnaRastojanja[i];

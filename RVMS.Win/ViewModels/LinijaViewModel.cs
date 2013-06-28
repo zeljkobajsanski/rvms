@@ -4,6 +4,8 @@ using RVMS.Model.DTO;
 using RVMS.Win.Models;
 using RVMS.Win.RvmsServices;
 using System.Linq;
+using RVMS.Win.Services.Linije;
+using RVMS.Win.Services.Stajalista;
 
 namespace RVMS.Win.ViewModels
 {
@@ -17,20 +19,14 @@ namespace RVMS.Win.ViewModels
 
         public override void Init()
         {
-            using (var svc = new RvmsServiceClient())
+            using (var svc = new StajalistaClient())
             {
-                svc.VratiStajalistaMestaIOpstineCompleted += (s, e) =>
+                svc.VratiStajalistaCompleted += (s, e) =>
                 {
                     HandleError(e);
                     Stajalista = e.Result.OrderBy(x => x.Naziv).ThenBy(x => x.Opstina).ToArray();
                 };
-                svc.VratiStajalistaMestaIOpstineAsync(null, null);
-                //svc.VratiDaljinarCompleted += (s, e) =>
-                //{
-                //    HandleError(e);
-                //    Relacije = e.Result;
-                //};
-                //svc.VratiDaljinarAsync(1, null);
+                svc.VratiStajalistaAsync(null, null);
             }
         }
 
@@ -87,7 +83,7 @@ namespace RVMS.Win.ViewModels
                 IdStajalista = idStajalista,
                 NazivStajalista = stajaliste.Naziv
             });
-            using (var svc = new RvmsServiceClient())
+            using (var svc = new LinijeClient())
             {
                 svc.DodajStajalisteNaLinijuCompleted += (s, e) =>
                 {
@@ -101,7 +97,7 @@ namespace RVMS.Win.ViewModels
 
         public void DodajStajalistaRelacije(int idRelacije)
         {
-            using (var svc = new RvmsServiceClient())
+            using (var svc = new LinijeClient())
             {
                 svc.DodajStajalistaRelacijeNaLinijuCompleted += (s, e) =>
                 {
@@ -138,9 +134,9 @@ namespace RVMS.Win.ViewModels
             }
             m_StajalistaLinije.Remove(stajaliste);
             last = m_StajalistaLinije.LastOrDefault();
-            using (var svc = new RvmsServiceClient())
+            if (last != null)
             {
-                if (last != null)
+                using (var svc = new LinijeClient())
                 {
                     svc.SkloniStajalisteSaLinijeCompleted += (sender, args) =>
                     {
@@ -149,14 +145,17 @@ namespace RVMS.Win.ViewModels
                     };
                     svc.SkloniStajalisteSaLinijeAsync(1, last.IdStajalista); //TODO: IdLinije
                 }
-                else
+            }
+            else
+            {
+                using (var svc = new StajalistaClient())
                 {
-                    svc.VratiStajalistaMestaIOpstineCompleted += (s, e) =>
+                    svc.VratiStajalistaCompleted += (s, e) =>
                     {
                         HandleError(e);
                         Stajalista = e.Result;
                     };
-                    svc.VratiStajalistaMestaIOpstineAsync(null, null);
+                    svc.VratiStajalistaAsync(null, null);
                 }
             }
         }

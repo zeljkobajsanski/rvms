@@ -68,6 +68,9 @@ namespace RVMS.Web
         LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
 
         [OperationContract]
+        LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije);
+
+        [OperationContract]
         LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista);
 
         [OperationContract]
@@ -76,7 +79,6 @@ namespace RVMS.Web
         [OperationContract]
         StajalisteDTO[] VratiSusednaStajalista(int idStajalista);
 
-        [OperationContract]
-        LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije);
+        
     }
 }

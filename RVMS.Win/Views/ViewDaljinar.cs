@@ -17,6 +17,7 @@ namespace RVMS.Win.Views
 {
     public partial class ViewDaljinar : ViewBase
     {
+
         private readonly DaljinarViewModel m_ViewModel = new DaljinarViewModel();
 
         public ViewDaljinar()
