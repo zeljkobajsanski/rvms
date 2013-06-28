@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\LinijaDTO.cs" />
+    <Compile Include="DTO\LinijaSaKandidatimaDTO.cs" />
     <Compile Include="DTO\MedjustanicnoRastojanjeDTO.cs" />
     <Compile Include="DTO\PrevoznikDTO.cs" />
     <Compile Include="DTO\RelacijaDTO.cs" />

@@ -111,6 +111,36 @@
   <wsdl:message name="IRvmsService_SvediStajalistaNaPodrazumevano_OutputMessage">
     <wsdl:part name="parameters" element="tns:SvediStajalistaNaPodrazumevanoResponse" />
   </wsdl:message>
+  <wsdl:message name="IRvmsService_DodajStajalisteNaLiniju_InputMessage">
+    <wsdl:part name="parameters" element="tns:DodajStajalisteNaLiniju" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_DodajStajalisteNaLiniju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DodajStajalisteNaLinijuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SkloniStajalisteSaLinije_InputMessage">
+    <wsdl:part name="parameters" element="tns:SkloniStajalisteSaLinije" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_SkloniStajalisteSaLinije_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SkloniStajalisteSaLinijeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiTooltipZaRelaciju_InputMessage">
+    <wsdl:part name="parameters" element="tns:VratiTooltipZaRelaciju" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiTooltipZaRelaciju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VratiTooltipZaRelacijuResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiSusednaStajalista_InputMessage">
+    <wsdl:part name="parameters" element="tns:VratiSusednaStajalista" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_VratiSusednaStajalista_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VratiSusednaStajalistaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_DodajStajalistaRelacijeNaLiniju_InputMessage">
+    <wsdl:part name="parameters" element="tns:DodajStajalistaRelacijeNaLiniju" />
+  </wsdl:message>
+  <wsdl:message name="IRvmsService_DodajStajalistaRelacijeNaLiniju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DodajStajalistaRelacijeNaLinijuResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRvmsService">
     <wsdl:operation name="VratiOpstine">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiOpstine" message="tns:IRvmsService_VratiOpstine_InputMessage" />
@@ -179,6 +209,26 @@
     <wsdl:operation name="SvediStajalistaNaPodrazumevano">
       <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevano" message="tns:IRvmsService_SvediStajalistaNaPodrazumevano_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevanoResponse" message="tns:IRvmsService_SvediStajalistaNaPodrazumevano_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DodajStajalisteNaLiniju">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/DodajStajalisteNaLiniju" message="tns:IRvmsService_DodajStajalisteNaLiniju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/DodajStajalisteNaLinijuResponse" message="tns:IRvmsService_DodajStajalisteNaLiniju_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SkloniStajalisteSaLinije">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinije" message="tns:IRvmsService_SkloniStajalisteSaLinije_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinijeResponse" message="tns:IRvmsService_SkloniStajalisteSaLinije_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VratiTooltipZaRelaciju">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiTooltipZaRelaciju" message="tns:IRvmsService_VratiTooltipZaRelaciju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiTooltipZaRelacijuResponse" message="tns:IRvmsService_VratiTooltipZaRelaciju_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VratiSusednaStajalista">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/VratiSusednaStajalista" message="tns:IRvmsService_VratiSusednaStajalista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/VratiSusednaStajalistaResponse" message="tns:IRvmsService_VratiSusednaStajalista_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DodajStajalistaRelacijeNaLiniju">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLiniju" message="tns:IRvmsService_DodajStajalistaRelacijeNaLiniju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLinijuResponse" message="tns:IRvmsService_DodajStajalistaRelacijeNaLiniju_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRvmsService" type="tns:IRvmsService">
@@ -329,6 +379,51 @@
     </wsdl:operation>
     <wsdl:operation name="SvediStajalistaNaPodrazumevano">
       <soap:operation soapAction="http://tempuri.org/IRvmsService/SvediStajalistaNaPodrazumevano" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DodajStajalisteNaLiniju">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/DodajStajalisteNaLiniju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SkloniStajalisteSaLinije">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinije" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VratiTooltipZaRelaciju">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiTooltipZaRelaciju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VratiSusednaStajalista">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/VratiSusednaStajalista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DodajStajalistaRelacijeNaLiniju">
+      <soap:operation soapAction="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLiniju" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -240,4 +240,77 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="DodajStajalisteNaLiniju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idLinije" type="xs:int" />
+        <xs:element minOccurs="0" name="idStajalista" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DodajStajalisteNaLinijuResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="DodajStajalisteNaLinijuResult" nillable="true" type="q17:LinijaSaKandidatimaDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SkloniStajalisteSaLinije">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idLinije" type="xs:int" />
+        <xs:element minOccurs="0" name="idStajalista" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SkloniStajalisteSaLinijeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="SkloniStajalisteSaLinijeResult" nillable="true" type="q18:LinijaSaKandidatimaDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiTooltipZaRelaciju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idRelacije" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiTooltipZaRelacijuResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VratiTooltipZaRelacijuResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiSusednaStajalista">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idStajalista" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiSusednaStajalistaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="VratiSusednaStajalistaResult" nillable="true" type="q19:ArrayOfStajalisteDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DodajStajalistaRelacijeNaLiniju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idLinije" type="xs:int" />
+        <xs:element minOccurs="0" name="idRelacije" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DodajStajalistaRelacijeNaLinijuResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="DodajStajalistaRelacijeNaLinijuResult" nillable="true" type="q20:LinijaSaKandidatimaDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -77,7 +77,7 @@ namespace RVMS.Web.Controllers
         public JsonResult MedjustanicnaRastojanja(int idRelacije)
         {
             var medjustanicnaRastojanja =
-                fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO
+                fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO
                 {
                     Id = x.Id,
                     PolaznoStajalisteId = x.PolaznoStajalisteId,
@@ -155,7 +155,7 @@ namespace RVMS.Web.Controllers
         {
             if (id.HasValue)
             {
-                var stajalista = fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(id.Value)
+                var stajalista = fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(id.Value)
                                                   .Select(x => new MedjustanicnoRastojanjeDTO()
                                                   {
                                                       Id = x.Id,

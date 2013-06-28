@@ -12,7 +12,7 @@ namespace RVMS.Win.ViewModels
         private StajalisteDTO[] fStajalista;
         private int? fIzabranoStajaliste;
         private int fTipStajalista;
-
+        private Dictionary<int, string> m_Tooltips = new Dictionary<int, string>();
 
         public DaljinarViewModel()
         {
@@ -103,6 +103,20 @@ namespace RVMS.Win.ViewModels
                     IsBusy = false;
                 };
                 svc.VratiStajalistaMestaIOpstineAsync(null, null);
+            }
+        }
+
+        public string VratiTooltip(int idRelacije)
+        {
+            if (m_Tooltips.ContainsKey(idRelacije))
+            {
+                return m_Tooltips[idRelacije];
+            }
+            using (var svc = new RvmsServiceClient())
+            {
+                var tooltip = svc.VratiTooltipZaRelaciju(idRelacije);
+                m_Tooltips.Add(idRelacije, tooltip);
+                return tooltip;
             }
         }
     }

@@ -85,4 +85,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StajalisteSaRelacijamaDTO" nillable="true" type="tns:StajalisteSaRelacijamaDTO" />
+  <xs:complexType name="LinijaSaKandidatimaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Linija" nillable="true" type="tns:LinijaDTO" />
+      <xs:element minOccurs="0" name="Relacije" nillable="true" type="tns:ArrayOfRelacijaDTO" />
+      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinijaSaKandidatimaDTO" nillable="true" type="tns:LinijaSaKandidatimaDTO" />
+  <xs:complexType name="LinijaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrevoznikId" type="xs:int" />
+      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinijaDTO" nillable="true" type="tns:LinijaDTO" />
 </xs:schema>

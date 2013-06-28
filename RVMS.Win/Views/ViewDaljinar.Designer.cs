@@ -33,8 +33,8 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.daljinarViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.stajalisteDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,6 +52,7 @@
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.colNapomena = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -61,8 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daljinarViewModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -100,6 +101,10 @@
             this.radioGroup1.StyleController = this.layoutControl1;
             this.radioGroup1.TabIndex = 6;
             // 
+            // daljinarViewModelBindingSource
+            // 
+            this.daljinarViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.DaljinarViewModel);
+            // 
             // searchLookUpEdit1
             // 
             this.searchLookUpEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.daljinarViewModelBindingSource, "IzabranoStajaliste", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -117,10 +122,6 @@
             this.searchLookUpEdit1.Size = new System.Drawing.Size(276, 20);
             this.searchLookUpEdit1.StyleController = this.layoutControl1;
             this.searchLookUpEdit1.TabIndex = 5;
-            // 
-            // daljinarViewModelBindingSource
-            // 
-            this.daljinarViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.DaljinarViewModel);
             // 
             // stajalisteDTOBindingSource
             // 
@@ -176,6 +177,7 @@
             this.repositoryItemMemoExEdit1});
             this.gridControl1.Size = new System.Drawing.Size(1000, 620);
             this.gridControl1.TabIndex = 4;
+            this.gridControl1.ToolTipController = this.toolTipController1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -292,6 +294,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemMemoExEdit1.Name = "repositoryItemMemoExEdit1";
             // 
+            // toolTipController1
+            // 
+            this.toolTipController1.AutoPopDelay = 60000;
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
@@ -374,8 +380,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daljinarViewModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -422,5 +428,6 @@
         private System.Windows.Forms.BindingSource daljinarViewModelBindingSource;
         private DevExpress.XtraEditors.RadioGroup radioGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.Utils.ToolTipController toolTipController1;
     }
 }

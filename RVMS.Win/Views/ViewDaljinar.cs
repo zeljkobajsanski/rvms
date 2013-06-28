@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using RVMS.Model.DTO;
 using RVMS.Win.Messages;
@@ -24,13 +25,42 @@ namespace RVMS.Win.Views
             radioGroup1.Properties.Items.Add(new RadioGroupItem(1, "Polazno stajalište"));
             radioGroup1.Properties.Items.Add(new RadioGroupItem(2, "Dolazno stajalište"));
             relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
+            daljinarViewModelBindingSource.DataSource = m_ViewModel;
+            HandleEvents();
+        }
+
+        public override void Osvezi()
+        {
+            try
+            {
+                m_ViewModel.UcitajStajalista();
+                m_ViewModel.UcitajDaljinar();
+            }
+            catch (Exception exc)
+            {
+                OnNotify(new ErrorMessage(exc));
+            }
+        }
+
+        public override void NoviUnos()
+        {
+            OnRequestView("Relacija", null);
+        }
+
+        private void HandleEvents()
+        {
             repositoryItemButtonEdit1.ButtonClick += (s, e) =>
             {
-                if (e.Button.Index == 0) Izmeni();
-                else if (e.Button.Index == 1) Obrisi();
+                if (e.Button.Index == 0)
+                {
+                    Izmeni();
+                }
+                else if (e.Button.Index == 1)
+                {
+                    Obrisi();
+                }
             };
             m_ViewModel.PropertyChanged += ViewModelPropertyChanged;
-            daljinarViewModelBindingSource.DataSource = m_ViewModel;
             searchLookUpEdit1.ButtonClick += (s, e) =>
             {
                 if (e.Button.Kind == ButtonPredefines.Delete)
@@ -38,9 +68,31 @@ namespace RVMS.Win.Views
                     searchLookUpEdit1.EditValue = null;
                 }
             };
+            toolTipController1.GetActiveObjectInfo += (s, e) =>
+            {
+                if (e.SelectedControl == gridControl1)
+                {
+                    var hit = gridView1.CalcHitInfo(e.ControlMousePosition);
+                    if (hit.InRow)
+                    {
+                        var relacija = gridView1.GetRow(hit.RowHandle) as RelacijaDTO;
+                        if (relacija != null)
+                        {
+                            e.Info = new ToolTipControlInfo(){Title = relacija.Naziv};
+                            e.Info.Text = m_ViewModel.VratiTooltip(relacija.Id);
+                            e.Info.Object = hit.HitTest + hit.RowHandle;
+                            //var tooltipArgs = new SuperToolTipSetupArgs();
+                            //tooltipArgs.Title.Text = "Relacija";
+                            //tooltipArgs.Contents.Text = "Relacija ID: " + relacija.Id;
+                            //e.Info.ToolTipType = ToolTipType.SuperTip;
+                            //e.Info.SuperTip = new SuperToolTip();
+                            //e.Info.SuperTip.Setup(tooltipArgs);
+                        }
+                    }
+                }
+            };
         }
 
-        
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -51,13 +103,16 @@ namespace RVMS.Win.Views
             else if ("Daljinar" == e.PropertyName)
             {
                 relacijaDTOBindingSource.DataSource = m_ViewModel.Daljinar;
-            } else if ("Stajalista" == e.PropertyName)
+            }
+            else if ("Stajalista" == e.PropertyName)
             {
                 stajalisteDTOBindingSource.DataSource = m_ViewModel.Stajalista;
-            } else if ("IzabranoStajaliste" == e.PropertyName)
+            }
+            else if ("IzabranoStajaliste" == e.PropertyName)
             {
                 m_ViewModel.UcitajDaljinar();
-            } else if ("TipStajalista" == e.PropertyName)
+            }
+            else if ("TipStajalista" == e.PropertyName)
             {
                 m_ViewModel.UcitajDaljinar();
             }
@@ -102,24 +157,6 @@ namespace RVMS.Win.Views
         protected override void OnLoad(EventArgs e)
         {
             Osvezi();
-        }
-
-        public override void Osvezi()
-        {
-            try
-            {
-                m_ViewModel.UcitajStajalista();
-                m_ViewModel.UcitajDaljinar();
-            }
-            catch (Exception exc)
-            {
-                OnNotify(new ErrorMessage(exc));
-            }
-        }
-
-        public override void NoviUnos()
-        {
-            OnRequestView("Relacija", null);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace RVMS.Model.Repository
 {
     public class MedjustanicnaRastojanjaRepository : Repository<MedjustanicnoRastojanje>
     {
-        public IEnumerable<MedjustanicnoRastojanje> VratiMedjustanicnaRastojanja(int idRelacije)
+        public IEnumerable<MedjustanicnoRastojanje> VratiMedjustanicnaRastojanjaNaRelaciji(int idRelacije)
         {
             return fDataContext.Relacije.Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                                         .Include("MedjustanicnaRastojanja.DolaznoStajaliste")

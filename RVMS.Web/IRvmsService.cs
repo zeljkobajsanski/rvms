@@ -63,5 +63,20 @@ namespace RVMS.Web
 
         [OperationContract]
         void SvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode);
+
+        [OperationContract]
+        LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
+
+        [OperationContract]
+        LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista);
+
+        [OperationContract]
+        string VratiTooltipZaRelaciju(int idRelacije);
+
+        [OperationContract]
+        StajalisteDTO[] VratiSusednaStajalista(int idStajalista);
+
+        [OperationContract]
+        LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije);
     }
 }

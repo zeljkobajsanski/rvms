@@ -52,5 +52,44 @@ namespace RVMS.Model.DTO
         {
             get { return IdComparerInstance; }
         }
+
+        private sealed class NazivOpstinaEqualityComparer : IEqualityComparer<StajalisteDTO>
+        {
+            public bool Equals(StajalisteDTO x, StajalisteDTO y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+                if (ReferenceEquals(x, null))
+                {
+                    return false;
+                }
+                if (ReferenceEquals(y, null))
+                {
+                    return false;
+                }
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+                return string.Equals(x.Naziv, y.Naziv) && string.Equals(x.Opstina, y.Opstina);
+            }
+
+            public int GetHashCode(StajalisteDTO obj)
+            {
+                unchecked
+                {
+                    return ((obj.Naziv != null ? obj.Naziv.GetHashCode() : 0)*397) ^ (obj.Opstina != null ? obj.Opstina.GetHashCode() : 0);
+                }
+            }
+        }
+
+        private static readonly IEqualityComparer<StajalisteDTO> NazivOpstinaComparerInstance = new NazivOpstinaEqualityComparer();
+
+        public static IEqualityComparer<StajalisteDTO> NazivOpstinaComparer
+        {
+            get { return NazivOpstinaComparerInstance; }
+        }
     }
 }

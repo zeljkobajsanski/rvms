@@ -10,8 +10,7 @@ using rs.mvc.Korisnici.Filters;
 
 namespace RVMS.Web.Controllers
 {
-    [Authorize]
-    [LogujAktivnost]
+    
     public class LinijeController : Controller
     {
         private readonly MedjustanicnaRastojanjaRepository m_MedjustanicnaRastojanjaRepository =
@@ -154,6 +153,11 @@ namespace RVMS.Web.Controllers
             }
             m_LinijeRepository.Save();
             return Json(linija);
+        }
+
+        public ActionResult KreirajLiniju(int? idLinije)
+        {
+            return View();
         }
     }
 }

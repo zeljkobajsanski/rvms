@@ -17,6 +17,14 @@ namespace RVMS.Web
     // NOTE: In order to launch WCF Test Client for testing this service, please select RvmsService.svc or RvmsService.svc.cs at the Solution Explorer and start debugging.
     public class RvmsService : IRvmsService
     {
+        private readonly MedjustanicnaRastojanjaRepository m_MedjustanicnaRastojanjaRepository = new MedjustanicnaRastojanjaRepository();
+
+        private readonly RelacijeRepository m_RelacijeRepository = new RelacijeRepository();
+
+        private readonly StajalistaRepository m_StajalistaRepository = new StajalistaRepository();
+
+        private readonly MestaRepository m_MestaRepository = new MestaRepository();
+
         public Opstina[] VratiOpstine()
         {
             return new Model.Repository.Repository<Opstina>().GetActive().OrderBy(x => x.NazivOpstine).ToArray();
@@ -24,7 +32,7 @@ namespace RVMS.Web
 
         public StajalisteDTO[] VratiStajalisteOpstine(int? idOpstine)
         {
-            return new StajalistaRepository().VratiStajalistaOpstine(idOpstine).OrderBy(x => x.Naziv).Select(x => new StajalisteDTO()
+            return m_StajalistaRepository.VratiStajalistaOpstine(idOpstine).OrderBy(x => x.Naziv).Select(x => new StajalisteDTO()
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
@@ -34,7 +42,7 @@ namespace RVMS.Web
 
         public RelacijaDTO[] VratiDaljinar(int tipStajalista, int? idStajalista)
         {
-            return new RelacijeRepository().VratiRelacije(tipStajalista, idStajalista).Select(x => new RelacijaDTO()
+            return m_RelacijeRepository.VratiRelacije(tipStajalista, idStajalista).Select(x => new RelacijaDTO()
             {
                 Id = x.Id,
                 Naziv = x.Naziv,
@@ -47,7 +55,7 @@ namespace RVMS.Web
 
         public RelacijaSaMedjustanicnimRastojanjimaDTO VratiRelacijuSaRastojanjima(int idRelacije)
         {
-            var relacija = new RelacijeRepository().VratiRelacijuSaRastojanjima(idRelacije);
+            var relacija = m_RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
             if (relacija == null) return null;
             var retVal = new RelacijaSaMedjustanicnimRastojanjimaDTO
             {
@@ -81,7 +89,7 @@ namespace RVMS.Web
             if (Validator.TryValidateObject(relacija, new ValidationContext(relacija, null, null),
                                             new Collection<ValidationResult>()))
             {
-                var repository = new RelacijeRepository();
+                var repository = m_RelacijeRepository;
                 if (relacija.Id == 0)
                 {
                     repository.Add(relacija);
@@ -98,7 +106,7 @@ namespace RVMS.Web
 
         public void ObrisiRelaciju(int idRelacije)
         {
-            var repo = new RelacijeRepository();
+            var repo = m_RelacijeRepository;
             var relacija = repo.Get(idRelacije);
             if (relacija != null)
             {
@@ -109,23 +117,22 @@ namespace RVMS.Web
 
         public MedjustanicnoRastojanjeDTO[] SacuvajRastojanje(MedjustanicnoRastojanje rastojanje)
         {
-            var r = new MedjustanicnaRastojanjaRepository();
-            var broj = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Count();
+            var broj = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(rastojanje.RelacijaId).Count();
             rastojanje.Rbr = broj + 1;
             if (rastojanje.Id == 0)
             {
-                r.Add(rastojanje);
+                m_MedjustanicnaRastojanjaRepository.Add(rastojanje);
             }
             else
             {
-                var msr = r.Get(rastojanje.Id);
+                var msr = m_MedjustanicnaRastojanjaRepository.Get(rastojanje.Id);
                 msr.PolaznoStajalisteId = rastojanje.PolaznoStajalisteId;
                 msr.DolaznoStajalisteId = rastojanje.DolaznoStajalisteId;
                 msr.Rastojanje = rastojanje.Rastojanje;
                 msr.VremeVoznje = rastojanje.VremeVoznje;
             }
-            r.Save();
-            var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
+            m_MedjustanicnaRastojanjaRepository.Save();
+            var retVal = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
                 Rbr = x.Rbr,
@@ -146,11 +153,10 @@ namespace RVMS.Web
 
         public MedjustanicnoRastojanjeDTO[] ObrisiRastojanje(int id)
         {
-            var r = new MedjustanicnaRastojanjaRepository();
-            var rastojanje = r.Get(id);
-            r.Delete(rastojanje);
-            r.Save();
-            var retVal = r.VratiMedjustanicnaRastojanja(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
+            var rastojanje = m_MedjustanicnaRastojanjaRepository.Get(id);
+            m_MedjustanicnaRastojanjaRepository.Delete(rastojanje);
+            m_MedjustanicnaRastojanjaRepository.Save();
+            var retVal = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(rastojanje.RelacijaId).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
                 Rbr = x.Rbr,
@@ -171,12 +177,12 @@ namespace RVMS.Web
 
         public Mesto[] VratiMesta(int? idOpstine)
         {
-            return new MestaRepository().VratiMestaOpstine(idOpstine).OrderBy(x => x.Naziv).ToArray();
+            return m_MestaRepository.VratiMestaOpstine(idOpstine).OrderBy(x => x.Naziv).ToArray();
         }
 
         public StajalisteDTO[] VratiStajalistaMestaIOpstine(int? idOpstine, int? idMesta)
         {
-            return new StajalistaRepository().VratiStajalista(idOpstine, idMesta, true)
+            return m_StajalistaRepository.VratiStajalista(idOpstine, idMesta, true)
                                              .Select(x => new StajalisteDTO()
                                              {
                                                  Id = x.Id,
@@ -194,28 +200,26 @@ namespace RVMS.Web
 
         public int SacuvajStajaliste(Stajaliste stajaliste)
         {
-            var repo = new StajalistaRepository();
             if (stajaliste.Id == 0)
             {
-                repo.Add(stajaliste);
+                m_StajalistaRepository.Add(stajaliste);
             }
             else
             {
-                repo.Update(stajaliste);
+                m_StajalistaRepository.Update(stajaliste);
             }
-            repo.Save();
+            m_StajalistaRepository.Save();
             return stajaliste.Id;
         }
 
         public MedjustanicnoRastojanje VratiMedjustanicnoRastojanje(int id)
         {
-            return new MedjustanicnaRastojanjaRepository().Get(id);
+            return m_MedjustanicnaRastojanjaRepository.Get(id);
         }
 
         public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeGore(int idRelacije, int idMedjustanicnogRastojanja)
         {
-            var r = new MedjustanicnaRastojanjaRepository();
-            var rastojanja = r.VratiMedjustanicnaRastojanja(idRelacije);
+            var rastojanja = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(idRelacije);
             var msr = rastojanja.Single(x => x.Id == idMedjustanicnogRastojanja);
             if (msr.Rbr > 0)
             {
@@ -226,9 +230,9 @@ namespace RVMS.Web
                     medjustanicnoRastojanje.Rbr = msr.Rbr;
                 }
                 msr.Rbr = rbr;
-                r.Save();
+                m_MedjustanicnaRastojanjaRepository.Save();
             }
-            var retVal = r.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
+            var retVal = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
                 Rbr = x.Rbr,
@@ -249,10 +253,8 @@ namespace RVMS.Web
 
         public StajalisteSaRelacijamaDTO VratiStajalisteSaRelacijama(int idStajalista)
         {
-            var rRepo = new RelacijeRepository();
-            var sRepo = new StajalistaRepository();
-            var stajaliste = sRepo.VratiStajalisteIOpstinu(idStajalista);
-            var relacije = rRepo.VratiRelacije(1, idStajalista);
+            var stajaliste = m_StajalistaRepository.VratiStajalisteIOpstinu(idStajalista);
+            var relacije = m_RelacijeRepository.VratiRelacije(1, idStajalista);
             return new StajalisteSaRelacijamaDTO
             {
                 Id = stajaliste.Id,
@@ -270,25 +272,22 @@ namespace RVMS.Web
 
         public string ObrisiStajaliste(int idStajalista)
         {
-            var sRepo = new StajalistaRepository();
-            var rRepo = new RelacijeRepository();
-            var postoji = rRepo.PostojiRelacijaSaStajalistem(idStajalista);
+            var postoji = m_RelacijeRepository.PostojiRelacijaSaStajalistem(idStajalista);
             if (postoji) return "Brisanje nije dozvoljeno: Postoje relacije sa izabranim stajalištem";
-            var stajaliste = sRepo.Get(idStajalista);
+            var stajaliste = m_StajalistaRepository.Get(idStajalista);
             if (stajaliste != null)
             {
                 stajaliste.Aktivan = false;
-                sRepo.Save();
+                m_StajalistaRepository.Save();
             }
             return null;
         }
 
         public void SvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode)
         {
-            var dRepos = new MedjustanicnaRastojanjaRepository();
             foreach (var idStajalista in stajalistaKojaSeSvode)
             {
-                var daljinar = dRepos.VratiSvaMedjustanicnaRastojanjaSaStajalistem(idStajalista).ToArray();
+                var daljinar = m_MedjustanicnaRastojanjaRepository.VratiSvaMedjustanicnaRastojanjaSaStajalistem(idStajalista).ToArray();
                 foreach (var medjustanicnoRastojanje in daljinar)
                 {
                     if (medjustanicnoRastojanje.PolaznoStajalisteId == idStajalista)
@@ -302,13 +301,162 @@ namespace RVMS.Web
                 }
                 ObrisiStajaliste(idStajalista);
             }
-            dRepos.Save();
+            m_MedjustanicnaRastojanjaRepository.Save();
+        }
+
+        public LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista)
+        {
+            var dto = new LinijaSaKandidatimaDTO();
+            dto.Stajalista = VratiSusednaStajalista(idStajalista);
+            var relacije = m_RelacijeRepository.VratiRelacijeKojePolazeSaStanice(idStajalista).ToArray();
+            dto.Relacije = new List<RelacijaDTO>();
+            foreach (var relacija in relacije)
+            {
+                var relacijaDto = new RelacijaDTO()
+                {
+                    Id = relacija.Id,
+                    Naziv = relacija.Naziv,
+                    Napomena = KreirajStringOpisaRelacije(relacija).Replace(Environment.NewLine, ",")
+                };
+                dto.Relacije.Add(relacijaDto);
+            }
+            return dto;
+        }
+
+        public LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista)
+        {
+            var dto = new LinijaSaKandidatimaDTO();
+            dto.Stajalista = VratiSusednaStajalista(idStajalista);
+            return dto;
+        }
+
+        public string VratiTooltipZaRelaciju(int idRelacije)
+        {
+            var relacija = m_RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
+            return KreirajStringOpisaRelacije(relacija);
+        }
+
+        private static string KreirajStringOpisaRelacije(Relacija relacija)
+        {
+            var sb = new StringBuilder();
+            var len = relacija.MedjustanicnaRastojanja.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var medjustanicnoRastojanje = relacija.MedjustanicnaRastojanja[i];
+                if (i == 0)
+                {
+                    sb.AppendLine(medjustanicnoRastojanje.PolaznoStajaliste.Naziv);
+                }
+                else if (i == len - 1)
+                {
+                    sb.AppendLine(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
+                }
+                else
+                {
+                    sb.AppendLine(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
+                }
+            }
+            return sb.ToString();
+        }
+
+        public StajalisteDTO[] VratiSusednaStajalista(int idStajalista)
+        {
+            var stajalista = new List<StajalisteDTO>();
+            var medjustanicnaRastojanja = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(idStajalista);
+            foreach (var medjustanicnoRastojanje in medjustanicnaRastojanja)
+            {
+                if (medjustanicnoRastojanje.PolaznoStajalisteId == idStajalista)
+                {
+                    stajalista.Add(new StajalisteDTO()
+                    {
+                        Id = medjustanicnoRastojanje.DolaznoStajalisteId,
+                        Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
+                        Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
+                        Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
+                        Opstina = medjustanicnoRastojanje.DolaznoStajaliste.Opstina.NazivOpstine
+                    });
+                }
+                if (medjustanicnoRastojanje.DolaznoStajalisteId == idStajalista)
+                {
+                    stajalista.Add(new StajalisteDTO()
+                    {
+                        Id = medjustanicnoRastojanje.PolaznoStajalisteId,
+                        Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
+                        Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
+                        Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
+                        Opstina = medjustanicnoRastojanje.PolaznoStajaliste.Opstina.NazivOpstine
+                    });
+                }
+            }
+            
+            return stajalista.Distinct(StajalisteDTO.IdComparer).ToArray();
+        }
+
+        public LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije)
+        {
+            var relacija = m_RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
+            var dto = new LinijaSaKandidatimaDTO()
+            {
+                Linija = new LinijaDTO{Id = idLinije}
+            };
+            var poslednje = relacija.MedjustanicnaRastojanja.Last();
+            dto.Stajalista = VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
+            var relacije = m_RelacijeRepository.VratiRelacijeKojePolazeSaStanice(poslednje.DolaznoStajalisteId).ToArray();
+            dto.Relacije = new List<RelacijaDTO>();
+            foreach (var r in relacije)
+            {
+                var relacijaDto = new RelacijaDTO()
+                {
+                    Id = r.Id,
+                    Naziv = r.Naziv,
+                    Napomena = KreirajStringOpisaRelacije(r).Replace(Environment.NewLine, ",")
+                };
+                dto.Relacije.Add(relacijaDto);
+            }
+            var medjustanicnaRastojanja = relacija.MedjustanicnaRastojanja.ToArray();
+
+            if (medjustanicnaRastojanja.Length == 1)
+            {
+                dto.Linija.Stajalista.Add(new StajalisteDTO
+                {
+                    Id = medjustanicnaRastojanja[0].Id,
+                    Naziv = medjustanicnaRastojanja[0].DolaznoStajaliste.Naziv,
+                    Latituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLatituda,
+                    Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
+                });
+            }
+
+            for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
+            {
+                var medjustanicnoRastojanje = medjustanicnaRastojanja[i];
+                if (i < medjustanicnaRastojanja.Length - 1)
+                {
+                    dto.Linija.Stajalista.Add(new StajalisteDTO
+                    {
+                        Id = medjustanicnoRastojanje.Id,
+                        Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
+                        Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
+                        Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
+                    });
+                }
+                else
+                {
+                    dto.Linija.Stajalista.Add(new StajalisteDTO
+                    {
+                        Id = medjustanicnoRastojanje.Id,
+                        Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
+                        Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
+                        Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
+                    });
+                }
+            }
+            
+            return dto;
         }
 
         public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeDole(int idRelacije, int idMedjustanicnogRastojanja)
         {
-            var r = new MedjustanicnaRastojanjaRepository();
-            var rastojanja = r.VratiMedjustanicnaRastojanja(idRelacije);
+            var rastojanja = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(idRelacije);
             var msr = rastojanja.Single(x => x.Id == idMedjustanicnogRastojanja);
             if (msr.Rbr < rastojanja.Count())
             {
@@ -319,9 +467,9 @@ namespace RVMS.Web
                     medjustanicnoRastojanje.Rbr = msr.Rbr;
                 }
                 msr.Rbr = rbr;
-                r.Save();
+                m_MedjustanicnaRastojanjaRepository.Save();
             }
-            var retVal = r.VratiMedjustanicnaRastojanja(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
+            var retVal = m_MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanjaNaRelaciji(idRelacije).Select(x => new MedjustanicnoRastojanjeDTO()
             {
                 Id = x.Id,
                 Rbr = x.Rbr,

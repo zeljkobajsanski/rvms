@@ -73,10 +73,12 @@
             this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemDaljinar = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemRelacija = new DevExpress.XtraNavBar.NavBarItem();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
             this.navBarGroup3 = new DevExpress.XtraNavBar.NavBarGroup();
             this.iPoredjenjeStajalista = new DevExpress.XtraNavBar.NavBarItem();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
+            this.iLinija = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarGroup4 = new DevExpress.XtraNavBar.NavBarGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
@@ -469,7 +471,7 @@
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("0def2a04-cf98-457a-89cf-3c6d7d398a93");
-            this.dockPanel1.Location = new System.Drawing.Point(-200, 0);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
             this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
@@ -488,18 +490,20 @@
             // 
             // navBarControl1
             // 
-            this.navBarControl1.ActiveGroup = this.navBarGroup1;
+            this.navBarControl1.ActiveGroup = this.navBarGroup4;
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navBarGroup1,
             this.navBarGroup2,
+            this.navBarGroup4,
             this.navBarGroup3});
             this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItemDaljinar,
             this.navBarItemRelacija,
             this.iMesta,
             this.iStajalista,
-            this.iPoredjenjeStajalista});
+            this.iPoredjenjeStajalista,
+            this.iLinija});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 192;
@@ -549,14 +553,6 @@
             this.navBarItemRelacija.Name = "navBarItemRelacija";
             this.navBarItemRelacija.SmallImageIndex = 7;
             // 
-            // defaultLookAndFeel1
-            // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2010 Blue";
-            // 
-            // alertControl1
-            // 
-            this.alertControl1.AutoFormDelay = 3000;
-            // 
             // navBarGroup3
             // 
             this.navBarGroup3.Caption = "Alati";
@@ -569,6 +565,27 @@
             // 
             this.iPoredjenjeStajalista.Caption = "Poređenje stajališta";
             this.iPoredjenjeStajalista.Name = "iPoredjenjeStajalista";
+            // 
+            // defaultLookAndFeel1
+            // 
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Office 2010 Blue";
+            // 
+            // alertControl1
+            // 
+            this.alertControl1.AutoFormDelay = 3000;
+            // 
+            // iLinija
+            // 
+            this.iLinija.Caption = "Definisanje linije";
+            this.iLinija.Name = "iLinija";
+            // 
+            // navBarGroup4
+            // 
+            this.navBarGroup4.Caption = "Prevoznik";
+            this.navBarGroup4.Expanded = true;
+            this.navBarGroup4.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.iLinija)});
+            this.navBarGroup4.Name = "navBarGroup4";
             // 
             // Shell
             // 
@@ -653,6 +670,8 @@
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
         private DevExpress.XtraNavBar.NavBarGroup navBarGroup3;
         private DevExpress.XtraNavBar.NavBarItem iPoredjenjeStajalista;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroup4;
+        private DevExpress.XtraNavBar.NavBarItem iLinija;
 
     }
 }

@@ -157,6 +157,7 @@
     <Compile Include="Messages\SavedMessage.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\Relacija.cs" />
+    <Compile Include="Models\StajalisteLinije.cs" />
     <Compile Include="Models\StajalisteSaRelacijama.cs" />
     <Compile Include="Models\Validators\LoginViewModelValidator.cs" />
     <Compile Include="Models\Validators\PromenaLozinkeViewModelValidator.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="ViewModels\DaljinarViewModel.cs" />
     <Compile Include="ViewModels\IzmenaRelacijeViewModel.cs" />
     <Compile Include="ViewModels\KorisnickiNalogViewModel.cs" />
+    <Compile Include="ViewModels\LinijaViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PoredjenjeStajalistaViewModel.cs" />
     <Compile Include="ViewModels\PromenaLozinkeViewModel.cs" />
@@ -203,6 +205,12 @@
     </Compile>
     <Compile Include="Views\ViewKorisnickiNalog.Designer.cs">
       <DependentUpon>ViewKorisnickiNalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewLinija.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ViewLinija.Designer.cs">
+      <DependentUpon>ViewLinija.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewPoredjenjeStajalista.cs">
       <SubType>UserControl</SubType>
@@ -258,6 +266,9 @@
     <EmbeddedResource Include="Views\ViewKorisnickiNalog.resx">
       <DependentUpon>ViewKorisnickiNalog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ViewLinija.resx">
+      <DependentUpon>ViewLinija.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ViewPoredjenjeStajalista.resx">
       <DependentUpon>ViewPoredjenjeStajalista.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +285,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Korisnici.ClientLibrary.WebServices.AccountsService.Korisnik.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.LinijaDTO.datasource" />
+    <None Include="Properties\DataSources\RVMS.Model.DTO.LinijaSaKandidatimaDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.MedjustanicnoRastojanjeDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.PrevoznikDTO.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.DTO.RelacijaDTO.datasource" />
@@ -290,6 +302,7 @@
     <None Include="Properties\DataSources\RVMS.Model.Entities.Stajaliste.datasource" />
     <None Include="Properties\DataSources\RVMS.Model.Entities.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.Relacija.datasource" />
+    <None Include="Properties\DataSources\RVMS.Win.Models.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.StajalisteSaRelacijama.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.LoginViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.PromenaLozinkeViewModel.datasource" />

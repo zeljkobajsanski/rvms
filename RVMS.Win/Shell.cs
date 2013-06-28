@@ -25,6 +25,8 @@ namespace RVMS.Win
 {
     public partial class Shell : RibbonForm
     {
+        private bool m_Anonymus = true;
+
         public Shell()
         {
             InitializeComponent();
@@ -34,10 +36,13 @@ namespace RVMS.Win
             navBarItemDaljinar.LinkClicked += (s, e) => AddDocumentDaljinar();
             iStajalista.LinkClicked += (s, e) => AddDocumentStajalista();
             iPoredjenjeStajalista.LinkClicked += (s, e) => AddDocumentPoredjenjeStajalista();
+            iLinija.LinkClicked += (s, e) => AddDocumentDefinisanjeLinije();
             repositoryItemMarqueeProgressBar1.Stopped = true;
+
         }
 
         
+
 
         protected override void OnLoad(EventArgs e)
         {
@@ -45,18 +50,24 @@ namespace RVMS.Win
             {
                 siStatus.Caption = "Build: " + ApplicationDeployment.CurrentDeployment.CurrentVersion;
             }
-            using (var login = new Login())
+            if (!m_Anonymus)
             {
-                var result = login.ShowDialog(this);
-                if (DialogResult.OK != result) Application.Exit();
-                WindowState = FormWindowState.Maximized;
-                iUser.Caption = ApplicationContext.Current.ImeIPrezime;
+                using (var login = new Login())
+                {
+                    var result = login.ShowDialog(this);
+                    if (DialogResult.OK != result) Application.Exit();
+                    WindowState = FormWindowState.Maximized;
+                    iUser.Caption = ApplicationContext.Current.ImeIPrezime;
+                }    
             }
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            new Account(ApplicationContext.Current.LoginService).Logout(ApplicationContext.Current.LogId);
+            if (!m_Anonymus)
+            {
+                new Account(ApplicationContext.Current.LoginService).Logout(ApplicationContext.Current.LogId);    
+            }
         }
 
         private void AddDocumentStajalista()
@@ -96,6 +107,16 @@ namespace RVMS.Win
             view.RequestView += (s, e) => AddDocumentRelacija(e.Parameters);
             var doc = documentManager1.View.Controller.AddDocument(view);
             doc.Caption = "Poređenje stajališta";
+        }
+
+        private void AddDocumentDefinisanjeLinije()
+        {
+            var view = new ViewLinija();
+            view.PropertyChanged += ViewPropertyChanged;
+            view.Notify += OnNotify;
+            //view.RequestView += (s, e) => AddDocumentRelacija(e.Parameters);
+            var doc = documentManager1.View.Controller.AddDocument(view);
+            doc.Caption = "Definisanje linije";
         }
 
         private void InitCommands()

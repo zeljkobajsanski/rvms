@@ -150,6 +150,46 @@ namespace RVMS.Win.RvmsServices {
         System.IAsyncResult BeginSvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode, System.AsyncCallback callback, object asyncState);
         
         void EndSvediStajalistaNaPodrazumevano(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/DodajStajalisteNaLiniju", ReplyAction="http://tempuri.org/IRvmsService/DodajStajalisteNaLinijuResponse")]
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/DodajStajalisteNaLiniju", ReplyAction="http://tempuri.org/IRvmsService/DodajStajalisteNaLinijuResponse")]
+        System.IAsyncResult BeginDodajStajalisteNaLiniju(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO EndDodajStajalisteNaLiniju(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinije", ReplyAction="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinijeResponse")]
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinije", ReplyAction="http://tempuri.org/IRvmsService/SkloniStajalisteSaLinijeResponse")]
+        System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO EndSkloniStajalisteSaLinije(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiTooltipZaRelaciju", ReplyAction="http://tempuri.org/IRvmsService/VratiTooltipZaRelacijuResponse")]
+        string VratiTooltipZaRelaciju(int idRelacije);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/VratiTooltipZaRelaciju", ReplyAction="http://tempuri.org/IRvmsService/VratiTooltipZaRelacijuResponse")]
+        System.IAsyncResult BeginVratiTooltipZaRelaciju(int idRelacije, System.AsyncCallback callback, object asyncState);
+        
+        string EndVratiTooltipZaRelaciju(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/VratiSusednaStajalista", ReplyAction="http://tempuri.org/IRvmsService/VratiSusednaStajalistaResponse")]
+        RVMS.Model.DTO.StajalisteDTO[] VratiSusednaStajalista(int idStajalista);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/VratiSusednaStajalista", ReplyAction="http://tempuri.org/IRvmsService/VratiSusednaStajalistaResponse")]
+        System.IAsyncResult BeginVratiSusednaStajalista(int idStajalista, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.StajalisteDTO[] EndVratiSusednaStajalista(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLiniju", ReplyAction="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLinijuResponse")]
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLiniju", ReplyAction="http://tempuri.org/IRvmsService/DodajStajalistaRelacijeNaLinijuResponse")]
+        System.IAsyncResult BeginDodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO EndDodajStajalistaRelacijeNaLiniju(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -443,6 +483,101 @@ namespace RVMS.Win.RvmsServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DodajStajalisteNaLinijuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DodajStajalisteNaLinijuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.LinijaSaKandidatimaDTO)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SkloniStajalisteSaLinijeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SkloniStajalisteSaLinijeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.LinijaSaKandidatimaDTO)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class VratiTooltipZaRelacijuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VratiTooltipZaRelacijuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class VratiSusednaStajalistaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VratiSusednaStajalistaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.StajalisteDTO[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.StajalisteDTO[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DodajStajalistaRelacijeNaLinijuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DodajStajalistaRelacijeNaLinijuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.LinijaSaKandidatimaDTO)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class RvmsServiceClient : System.ServiceModel.ClientBase<RVMS.Win.RvmsServices.IRvmsService>, RVMS.Win.RvmsServices.IRvmsService {
         
         private BeginOperationDelegate onBeginVratiOpstineDelegate;
@@ -547,6 +682,36 @@ namespace RVMS.Win.RvmsServices {
         
         private System.Threading.SendOrPostCallback onSvediStajalistaNaPodrazumevanoCompletedDelegate;
         
+        private BeginOperationDelegate onBeginDodajStajalisteNaLinijuDelegate;
+        
+        private EndOperationDelegate onEndDodajStajalisteNaLinijuDelegate;
+        
+        private System.Threading.SendOrPostCallback onDodajStajalisteNaLinijuCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSkloniStajalisteSaLinijeDelegate;
+        
+        private EndOperationDelegate onEndSkloniStajalisteSaLinijeDelegate;
+        
+        private System.Threading.SendOrPostCallback onSkloniStajalisteSaLinijeCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginVratiTooltipZaRelacijuDelegate;
+        
+        private EndOperationDelegate onEndVratiTooltipZaRelacijuDelegate;
+        
+        private System.Threading.SendOrPostCallback onVratiTooltipZaRelacijuCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginVratiSusednaStajalistaDelegate;
+        
+        private EndOperationDelegate onEndVratiSusednaStajalistaDelegate;
+        
+        private System.Threading.SendOrPostCallback onVratiSusednaStajalistaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDodajStajalistaRelacijeNaLinijuDelegate;
+        
+        private EndOperationDelegate onEndDodajStajalistaRelacijeNaLinijuDelegate;
+        
+        private System.Threading.SendOrPostCallback onDodajStajalistaRelacijeNaLinijuCompletedDelegate;
+        
         public RvmsServiceClient() {
         }
         
@@ -599,6 +764,16 @@ namespace RVMS.Win.RvmsServices {
         public event System.EventHandler<ObrisiStajalisteCompletedEventArgs> ObrisiStajalisteCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SvediStajalistaNaPodrazumevanoCompleted;
+        
+        public event System.EventHandler<DodajStajalisteNaLinijuCompletedEventArgs> DodajStajalisteNaLinijuCompleted;
+        
+        public event System.EventHandler<SkloniStajalisteSaLinijeCompletedEventArgs> SkloniStajalisteSaLinijeCompleted;
+        
+        public event System.EventHandler<VratiTooltipZaRelacijuCompletedEventArgs> VratiTooltipZaRelacijuCompleted;
+        
+        public event System.EventHandler<VratiSusednaStajalistaCompletedEventArgs> VratiSusednaStajalistaCompleted;
+        
+        public event System.EventHandler<DodajStajalistaRelacijeNaLinijuCompletedEventArgs> DodajStajalistaRelacijeNaLinijuCompleted;
         
         public RVMS.Model.Entities.Opstina[] VratiOpstine() {
             return base.Channel.VratiOpstine();
@@ -1454,6 +1629,262 @@ namespace RVMS.Win.RvmsServices {
             base.InvokeAsync(this.onBeginSvediStajalistaNaPodrazumevanoDelegate, new object[] {
                         idPodrazumevanogStajalista,
                         stajalistaKojaSeSvode}, this.onEndSvediStajalistaNaPodrazumevanoDelegate, this.onSvediStajalistaNaPodrazumevanoCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista) {
+            return base.Channel.DodajStajalisteNaLiniju(idLinije, idStajalista);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDodajStajalisteNaLiniju(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDodajStajalisteNaLiniju(idLinije, idStajalista, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO EndDodajStajalisteNaLiniju(System.IAsyncResult result) {
+            return base.Channel.EndDodajStajalisteNaLiniju(result);
+        }
+        
+        private System.IAsyncResult OnBeginDodajStajalisteNaLiniju(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idLinije = ((int)(inValues[0]));
+            int idStajalista = ((int)(inValues[1]));
+            return this.BeginDodajStajalisteNaLiniju(idLinije, idStajalista, callback, asyncState);
+        }
+        
+        private object[] OnEndDodajStajalisteNaLiniju(System.IAsyncResult result) {
+            RVMS.Model.DTO.LinijaSaKandidatimaDTO retVal = this.EndDodajStajalisteNaLiniju(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDodajStajalisteNaLinijuCompleted(object state) {
+            if ((this.DodajStajalisteNaLinijuCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DodajStajalisteNaLinijuCompleted(this, new DodajStajalisteNaLinijuCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DodajStajalisteNaLinijuAsync(int idLinije, int idStajalista) {
+            this.DodajStajalisteNaLinijuAsync(idLinije, idStajalista, null);
+        }
+        
+        public void DodajStajalisteNaLinijuAsync(int idLinije, int idStajalista, object userState) {
+            if ((this.onBeginDodajStajalisteNaLinijuDelegate == null)) {
+                this.onBeginDodajStajalisteNaLinijuDelegate = new BeginOperationDelegate(this.OnBeginDodajStajalisteNaLiniju);
+            }
+            if ((this.onEndDodajStajalisteNaLinijuDelegate == null)) {
+                this.onEndDodajStajalisteNaLinijuDelegate = new EndOperationDelegate(this.OnEndDodajStajalisteNaLiniju);
+            }
+            if ((this.onDodajStajalisteNaLinijuCompletedDelegate == null)) {
+                this.onDodajStajalisteNaLinijuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDodajStajalisteNaLinijuCompleted);
+            }
+            base.InvokeAsync(this.onBeginDodajStajalisteNaLinijuDelegate, new object[] {
+                        idLinije,
+                        idStajalista}, this.onEndDodajStajalisteNaLinijuDelegate, this.onDodajStajalisteNaLinijuCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista) {
+            return base.Channel.SkloniStajalisteSaLinije(idLinije, idStajalista);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSkloniStajalisteSaLinije(idLinije, idStajalista, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO EndSkloniStajalisteSaLinije(System.IAsyncResult result) {
+            return base.Channel.EndSkloniStajalisteSaLinije(result);
+        }
+        
+        private System.IAsyncResult OnBeginSkloniStajalisteSaLinije(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idLinije = ((int)(inValues[0]));
+            int idStajalista = ((int)(inValues[1]));
+            return this.BeginSkloniStajalisteSaLinije(idLinije, idStajalista, callback, asyncState);
+        }
+        
+        private object[] OnEndSkloniStajalisteSaLinije(System.IAsyncResult result) {
+            RVMS.Model.DTO.LinijaSaKandidatimaDTO retVal = this.EndSkloniStajalisteSaLinije(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSkloniStajalisteSaLinijeCompleted(object state) {
+            if ((this.SkloniStajalisteSaLinijeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SkloniStajalisteSaLinijeCompleted(this, new SkloniStajalisteSaLinijeCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalista) {
+            this.SkloniStajalisteSaLinijeAsync(idLinije, idStajalista, null);
+        }
+        
+        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalista, object userState) {
+            if ((this.onBeginSkloniStajalisteSaLinijeDelegate == null)) {
+                this.onBeginSkloniStajalisteSaLinijeDelegate = new BeginOperationDelegate(this.OnBeginSkloniStajalisteSaLinije);
+            }
+            if ((this.onEndSkloniStajalisteSaLinijeDelegate == null)) {
+                this.onEndSkloniStajalisteSaLinijeDelegate = new EndOperationDelegate(this.OnEndSkloniStajalisteSaLinije);
+            }
+            if ((this.onSkloniStajalisteSaLinijeCompletedDelegate == null)) {
+                this.onSkloniStajalisteSaLinijeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSkloniStajalisteSaLinijeCompleted);
+            }
+            base.InvokeAsync(this.onBeginSkloniStajalisteSaLinijeDelegate, new object[] {
+                        idLinije,
+                        idStajalista}, this.onEndSkloniStajalisteSaLinijeDelegate, this.onSkloniStajalisteSaLinijeCompletedDelegate, userState);
+        }
+        
+        public string VratiTooltipZaRelaciju(int idRelacije) {
+            return base.Channel.VratiTooltipZaRelaciju(idRelacije);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginVratiTooltipZaRelaciju(int idRelacije, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiTooltipZaRelaciju(idRelacije, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndVratiTooltipZaRelaciju(System.IAsyncResult result) {
+            return base.Channel.EndVratiTooltipZaRelaciju(result);
+        }
+        
+        private System.IAsyncResult OnBeginVratiTooltipZaRelaciju(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idRelacije = ((int)(inValues[0]));
+            return this.BeginVratiTooltipZaRelaciju(idRelacije, callback, asyncState);
+        }
+        
+        private object[] OnEndVratiTooltipZaRelaciju(System.IAsyncResult result) {
+            string retVal = this.EndVratiTooltipZaRelaciju(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVratiTooltipZaRelacijuCompleted(object state) {
+            if ((this.VratiTooltipZaRelacijuCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VratiTooltipZaRelacijuCompleted(this, new VratiTooltipZaRelacijuCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VratiTooltipZaRelacijuAsync(int idRelacije) {
+            this.VratiTooltipZaRelacijuAsync(idRelacije, null);
+        }
+        
+        public void VratiTooltipZaRelacijuAsync(int idRelacije, object userState) {
+            if ((this.onBeginVratiTooltipZaRelacijuDelegate == null)) {
+                this.onBeginVratiTooltipZaRelacijuDelegate = new BeginOperationDelegate(this.OnBeginVratiTooltipZaRelaciju);
+            }
+            if ((this.onEndVratiTooltipZaRelacijuDelegate == null)) {
+                this.onEndVratiTooltipZaRelacijuDelegate = new EndOperationDelegate(this.OnEndVratiTooltipZaRelaciju);
+            }
+            if ((this.onVratiTooltipZaRelacijuCompletedDelegate == null)) {
+                this.onVratiTooltipZaRelacijuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiTooltipZaRelacijuCompleted);
+            }
+            base.InvokeAsync(this.onBeginVratiTooltipZaRelacijuDelegate, new object[] {
+                        idRelacije}, this.onEndVratiTooltipZaRelacijuDelegate, this.onVratiTooltipZaRelacijuCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.StajalisteDTO[] VratiSusednaStajalista(int idStajalista) {
+            return base.Channel.VratiSusednaStajalista(idStajalista);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginVratiSusednaStajalista(int idStajalista, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiSusednaStajalista(idStajalista, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.StajalisteDTO[] EndVratiSusednaStajalista(System.IAsyncResult result) {
+            return base.Channel.EndVratiSusednaStajalista(result);
+        }
+        
+        private System.IAsyncResult OnBeginVratiSusednaStajalista(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idStajalista = ((int)(inValues[0]));
+            return this.BeginVratiSusednaStajalista(idStajalista, callback, asyncState);
+        }
+        
+        private object[] OnEndVratiSusednaStajalista(System.IAsyncResult result) {
+            RVMS.Model.DTO.StajalisteDTO[] retVal = this.EndVratiSusednaStajalista(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVratiSusednaStajalistaCompleted(object state) {
+            if ((this.VratiSusednaStajalistaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VratiSusednaStajalistaCompleted(this, new VratiSusednaStajalistaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VratiSusednaStajalistaAsync(int idStajalista) {
+            this.VratiSusednaStajalistaAsync(idStajalista, null);
+        }
+        
+        public void VratiSusednaStajalistaAsync(int idStajalista, object userState) {
+            if ((this.onBeginVratiSusednaStajalistaDelegate == null)) {
+                this.onBeginVratiSusednaStajalistaDelegate = new BeginOperationDelegate(this.OnBeginVratiSusednaStajalista);
+            }
+            if ((this.onEndVratiSusednaStajalistaDelegate == null)) {
+                this.onEndVratiSusednaStajalistaDelegate = new EndOperationDelegate(this.OnEndVratiSusednaStajalista);
+            }
+            if ((this.onVratiSusednaStajalistaCompletedDelegate == null)) {
+                this.onVratiSusednaStajalistaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiSusednaStajalistaCompleted);
+            }
+            base.InvokeAsync(this.onBeginVratiSusednaStajalistaDelegate, new object[] {
+                        idStajalista}, this.onEndVratiSusednaStajalistaDelegate, this.onVratiSusednaStajalistaCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije) {
+            return base.Channel.DodajStajalistaRelacijeNaLiniju(idLinije, idRelacije);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDodajStajalistaRelacijeNaLiniju(idLinije, idRelacije, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO EndDodajStajalistaRelacijeNaLiniju(System.IAsyncResult result) {
+            return base.Channel.EndDodajStajalistaRelacijeNaLiniju(result);
+        }
+        
+        private System.IAsyncResult OnBeginDodajStajalistaRelacijeNaLiniju(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idLinije = ((int)(inValues[0]));
+            int idRelacije = ((int)(inValues[1]));
+            return this.BeginDodajStajalistaRelacijeNaLiniju(idLinije, idRelacije, callback, asyncState);
+        }
+        
+        private object[] OnEndDodajStajalistaRelacijeNaLiniju(System.IAsyncResult result) {
+            RVMS.Model.DTO.LinijaSaKandidatimaDTO retVal = this.EndDodajStajalistaRelacijeNaLiniju(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDodajStajalistaRelacijeNaLinijuCompleted(object state) {
+            if ((this.DodajStajalistaRelacijeNaLinijuCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DodajStajalistaRelacijeNaLinijuCompleted(this, new DodajStajalistaRelacijeNaLinijuCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DodajStajalistaRelacijeNaLinijuAsync(int idLinije, int idRelacije) {
+            this.DodajStajalistaRelacijeNaLinijuAsync(idLinije, idRelacije, null);
+        }
+        
+        public void DodajStajalistaRelacijeNaLinijuAsync(int idLinije, int idRelacije, object userState) {
+            if ((this.onBeginDodajStajalistaRelacijeNaLinijuDelegate == null)) {
+                this.onBeginDodajStajalistaRelacijeNaLinijuDelegate = new BeginOperationDelegate(this.OnBeginDodajStajalistaRelacijeNaLiniju);
+            }
+            if ((this.onEndDodajStajalistaRelacijeNaLinijuDelegate == null)) {
+                this.onEndDodajStajalistaRelacijeNaLinijuDelegate = new EndOperationDelegate(this.OnEndDodajStajalistaRelacijeNaLiniju);
+            }
+            if ((this.onDodajStajalistaRelacijeNaLinijuCompletedDelegate == null)) {
+                this.onDodajStajalistaRelacijeNaLinijuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDodajStajalistaRelacijeNaLinijuCompleted);
+            }
+            base.InvokeAsync(this.onBeginDodajStajalistaRelacijeNaLinijuDelegate, new object[] {
+                        idLinije,
+                        idRelacije}, this.onEndDodajStajalistaRelacijeNaLinijuDelegate, this.onDodajStajalistaRelacijeNaLinijuCompletedDelegate, userState);
         }
     }
 }

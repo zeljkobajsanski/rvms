@@ -196,6 +196,8 @@
     <Content Include="Content\images\black_gradient.png" />
     <Content Include="Content\images\bootstrap\glyphicons-halflings-white.png" />
     <Content Include="Content\images\bootstrap\glyphicons-halflings.png" />
+    <Content Include="Content\images\bus_black_24x24.png" />
+    <Content Include="Content\images\bus_black_32x32.png" />
     <Content Include="Content\images\check_black.png" />
     <Content Include="Content\images\check_disabled.png" />
     <Content Include="Content\images\check_indeterminate_black.png" />
@@ -536,6 +538,7 @@
     <Content Include="Views\Stajalista\MapaStajalista.cshtml" />
     <Content Include="Views\Shared\_MapLayout.cshtml" />
     <Content Include="Views\Stajalista\PoredjenjeStajalista.cshtml" />
+    <Content Include="Views\Linije\KreirajLiniju.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

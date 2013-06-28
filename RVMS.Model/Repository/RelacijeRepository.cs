@@ -29,6 +29,14 @@ namespace RVMS.Model.Repository
              return relacije.ToArray();
          }
 
+        public IQueryable<Relacija> VratiRelacijeKojePolazeSaStanice(int idStajalista)
+        {
+            return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
+                                        .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
+                                        .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
+                                        .Where(x => x.MedjustanicnaRastojanja.Any(m => m.PolaznoStajalisteId == idStajalista && m.Rbr == 1));
+        }
+
         public Relacija VratiRelacijuSaRastojanjima(int idRelacije)
         {
             return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
