@@ -2,6 +2,8 @@
 {
     public class StajalisteLinije
     {
+        public int Id { get; set; }
+
         public int IdStajalista { get; set; }
 
         public int IdLinije { get; set; }

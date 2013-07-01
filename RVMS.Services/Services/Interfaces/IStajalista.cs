@@ -3,6 +3,7 @@ using RVMS.Model.DTO;
 
 namespace RVMS.Services.Services.Interfaces
 {
+    [ServiceContract]
     public interface IStajalista
     {
         [OperationContract]

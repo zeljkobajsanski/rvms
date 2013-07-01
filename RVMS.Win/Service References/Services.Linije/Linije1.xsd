@@ -5,33 +5,29 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PrevoznikId" type="xs:int" />
-      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteDTO" />
+      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteLinijeDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LinijaDTO" nillable="true" type="tns:LinijaDTO" />
-  <xs:complexType name="ArrayOfStajalisteDTO">
+  <xs:complexType name="ArrayOfStajalisteLinijeDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="StajalisteDTO" nillable="true" type="tns:StajalisteDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StajalisteLinijeDTO" nillable="true" type="tns:StajalisteLinijeDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfStajalisteDTO" nillable="true" type="tns:ArrayOfStajalisteDTO" />
-  <xs:complexType name="StajalisteDTO">
+  <xs:element name="ArrayOfStajalisteLinijeDTO" nillable="true" type="tns:ArrayOfStajalisteLinijeDTO" />
+  <xs:complexType name="StajalisteLinijeDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdStajalistaLinije" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Latituda" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LinijaId" type="xs:int" />
       <xs:element minOccurs="0" name="Longituda" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Mesto" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="MestoId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Novo" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Opstina" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OpstinaId" type="xs:int" />
-      <xs:element minOccurs="0" name="Stanica" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Udaljenost" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NazivStajalista" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rastojanje" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rbr" type="xs:int" />
+      <xs:element minOccurs="0" name="StajalisteId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="StajalisteDTO" nillable="true" type="tns:StajalisteDTO" />
+  <xs:element name="StajalisteLinijeDTO" nillable="true" type="tns:StajalisteLinijeDTO" />
   <xs:complexType name="LinijaSaKandidatimaDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Linija" nillable="true" type="tns:LinijaDTO" />
@@ -57,4 +53,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RelacijaDTO" nillable="true" type="tns:RelacijaDTO" />
+  <xs:complexType name="ArrayOfStajalisteDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StajalisteDTO" nillable="true" type="tns:StajalisteDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStajalisteDTO" nillable="true" type="tns:ArrayOfStajalisteDTO" />
+  <xs:complexType name="StajalisteDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdStajalistaLinije" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Latituda" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longituda" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Mesto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MestoId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Naziv" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Novo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Opstina" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpstinaId" type="xs:int" />
+      <xs:element minOccurs="0" name="Stanica" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Udaljenost" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StajalisteDTO" nillable="true" type="tns:StajalisteDTO" />
 </xs:schema>

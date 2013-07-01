@@ -31,10 +31,10 @@ namespace RVMS.Model.Repository
                                         .Where(x => x.PolaznoStajalisteId == polaznoStajaliste || x.DolaznoStajalisteId == polaznoStajaliste).ToArray();
         }
 
-        public decimal? VratiMedjustanicnaRastojanja(int odStajalista, int doStajalista)
+        public virtual decimal? VratiMedjustanicnaRastojanja(int odStajalista, int doStajalista)
         {
             var msr =
-                DataContext.Daljinar.SingleOrDefault(x => 
+                DataContext.Daljinar.FirstOrDefault(x => 
                     (x.PolaznoStajalisteId == odStajalista && x.DolaznoStajalisteId == doStajalista) || 
                     (x.PolaznoStajalisteId == doStajalista && x.DolaznoStajalisteId == odStajalista));
             return msr != null ? msr.Rastojanje : (decimal?)null;

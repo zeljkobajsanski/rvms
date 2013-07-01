@@ -65,15 +65,6 @@ namespace RVMS.Web
         void SvediStajalistaNaPodrazumevano(int idPodrazumevanogStajalista, int[] stajalistaKojaSeSvode);
 
         [OperationContract]
-        LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
-
-        [OperationContract]
-        LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije);
-
-        [OperationContract]
-        LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista);
-
-        [OperationContract]
         string VratiTooltipZaRelaciju(int idRelacije);
 
         [OperationContract]

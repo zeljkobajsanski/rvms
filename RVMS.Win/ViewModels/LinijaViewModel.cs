@@ -122,13 +122,6 @@ namespace RVMS.Win.ViewModels
 
         public void DodajStajaliste(int idStajalista)
         {
-            var stajaliste = m_Stajalista.SingleOrDefault(x => x.Id == idStajalista);
-            if (stajaliste == null) throw new Exception("Stajalište id: " + idStajalista + " nije pronađeno");
-            m_StajalistaLinije.Add(new StajalisteLinije
-            {
-                IdStajalista = idStajalista,
-                NazivStajalista = stajaliste.Naziv
-            });
             using (var svc = new LinijeClient())
             {
                 svc.DodajStajalisteNaLinijuCompleted += (s, e) =>
@@ -136,6 +129,17 @@ namespace RVMS.Win.ViewModels
                     HandleError(e);
                     Stajalista = e.Result.Stajalista;
                     Relacije = e.Result.Relacije.ToArray();
+                    m_StajalistaLinije.Clear();
+                    foreach (var stajaliste in e.Result.Linija.Stajalista)
+                    {
+                        m_StajalistaLinije.Add(new StajalisteLinije
+                        {
+                            Id = stajaliste.Id,
+                            IdStajalista = stajaliste.StajalisteId,
+                            NazivStajalista = stajaliste.NazivStajalista, 
+                            Rastojanje = stajaliste.Rastojanje
+                        });
+                    }
                 };
                 svc.DodajStajalisteNaLinijuAsync(IdLinije, idStajalista);
             }
@@ -154,11 +158,11 @@ namespace RVMS.Win.ViewModels
                     {
                         m_StajalistaLinije.Add(new StajalisteLinije
                         {
+                            Id = stajalisteLinije.Id,
                             IdStajalista = stajalisteLinije.Id,
-                            NazivStajalista = stajalisteLinije.Naziv
+                            NazivStajalista = stajalisteLinije.NazivStajalista
                         });
                     }
-                    DodataStajalista = e.Result.Linija.Stajalista.ToArray();
                 };
                 svc.DodajStajalistaRelacijeNaLinijuAsync(IdLinije, idRelacije);
             }
@@ -172,37 +176,27 @@ namespace RVMS.Win.ViewModels
 
         public void Obrisi(StajalisteLinije stajaliste)
         {
-            var last = m_StajalistaLinije.LastOrDefault();
-            if (last == null) return;
-            if (stajaliste != last)
+            
+            using (var svc = new LinijeClient())
             {
-                throw new Exception("Dozvoljeno je obrisati samo poslednje stajalište na liniji");
-            }
-            m_StajalistaLinije.Remove(stajaliste);
-            last = m_StajalistaLinije.LastOrDefault();
-            if (last != null)
-            {
-                using (var svc = new LinijeClient())
+                svc.SkloniStajalisteSaLinijeCompleted += (sender, args) =>
                 {
-                    svc.SkloniStajalisteSaLinijeCompleted += (sender, args) =>
+                    HandleError(args);
+                    Stajalista = args.Result.Stajalista;
+                    Relacije = args.Result.Relacije.ToArray();
+                    m_StajalistaLinije.Clear();
+                    foreach (var stajalisteLinije in args.Result.Linija.Stajalista)
                     {
-                        HandleError(args);
-                        Stajalista = args.Result.Stajalista;
-                    };
-                    svc.SkloniStajalisteSaLinijeAsync(IdLinije, last.IdStajalista);
-                }
-            }
-            else
-            {
-                using (var svc = new StajalistaClient())
-                {
-                    svc.VratiStajalistaCompleted += (s, e) =>
-                    {
-                        HandleError(e);
-                        Stajalista = e.Result;
-                    };
-                    svc.VratiStajalistaAsync(null, null);
-                }
+                        m_StajalistaLinije.Add(new StajalisteLinije
+                        {
+                            Id = stajalisteLinije.Id,
+                            IdStajalista = stajaliste.IdStajalista,
+                            NazivStajalista = stajaliste.NazivStajalista,
+                            Rastojanje = stajaliste.Rastojanje
+                        });
+                    }
+                };
+                svc.SkloniStajalisteSaLinijeAsync(IdLinije, stajaliste.Id);
             }
         }
 

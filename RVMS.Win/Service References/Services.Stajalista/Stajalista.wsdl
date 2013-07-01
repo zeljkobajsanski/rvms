@@ -7,22 +7,41 @@
       <xsd:import schemaLocation="http://localhost:49998/Services/Stajalista.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="Stajalista_VratiStajalista_InputMessage">
+  <wsdl:message name="IStajalista_VratiStajalista_InputMessage">
     <wsdl:part name="parameters" element="tns:VratiStajalista" />
   </wsdl:message>
-  <wsdl:message name="Stajalista_VratiStajalista_OutputMessage">
+  <wsdl:message name="IStajalista_VratiStajalista_OutputMessage">
     <wsdl:part name="parameters" element="tns:VratiStajalistaResponse" />
   </wsdl:message>
-  <wsdl:portType name="Stajalista">
+  <wsdl:message name="IStajalista_VratiSusednaStajalista_InputMessage">
+    <wsdl:part name="parameters" element="tns:VratiSusednaStajalista" />
+  </wsdl:message>
+  <wsdl:message name="IStajalista_VratiSusednaStajalista_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VratiSusednaStajalistaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IStajalista">
     <wsdl:operation name="VratiStajalista">
-      <wsdl:input wsaw:Action="http://tempuri.org/Stajalista/VratiStajalista" message="tns:Stajalista_VratiStajalista_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Stajalista/VratiStajalistaResponse" message="tns:Stajalista_VratiStajalista_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IStajalista/VratiStajalista" message="tns:IStajalista_VratiStajalista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStajalista/VratiStajalistaResponse" message="tns:IStajalista_VratiStajalista_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VratiSusednaStajalista">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStajalista/VratiSusednaStajalista" message="tns:IStajalista_VratiSusednaStajalista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStajalista/VratiSusednaStajalistaResponse" message="tns:IStajalista_VratiSusednaStajalista_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="BasicHttpBinding_Stajalista" type="tns:Stajalista">
+  <wsdl:binding name="BasicHttpBinding_IStajalista" type="tns:IStajalista">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="VratiStajalista">
-      <soap:operation soapAction="http://tempuri.org/Stajalista/VratiStajalista" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IStajalista/VratiStajalista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VratiSusednaStajalista">
+      <soap:operation soapAction="http://tempuri.org/IStajalista/VratiSusednaStajalista" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -32,7 +51,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Stajalista">
-    <wsdl:port name="BasicHttpBinding_Stajalista" binding="tns:BasicHttpBinding_Stajalista">
+    <wsdl:port name="BasicHttpBinding_IStajalista" binding="tns:BasicHttpBinding_IStajalista">
       <soap:address location="http://localhost:49998/Services/Stajalista.svc" />
     </wsdl:port>
   </wsdl:service>

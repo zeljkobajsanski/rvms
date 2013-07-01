@@ -393,67 +393,7 @@ namespace RVMS.Web
             return stajalista.Distinct(StajalisteDTO.IdComparer).ToArray();
         }
 
-        public LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije)
-        {
-            var relacija = m_RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
-            var dto = new LinijaSaKandidatimaDTO()
-            {
-                Linija = new LinijaDTO{Id = idLinije}
-            };
-            var poslednje = relacija.MedjustanicnaRastojanja.Last();
-            dto.Stajalista = VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
-            var relacije = m_RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
-            dto.Relacije = new List<RelacijaDTO>();
-            foreach (var r in relacije)
-            {
-                var relacijaDto = new RelacijaDTO()
-                {
-                    Id = r.Id,
-                    Naziv = r.Naziv,
-                    Napomena = KreirajStringOpisaRelacije(r).Replace(Environment.NewLine, ",")
-                };
-                dto.Relacije.Add(relacijaDto);
-            }
-            var medjustanicnaRastojanja = relacija.MedjustanicnaRastojanja.ToArray();
-
-            if (medjustanicnaRastojanja.Length == 1)
-            {
-                dto.Linija.Stajalista.Add(new StajalisteDTO
-                {
-                    Id = medjustanicnaRastojanja[0].Id,
-                    Naziv = medjustanicnaRastojanja[0].DolaznoStajaliste.Naziv,
-                    Latituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLatituda,
-                    Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
-                });
-            }
-            var found = false;
-            for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
-            {
-                var medjustanicnoRastojanje = medjustanicnaRastojanja[i];
-                if (i < medjustanicnaRastojanja.Length - 1)
-                {
-                    dto.Linija.Stajalista.Add(new StajalisteDTO
-                    {
-                        Id = medjustanicnoRastojanje.Id,
-                        Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
-                        Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
-                        Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
-                    });
-                }
-                else
-                {
-                    dto.Linija.Stajalista.Add(new StajalisteDTO
-                    {
-                        Id = medjustanicnoRastojanje.Id,
-                        Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
-                        Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
-                        Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
-                    });
-                }
-            }
-            
-            return dto;
-        }
+        
 
         public MedjustanicnoRastojanjeDTO[] PomeriMedjustanicnoRastojanjeDole(int idRelacije, int idMedjustanicnogRastojanja)
         {

@@ -53,18 +53,30 @@ namespace RVMS.Services.Services
         [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista)
         {
-            fRepositories.StajalistaLinijeRepository.Add(new StajalisteLinije()
+            var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);
+            decimal rastojanje = 0;
+            if (linija.Stajalista.Any())
+            {
+                var poslednjeStajaliste = linija.Stajalista.Last();
+                var medjustanicnoRastojanje = fRepositories.MedjustanicnaRastojanjaRepository
+                                          .VratiMedjustanicnaRastojanja(poslednjeStajaliste.Stajaliste.Id, idStajalista);
+                rastojanje =  (medjustanicnoRastojanje ?? 0) + poslednjeStajaliste.Rastojanje;
+            }
+            linija.Stajalista.Add(new StajalisteLinije()
             {
                 LinijaId = idLinije,
-                StajalisteId = idStajalista
+                StajalisteId = idStajalista,
+                Stajaliste = fRepositories.StajalistaRepository.Get(idStajalista),
+                Rastojanje = rastojanje
             });
             fRepositories.Save();
-            
+
             var dto = new LinijaSaKandidatimaDTO
-                          {
-                              Linija = UcitajLiniju(idLinije),
-                              Stajalista = fStajalista.VratiSusednaStajalista(idStajalista)
-                          };
+            {
+                Linija = ObjectMapper.Map(linija),
+                Stajalista = fStajalista.VratiSusednaStajalista(idStajalista)
+            };
+
             var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(idStajalista).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var relacija in relacije)
@@ -85,81 +97,110 @@ namespace RVMS.Services.Services
         [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije)
         {
-            var relacija = fRepositories.RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
-            var dto = new LinijaSaKandidatimaDTO()
-            {
-                Linija = new LinijaDTO { Id = idLinije }
-            };
-            var poslednje = relacija.MedjustanicnaRastojanja.Last();
-            dto.Stajalista = fStajalista.VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
-            var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
-            dto.Relacije = new List<RelacijaDTO>();
-            foreach (var r in relacije)
-            {
-                var relacijaDto = new RelacijaDTO()
-                {
-                    Id = r.Id,
-                    Naziv = r.Naziv,
-                    Napomena = KreirajStringOpisaRelacije(r).Replace(Environment.NewLine, ",")
-                };
-                dto.Relacije.Add(relacijaDto);
-            }
-            var medjustanicnaRastojanja = relacija.MedjustanicnaRastojanja.ToArray();
+            //var relacija = fRepositories.RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
+            //var dto = new LinijaSaKandidatimaDTO()
+            //{
+            //    Linija = new LinijaDTO { Id = idLinije }
+            //};
+            //var poslednje = relacija.MedjustanicnaRastojanja.Last();
+            //dto.Stajalista = fStajalista.VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
+            //var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
+            //dto.Relacije = new List<RelacijaDTO>();
+            //foreach (var r in relacije)
+            //{
+            //    var relacijaDto = new RelacijaDTO()
+            //    {
+            //        Id = r.Id,
+            //        Naziv = r.Naziv,
+            //        Napomena = KreirajStringOpisaRelacije(r).Replace(Environment.NewLine, ",")
+            //    };
+            //    dto.Relacije.Add(relacijaDto);
+            //}
+            //var medjustanicnaRastojanja = relacija.MedjustanicnaRastojanja.ToArray();
 
-            if (medjustanicnaRastojanja.Length == 1)
-            {
-                dto.Linija.Stajalista.Add(new StajalisteDTO
-                {
-                    Id = medjustanicnaRastojanja[0].Id,
-                    Naziv = medjustanicnaRastojanja[0].DolaznoStajaliste.Naziv,
-                    Latituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLatituda,
-                    Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
-                });
-            }
-            var found = false;
-            for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
-            {
-                var medjustanicnoRastojanje = medjustanicnaRastojanja[i];
-                if (i < medjustanicnaRastojanja.Length - 1)
-                {
-                    dto.Linija.Stajalista.Add(new StajalisteDTO
-                    {
-                        Id = medjustanicnoRastojanje.Id,
-                        Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
-                        Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
-                        Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
-                    });
-                }
-                else
-                {
-                    dto.Linija.Stajalista.Add(new StajalisteDTO
-                    {
-                        Id = medjustanicnoRastojanje.Id,
-                        Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
-                        Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
-                        Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
-                    });
-                }
-            }
+            //if (medjustanicnaRastojanja.Length == 1)
+            //{
+            //    dto.Linija.Stajalista.Add(new StajalisteDTO
+            //    {
+            //        Id = medjustanicnaRastojanja[0].Id,
+            //        Naziv = medjustanicnaRastojanja[0].DolaznoStajaliste.Naziv,
+            //        Latituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLatituda,
+            //        Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
+            //    });
+            //}
+            //var found = false;
+            //for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
+            //{
+            //    var medjustanicnoRastojanje = medjustanicnaRastojanja[i];
+            //    if (i < medjustanicnaRastojanja.Length - 1)
+            //    {
+            //        dto.Linija.Stajalista.Add(new StajalisteDTO
+            //        {
+            //            Id = medjustanicnoRastojanje.Id,
+            //            Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
+            //            Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
+            //            Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
+            //        });
+            //    }
+            //    else
+            //    {
+            //        dto.Linija.Stajalista.Add(new StajalisteDTO
+            //        {
+            //            Id = medjustanicnoRastojanje.Id,
+            //            Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
+            //            Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
+            //            Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
+            //        });
+            //    }
+            //}
 
-            return dto;
+            //return dto;
+            return null;
         }
 
         [OperationContract]
-        public LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista)
+        public LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije)
         {
-            var dto = new LinijaSaKandidatimaDTO();
-            dto.Stajalista = fStajalista.VratiSusednaStajalista(idStajalista);
+            var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);
+            var found = false;
+            foreach (var stajalisteLinije in linija.Stajalista.ToArray())
+            {
+                if (stajalisteLinije.Id == idStajalistaLinije)
+                {
+                    found = true;
+                }
+                if (found)
+                {
+                    linija.Stajalista.Remove(stajalisteLinije);
+                }
+            }
+            fRepositories.Save();
+            var dto = new LinijaSaKandidatimaDTO()
+            {
+                Linija = ObjectMapper.Map(linija)
+            };
+            var poslednjeStajaliste = linija.Stajalista.LastOrDefault();
+            if (poslednjeStajaliste == null)
+            {
+                dto.Stajalista = fStajalista.VratiStajalista(null, null);
+                dto.Relacije = new List<RelacijaDTO>();
+            }
+            else
+            {
+                dto.Stajalista = fStajalista.VratiSusednaStajalista(poslednjeStajaliste.StajalisteId);
+                var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednjeStajaliste.StajalisteId);
+                dto.Relacije = relacije.Select(ObjectMapper.Map).ToList();
+                foreach (var relacija in relacije)
+                {
+                    var relacijaDto = dto.Relacije.Single(x => x.Id == relacija.Id);
+                    relacijaDto.Napomena = KreirajStringOpisaRelacije(relacija);
+                }
+            }
+            
             return dto;
         }
 
-        private LinijaDTO UcitajLiniju(int idLinije)
-        {
-            var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);
-            return linija != null ? ObjectMapper.Map(linija) : null;
-        }
-
-        private static string KreirajStringOpisaRelacije(Relacija relacija)
+        public static string KreirajStringOpisaRelacije(Relacija relacija)
         {
             var sb = new StringBuilder();
             var len = relacija.MedjustanicnaRastojanja.Count;
@@ -169,17 +210,12 @@ namespace RVMS.Services.Services
                 var medjustanicnoRastojanje = relacija.MedjustanicnaRastojanja[i];
                 if (i == 0)
                 {
-                    sb.AppendLine(medjustanicnoRastojanje.PolaznoStajaliste.Naziv);
+                    sb.Append(medjustanicnoRastojanje.PolaznoStajaliste.Naziv).Append(",");
                 }
-                else
-                {
-                    sb.AppendLine(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
-                }
+                sb.Append(medjustanicnoRastojanje.DolaznoStajaliste.Naziv);
+                if (i < len - 1) sb.Append(',');
             }
-            if (len == 1)
-            {
-                sb.AppendLine(relacija.MedjustanicnaRastojanja[0].DolaznoStajaliste.Naziv);
-            }
+            
             return sb.ToString();
         }
     }

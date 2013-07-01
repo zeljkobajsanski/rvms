@@ -117,14 +117,9 @@ namespace RVMS.Web.Controllers
                 Id = linija.Id,
                 Naziv = linija.Naziv,
                 PrevoznikId = linija.PrevoznikId,
-                Stajalista = new List<StajalisteDTO>(stajalista.Select(x => new StajalisteDTO()
+                Stajalista = new List<StajalisteLinijeDTO>(stajalista.Select(x => new StajalisteLinijeDTO()
                 {
-                    Id = x.StajalisteId,
-                    IdStajalistaLinije = x.Id,
-                    Naziv = x.Stajaliste.Naziv,
-                    Latituda = x.Stajaliste.GpsLatituda,
-                    Longituda = x.Stajaliste.GpsLongituda,
-                    Udaljenost = x.Rastojanje
+                    
                 }))
             };
             return Json(dto, JsonRequestBehavior.AllowGet);

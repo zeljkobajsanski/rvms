@@ -21,27 +21,27 @@ namespace RVMS.Model.Repository
         {
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             DataContext.Set<T>().Add(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             DataContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             DataContext.Entry(entity).State = EntityState.Deleted;
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return DataContext.Set<T>().SingleOrDefault(x => x.Id == id);
         }
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return DataContext.Set<T>();
         } 
@@ -61,7 +61,7 @@ namespace RVMS.Model.Repository
             DataContext.Entry(entity).State = EntityState.Unchanged;
         }
 
-        public IQueryable<T> GetActive()
+        public virtual IQueryable<T> GetActive()
         {
             return DataContext.Set<T>().Where(x => x.Aktivan);
         } 

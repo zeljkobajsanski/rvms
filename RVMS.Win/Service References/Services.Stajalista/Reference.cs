@@ -12,20 +12,28 @@ namespace RVMS.Win.Services.Stajalista {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Services.Stajalista.Stajalista")]
-    public interface Stajalista {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Services.Stajalista.IStajalista")]
+    public interface IStajalista {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Stajalista/VratiStajalista", ReplyAction="http://tempuri.org/Stajalista/VratiStajalistaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStajalista/VratiStajalista", ReplyAction="http://tempuri.org/IStajalista/VratiStajalistaResponse")]
         RVMS.Model.DTO.StajalisteDTO[] VratiStajalista(System.Nullable<int> idOpstine, System.Nullable<int> idMesta);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/Stajalista/VratiStajalista", ReplyAction="http://tempuri.org/Stajalista/VratiStajalistaResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStajalista/VratiStajalista", ReplyAction="http://tempuri.org/IStajalista/VratiStajalistaResponse")]
         System.IAsyncResult BeginVratiStajalista(System.Nullable<int> idOpstine, System.Nullable<int> idMesta, System.AsyncCallback callback, object asyncState);
         
         RVMS.Model.DTO.StajalisteDTO[] EndVratiStajalista(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStajalista/VratiSusednaStajalista", ReplyAction="http://tempuri.org/IStajalista/VratiSusednaStajalistaResponse")]
+        RVMS.Model.DTO.StajalisteDTO[] VratiSusednaStajalista(int idStajalista);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IStajalista/VratiSusednaStajalista", ReplyAction="http://tempuri.org/IStajalista/VratiSusednaStajalistaResponse")]
+        System.IAsyncResult BeginVratiSusednaStajalista(int idStajalista, System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.StajalisteDTO[] EndVratiSusednaStajalista(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface StajalistaChannel : RVMS.Win.Services.Stajalista.Stajalista, System.ServiceModel.IClientChannel {
+    public interface IStajalistaChannel : RVMS.Win.Services.Stajalista.IStajalista, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -49,13 +57,38 @@ namespace RVMS.Win.Services.Stajalista {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class StajalistaClient : System.ServiceModel.ClientBase<RVMS.Win.Services.Stajalista.Stajalista>, RVMS.Win.Services.Stajalista.Stajalista {
+    public partial class VratiSusednaStajalistaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VratiSusednaStajalistaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.StajalisteDTO[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.StajalisteDTO[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class StajalistaClient : System.ServiceModel.ClientBase<RVMS.Win.Services.Stajalista.IStajalista>, RVMS.Win.Services.Stajalista.IStajalista {
         
         private BeginOperationDelegate onBeginVratiStajalistaDelegate;
         
         private EndOperationDelegate onEndVratiStajalistaDelegate;
         
         private System.Threading.SendOrPostCallback onVratiStajalistaCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginVratiSusednaStajalistaDelegate;
+        
+        private EndOperationDelegate onEndVratiSusednaStajalistaDelegate;
+        
+        private System.Threading.SendOrPostCallback onVratiSusednaStajalistaCompletedDelegate;
         
         public StajalistaClient() {
         }
@@ -77,6 +110,8 @@ namespace RVMS.Win.Services.Stajalista {
         }
         
         public event System.EventHandler<VratiStajalistaCompletedEventArgs> VratiStajalistaCompleted;
+        
+        public event System.EventHandler<VratiSusednaStajalistaCompletedEventArgs> VratiSusednaStajalistaCompleted;
         
         public RVMS.Model.DTO.StajalisteDTO[] VratiStajalista(System.Nullable<int> idOpstine, System.Nullable<int> idMesta) {
             return base.Channel.VratiStajalista(idOpstine, idMesta);
@@ -128,6 +163,56 @@ namespace RVMS.Win.Services.Stajalista {
             base.InvokeAsync(this.onBeginVratiStajalistaDelegate, new object[] {
                         idOpstine,
                         idMesta}, this.onEndVratiStajalistaDelegate, this.onVratiStajalistaCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.StajalisteDTO[] VratiSusednaStajalista(int idStajalista) {
+            return base.Channel.VratiSusednaStajalista(idStajalista);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginVratiSusednaStajalista(int idStajalista, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiSusednaStajalista(idStajalista, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.StajalisteDTO[] EndVratiSusednaStajalista(System.IAsyncResult result) {
+            return base.Channel.EndVratiSusednaStajalista(result);
+        }
+        
+        private System.IAsyncResult OnBeginVratiSusednaStajalista(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int idStajalista = ((int)(inValues[0]));
+            return this.BeginVratiSusednaStajalista(idStajalista, callback, asyncState);
+        }
+        
+        private object[] OnEndVratiSusednaStajalista(System.IAsyncResult result) {
+            RVMS.Model.DTO.StajalisteDTO[] retVal = this.EndVratiSusednaStajalista(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVratiSusednaStajalistaCompleted(object state) {
+            if ((this.VratiSusednaStajalistaCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VratiSusednaStajalistaCompleted(this, new VratiSusednaStajalistaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VratiSusednaStajalistaAsync(int idStajalista) {
+            this.VratiSusednaStajalistaAsync(idStajalista, null);
+        }
+        
+        public void VratiSusednaStajalistaAsync(int idStajalista, object userState) {
+            if ((this.onBeginVratiSusednaStajalistaDelegate == null)) {
+                this.onBeginVratiSusednaStajalistaDelegate = new BeginOperationDelegate(this.OnBeginVratiSusednaStajalista);
+            }
+            if ((this.onEndVratiSusednaStajalistaDelegate == null)) {
+                this.onEndVratiSusednaStajalistaDelegate = new EndOperationDelegate(this.OnEndVratiSusednaStajalista);
+            }
+            if ((this.onVratiSusednaStajalistaCompletedDelegate == null)) {
+                this.onVratiSusednaStajalistaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiSusednaStajalistaCompleted);
+            }
+            base.InvokeAsync(this.onBeginVratiSusednaStajalistaDelegate, new object[] {
+                        idStajalista}, this.onEndVratiSusednaStajalistaDelegate, this.onVratiSusednaStajalistaCompletedDelegate, userState);
         }
     }
 }

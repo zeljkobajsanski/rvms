@@ -6,12 +6,12 @@ namespace RVMS.Model.DTO
     {
         public LinijaDTO()
         {
-            Stajalista = new List<StajalisteDTO>();
+            Stajalista = new List<StajalisteLinijeDTO>();
         }
 
         public int Id { get; set; }
         public string Naziv { get; set; }
         public int PrevoznikId { get; set; }
-        public List<StajalisteDTO> Stajalista { get; set; }
+        public List<StajalisteLinijeDTO> Stajalista { get; set; }
     }
 }

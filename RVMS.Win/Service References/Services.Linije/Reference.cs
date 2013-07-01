@@ -40,10 +40,10 @@ namespace RVMS.Win.Services.Linije {
         RVMS.Model.DTO.LinijaSaKandidatimaDTO EndDodajStajalistaRelacijeNaLiniju(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/SkloniStajalisteSaLinije", ReplyAction="http://tempuri.org/Linije/SkloniStajalisteSaLinijeResponse")]
-        RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista);
+        RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/Linije/SkloniStajalisteSaLinije", ReplyAction="http://tempuri.org/Linije/SkloniStajalisteSaLinijeResponse")]
-        System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije, System.AsyncCallback callback, object asyncState);
         
         RVMS.Model.DTO.LinijaSaKandidatimaDTO EndSkloniStajalisteSaLinije(System.IAsyncResult result);
     }
@@ -337,13 +337,13 @@ namespace RVMS.Win.Services.Linije {
                         idRelacije}, this.onEndDodajStajalistaRelacijeNaLinijuDelegate, this.onDodajStajalistaRelacijeNaLinijuCompletedDelegate, userState);
         }
         
-        public RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista) {
-            return base.Channel.SkloniStajalisteSaLinije(idLinije, idStajalista);
+        public RVMS.Model.DTO.LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije) {
+            return base.Channel.SkloniStajalisteSaLinije(idLinije, idStajalistaLinije);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalista, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginSkloniStajalisteSaLinije(idLinije, idStajalista, callback, asyncState);
+        public System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSkloniStajalisteSaLinije(idLinije, idStajalistaLinije, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -353,8 +353,8 @@ namespace RVMS.Win.Services.Linije {
         
         private System.IAsyncResult OnBeginSkloniStajalisteSaLinije(object[] inValues, System.AsyncCallback callback, object asyncState) {
             int idLinije = ((int)(inValues[0]));
-            int idStajalista = ((int)(inValues[1]));
-            return this.BeginSkloniStajalisteSaLinije(idLinije, idStajalista, callback, asyncState);
+            int idStajalistaLinije = ((int)(inValues[1]));
+            return this.BeginSkloniStajalisteSaLinije(idLinije, idStajalistaLinije, callback, asyncState);
         }
         
         private object[] OnEndSkloniStajalisteSaLinije(System.IAsyncResult result) {
@@ -370,11 +370,11 @@ namespace RVMS.Win.Services.Linije {
             }
         }
         
-        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalista) {
-            this.SkloniStajalisteSaLinijeAsync(idLinije, idStajalista, null);
+        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalistaLinije) {
+            this.SkloniStajalisteSaLinijeAsync(idLinije, idStajalistaLinije, null);
         }
         
-        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalista, object userState) {
+        public void SkloniStajalisteSaLinijeAsync(int idLinije, int idStajalistaLinije, object userState) {
             if ((this.onBeginSkloniStajalisteSaLinijeDelegate == null)) {
                 this.onBeginSkloniStajalisteSaLinijeDelegate = new BeginOperationDelegate(this.OnBeginSkloniStajalisteSaLinije);
             }
@@ -386,7 +386,7 @@ namespace RVMS.Win.Services.Linije {
             }
             base.InvokeAsync(this.onBeginSkloniStajalisteSaLinijeDelegate, new object[] {
                         idLinije,
-                        idStajalista}, this.onEndSkloniStajalisteSaLinijeDelegate, this.onSkloniStajalisteSaLinijeCompletedDelegate, userState);
+                        idStajalistaLinije}, this.onEndSkloniStajalisteSaLinijeDelegate, this.onSkloniStajalisteSaLinijeCompletedDelegate, userState);
         }
     }
 }

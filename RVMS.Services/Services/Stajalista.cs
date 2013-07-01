@@ -8,7 +8,6 @@ using RVMS.Services.Services.Interfaces;
 
 namespace RVMS.Services.Services
 {
-    [ServiceContract]
     public class Stajalista : IStajalista
     {
         private readonly IRepositories fRepositories;
@@ -23,7 +22,6 @@ namespace RVMS.Services.Services
             fRepositories = repositories;
         }
 
-        [OperationContract]
          public StajalisteDTO[] VratiStajalista(int? idOpstine, int? idMesta)
          {
              return fRepositories.StajalistaRepository.VratiStajalista(idOpstine, idMesta, true).Select(
@@ -42,7 +40,6 @@ namespace RVMS.Services.Services
                      }).ToArray();
          }
 
-         [OperationContract]
          public StajalisteDTO[] VratiSusednaStajalista(int idStajalista)
          {
              var stajalista = new List<StajalisteDTO>();
