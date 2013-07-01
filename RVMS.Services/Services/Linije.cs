@@ -172,6 +172,7 @@ namespace RVMS.Services.Services
                 if (found)
                 {
                     linija.Stajalista.Remove(stajalisteLinije);
+                    fRepositories.StajalistaLinijeRepository.Delete(stajalisteLinije);
                 }
             }
             fRepositories.Save();

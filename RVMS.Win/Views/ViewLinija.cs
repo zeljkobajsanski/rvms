@@ -44,14 +44,15 @@ namespace RVMS.Win.Views
             }
         }
 
-        private void DodajMarkere(IEnumerable<StajalisteDTO> stajalista)
+        private void DodajMarkere(IEnumerable<StajalisteLinije> stajalista)
         {
             if (webBrowser1.Document != null)
             {
+                webBrowser1.Document.InvokeScript("dodajMarker"
                 foreach (var stajalisteDto in stajalista)
                 {
                     webBrowser1.Document.InvokeScript("dodajMarker",
-                                                      new object[] { stajalisteDto.Id, stajalisteDto.Latituda, stajalisteDto.Longituda });
+                                                      new object[] { stajalisteDto.Id, stajalisteDto., stajalisteDto.Longituda });
                 }
             }
             

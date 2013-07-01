@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using FluentValidation;
 using FluentValidation.Results;
@@ -19,7 +20,7 @@ namespace RVMS.Win.ViewModels
         
         private StajalisteDTO[] m_Stajalista;
         private RelacijaDTO[] m_Relacije;
-        private StajalisteDTO[] m_DodataStajalista;
+        private IEnumerable<StajalisteLinije> m_DodataStajalista;
         private string fNazivLinije;
         private int? fIdPrevoznika;
         private readonly LinijaViewModelValidator fModelValidator = new LinijaViewModelValidator();
@@ -92,7 +93,7 @@ namespace RVMS.Win.ViewModels
             }
         }
 
-        public StajalisteDTO[] DodataStajalista
+        public IEnumerable<StajalisteLinije> DodataStajalista
         {
             get { return m_DodataStajalista; }
             set
@@ -190,11 +191,12 @@ namespace RVMS.Win.ViewModels
                         m_StajalistaLinije.Add(new StajalisteLinije
                         {
                             Id = stajalisteLinije.Id,
-                            IdStajalista = stajaliste.IdStajalista,
-                            NazivStajalista = stajaliste.NazivStajalista,
-                            Rastojanje = stajaliste.Rastojanje
+                            IdStajalista = stajalisteLinije.StajalisteId,
+                            NazivStajalista = stajalisteLinije.NazivStajalista,
+                            Rastojanje = stajalisteLinije.Rastojanje
                         });
                     }
+                    DodataStajalista = m_StajalistaLinije;
                 };
                 svc.SkloniStajalisteSaLinijeAsync(IdLinije, stajaliste.Id);
             }
