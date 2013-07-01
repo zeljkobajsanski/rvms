@@ -3,22 +3,69 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using RVMS.Model;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using RVMS.Model.Repository;
+using RVMS.Model.Repository.Interfaces;
+using RVMS.Services.Services.Interfaces;
 
 namespace RVMS.Services.Services
 {
     [ServiceContract]
     public class Linije
     {
-        private readonly RelacijeRepository fRelacijeRepository = new RelacijeRepository();
+        private readonly IRepositories fRepositories = new Repositories();
+
+        private readonly IStajalista fStajalista;
+
+        public Linije() : this(new Repositories(), new Stajalista())
+        {
+        }
+
+        public Linije(IRepositories repositories, IStajalista stajalista)
+        {
+            fRepositories = repositories;
+            fStajalista = stajalista;
+        }
+
+        [OperationContract]
+        public int SacuvajLiniju(LinijaDTO linijaDto)
+        {
+            var linija = new Linija
+            {
+                Id = linijaDto.Id,
+                PrevoznikId = linijaDto.PrevoznikId,
+                Naziv = linijaDto.Naziv
+            };
+            if (linija.Id == 0)
+            {
+                fRepositories.LinijeRepository.Add(linija);
+            }
+            else
+            {
+                fRepositories.LinijeRepository.Update(linija);
+            }
+            fRepositories.Save();
+            return linija.Id;
+        }
 
         [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista)
         {
-            var dto = new LinijaSaKandidatimaDTO {Stajalista = new Stajalista().VratiSusednaStajalista(idStajalista)};
-            var relacije = fRelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(idStajalista).ToArray();
+            fRepositories.StajalistaLinijeRepository.Add(new StajalisteLinije()
+            {
+                LinijaId = idLinije,
+                StajalisteId = idStajalista
+            });
+            fRepositories.Save();
+            
+            var dto = new LinijaSaKandidatimaDTO
+                          {
+                              Linija = UcitajLiniju(idLinije),
+                              Stajalista = fStajalista.VratiSusednaStajalista(idStajalista)
+                          };
+            var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(idStajalista).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var relacija in relacije)
             {
@@ -33,17 +80,19 @@ namespace RVMS.Services.Services
             return dto;
         }
 
+        
+
         [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije)
         {
-            var relacija = fRelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
+            var relacija = fRepositories.RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
             var dto = new LinijaSaKandidatimaDTO()
             {
                 Linija = new LinijaDTO { Id = idLinije }
             };
             var poslednje = relacija.MedjustanicnaRastojanja.Last();
-            dto.Stajalista = new Stajalista().VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
-            var relacije = fRelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
+            dto.Stajalista = fStajalista.VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
+            var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var r in relacije)
             {
@@ -100,8 +149,14 @@ namespace RVMS.Services.Services
         public LinijaSaKandidatimaDTO SkloniStajalisteSaLinije(int idLinije, int idStajalista)
         {
             var dto = new LinijaSaKandidatimaDTO();
-            dto.Stajalista = new Stajalista().VratiSusednaStajalista(idStajalista);
+            dto.Stajalista = fStajalista.VratiSusednaStajalista(idStajalista);
             return dto;
+        }
+
+        private LinijaDTO UcitajLiniju(int idLinije)
+        {
+            var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);
+            return linija != null ? ObjectMapper.Map(linija) : null;
         }
 
         private static string KreirajStringOpisaRelacije(Relacija relacija)

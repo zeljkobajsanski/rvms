@@ -1,21 +1,30 @@
 ﻿using System.Collections.Generic;
 using RVMS.Model.Entities;
 using System.Linq;
+using RVMS.Model.Repository.Interfaces;
 
 namespace RVMS.Model.Repository
 {
-    public class MedjustanicnaRastojanjaRepository : Repository<MedjustanicnoRastojanje>
+    public class MedjustanicnaRastojanjaRepository : Repository<MedjustanicnoRastojanje>, IMedjustanicnaRastojanjaRepository
     {
+        public MedjustanicnaRastojanjaRepository()
+        {
+        }
+
+        public MedjustanicnaRastojanjaRepository(DataContext dataContext) : base(dataContext)
+        {
+        }
+
         public IEnumerable<MedjustanicnoRastojanje> VratiMedjustanicnaRastojanjaNaRelaciji(int idRelacije)
         {
-            return fDataContext.Relacije.Include("MedjustanicnaRastojanja.PolaznoStajaliste")
+            return DataContext.Relacije.Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                                         .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
                                         .Single(x => x.Id == idRelacije).MedjustanicnaRastojanja;
         }
 
         public IEnumerable<MedjustanicnoRastojanje> VratiMedjustanicnaRastojanja(int? polaznoStajaliste)
         {
-            return fDataContext.Daljinar.Include("PolaznoStajaliste")
+            return DataContext.Daljinar.Include("PolaznoStajaliste")
                                         .Include("PolaznoStajaliste.Opstina")
                                         .Include("DolaznoStajaliste")
                                         .Include("DolaznoStajaliste.Opstina")
@@ -25,7 +34,7 @@ namespace RVMS.Model.Repository
         public decimal? VratiMedjustanicnaRastojanja(int odStajalista, int doStajalista)
         {
             var msr =
-                fDataContext.Daljinar.SingleOrDefault(x => 
+                DataContext.Daljinar.SingleOrDefault(x => 
                     (x.PolaznoStajalisteId == odStajalista && x.DolaznoStajalisteId == doStajalista) || 
                     (x.PolaznoStajalisteId == doStajalista && x.DolaznoStajalisteId == odStajalista));
             return msr != null ? msr.Rastojanje : (decimal?)null;
@@ -34,7 +43,7 @@ namespace RVMS.Model.Repository
         public IQueryable<MedjustanicnoRastojanje> VratiSvaMedjustanicnaRastojanjaSaStajalistem(int idStajalista)
         {
             return
-                fDataContext.Daljinar.Where(
+                DataContext.Daljinar.Where(
                     x => x.PolaznoStajalisteId == idStajalista || x.DolaznoStajalisteId == idStajalista);
         }
     }

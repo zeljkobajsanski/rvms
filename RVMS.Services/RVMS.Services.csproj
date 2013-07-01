@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -41,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IStajalista.cs" />
     <Compile Include="Services\Linije.cs" />
     <Compile Include="Services\Stajalista.cs" />
-    <Compile Include="Services\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RVMS.Model\RVMS.Model.csproj">

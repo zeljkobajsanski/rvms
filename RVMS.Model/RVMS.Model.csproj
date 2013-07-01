@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -61,14 +64,26 @@
     <Compile Include="Entities\Relacija.cs" />
     <Compile Include="Entities\Stajaliste.cs" />
     <Compile Include="Entities\StajalisteLinije.cs" />
+    <Compile Include="ObjectMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DataContext.cs" />
+    <Compile Include="Repository\Interfaces\ILinijeRepository.cs" />
+    <Compile Include="Repository\Interfaces\IMedjustanicnaRastojanjaRepository.cs" />
+    <Compile Include="Repository\Interfaces\IMestaRepository.cs" />
+    <Compile Include="Repository\Interfaces\IPrevozniciRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRelacijeRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRepositories.cs" />
+    <Compile Include="Repository\Interfaces\IRepository.cs" />
+    <Compile Include="Repository\Interfaces\IStajalistaLinijeRepository.cs" />
+    <Compile Include="Repository\Interfaces\IStajalistaRepository.cs" />
     <Compile Include="Repository\LinijeRepository.cs" />
     <Compile Include="Repository\MedjustanicnaRastojanjaRepository.cs" />
     <Compile Include="Repository\MestaRepository.cs" />
     <Compile Include="Repository\PrevozniciRepository.cs" />
     <Compile Include="Repository\RelacijeRepository.cs" />
+    <Compile Include="Repository\Repositories.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\StajalistaLinijeRepository.cs" />
     <Compile Include="Repository\StajalistaRepository.cs" />
   </ItemGroup>
   <ItemGroup>

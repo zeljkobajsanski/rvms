@@ -3,20 +3,30 @@ using System.Linq;
 using System.ServiceModel;
 using RVMS.Model.DTO;
 using RVMS.Model.Repository;
+using RVMS.Model.Repository.Interfaces;
+using RVMS.Services.Services.Interfaces;
 
 namespace RVMS.Services.Services
 {
     [ServiceContract]
-    public class Stajalista
+    public class Stajalista : IStajalista
     {
-        private readonly StajalistaRepository fStajalistaRepository = new StajalistaRepository();
+        private readonly IRepositories fRepositories;
 
-        private readonly MedjustanicnaRastojanjaRepository fMedjustanicnaRastojanjaRepository = new MedjustanicnaRastojanjaRepository();
+        public Stajalista()
+        {
+            fRepositories = new Repositories();
+        }
 
-         [OperationContract]
+        public Stajalista(IRepositories repositories)
+        {
+            fRepositories = repositories;
+        }
+
+        [OperationContract]
          public StajalisteDTO[] VratiStajalista(int? idOpstine, int? idMesta)
          {
-             return fStajalistaRepository.VratiStajalista(idOpstine, idMesta, true).Select(
+             return fRepositories.StajalistaRepository.VratiStajalista(idOpstine, idMesta, true).Select(
                  x => new StajalisteDTO()
                      {
                         Id = x.Id,
@@ -36,7 +46,7 @@ namespace RVMS.Services.Services
          public StajalisteDTO[] VratiSusednaStajalista(int idStajalista)
          {
              var stajalista = new List<StajalisteDTO>();
-             var medjustanicnaRastojanja = fMedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(idStajalista);
+             var medjustanicnaRastojanja = fRepositories.MedjustanicnaRastojanjaRepository.VratiMedjustanicnaRastojanja(idStajalista);
              foreach (var medjustanicnoRastojanje in medjustanicnaRastojanja)
              {
                  if (medjustanicnoRastojanje.PolaznoStajalisteId == idStajalista)

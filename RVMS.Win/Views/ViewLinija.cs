@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Data;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace RVMS.Win.Views
             InitializeComponent();
             HandleEvents();
             stajalisteLinijeBindingSource.DataSource = m_ViewModel.StajalistaLinije;
+            linijaViewModelBindingSource.DataSource = m_ViewModel;
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -66,6 +68,18 @@ namespace RVMS.Win.Views
         {
             m_ViewModel.NoviUnos();
             webBrowser1.Url = new Uri(ApplicationContext.Current.WebServiceHome + "/Linije/KreirajLiniju");
+        }
+
+        public override void Sacuvaj()
+        {
+            try
+            {
+                m_ViewModel.Sacuvaj();
+            }
+            catch (ValidationException)
+            {
+                OnNotify(new InvalidForSaveMessage());
+            }
         }
 
         private void HandleEvents()

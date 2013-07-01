@@ -3,14 +3,23 @@ using System.Data;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using System.Linq;
+using RVMS.Model.Repository.Interfaces;
 
 namespace RVMS.Model.Repository
 {
-    public class StajalistaRepository : Repository<Stajaliste>
+    public class StajalistaRepository : Repository<Stajaliste>, IStajalistaRepository
     {
+        public StajalistaRepository()
+        {
+        }
+
+        public StajalistaRepository(DataContext dataContext) : base(dataContext)
+        {
+        }
+
         public IQueryable<Stajaliste> VratiStajalista(int? idOpstine, int? idMesta, bool includeParents = false)
         {
-            var set = fDataContext.Stajalista;
+            var set = DataContext.Stajalista;
             if (includeParents)
             {
                 set.Include("Opstina");
@@ -30,17 +39,17 @@ namespace RVMS.Model.Repository
 
         public IEnumerable<Stajaliste> VratiAktivnaStajalista()
         {
-            return fDataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan).ToArray();
+            return DataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan).ToArray();
         }
 
         public Stajaliste VratiStajalisteIOpstinu(int idStajalista)
         {
-            return fDataContext.Stajalista.Include("Opstina").SingleOrDefault(x => x.Id == idStajalista);
+            return DataContext.Stajalista.Include("Opstina").SingleOrDefault(x => x.Id == idStajalista);
         }
 
         public IEnumerable<Stajaliste> PretraziStajalista(int? idOpstine, int? idMesta, string nazivStajalista)
         {
-            var stajalista = fDataContext.Stajalista.Include("Opstina").Include("Mesto").Where(x => x.Aktivan);
+            var stajalista = DataContext.Stajalista.Include("Opstina").Include("Mesto").Where(x => x.Aktivan);
             if (idOpstine.HasValue)
             {
                 stajalista = stajalista.Where(x => x.OpstinaId == idOpstine);
@@ -58,7 +67,7 @@ namespace RVMS.Model.Repository
 
         public IQueryable<Stajaliste> VratiStajalistaOpstine(int? idOpstine)
         {
-            var stajalista = fDataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan);
+            var stajalista = DataContext.Stajalista.Include("Opstina").Where(x => x.Aktivan);
             if (idOpstine.HasValue)
             {
                 stajalista = stajalista.Where(x => x.OpstinaId == idOpstine);

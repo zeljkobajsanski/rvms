@@ -159,6 +159,7 @@
     <Compile Include="Models\Relacija.cs" />
     <Compile Include="Models\StajalisteLinije.cs" />
     <Compile Include="Models\StajalisteSaRelacijama.cs" />
+    <Compile Include="Models\Validators\LinijaViewModelValidator.cs" />
     <Compile Include="Models\Validators\LoginViewModelValidator.cs" />
     <Compile Include="Models\Validators\PromenaLozinkeViewModelValidator.cs" />
     <Compile Include="Models\Validators\RelacijeViewModelValidator.cs" />
@@ -314,6 +315,7 @@
     <None Include="Properties\DataSources\RVMS.Win.Models.Relacija.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.StajalisteLinije.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.Models.StajalisteSaRelacijama.datasource" />
+    <None Include="Properties\DataSources\RVMS.Win.ViewModels.LinijaViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.LoginViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.PromenaLozinkeViewModel.datasource" />
     <None Include="Properties\DataSources\RVMS.Win.ViewModels.RelacijaViewModel.datasource" />

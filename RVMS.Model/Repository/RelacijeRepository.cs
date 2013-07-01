@@ -1,14 +1,23 @@
 ﻿using System.Collections.Generic;
 using RVMS.Model.Entities;
 using System.Linq;
+using RVMS.Model.Repository.Interfaces;
 
 namespace RVMS.Model.Repository
 {
-    public class RelacijeRepository : Repository<Relacija>
+    public class RelacijeRepository : Repository<Relacija>, IRelacijeRepository
     {
+        public RelacijeRepository()
+        {
+        }
+
+        public RelacijeRepository(DataContext dataContext) : base(dataContext)
+        {
+        }
+
         public IEnumerable<Relacija> VratiRelacije(int tipStajalista, int? idStajalista)
         {
-            var relacije = fDataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan);
+            var relacije = DataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan);
             if (idStajalista.HasValue)
             {
                 switch (tipStajalista)
@@ -31,7 +40,7 @@ namespace RVMS.Model.Repository
 
         public IQueryable<Relacija> VratiRelacijeKojePolazeSaStanice(int idStajalista)
         {
-            return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
+            return DataContext.Relacije.Include("MedjustanicnaRastojanja")
                                         .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                                         .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
                                         .Where(x => x.MedjustanicnaRastojanja.Any(m => m.PolaznoStajalisteId == idStajalista && m.Rbr == 1));
@@ -39,7 +48,7 @@ namespace RVMS.Model.Repository
 
         public IQueryable<Relacija> VratiRelacijeKojeProlazeKrozStanicu(int idStajalista)
         {
-            return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
+            return DataContext.Relacije.Include("MedjustanicnaRastojanja")
                                         .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                                         .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
                                         .Where(x => x.MedjustanicnaRastojanja.Any(m => m.PolaznoStajalisteId == idStajalista));
@@ -47,7 +56,7 @@ namespace RVMS.Model.Repository
 
         public Relacija VratiRelacijuSaRastojanjima(int idRelacije)
         {
-            return fDataContext.Relacije.Include("MedjustanicnaRastojanja")
+            return DataContext.Relacije.Include("MedjustanicnaRastojanja")
                 .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
                 .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
                 .SingleOrDefault(x => x.Id == idRelacije);
@@ -56,7 +65,7 @@ namespace RVMS.Model.Repository
         public bool PostojiRelacijaSaStajalistem(int idStajalista)
         {
             return
-                fDataContext.Daljinar.Any(
+                DataContext.Daljinar.Any(
                     x => x.PolaznoStajalisteId == idStajalista || x.DolaznoStajalisteId == idStajalista);
         }
     }

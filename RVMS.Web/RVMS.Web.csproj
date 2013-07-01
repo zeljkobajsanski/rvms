@@ -40,6 +40,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper">
+      <HintPath>..\packages\Bootstrapper.2.0.3.7\lib\Net40\Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper.AutoMapper">
+      <HintPath>..\packages\Bootstrapper.AutoMapper.2.0.3.7\lib\Net40\Bootstrapper.AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.AspNet">
       <HintPath>..\packages\Glimpse.AspNet.1.2.2\lib\net40\Glimpse.AspNet.dll</HintPath>
     </Reference>
@@ -517,7 +526,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Services\Linije.svc" />
     <Content Include="Services\Stajalista.svc" />
-    <Content Include="Services\Test.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -545,6 +553,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="_MSBuild\NuGetPackageAndPublish.targets" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

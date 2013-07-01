@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="LinijaSaKandidatimaDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Linija" nillable="true" type="tns:LinijaDTO" />
-      <xs:element minOccurs="0" name="Relacije" nillable="true" type="tns:ArrayOfRelacijaDTO" />
-      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="LinijaSaKandidatimaDTO" nillable="true" type="tns:LinijaSaKandidatimaDTO" />
   <xs:complexType name="LinijaDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -40,6 +32,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StajalisteDTO" nillable="true" type="tns:StajalisteDTO" />
+  <xs:complexType name="LinijaSaKandidatimaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Linija" nillable="true" type="tns:LinijaDTO" />
+      <xs:element minOccurs="0" name="Relacije" nillable="true" type="tns:ArrayOfRelacijaDTO" />
+      <xs:element minOccurs="0" name="Stajalista" nillable="true" type="tns:ArrayOfStajalisteDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinijaSaKandidatimaDTO" nillable="true" type="tns:LinijaSaKandidatimaDTO" />
   <xs:complexType name="ArrayOfRelacijaDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RelacijaDTO" nillable="true" type="tns:RelacijaDTO" />

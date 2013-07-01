@@ -1,11 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
+using FluentValidation;
+using FluentValidation.Results;
 using RVMS.Model.DTO;
 using RVMS.Win.Models;
+using RVMS.Win.Models.Validators;
 using RVMS.Win.RvmsServices;
 using System.Linq;
 using RVMS.Win.Services.Linije;
 using RVMS.Win.Services.Stajalista;
+using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
 
 namespace RVMS.Win.ViewModels
 {
@@ -16,6 +20,15 @@ namespace RVMS.Win.ViewModels
         private StajalisteDTO[] m_Stajalista;
         private RelacijaDTO[] m_Relacije;
         private StajalisteDTO[] m_DodataStajalista;
+        private string fNazivLinije;
+        private int? fIdPrevoznika;
+        private readonly LinijaViewModelValidator fModelValidator = new LinijaViewModelValidator();
+        private int fIdLinije;
+
+        public LinijaViewModel()
+        {
+            IdPrevoznika = 1;
+        }
 
         public override void Init()
         {
@@ -31,6 +44,39 @@ namespace RVMS.Win.ViewModels
         }
 
         public BindingList<StajalisteLinije> StajalistaLinije { get { return m_StajalistaLinije; } }
+
+        public int IdLinije
+        {
+            get { return fIdLinije; }
+            set
+            {
+                if (value == fIdLinije) return;
+                fIdLinije = value;
+                OnPropertyChanged("IdLinije");
+            }
+        }
+
+        public string NazivLinije
+        {
+            get { return fNazivLinije; }
+            set
+            {
+                if (value == fNazivLinije) return;
+                fNazivLinije = value;
+                OnPropertyChanged("NazivLinije");
+            }
+        }
+
+        public int? IdPrevoznika
+        {
+            get { return fIdPrevoznika; }
+            set
+            {
+                if (value == fIdPrevoznika) return;
+                fIdPrevoznika = value;
+                OnPropertyChanged("IdPrevoznika");
+            }
+        }
 
         public StajalisteDTO[] Stajalista
         {
@@ -91,7 +137,7 @@ namespace RVMS.Win.ViewModels
                     Stajalista = e.Result.Stajalista;
                     Relacije = e.Result.Relacije.ToArray();
                 };
-                svc.DodajStajalisteNaLinijuAsync(1, idStajalista); //TODO: IdLinije
+                svc.DodajStajalisteNaLinijuAsync(IdLinije, idStajalista);
             }
         }
 
@@ -114,7 +160,7 @@ namespace RVMS.Win.ViewModels
                     }
                     DodataStajalista = e.Result.Linija.Stajalista.ToArray();
                 };
-                svc.DodajStajalistaRelacijeNaLinijuAsync(1, idRelacije); //TODO: IdLinije
+                svc.DodajStajalistaRelacijeNaLinijuAsync(IdLinije, idRelacije);
             }
         }
 
@@ -143,7 +189,7 @@ namespace RVMS.Win.ViewModels
                         HandleError(args);
                         Stajalista = args.Result.Stajalista;
                     };
-                    svc.SkloniStajalisteSaLinijeAsync(1, last.IdStajalista); //TODO: IdLinije
+                    svc.SkloniStajalisteSaLinijeAsync(IdLinije, last.IdStajalista);
                 }
             }
             else
@@ -160,6 +206,39 @@ namespace RVMS.Win.ViewModels
             }
         }
 
-        
+        public override string this[string columnName]
+        {
+            get
+            {
+                var r = fModelValidator.Validate(this);
+                var fe = r.Errors.FirstOrDefault(x => x.PropertyName == columnName);
+                return fe != null ? fe.ErrorMessage : null;
+            }
+        }
+
+        public override string Error
+        {
+            get
+            {
+                return fModelValidator.Validate(this).IsValid ? null : "Linija nije validna";
+            }
+        }
+
+        public void Sacuvaj()
+        {
+            if (Error != null)
+            {
+                throw new ValidationException();
+            }
+            using (var svc = new LinijeClient())
+            {
+                IdLinije = svc.SacuvajLiniju(new LinijaDTO()
+                {
+                    Id = 0,
+                    PrevoznikId = IdPrevoznika ?? 0,
+                    Naziv = NazivLinije
+                });
+            }
+        }
     }
 }

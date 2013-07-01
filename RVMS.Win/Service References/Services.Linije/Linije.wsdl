@@ -7,6 +7,12 @@
       <xsd:import schemaLocation="http://localhost:49998/Services/Linije.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="Linije_SacuvajLiniju_InputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajLiniju" />
+  </wsdl:message>
+  <wsdl:message name="Linije_SacuvajLiniju_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SacuvajLinijuResponse" />
+  </wsdl:message>
   <wsdl:message name="Linije_DodajStajalisteNaLiniju_InputMessage">
     <wsdl:part name="parameters" element="tns:DodajStajalisteNaLiniju" />
   </wsdl:message>
@@ -26,6 +32,10 @@
     <wsdl:part name="parameters" element="tns:SkloniStajalisteSaLinijeResponse" />
   </wsdl:message>
   <wsdl:portType name="Linije">
+    <wsdl:operation name="SacuvajLiniju">
+      <wsdl:input wsaw:Action="http://tempuri.org/Linije/SacuvajLiniju" message="tns:Linije_SacuvajLiniju_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Linije/SacuvajLinijuResponse" message="tns:Linije_SacuvajLiniju_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DodajStajalisteNaLiniju">
       <wsdl:input wsaw:Action="http://tempuri.org/Linije/DodajStajalisteNaLiniju" message="tns:Linije_DodajStajalisteNaLiniju_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Linije/DodajStajalisteNaLinijuResponse" message="tns:Linije_DodajStajalisteNaLiniju_OutputMessage" />
@@ -41,6 +51,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_Linije" type="tns:Linije">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SacuvajLiniju">
+      <soap:operation soapAction="http://tempuri.org/Linije/SacuvajLiniju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DodajStajalisteNaLiniju">
       <soap:operation soapAction="http://tempuri.org/Linije/DodajStajalisteNaLiniju" style="document" />
       <wsdl:input>

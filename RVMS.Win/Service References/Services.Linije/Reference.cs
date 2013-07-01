@@ -15,6 +15,14 @@ namespace RVMS.Win.Services.Linije {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Services.Linije.Linije")]
     public interface Linije {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/SacuvajLiniju", ReplyAction="http://tempuri.org/Linije/SacuvajLinijuResponse")]
+        int SacuvajLiniju(RVMS.Model.DTO.LinijaDTO linijaDto);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/Linije/SacuvajLiniju", ReplyAction="http://tempuri.org/Linije/SacuvajLinijuResponse")]
+        System.IAsyncResult BeginSacuvajLiniju(RVMS.Model.DTO.LinijaDTO linijaDto, System.AsyncCallback callback, object asyncState);
+        
+        int EndSacuvajLiniju(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/DodajStajalisteNaLiniju", ReplyAction="http://tempuri.org/Linije/DodajStajalisteNaLinijuResponse")]
         RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
         
@@ -42,6 +50,25 @@ namespace RVMS.Win.Services.Linije {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface LinijeChannel : RVMS.Win.Services.Linije.Linije, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SacuvajLinijuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SacuvajLinijuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -105,6 +132,12 @@ namespace RVMS.Win.Services.Linije {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class LinijeClient : System.ServiceModel.ClientBase<RVMS.Win.Services.Linije.Linije>, RVMS.Win.Services.Linije.Linije {
         
+        private BeginOperationDelegate onBeginSacuvajLinijuDelegate;
+        
+        private EndOperationDelegate onEndSacuvajLinijuDelegate;
+        
+        private System.Threading.SendOrPostCallback onSacuvajLinijuCompletedDelegate;
+        
         private BeginOperationDelegate onBeginDodajStajalisteNaLinijuDelegate;
         
         private EndOperationDelegate onEndDodajStajalisteNaLinijuDelegate;
@@ -142,11 +175,63 @@ namespace RVMS.Win.Services.Linije {
                 base(binding, remoteAddress) {
         }
         
+        public event System.EventHandler<SacuvajLinijuCompletedEventArgs> SacuvajLinijuCompleted;
+        
         public event System.EventHandler<DodajStajalisteNaLinijuCompletedEventArgs> DodajStajalisteNaLinijuCompleted;
         
         public event System.EventHandler<DodajStajalistaRelacijeNaLinijuCompletedEventArgs> DodajStajalistaRelacijeNaLinijuCompleted;
         
         public event System.EventHandler<SkloniStajalisteSaLinijeCompletedEventArgs> SkloniStajalisteSaLinijeCompleted;
+        
+        public int SacuvajLiniju(RVMS.Model.DTO.LinijaDTO linijaDto) {
+            return base.Channel.SacuvajLiniju(linijaDto);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSacuvajLiniju(RVMS.Model.DTO.LinijaDTO linijaDto, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSacuvajLiniju(linijaDto, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public int EndSacuvajLiniju(System.IAsyncResult result) {
+            return base.Channel.EndSacuvajLiniju(result);
+        }
+        
+        private System.IAsyncResult OnBeginSacuvajLiniju(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            RVMS.Model.DTO.LinijaDTO linijaDto = ((RVMS.Model.DTO.LinijaDTO)(inValues[0]));
+            return this.BeginSacuvajLiniju(linijaDto, callback, asyncState);
+        }
+        
+        private object[] OnEndSacuvajLiniju(System.IAsyncResult result) {
+            int retVal = this.EndSacuvajLiniju(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSacuvajLinijuCompleted(object state) {
+            if ((this.SacuvajLinijuCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SacuvajLinijuCompleted(this, new SacuvajLinijuCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SacuvajLinijuAsync(RVMS.Model.DTO.LinijaDTO linijaDto) {
+            this.SacuvajLinijuAsync(linijaDto, null);
+        }
+        
+        public void SacuvajLinijuAsync(RVMS.Model.DTO.LinijaDTO linijaDto, object userState) {
+            if ((this.onBeginSacuvajLinijuDelegate == null)) {
+                this.onBeginSacuvajLinijuDelegate = new BeginOperationDelegate(this.OnBeginSacuvajLiniju);
+            }
+            if ((this.onEndSacuvajLinijuDelegate == null)) {
+                this.onEndSacuvajLinijuDelegate = new EndOperationDelegate(this.OnEndSacuvajLiniju);
+            }
+            if ((this.onSacuvajLinijuCompletedDelegate == null)) {
+                this.onSacuvajLinijuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSacuvajLinijuCompleted);
+            }
+            base.InvokeAsync(this.onBeginSacuvajLinijuDelegate, new object[] {
+                        linijaDto}, this.onEndSacuvajLinijuDelegate, this.onSacuvajLinijuCompletedDelegate, userState);
+        }
         
         public RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista) {
             return base.Channel.DodajStajalisteNaLiniju(idLinije, idStajalista);

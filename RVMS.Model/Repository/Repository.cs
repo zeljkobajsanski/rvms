@@ -3,57 +3,67 @@ using System.Collections.Generic;
 using System.Data;
 using RVMS.Model.Entities;
 using System.Linq;
+using RVMS.Model.Repository.Interfaces;
 
 namespace RVMS.Model.Repository
 {
-    public class Repository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : Entity
     {
 
-        protected readonly DataContext fDataContext = new DataContext();
+        protected readonly DataContext DataContext = new DataContext();
+
+        protected Repository(DataContext dataContext)
+        {
+            DataContext = dataContext;
+        }
+
+        public Repository() : this(new DataContext())
+        {
+        }
 
         public void Add(T entity)
         {
-            fDataContext.Set<T>().Add(entity);
+            DataContext.Set<T>().Add(entity);
         }
 
         public void Update(T entity)
         {
-            fDataContext.Entry(entity).State = EntityState.Modified;
+            DataContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(T entity)
         {
-            fDataContext.Entry(entity).State = EntityState.Deleted;
+            DataContext.Entry(entity).State = EntityState.Deleted;
         }
 
         public T Get(int id)
         {
-            return fDataContext.Set<T>().SingleOrDefault(x => x.Id == id);
+            return DataContext.Set<T>().SingleOrDefault(x => x.Id == id);
         }
 
         public IQueryable<T> GetAll()
         {
-            return fDataContext.Set<T>();
+            return DataContext.Set<T>();
         } 
 
         public void Dispose()
         {
-            fDataContext.Dispose();
+            DataContext.Dispose();
         }
 
         public void Save()
         {
-            fDataContext.SaveChanges();
+            DataContext.SaveChanges();
         }
 
         public void MarkUnchanged(Entity entity)
         {
-            fDataContext.Entry(entity).State = EntityState.Unchanged;
+            DataContext.Entry(entity).State = EntityState.Unchanged;
         }
 
         public IQueryable<T> GetActive()
         {
-            return fDataContext.Set<T>().Where(x => x.Aktivan);
+            return DataContext.Set<T>().Where(x => x.Aktivan);
         } 
     }
 }

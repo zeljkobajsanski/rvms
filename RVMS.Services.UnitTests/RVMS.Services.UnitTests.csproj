@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -54,12 +57,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LinijeFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RVMS.Model\RVMS.Model.csproj">
+      <Project>{3ea33751-90f9-40c4-a1cf-01f66113d940}</Project>
+      <Name>RVMS.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RVMS.Services\RVMS.Services.csproj">
       <Project>{152a4e2b-1982-4620-9863-c19446c1f364}</Project>
       <Name>RVMS.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
