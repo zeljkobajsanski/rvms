@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Bootstrap;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -247,7 +248,67 @@ namespace RVMS.Services.UnitTests.Services
             
         }
 
-        
+        [TestMethod]
+        public void Dodaj_Stajalista_Relacije_Na_Liniju_Koja_Vec_Ima_Stajalista()
+        {
+            // arrange
+            const int idRelacije = 1;
+            const int idLinije = 1;
+            var relacija = fRelacije.Single();
+            fRelacijeRepository.Setup(x => x.VratiRelacijuSaRastojanjima(idRelacije)).Returns(relacija);
+            var linija = new Linija
+            {
+                Id = idLinije,
+                Naziv = "Sremska Mitrovica AS - Beograd 'Sava Centar' - Beograd AS (autoputem)",
+                Stajalista = new List<StajalisteLinije>()
+                {
+                    new StajalisteLinije{Id = 1, StajalisteId = 1, Stajaliste = new Stajaliste(){Id = 1, Naziv = "Sremska Mitrovica AS"}, Rastojanje = 0},
+                    new StajalisteLinije{Id = 2, StajalisteId = 2, Stajaliste = new Stajaliste(){Id = 2, Naziv = "Sremska Mitrovica - Rumska Malta"}, Rastojanje = 3.1M},
+                    new StajalisteLinije{Id = 3, StajalisteId = 3, Stajaliste = new Stajaliste(){Id = 3, Naziv = "Novi Beograd - Studentski grad"}, Rastojanje = 70.1M},
+                }
+            };
+            fLinijeRepository.Setup(x => x.UcitajLinijuIStajalista(idLinije)).Returns(linija);
+
+            // act
+            var dto = fCut.DodajStajalistaRelacijeNaLiniju(idLinije, idRelacije);
+            fRepositories.Verify(x => x.Save());
+            Assert.AreEqual(5, dto.Linija.Stajalista.Count);
+            Assert.AreEqual("Novi Beograd - Sava Centar", dto.Linija.Stajalista[3].NazivStajalista);
+            Assert.AreEqual(73.1M, dto.Linija.Stajalista[3].Rastojanje);
+            Assert.AreEqual("Beograd AS", dto.Linija.Stajalista[4].NazivStajalista);
+            Assert.AreEqual(76.7M, dto.Linija.Stajalista[4].Rastojanje);
+        }
+
+        [TestMethod]
+        public void Dodaj_Stajalista_Relacije_Na_Liniju_Koja_Nema_Stajalista()
+        {
+            // arrange
+            const int idRelacije = 1;
+            const int idLinije = 1;
+            var relacija = fRelacije.Single();
+            fRelacijeRepository.Setup(x => x.VratiRelacijuSaRastojanjima(idRelacije)).Returns(relacija);
+            var linija = new Linija
+            {
+                Id = idLinije,
+                Naziv = "Sremska Mitrovica AS - Beograd 'Sava Centar' - Beograd AS (autoputem)",
+            };
+            fLinijeRepository.Setup(x => x.UcitajLinijuIStajalista(idLinije)).Returns(linija);
+
+            // act
+            var dto = fCut.DodajStajalistaRelacijeNaLiniju(idLinije, idRelacije);
+            fRepositories.Verify(x => x.Save());
+            Assert.AreEqual(5, dto.Linija.Stajalista.Count);
+            Assert.AreEqual("Sremska Mitrovica AS", dto.Linija.Stajalista[0].NazivStajalista);
+            Assert.AreEqual(0, dto.Linija.Stajalista[0].Rastojanje);
+            Assert.AreEqual("Sremska Mitrovica - Rumska malta", dto.Linija.Stajalista[1].NazivStajalista);
+            Assert.AreEqual(3.1M, dto.Linija.Stajalista[1].Rastojanje);
+            Assert.AreEqual("Novi Beograd - Studentski grad", dto.Linija.Stajalista[2].NazivStajalista);
+            Assert.AreEqual(70.1M, dto.Linija.Stajalista[2].Rastojanje);
+            Assert.AreEqual("Novi Beograd - Sava Centar", dto.Linija.Stajalista[3].NazivStajalista);
+            Assert.AreEqual(73.1M, dto.Linija.Stajalista[3].Rastojanje);
+            Assert.AreEqual("Beograd AS", dto.Linija.Stajalista[4].NazivStajalista);
+            Assert.AreEqual(76.7M, dto.Linija.Stajalista[4].Rastojanje);
+        }
 
         private void KreirajRelacijuIStajalista()
         {

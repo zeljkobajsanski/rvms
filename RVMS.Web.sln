@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2EB15322
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVMS.Services.UnitTests", "RVMS.Services.UnitTests\RVMS.Services.UnitTests.csproj", "{5A1FAE0F-9B96-44A7-8B86-744FBB818053}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{10346456-B7D2-4EDC-9865-CA41E61CE047}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{10346456-B7D2-4EDC-9865-CA41E61CE047}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A3C608C-B457-4080-883A-332CD36E9F4C}"
 	ProjectSection(SolutionItems) = preProject

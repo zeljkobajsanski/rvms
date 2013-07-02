@@ -20,15 +20,12 @@ namespace RVMS.Win.ViewModels
         
         private StajalisteDTO[] m_Stajalista;
         private RelacijaDTO[] m_Relacije;
-        private IEnumerable<StajalisteLinije> m_DodataStajalista;
         private string fNazivLinije;
         private int? fIdPrevoznika;
         private readonly LinijaViewModelValidator fModelValidator = new LinijaViewModelValidator();
         private int fIdLinije;
 
         public event EventHandler RefreshMap;
-
-        
 
         public LinijaViewModel()
         {
@@ -45,6 +42,15 @@ namespace RVMS.Win.ViewModels
                     Stajalista = e.Result.OrderBy(x => x.Naziv).ThenBy(x => x.Opstina).ToArray();
                 };
                 svc.VratiStajalistaAsync(null, null);
+            }
+            using (var svc = new RvmsServiceClient())
+            {
+                svc.VratiDaljinarCompleted += (s, e) =>
+                {
+                    HandleError(e);
+                    Relacije = e.Result;
+                };
+                svc.VratiDaljinarAsync(1, null);
             }
         }
 
@@ -144,11 +150,13 @@ namespace RVMS.Win.ViewModels
                     HandleError(e);
                     Stajalista = e.Result.Stajalista;
                     Relacije = e.Result.Relacije.ToArray();
+                    m_StajalistaLinije.Clear();
                     foreach (var stajalisteLinije in e.Result.Linija.Stajalista)
                     {
                         m_StajalistaLinije.Add(DtoMapper.Map(stajalisteLinije));
                     }
                 };
+                OnRefreshMap();
                 svc.DodajStajalistaRelacijeNaLinijuAsync(IdLinije, idRelacije);
             }
         }

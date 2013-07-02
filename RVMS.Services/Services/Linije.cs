@@ -67,8 +67,8 @@ namespace RVMS.Services.Services
             {
                 var poslednjeStajaliste = linija.Stajalista.Last();
                 var medjustanicnoRastojanje = fRepositories.MedjustanicnaRastojanjaRepository
-                                          .VratiMedjustanicnaRastojanja(poslednjeStajaliste.Stajaliste.Id, idStajalista);
-                rastojanje =  (medjustanicnoRastojanje ?? 0) + poslednjeStajaliste.Rastojanje;
+                                                           .VratiMedjustanicnaRastojanja(poslednjeStajaliste.Stajaliste.Id, idStajalista);
+                rastojanje =  Math.Round(medjustanicnoRastojanje ?? 0, 0) + poslednjeStajaliste.Rastojanje;
             }
             linija.Stajalista.Add(new StajalisteLinije()
             {
@@ -85,6 +85,12 @@ namespace RVMS.Services.Services
                 Stajalista = fStajalista.VratiSusednaStajalista(idStajalista)
             };
 
+            UcitajRelacijeKojeProlazeKrozStajaliste(idStajalista, dto);
+            return dto;
+        }
+
+        private void UcitajRelacijeKojeProlazeKrozStajaliste(int idStajalista, LinijaSaKandidatimaDTO dto)
+        {
             var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(idStajalista).ToArray();
             dto.Relacije = new List<RelacijaDTO>();
             foreach (var relacija in relacije)
@@ -93,77 +99,93 @@ namespace RVMS.Services.Services
                 {
                     Id = relacija.Id,
                     Naziv = relacija.Naziv,
-                    Napomena = KreirajStringOpisaRelacije(relacija).Replace(Environment.NewLine, ",")
+                    Napomena = KreirajStringOpisaRelacije(relacija)
                 };
                 dto.Relacije.Add(relacijaDto);
             }
-            return dto;
         }
 
-        
 
         [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalistaRelacijeNaLiniju(int idLinije, int idRelacije)
         {
-            //var relacija = fRepositories.RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
-            //var dto = new LinijaSaKandidatimaDTO()
-            //{
-            //    Linija = new LinijaDTO { Id = idLinije }
-            //};
-            //var poslednje = relacija.MedjustanicnaRastojanja.Last();
-            //dto.Stajalista = fStajalista.VratiSusednaStajalista(poslednje.DolaznoStajalisteId);
-            //var relacije = fRepositories.RelacijeRepository.VratiRelacijeKojeProlazeKrozStanicu(poslednje.DolaznoStajalisteId).ToArray();
-            //dto.Relacije = new List<RelacijaDTO>();
-            //foreach (var r in relacije)
-            //{
-            //    var relacijaDto = new RelacijaDTO()
-            //    {
-            //        Id = r.Id,
-            //        Naziv = r.Naziv,
-            //        Napomena = KreirajStringOpisaRelacije(r).Replace(Environment.NewLine, ",")
-            //    };
-            //    dto.Relacije.Add(relacijaDto);
-            //}
-            //var medjustanicnaRastojanja = relacija.MedjustanicnaRastojanja.ToArray();
-
-            //if (medjustanicnaRastojanja.Length == 1)
-            //{
-            //    dto.Linija.Stajalista.Add(new StajalisteDTO
-            //    {
-            //        Id = medjustanicnaRastojanja[0].Id,
-            //        Naziv = medjustanicnaRastojanja[0].DolaznoStajaliste.Naziv,
-            //        Latituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLatituda,
-            //        Longituda = medjustanicnaRastojanja[0].DolaznoStajaliste.GpsLongituda,
-            //    });
-            //}
-            //var found = false;
-            //for (int i = 1; i < medjustanicnaRastojanja.Length; i++)
-            //{
-            //    var medjustanicnoRastojanje = medjustanicnaRastojanja[i];
-            //    if (i < medjustanicnaRastojanja.Length - 1)
-            //    {
-            //        dto.Linija.Stajalista.Add(new StajalisteDTO
-            //        {
-            //            Id = medjustanicnoRastojanje.Id,
-            //            Naziv = medjustanicnoRastojanje.PolaznoStajaliste.Naziv,
-            //            Latituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLatituda,
-            //            Longituda = medjustanicnoRastojanje.PolaznoStajaliste.GpsLongituda,
-            //        });
-            //    }
-            //    else
-            //    {
-            //        dto.Linija.Stajalista.Add(new StajalisteDTO
-            //        {
-            //            Id = medjustanicnoRastojanje.Id,
-            //            Naziv = medjustanicnoRastojanje.DolaznoStajaliste.Naziv,
-            //            Latituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLatituda,
-            //            Longituda = medjustanicnoRastojanje.DolaznoStajaliste.GpsLongituda,
-            //        });
-            //    }
-            //}
-
-            //return dto;
-            return null;
+            var relacija = fRepositories.RelacijeRepository.VratiRelacijuSaRastojanjima(idRelacije);
+            var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);
+            var poslednjeStajaliste = linija.Stajalista.LastOrDefault();
+            if (poslednjeStajaliste == null)
+            {
+                var dodatoPrvo = false;
+                StajalisteLinije poslednjeDodatoStajaliste = null;
+                foreach (var msr in relacija.MedjustanicnaRastojanja)
+                {
+                    if (!dodatoPrvo)
+                    {
+                        var stajalisteLinije = new StajalisteLinije()
+                        {
+                            LinijaId = idLinije,
+                            Stajaliste = msr.PolaznoStajaliste,
+                        };
+                        linija.Stajalista.Add(stajalisteLinije);
+                        stajalisteLinije = new StajalisteLinije()
+                        {
+                            LinijaId = idLinije,
+                            Stajaliste = msr.DolaznoStajaliste,
+                            Rastojanje = Math.Round(msr.Rastojanje, 0)
+                        };
+                        linija.Stajalista.Add(stajalisteLinije);
+                        dodatoPrvo = true;
+                        poslednjeDodatoStajaliste = stajalisteLinije;
+                    }
+                    else
+                    {
+                        var stajalisteLinije = new StajalisteLinije()
+                        {
+                            LinijaId = idLinije,
+                            Stajaliste = msr.DolaznoStajaliste,
+                            Rastojanje = poslednjeDodatoStajaliste.Rastojanje + Math.Round(msr.Rastojanje, 0)
+                        };
+                        linija.Stajalista.Add(stajalisteLinije);
+                        poslednjeDodatoStajaliste = stajalisteLinije;
+                    }
+                }
+            }
+            else
+            {
+                var found = false;
+                foreach (var msr in relacija.MedjustanicnaRastojanja)
+                {
+                    if (msr.PolaznoStajalisteId == poslednjeStajaliste.StajalisteId)
+                    {
+                        found = true;
+                        var stajalisteLinije = new StajalisteLinije()
+                        {
+                            LinijaId = idLinije,
+                            Stajaliste = msr.DolaznoStajaliste,
+                            Rastojanje = poslednjeStajaliste.Rastojanje + Math.Round(msr.Rastojanje, 0)
+                        };
+                        linija.Stajalista.Add(stajalisteLinije);
+                        continue;
+                    }
+                    if (found)
+                    {
+                        linija.Stajalista.Add(new StajalisteLinije()
+                        {
+                            LinijaId = idLinije,
+                            Stajaliste = msr.DolaznoStajaliste,
+                            Rastojanje = linija.Stajalista.Last().Rastojanje + Math.Round(msr.Rastojanje, 0)
+                        });
+                    }
+                }
+            }
+            fRepositories.Save();
+            poslednjeStajaliste = linija.Stajalista.Last();
+            var dto = new LinijaSaKandidatimaDTO()
+            {
+                Linija = ObjectMapper.Map(linija),
+                Stajalista = fStajalista.VratiSusednaStajalista(poslednjeStajaliste.StajalisteId),
+            };
+            UcitajRelacijeKojeProlazeKrozStajaliste(poslednjeStajaliste.StajalisteId, dto);
+            return dto;
         }
 
         [OperationContract]

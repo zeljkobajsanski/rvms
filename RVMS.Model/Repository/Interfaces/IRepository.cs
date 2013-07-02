@@ -13,5 +13,6 @@ namespace RVMS.Model.Repository.Interfaces
         void Dispose();
         void Save();
         IQueryable<T> GetActive();
+        void MarkUnchanged(Entity entity);
     }
 }
