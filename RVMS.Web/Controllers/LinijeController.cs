@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RVMS.Model;
 using RVMS.Model.DTO;
 using RVMS.Model.Entities;
 using RVMS.Model.Repository;
@@ -150,9 +151,18 @@ namespace RVMS.Web.Controllers
             return Json(linija);
         }
 
-        public ActionResult KreirajLiniju(int? idLinije)
+        public ActionResult KreirajLiniju(int? id)
         {
-            return View();
+            if (id.HasValue)
+            {
+                var linija = m_LinijeRepository.UcitajLinijuIStajalista(id.Value);
+                if (linija != null)
+                {
+                    return View(ObjectMapper.Map(linija));
+                }
+                
+            }
+            return View(new LinijaDTO());
         }
     }
 }

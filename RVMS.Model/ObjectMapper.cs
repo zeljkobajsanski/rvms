@@ -15,6 +15,7 @@ namespace RVMS.Model
                 .ForMember(x => x.NazivStajalista, opt => opt.MapFrom(x => x.Stajaliste.Naziv))
                 .ForMember(x => x.Latituda, opt => opt.MapFrom(x => x.Stajaliste.GpsLatituda))
                 .ForMember(x => x.Longituda, opt => opt.MapFrom(x => x.Stajaliste.GpsLongituda));
+            CreateMap<StajalisteLinijeDTO, StajalisteLinije>();
             CreateMap<Relacija, RelacijaDTO>();
         }
 
@@ -31,6 +32,11 @@ namespace RVMS.Model
         public static RelacijaDTO Map(Relacija relacija)
         {
             return Mapper.Map<RelacijaDTO>(relacija);
+        }
+
+        public static StajalisteLinije Map(StajalisteLinijeDTO stajalisteLinijeDto)
+        {
+            return Mapper.Map<StajalisteLinije>(stajalisteLinijeDto);
         }
     }
 }

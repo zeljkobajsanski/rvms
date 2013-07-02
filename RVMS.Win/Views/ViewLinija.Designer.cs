@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.linijaViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lkpRelacije = new DevExpress.XtraEditors.LookUpEdit();
             this.relacijaDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -44,7 +45,9 @@
             this.colIdStajalista = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIdLinije = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPrimaPutnike = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.colRastojanje = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.colNazivStajalista = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -57,17 +60,19 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.linijaViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.linijaViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkpRelacije.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.relacijaDTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteLinijeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkpStajalista.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).BeginInit();
@@ -78,7 +83,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.linijaViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,15 +122,20 @@
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 9;
             // 
+            // linijaViewModelBindingSource
+            // 
+            this.linijaViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.LinijaViewModel);
+            // 
             // lkpRelacije
             // 
+            this.lkpRelacije.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.linijaViewModelBindingSource, "DozvoljenUnos", true));
             this.lkpRelacije.EnterMoveNextControl = true;
             this.lkpRelacije.Location = new System.Drawing.Point(65, 86);
             this.lkpRelacije.Name = "lkpRelacije";
             this.lkpRelacije.Properties.ActionButtonIndex = 1;
             this.lkpRelacije.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
             this.lkpRelacije.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "Dodaj sva stajališta izabrane relacije na liniju", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Dodaj sva stajališta izabrane relacije na liniju", null, null, true),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkpRelacije.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Relacija", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
@@ -154,12 +163,15 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.linijaViewModelBindingSource, "DozvoljenUnos", true));
             this.gridControl1.DataSource = this.stajalisteLinijeBindingSource;
             this.gridControl1.Location = new System.Drawing.Point(12, 110);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButtonEdit1});
+            this.repositoryItemButtonEdit1,
+            this.repositoryItemCheckEdit1,
+            this.repositoryItemSpinEdit1});
             this.gridControl1.Size = new System.Drawing.Size(436, 469);
             this.gridControl1.TabIndex = 6;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -186,7 +198,7 @@
             // 
             // colIdStajalista
             // 
-            this.colIdStajalista.FieldName = "IdStajalista";
+            this.colIdStajalista.FieldName = "StajalisteId";
             this.colIdStajalista.Name = "colIdStajalista";
             this.colIdStajalista.OptionsColumn.AllowEdit = false;
             // 
@@ -199,21 +211,36 @@
             // colPrimaPutnike
             // 
             this.colPrimaPutnike.Caption = "Primi putnike";
+            this.colPrimaPutnike.ColumnEdit = this.repositoryItemCheckEdit1;
             this.colPrimaPutnike.FieldName = "PrimaPutnike";
             this.colPrimaPutnike.Name = "colPrimaPutnike";
             this.colPrimaPutnike.Visible = true;
             this.colPrimaPutnike.VisibleIndex = 2;
             this.colPrimaPutnike.Width = 81;
             // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            // 
             // colRastojanje
             // 
             this.colRastojanje.Caption = "Dužina linije";
+            this.colRastojanje.ColumnEdit = this.repositoryItemSpinEdit1;
             this.colRastojanje.FieldName = "Rastojanje";
             this.colRastojanje.Name = "colRastojanje";
-            this.colRastojanje.OptionsColumn.AllowEdit = false;
             this.colRastojanje.Visible = true;
             this.colRastojanje.VisibleIndex = 1;
             this.colRastojanje.Width = 66;
+            // 
+            // repositoryItemSpinEdit1
+            // 
+            this.repositoryItemSpinEdit1.AutoHeight = false;
+            this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemSpinEdit1.Mask.EditMask = "n2";
+            this.repositoryItemSpinEdit1.Mask.UseMaskAsDisplayFormat = true;
+            this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
             // 
             // colNazivStajalista
             // 
@@ -239,19 +266,20 @@
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::RVMS.Win.Properties.Resources.gnome_edit_delete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::RVMS.Win.Properties.Resources.gnome_edit_delete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
             // lkpStajalista
             // 
+            this.lkpStajalista.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.linijaViewModelBindingSource, "DozvoljenUnos", true));
             this.lkpStajalista.EnterMoveNextControl = true;
             this.lkpStajalista.Location = new System.Drawing.Point(65, 60);
             this.lkpStajalista.Name = "lkpStajalista";
             this.lkpStajalista.Properties.ActionButtonIndex = 1;
             this.lkpStajalista.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.lkpStajalista.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "Dodaj izabrano stajalište na liniju", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Dodaj izabrano stajalište na liniju", null, null, true),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkpStajalista.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Naziv", "Naziv", 36, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
@@ -353,10 +381,6 @@
             this.layoutControlItem6.Text = "Prevoznik";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(50, 13);
             // 
-            // linijaViewModelBindingSource
-            // 
-            this.linijaViewModelBindingSource.DataSource = typeof(RVMS.Win.ViewModels.LinijaViewModel);
-            // 
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
@@ -373,11 +397,14 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.linijaViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkpRelacije.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.relacijaDTOBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteLinijeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkpStajalista.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stajalisteDTOBindingSource)).EndInit();
@@ -388,7 +415,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.linijaViewModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -423,5 +449,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private System.Windows.Forms.BindingSource linijaViewModelBindingSource;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
     }
 }

@@ -51,6 +51,14 @@ namespace RVMS.Services.Services
         }
 
         [OperationContract]
+        public void AzurirajStajalisteLinije(StajalisteLinijeDTO stajalisteLinijeDto)
+        {
+            var stajalisteLinije = ObjectMapper.Map(stajalisteLinijeDto);
+            fRepositories.StajalistaLinijeRepository.Update(stajalisteLinije);
+            fRepositories.Save();
+        }
+
+        [OperationContract]
         public LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista)
         {
             var linija = fRepositories.LinijeRepository.UcitajLinijuIStajalista(idLinije);

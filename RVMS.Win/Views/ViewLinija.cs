@@ -38,25 +38,13 @@ namespace RVMS.Win.Views
                 case "Relacije":
                     relacijaDTOBindingSource.DataSource = m_ViewModel.Relacije;
                     break;
-                case "DodataStajalista":
-                    DodajMarkere(m_ViewModel.DodataStajalista);
-                    break;
+                
             }
         }
 
-        private void DodajMarkere(IEnumerable<StajalisteLinije> stajalista)
+        private void IscrtajMapu()
         {
-            if (webBrowser1.Document != null)
-            {
-                webBrowser1.Document.InvokeScript("dodajMarker"
-                foreach (var stajalisteDto in stajalista)
-                {
-                    webBrowser1.Document.InvokeScript("dodajMarker",
-                                                      new object[] { stajalisteDto.Id, stajalisteDto., stajalisteDto.Longituda });
-                }
-            }
-            
-            
+            webBrowser1.Url = new Uri(ApplicationContext.Current.WebServiceHome + "/Linije/KreirajLiniju/" + m_ViewModel.IdLinije);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -101,6 +89,14 @@ namespace RVMS.Win.Views
                 }
             };
             repositoryItemButtonEdit1.ButtonClick += (s, e) => ObrisiStajaliste();
+            m_ViewModel.RefreshMap += (sender, args) => IscrtajMapu();
+            gridView1.CellValueChanged += (s, e) =>
+            {
+                var stajaliste = gridView1.GetRow(e.RowHandle) as StajalisteLinije;
+                m_ViewModel.Azuriraj(stajaliste);
+            };
+            repositoryItemCheckEdit1.EditValueChanged += (s, e) => gridView1.CloseEditor();
+            //repositoryItemSpinEdit1.EditValueChanged += (s, e) => gridView1.CloseEditor();
         }
 
         private void DodajRelaciju()
@@ -122,13 +118,6 @@ namespace RVMS.Win.Views
                 try
                 {
                     m_ViewModel.DodajStajaliste(idStajalista);
-                    var stajaliste = lkpStajalista.GetSelectedDataRow() as StajalisteDTO;
-                    if (webBrowser1.Document != null)
-                    {
-                        webBrowser1.Document.InvokeScript("dodajMarker",
-                                                          new object[]
-                                                          {stajaliste.Id, stajaliste.Latituda, stajaliste.Longituda});
-                    }
                 }
                 catch (Exception exc)
                 {
@@ -145,10 +134,6 @@ namespace RVMS.Win.Views
                 try
                 {
                     m_ViewModel.Obrisi(stajaliste);
-                    if (webBrowser1.Document != null)
-                    {
-                        webBrowser1.Document.InvokeScript("obrisiMarker", new object[] {stajaliste.IdStajalista});
-                    }
                 }
                 catch (Exception exc)
                 {

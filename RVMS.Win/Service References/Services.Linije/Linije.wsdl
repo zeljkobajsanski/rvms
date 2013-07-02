@@ -13,6 +13,12 @@
   <wsdl:message name="Linije_SacuvajLiniju_OutputMessage">
     <wsdl:part name="parameters" element="tns:SacuvajLinijuResponse" />
   </wsdl:message>
+  <wsdl:message name="Linije_AzurirajStajalisteLinije_InputMessage">
+    <wsdl:part name="parameters" element="tns:AzurirajStajalisteLinije" />
+  </wsdl:message>
+  <wsdl:message name="Linije_AzurirajStajalisteLinije_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AzurirajStajalisteLinijeResponse" />
+  </wsdl:message>
   <wsdl:message name="Linije_DodajStajalisteNaLiniju_InputMessage">
     <wsdl:part name="parameters" element="tns:DodajStajalisteNaLiniju" />
   </wsdl:message>
@@ -36,6 +42,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/Linije/SacuvajLiniju" message="tns:Linije_SacuvajLiniju_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Linije/SacuvajLinijuResponse" message="tns:Linije_SacuvajLiniju_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AzurirajStajalisteLinije">
+      <wsdl:input wsaw:Action="http://tempuri.org/Linije/AzurirajStajalisteLinije" message="tns:Linije_AzurirajStajalisteLinije_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Linije/AzurirajStajalisteLinijeResponse" message="tns:Linije_AzurirajStajalisteLinije_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DodajStajalisteNaLiniju">
       <wsdl:input wsaw:Action="http://tempuri.org/Linije/DodajStajalisteNaLiniju" message="tns:Linije_DodajStajalisteNaLiniju_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Linije/DodajStajalisteNaLinijuResponse" message="tns:Linije_DodajStajalisteNaLiniju_OutputMessage" />
@@ -53,6 +63,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SacuvajLiniju">
       <soap:operation soapAction="http://tempuri.org/Linije/SacuvajLiniju" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AzurirajStajalisteLinije">
+      <soap:operation soapAction="http://tempuri.org/Linije/AzurirajStajalisteLinije" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

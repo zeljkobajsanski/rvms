@@ -33,10 +33,11 @@ namespace RVMS.Model.Repository
 
         public virtual decimal? VratiMedjustanicnaRastojanja(int odStajalista, int doStajalista)
         {
-            var msr =
-                DataContext.Daljinar.FirstOrDefault(x => 
-                    (x.PolaznoStajalisteId == odStajalista && x.DolaznoStajalisteId == doStajalista) || 
-                    (x.PolaznoStajalisteId == doStajalista && x.DolaznoStajalisteId == odStajalista));
+            //var msr =
+            //    DataContext.Daljinar.FirstOrDefault(x => 
+            //                                        (x.PolaznoStajalisteId == odStajalista && x.DolaznoStajalisteId == doStajalista)) ??
+            //    DataContext.Daljinar.FirstOrDefault(x => x.DolaznoStajalisteId == odStajalista && x.PolaznoStajalisteId == doStajalista);
+            var msr = DataContext.Daljinar.FirstOrDefault(x => (x.PolaznoStajalisteId == odStajalista && x.DolaznoStajalisteId == doStajalista));
             return msr != null ? msr.Rastojanje : (decimal?)null;
         }
 

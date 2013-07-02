@@ -23,6 +23,14 @@ namespace RVMS.Win.Services.Linije {
         
         int EndSacuvajLiniju(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/AzurirajStajalisteLinije", ReplyAction="http://tempuri.org/Linije/AzurirajStajalisteLinijeResponse")]
+        void AzurirajStajalisteLinije(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/Linije/AzurirajStajalisteLinije", ReplyAction="http://tempuri.org/Linije/AzurirajStajalisteLinijeResponse")]
+        System.IAsyncResult BeginAzurirajStajalisteLinije(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto, System.AsyncCallback callback, object asyncState);
+        
+        void EndAzurirajStajalisteLinije(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/DodajStajalisteNaLiniju", ReplyAction="http://tempuri.org/Linije/DodajStajalisteNaLinijuResponse")]
         RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista);
         
@@ -138,6 +146,12 @@ namespace RVMS.Win.Services.Linije {
         
         private System.Threading.SendOrPostCallback onSacuvajLinijuCompletedDelegate;
         
+        private BeginOperationDelegate onBeginAzurirajStajalisteLinijeDelegate;
+        
+        private EndOperationDelegate onEndAzurirajStajalisteLinijeDelegate;
+        
+        private System.Threading.SendOrPostCallback onAzurirajStajalisteLinijeCompletedDelegate;
+        
         private BeginOperationDelegate onBeginDodajStajalisteNaLinijuDelegate;
         
         private EndOperationDelegate onEndDodajStajalisteNaLinijuDelegate;
@@ -176,6 +190,8 @@ namespace RVMS.Win.Services.Linije {
         }
         
         public event System.EventHandler<SacuvajLinijuCompletedEventArgs> SacuvajLinijuCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> AzurirajStajalisteLinijeCompleted;
         
         public event System.EventHandler<DodajStajalisteNaLinijuCompletedEventArgs> DodajStajalisteNaLinijuCompleted;
         
@@ -231,6 +247,55 @@ namespace RVMS.Win.Services.Linije {
             }
             base.InvokeAsync(this.onBeginSacuvajLinijuDelegate, new object[] {
                         linijaDto}, this.onEndSacuvajLinijuDelegate, this.onSacuvajLinijuCompletedDelegate, userState);
+        }
+        
+        public void AzurirajStajalisteLinije(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto) {
+            base.Channel.AzurirajStajalisteLinije(stajalisteLinijeDto);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginAzurirajStajalisteLinije(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAzurirajStajalisteLinije(stajalisteLinijeDto, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndAzurirajStajalisteLinije(System.IAsyncResult result) {
+            base.Channel.EndAzurirajStajalisteLinije(result);
+        }
+        
+        private System.IAsyncResult OnBeginAzurirajStajalisteLinije(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto = ((RVMS.Model.DTO.StajalisteLinijeDTO)(inValues[0]));
+            return this.BeginAzurirajStajalisteLinije(stajalisteLinijeDto, callback, asyncState);
+        }
+        
+        private object[] OnEndAzurirajStajalisteLinije(System.IAsyncResult result) {
+            this.EndAzurirajStajalisteLinije(result);
+            return null;
+        }
+        
+        private void OnAzurirajStajalisteLinijeCompleted(object state) {
+            if ((this.AzurirajStajalisteLinijeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AzurirajStajalisteLinijeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AzurirajStajalisteLinijeAsync(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto) {
+            this.AzurirajStajalisteLinijeAsync(stajalisteLinijeDto, null);
+        }
+        
+        public void AzurirajStajalisteLinijeAsync(RVMS.Model.DTO.StajalisteLinijeDTO stajalisteLinijeDto, object userState) {
+            if ((this.onBeginAzurirajStajalisteLinijeDelegate == null)) {
+                this.onBeginAzurirajStajalisteLinijeDelegate = new BeginOperationDelegate(this.OnBeginAzurirajStajalisteLinije);
+            }
+            if ((this.onEndAzurirajStajalisteLinijeDelegate == null)) {
+                this.onEndAzurirajStajalisteLinijeDelegate = new EndOperationDelegate(this.OnEndAzurirajStajalisteLinije);
+            }
+            if ((this.onAzurirajStajalisteLinijeCompletedDelegate == null)) {
+                this.onAzurirajStajalisteLinijeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAzurirajStajalisteLinijeCompleted);
+            }
+            base.InvokeAsync(this.onBeginAzurirajStajalisteLinijeDelegate, new object[] {
+                        stajalisteLinijeDto}, this.onEndAzurirajStajalisteLinijeDelegate, this.onAzurirajStajalisteLinijeCompletedDelegate, userState);
         }
         
         public RVMS.Model.DTO.LinijaSaKandidatimaDTO DodajStajalisteNaLiniju(int idLinije, int idStajalista) {

@@ -76,6 +76,16 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=2.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper">
+      <HintPath>..\packages\Bootstrapper.2.0.3.7\lib\Net40\Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper.AutoMapper">
+      <HintPath>..\packages\Bootstrapper.AutoMapper.2.0.3.7\lib\Net40\Bootstrapper.AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
@@ -156,6 +166,7 @@
     <Compile Include="Messages\QuestionMessage.cs" />
     <Compile Include="Messages\SavedMessage.cs" />
     <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\DtoMapper.cs" />
     <Compile Include="Models\Relacija.cs" />
     <Compile Include="Models\StajalisteLinije.cs" />
     <Compile Include="Models\StajalisteSaRelacijama.cs" />
@@ -366,6 +377,7 @@
     <None Include="Service References\Services.Stajalista\Stajalista2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="_MSBuild\NuGetPackageAndPublish.targets" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client,KB2468871">

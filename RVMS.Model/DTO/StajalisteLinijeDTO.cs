@@ -19,6 +19,8 @@ namespace RVMS.Model.DTO
 
         public decimal? Longituda { get; set; }
 
-        public decimal Rastojanje { get; set; } 
+        public decimal Rastojanje { get; set; }
+
+        public bool Aktivan { get; set; }
     }
 }

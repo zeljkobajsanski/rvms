@@ -2,7 +2,7 @@
     ViewBag.Title = "Kreiraj liniju";
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
-
+@model RVMS.Model.DTO.LinijaDTO
 @section styles
 {
     <style>
@@ -13,6 +13,7 @@
     </style>
 }
 <div id="map"></div>
+@Html.Hidden("Linija", Json.Encode(Model))
 
 <script>
     var map,
@@ -26,24 +27,28 @@
         bounds;
     
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    poly = new google.maps.Polyline({
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.75,
-        strokeWeight: 3
+    _createPolyline();
+    var linija = JSON.parse($("#Linija").val());
+
+    $.each(linija.Stajalista, function(index, stajaliste) {
+        dodajMarker(stajaliste.StajalisteId, stajaliste.Latituda, stajaliste.Longituda, stajaliste.Aktivan);
     });
-    poly.setMap(map);
-    
-    function dodajMarker(id, lat, lng) {
+
+    function dodajMarker(id, lat, lng, stani) {
         if (lat && lng) {
             var coord = new google.maps.LatLng(lat, lng);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: coord,
-                id: id,
-                icon: '@Url.Content("~/Content/images/bus_black_24x24.png")'
-            });
+            if (stani) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: coord,
+                    id: id,
+                    icon: '@Url.Content("~/Content/images/bus_black_24x24.png")'
+                });
+                markers.push(marker);
+            }
+            
             poly.getPath().push(coord);
-            markers.push(marker);
+            
             if (!bounds) {
                 bounds = new google.maps.LatLngBounds(coord, coord);
             } else {
@@ -51,6 +56,17 @@
             }
             map.fitBounds(bounds);
         }
+    }
+    
+    function ocisti() {
+        $.each(markers, function (ix, marker) {
+            marker.setMap(null);
+        });
+        var path = poly.getPath();
+        for (var i = 0; i < path.length; i++) {
+            path.removeAt(i);
+        }
+        _createPolyline();
     }
     
     function obrisiMarker(id) {
@@ -62,5 +78,14 @@
         var path = poly.getPath();
         var last = path.length;
         path.removeAt(last - 1);
+    }
+    
+    function _createPolyline() {
+        poly = new google.maps.Polyline({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.75,
+            strokeWeight: 3
+        });
+        poly.setMap(map);
     }
 </script>

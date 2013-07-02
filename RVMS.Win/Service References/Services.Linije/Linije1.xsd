@@ -17,6 +17,7 @@
   <xs:element name="ArrayOfStajalisteLinijeDTO" nillable="true" type="tns:ArrayOfStajalisteLinijeDTO" />
   <xs:complexType name="StajalisteLinijeDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Aktivan" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Latituda" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="LinijaId" type="xs:int" />

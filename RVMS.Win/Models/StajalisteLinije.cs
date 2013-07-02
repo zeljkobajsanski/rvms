@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
 
-        public int IdStajalista { get; set; }
+        public int StajalisteId { get; set; }
 
-        public int IdLinije { get; set; }
+        public int LinijaId { get; set; }
 
         public bool PrimaPutnike { get; set; }
 

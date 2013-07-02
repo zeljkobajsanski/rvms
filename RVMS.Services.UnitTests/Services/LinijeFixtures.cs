@@ -221,6 +221,34 @@ namespace RVMS.Services.UnitTests.Services
             
         }
 
+        [TestMethod]
+        public void Azuriraj_Stajaliste_Linije()
+        {
+            // arrange
+            var dto = new StajalisteLinijeDTO
+            {
+                Id = 2,
+                NazivStajalista = "Sremska Mitrovica AS",
+                Rastojanje = 3.1M,
+                LinijaId = 1,
+                StajalisteId = 12,
+                Latituda = 45.901M,
+                Longituda = 19.8761M,
+                Aktivan = true
+            };
+            
+
+            // act
+            fCut.AzurirajStajalisteLinije(dto);
+
+            // assert
+            fStajalistaLinijeRepository.Verify(x => x.Update(It.Is<StajalisteLinije>(s => s.Id == dto.Id)));
+            fRepositories.Verify(x => x.Save());
+            
+        }
+
+        
+
         private void KreirajRelacijuIStajalista()
         {
             fStajalista = new[]
