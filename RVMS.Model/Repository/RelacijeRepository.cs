@@ -15,7 +15,7 @@ namespace RVMS.Model.Repository
         {
         }
 
-        public IEnumerable<Relacija> VratiRelacije(int tipStajalista, int? idStajalista)
+        public IQueryable<Relacija> VratiRelacije(int tipStajalista, int? idStajalista)
         {
             var relacije = DataContext.Relacije.Include("MedjustanicnaRastojanja").Where(x => x.Aktivan);
             if (idStajalista.HasValue)
@@ -35,8 +35,16 @@ namespace RVMS.Model.Repository
                 }
                 
             }
-             return relacije.ToArray();
+             return relacije;
          }
+
+        public IQueryable<Relacija> VratiRelacijeSaRastojanjima()
+        {
+            return DataContext.Relacije.Include("MedjustanicnaRastojanja")
+                                       .Include("MedjustanicnaRastojanja.PolaznoStajaliste")
+                                       .Include("MedjustanicnaRastojanja.DolaznoStajaliste")
+                                       .Where(x => x.Aktivan);
+        }
 
         public IQueryable<Relacija> VratiRelacijeKojePolazeSaStanice(int idStajalista)
         {

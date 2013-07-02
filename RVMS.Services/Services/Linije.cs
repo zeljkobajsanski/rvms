@@ -130,7 +130,7 @@ namespace RVMS.Services.Services
                         {
                             LinijaId = idLinije,
                             Stajaliste = msr.DolaznoStajaliste,
-                            Rastojanje = Math.Round(msr.Rastojanje, 0)
+                            Rastojanje = Math.Ceiling(msr.Rastojanje)
                         };
                         linija.Stajalista.Add(stajalisteLinije);
                         dodatoPrvo = true;
@@ -142,7 +142,7 @@ namespace RVMS.Services.Services
                         {
                             LinijaId = idLinije,
                             Stajaliste = msr.DolaznoStajaliste,
-                            Rastojanje = poslednjeDodatoStajaliste.Rastojanje + Math.Round(msr.Rastojanje, 0)
+                            Rastojanje = poslednjeDodatoStajaliste.Rastojanje + Math.Ceiling(msr.Rastojanje)
                         };
                         linija.Stajalista.Add(stajalisteLinije);
                         poslednjeDodatoStajaliste = stajalisteLinije;
@@ -161,7 +161,7 @@ namespace RVMS.Services.Services
                         {
                             LinijaId = idLinije,
                             Stajaliste = msr.DolaznoStajaliste,
-                            Rastojanje = poslednjeStajaliste.Rastojanje + Math.Round(msr.Rastojanje, 0)
+                            Rastojanje = poslednjeStajaliste.Rastojanje + Math.Ceiling(msr.Rastojanje)
                         };
                         linija.Stajalista.Add(stajalisteLinije);
                         continue;
@@ -172,7 +172,7 @@ namespace RVMS.Services.Services
                         {
                             LinijaId = idLinije,
                             Stajaliste = msr.DolaznoStajaliste,
-                            Rastojanje = linija.Stajalista.Last().Rastojanje + Math.Round(msr.Rastojanje, 0)
+                            Rastojanje = linija.Stajalista.Last().Rastojanje + Math.Ceiling(msr.Rastojanje)
                         });
                     }
                 }
@@ -228,6 +228,19 @@ namespace RVMS.Services.Services
                 }
             }
             
+            return dto;
+        }
+
+        [OperationContract]
+        public RelacijaDTO[] VratiRelacije()
+        {
+            var relacije = fRepositories.RelacijeRepository.VratiRelacijeSaRastojanjima().ToArray();
+            var dto = relacije.Select(ObjectMapper.Map).ToArray();
+            foreach (var relacija in relacije)
+            {
+                var relacijaDto = dto.Single(x => x.Id == relacija.Id);
+                relacijaDto.Napomena = KreirajStringOpisaRelacije(relacija);
+            }
             return dto;
         }
 

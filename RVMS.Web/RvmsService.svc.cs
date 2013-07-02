@@ -254,7 +254,7 @@ namespace RVMS.Web
         public StajalisteSaRelacijamaDTO VratiStajalisteSaRelacijama(int idStajalista)
         {
             var stajaliste = m_StajalistaRepository.VratiStajalisteIOpstinu(idStajalista);
-            var relacije = m_RelacijeRepository.VratiRelacije(1, idStajalista);
+            var relacije = m_RelacijeRepository.VratiRelacije(1, idStajalista).ToArray();
             return new StajalisteSaRelacijamaDTO
             {
                 Id = stajaliste.Id,

@@ -54,6 +54,14 @@ namespace RVMS.Win.Services.Linije {
         System.IAsyncResult BeginSkloniStajalisteSaLinije(int idLinije, int idStajalistaLinije, System.AsyncCallback callback, object asyncState);
         
         RVMS.Model.DTO.LinijaSaKandidatimaDTO EndSkloniStajalisteSaLinije(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Linije/VratiRelacije", ReplyAction="http://tempuri.org/Linije/VratiRelacijeResponse")]
+        RVMS.Model.DTO.RelacijaDTO[] VratiRelacije();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/Linije/VratiRelacije", ReplyAction="http://tempuri.org/Linije/VratiRelacijeResponse")]
+        System.IAsyncResult BeginVratiRelacije(System.AsyncCallback callback, object asyncState);
+        
+        RVMS.Model.DTO.RelacijaDTO[] EndVratiRelacije(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -138,6 +146,25 @@ namespace RVMS.Win.Services.Linije {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class VratiRelacijeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VratiRelacijeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public RVMS.Model.DTO.RelacijaDTO[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((RVMS.Model.DTO.RelacijaDTO[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class LinijeClient : System.ServiceModel.ClientBase<RVMS.Win.Services.Linije.Linije>, RVMS.Win.Services.Linije.Linije {
         
         private BeginOperationDelegate onBeginSacuvajLinijuDelegate;
@@ -170,6 +197,12 @@ namespace RVMS.Win.Services.Linije {
         
         private System.Threading.SendOrPostCallback onSkloniStajalisteSaLinijeCompletedDelegate;
         
+        private BeginOperationDelegate onBeginVratiRelacijeDelegate;
+        
+        private EndOperationDelegate onEndVratiRelacijeDelegate;
+        
+        private System.Threading.SendOrPostCallback onVratiRelacijeCompletedDelegate;
+        
         public LinijeClient() {
         }
         
@@ -198,6 +231,8 @@ namespace RVMS.Win.Services.Linije {
         public event System.EventHandler<DodajStajalistaRelacijeNaLinijuCompletedEventArgs> DodajStajalistaRelacijeNaLinijuCompleted;
         
         public event System.EventHandler<SkloniStajalisteSaLinijeCompletedEventArgs> SkloniStajalisteSaLinijeCompleted;
+        
+        public event System.EventHandler<VratiRelacijeCompletedEventArgs> VratiRelacijeCompleted;
         
         public int SacuvajLiniju(RVMS.Model.DTO.LinijaDTO linijaDto) {
             return base.Channel.SacuvajLiniju(linijaDto);
@@ -452,6 +487,54 @@ namespace RVMS.Win.Services.Linije {
             base.InvokeAsync(this.onBeginSkloniStajalisteSaLinijeDelegate, new object[] {
                         idLinije,
                         idStajalistaLinije}, this.onEndSkloniStajalisteSaLinijeDelegate, this.onSkloniStajalisteSaLinijeCompletedDelegate, userState);
+        }
+        
+        public RVMS.Model.DTO.RelacijaDTO[] VratiRelacije() {
+            return base.Channel.VratiRelacije();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginVratiRelacije(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVratiRelacije(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public RVMS.Model.DTO.RelacijaDTO[] EndVratiRelacije(System.IAsyncResult result) {
+            return base.Channel.EndVratiRelacije(result);
+        }
+        
+        private System.IAsyncResult OnBeginVratiRelacije(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginVratiRelacije(callback, asyncState);
+        }
+        
+        private object[] OnEndVratiRelacije(System.IAsyncResult result) {
+            RVMS.Model.DTO.RelacijaDTO[] retVal = this.EndVratiRelacije(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVratiRelacijeCompleted(object state) {
+            if ((this.VratiRelacijeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VratiRelacijeCompleted(this, new VratiRelacijeCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VratiRelacijeAsync() {
+            this.VratiRelacijeAsync(null);
+        }
+        
+        public void VratiRelacijeAsync(object userState) {
+            if ((this.onBeginVratiRelacijeDelegate == null)) {
+                this.onBeginVratiRelacijeDelegate = new BeginOperationDelegate(this.OnBeginVratiRelacije);
+            }
+            if ((this.onEndVratiRelacijeDelegate == null)) {
+                this.onEndVratiRelacijeDelegate = new EndOperationDelegate(this.OnEndVratiRelacije);
+            }
+            if ((this.onVratiRelacijeCompletedDelegate == null)) {
+                this.onVratiRelacijeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVratiRelacijeCompleted);
+            }
+            base.InvokeAsync(this.onBeginVratiRelacijeDelegate, null, this.onEndVratiRelacijeDelegate, this.onVratiRelacijeCompletedDelegate, userState);
         }
     }
 }

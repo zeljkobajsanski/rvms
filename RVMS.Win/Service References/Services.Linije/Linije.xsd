@@ -72,4 +72,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="VratiRelacije">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VratiRelacijeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RVMS.Model.DTO" minOccurs="0" name="VratiRelacijeResult" nillable="true" type="q6:ArrayOfRelacijaDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

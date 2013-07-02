@@ -24,6 +24,7 @@ namespace RVMS.Win.ViewModels
         private int? fIdPrevoznika;
         private readonly LinijaViewModelValidator fModelValidator = new LinijaViewModelValidator();
         private int fIdLinije;
+        private RelacijaDTO[] fSveRelacije;
 
         public event EventHandler RefreshMap;
 
@@ -43,14 +44,22 @@ namespace RVMS.Win.ViewModels
                 };
                 svc.VratiStajalistaAsync(null, null);
             }
-            using (var svc = new RvmsServiceClient())
+            if (fSveRelacije == null)
             {
-                svc.VratiDaljinarCompleted += (s, e) =>
+                using (var svc = new LinijeClient())
                 {
-                    HandleError(e);
-                    Relacije = e.Result;
-                };
-                svc.VratiDaljinarAsync(1, null);
+                    svc.VratiRelacijeCompleted += (s, e) =>
+                    {
+                        HandleError(e);
+                        Relacije = e.Result;
+                        fSveRelacije = Relacije;
+                    };
+                    svc.VratiRelacijeAsync();
+                }
+            }
+            else
+            {
+                Relacije = fSveRelacije;
             }
         }
 

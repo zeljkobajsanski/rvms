@@ -57,6 +57,7 @@ namespace RVMS.Win.Views
         {
             m_ViewModel.NoviUnos();
             webBrowser1.Url = new Uri(ApplicationContext.Current.WebServiceHome + "/Linije/KreirajLiniju");
+            textEdit1.Focus();
         }
 
         public override void Sacuvaj()
